@@ -1,0 +1,132 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "graph": {
+        "stateEdges": {},
+        "vertices": {
+            "24": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "22": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "waitingResources": [],
+                    "activation": "OnStart",
+                    "tag": "Delay"
+                }
+            },
+            "21": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "116d3671-a2f6-466d-ae18-c6472be5d456",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "205df35d-b4f2-4b2c-91be-c5b2f223ebe7",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "31b228fb-f7d2-44de-91d6-e9d81cd37844",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "3b0f9123-2d95-49b3-8dc6-4fb51c12d90c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "573ce8d8-32a0-48b4-894c-91c864ed6af7",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "72124044-a25e-4a7d-b257-9aaec81313bf",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "7d6d816e-0101-4a2c-a2e2-58fa673a0bad",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "abf185fa-1cac-4370-bf0a-e377fd813c91",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "bb81fff4-ed1c-479f-97d1-e9034f841dd8",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "ec8d0943-a33b-4582-84f8-829af51643d8",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            }
+        },
+        "resourceEdges": {
+            "25": {
+                "to": 24,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 3,
+                    "tag": "RFConstant"
+                },
+                "from": 22,
+                "limits": {
+                    "lower": null,
+                    "upper": null
+                },
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "23": {
+                "to": 22,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 21,
+                "limits": {
+                    "lower": null,
+                    "upper": null
+                },
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

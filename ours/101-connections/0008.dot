@@ -1,0 +1,8 @@
+digraph {
+  graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
+  "2022" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "2023" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "2024" [label=<6+D5>,peripheries="1",color=black,shape=septagon];
+  "2023" -> "2024" [color=black];
+  "2024" -> "2022" [color=black];
+}

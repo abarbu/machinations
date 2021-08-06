@@ -1,0 +1,8 @@
+digraph {
+  graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
+  "517" [shape=triangle,peripheries="1",label=<<SUP>S</SUP>>,labelfontcolor=black,color=black];
+  "522" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "525" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "517" -> "525" [color=black];
+  "525" -> "522" [color=black];
+}

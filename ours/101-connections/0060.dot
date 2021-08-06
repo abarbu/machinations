@@ -1,0 +1,24 @@
+digraph {
+  graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
+  "64007" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "64008" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "64009" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "64011" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "64014" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "64015" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "64010" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "64008" -> "64010" [color=black];
+  "64010" -> "64009" [color=black];
+  "64012" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "64007" -> "64012" [color=black];
+  "64012" -> "64011" [color=black];
+  "64016" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "64015" -> "64016" [color=black];
+  "64016" -> "64014" [color=black];
+  "64013" [label=<+1>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "64009" -> "64013" [style=dashed,color=black];
+  "64013" -> "64012" [style=dashed,color=black];
+  "64017" [label=<+1i>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "64014" -> "64017" [style=dashed,color=black];
+  "64017" -> "64012" [style=dashed,color=black];
+}

@@ -1,0 +1,89 @@
+name:                machinations
+version:             0.8.0.0
+github:              "abarbu/machinations"
+license:             BSD3
+author:              "Andrei Barbu"
+maintainer:          "andrei@0xab.com"
+copyright:           "2020 Andrei Barbu"
+homepage:            https://github.com/abarbu/machinations
+bug-reports:         https://github.com/abarbu/machinations/issues
+category:            AI
+synopsis:            Category theory for AI
+
+extra-source-files:
+- README.md
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on Github at <https://github.com/abarbu/machinations#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+  dependencies:
+    - bytestring
+    - containers
+    - directory
+    - extra
+    - filepath
+    - mtl
+    - text
+    - time
+    - unix
+    - vector
+    - monad-logger
+    - string-interpolate
+    - shelly
+    - aeson
+    - aeson-pretty
+    - transformers
+    - constraints
+    - singletons
+    - ghc-prim
+    - lens
+    - indexed
+    - stm
+    - mono-traversable
+    - nondeterminism
+    - megaparsec
+    - parser-combinators
+    - hashable
+    - unordered-containers
+    - language-c
+    - pretty
+    - dot
+    - random
+    - uuid
+    - tasty
+    - tasty-quickcheck
+    - tasty-golden
+    - tasty-program
+    - tasty-smallcheck
+    - tasty-hunit
+    - tasty-expected-failure
+    - xml-to-json
+    - silently
+    - servant
+    - bifunctors
+
+
+tests:
+  test:
+    main:                Main.hs
+    source-dirs:         test
+    dependencies:
+    - machinations
+    - tasty
+    - tasty-quickcheck
+    - tasty-golden
+    - tasty-program
+    - tasty-smallcheck
+    - tasty-hunit
+    - tasty-expected-failure
+    - containers
+    - text
+    - aeson
+    - filepath

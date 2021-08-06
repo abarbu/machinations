@@ -1,0 +1,145 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "graph": {
+        "stateEdges": {
+            "18004": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 5,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 22071,
+                "active": false,
+                "from": 22069
+            }
+        },
+        "vertices": {
+            "22069": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "22071": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "22068": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Automatic",
+                    "tag": "Source"
+                }
+            },
+            "22085": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": "Automatic",
+                    "tag": "Drain"
+                }
+            },
+            "22073": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": "Automatic",
+                    "tag": "Drain"
+                }
+            }
+        },
+        "resourceEdges": {
+            "18006": {
+                "to": 22073,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 22071,
+                "limits": {
+                    "lower": null,
+                    "upper": null
+                },
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "18005": {
+                "to": 22085,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 22069,
+                "limits": {
+                    "lower": null,
+                    "upper": null
+                },
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "18003": {
+                "to": 22069,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 22068,
+                "limits": {
+                    "lower": null,
+                    "upper": null
+                },
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

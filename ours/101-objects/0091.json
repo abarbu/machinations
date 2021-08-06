@@ -1,0 +1,127 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "graph": {
+        "stateEdges": {},
+        "vertices": {
+            "545": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "548": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "": null,
+                        "tag": "Deterministic"
+                    },
+                    "activation": "Passive",
+                    "tag": "Gate"
+                }
+            },
+            "550": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "546": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Automatic",
+                    "tag": "Source"
+                }
+            }
+        },
+        "resourceEdges": {
+            "551": {
+                "to": 550,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 2,
+                    "tag": "RFConstant"
+                },
+                "from": 548,
+                "limits": {
+                    "lower": null,
+                    "upper": null
+                },
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "549": {
+                "to": 548,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 5,
+                    "tag": "RFConstant"
+                },
+                "from": 546,
+                "limits": {
+                    "lower": null,
+                    "upper": null
+                },
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "547": {
+                "to": 545,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 548,
+                "limits": {
+                    "lower": null,
+                    "upper": null
+                },
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

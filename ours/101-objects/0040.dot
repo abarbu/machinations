@@ -1,0 +1,24 @@
+digraph {
+  graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
+  "295" [shape=diamond,peripheries="1",label="",labelfontcolor=black,color=black];
+  "296" [shape=diamond,peripheries="1",label="",labelfontcolor=black,color=black];
+  "297" [shape=diamond,peripheries="1",label="",labelfontcolor=black,color=black];
+  "298" [shape=diamond,peripheries="1",label="",labelfontcolor=black,color=black];
+  "299" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "307" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "300" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "307" -> "300" [color=black];
+  "300" -> "295" [color=black];
+  "301" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "295" -> "301" [color=black];
+  "301" -> "296" [color=black];
+  "302" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "296" -> "302" [color=black];
+  "302" -> "297" [color=black];
+  "303" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "297" -> "303" [color=black];
+  "303" -> "298" [color=black];
+  "304" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "298" -> "304" [color=black];
+  "304" -> "299" [color=black];
+}

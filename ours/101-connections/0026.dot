@@ -1,0 +1,36 @@
+digraph {
+  graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
+  "6070" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "6071" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "6073" [shape=invtriangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "6075" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "6076" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "6078" [shape=invtriangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "6080" [shape=box3d,peripheries="1",label=<larger(a,2)*larger(b,2)<BR />larger(a,2)*larger(b,2)>,labelfontcolor=black,color=black];
+  "6083" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "6084" [shape=circle,peripheries="1",label=<0<BR />And Register>,labelfontcolor=black,color=black];
+  "6072" [label=<D6>,peripheries="1",color=black,shape=septagon];
+  "6070" -> "6072" [color=black];
+  "6072" -> "6071" [color=black];
+  "6074" [label=<all>,peripheries="1",color=black,shape=septagon];
+  "6071" -> "6074" [color=black];
+  "6074" -> "6073" [color=black];
+  "6077" [label=<D6>,peripheries="1",color=black,shape=septagon];
+  "6075" -> "6077" [color=black];
+  "6077" -> "6076" [color=black];
+  "6079" [label=<all>,peripheries="1",color=black,shape=septagon];
+  "6076" -> "6079" [color=black];
+  "6079" -> "6078" [color=black];
+  "6085" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "6083" -> "6085" [color=black];
+  "6085" -> "6084" [color=black];
+  "6081" [label=<a>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "6071" -> "6081" [style=dashed,color=black];
+  "6081" -> "6080" [style=dashed,color=black];
+  "6082" [label=<b>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "6076" -> "6082" [style=dashed,color=black];
+  "6082" -> "6080" [style=dashed,color=black];
+  "6086" [label=<&gt;0>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "6080" -> "6086" [style=dashed,color=black];
+  "6086" -> "6083" [style=dashed,color=black];
+}

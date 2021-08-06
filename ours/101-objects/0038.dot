@@ -1,0 +1,16 @@
+digraph {
+  graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
+  "279" [shape=triangle,peripheries="1",label="",labelfontcolor=black,color=black];
+  "280" [shape=diamond,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "281" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "283" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "278" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "279" -> "278" [color=black];
+  "278" -> "280" [color=black];
+  "282" [label=<25%>,peripheries="1",color=black,shape=septagon];
+  "280" -> "282" [color=black];
+  "282" -> "281" [color=black];
+  "284" [label=<25%>,peripheries="1",color=black,shape=septagon];
+  "280" -> "284" [color=black];
+  "284" -> "283" [color=black];
+}

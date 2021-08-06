@@ -1,0 +1,12 @@
+digraph {
+  graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
+  "22006" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "22007" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "22009" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "22008" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "22006" -> "22008" [color=black];
+  "22008" -> "22007" [color=black];
+  "22010" [label=<+5>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "22007" -> "22010" [style=dashed,color=black];
+  "22010" -> "22009" [style=dashed,color=black];
+}

@@ -1,0 +1,103 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "graph": {
+        "stateEdges": {},
+        "vertices": {
+            "407": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "04061e6d-452d-4e93-82ad-5b26da8fb342",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "1cea725a-d2b3-41bd-80bb-c2b90fc8fbbc",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "35e4b100-4235-45fc-a550-90178e6a55a1",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "4de8c606-7c30-4554-a5e5-f6828da8a93d",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "684474d9-3293-4814-be50-f793b4654b02",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "a0c3e99d-4518-4af9-ac9e-f6f28d9f061f",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "c5ace6ea-2b2b-4702-b939-9a30131c9bc8",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "cf48e825-e8de-4f14-a157-14198d4b7ef0",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "dcfc53d7-f9b2-4b29-8cbf-1972d950bfda",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "e52dbfc3-f646-4888-95ac-5d55c4327c48",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "408": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Automatic",
+                    "overflow": "OverflowDrain",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "limit": 4,
+                    "tag": "Pool"
+                }
+            }
+        },
+        "resourceEdges": {
+            "409": {
+                "to": 408,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 407,
+                "limits": {
+                    "lower": null,
+                    "upper": null
+                },
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

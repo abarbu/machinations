@@ -1,0 +1,28 @@
+digraph {
+  graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
+  "6029" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "6030" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "6032" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "6034" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "6036" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "6038" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "6042" [shape=box3d,peripheries="1",label=<a+letter+word<BR />a+letter+word>,labelfontcolor=black,color=black];
+  "6035" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "6029" -> "6035" [color=black];
+  "6035" -> "6034" [color=black];
+  "6037" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "6030" -> "6037" [color=black];
+  "6037" -> "6036" [color=black];
+  "6039" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "6032" -> "6039" [color=black];
+  "6039" -> "6038" [color=black];
+  "6043" [label=<a>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "6034" -> "6043" [style=dashed,color=black];
+  "6043" -> "6042" [style=dashed,color=black];
+  "6044" [label=<letter>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "6036" -> "6044" [style=dashed,color=black];
+  "6044" -> "6042" [style=dashed,color=black];
+  "6045" [label="",peripheries="1",color=black,style=dashed,shape=septagon];
+  "6038" -> "6045" [style=dashed,color=black];
+  "6045" -> "6042" [style=dashed,color=black];
+}

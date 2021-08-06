@@ -1,0 +1,132 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "graph": {
+        "stateEdges": {},
+        "vertices": {
+            "32": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "1753e843-1e74-4806-a669-9425d98e7ca2",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "27421a71-adfb-4da1-92b9-e4d9b72633d7",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "3fa5268f-6d36-45df-8ce5-c60c2b071bf4",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "6585638a-cec4-41e6-9420-ebb4e68be9fe",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "74de8746-cb3f-4dcf-9c6c-06bd12603084",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "aa1af85c-dd4d-4f41-a284-056e3cebd204",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "c45111e6-8a94-4ba6-bcc0-6f731b16845a",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "e130e038-012c-4327-a01f-63755d130add",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "f1eaa8ff-2f8d-4fc9-85df-b7c1bc92c4fd",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "f904e392-edfd-46bc-be04-13fb1891a32c",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "35": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "33": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "waitingResources": [],
+                    "activation": "Interactive",
+                    "tag": "Queue"
+                }
+            }
+        },
+        "resourceEdges": {
+            "34": {
+                "to": 33,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 32,
+                "limits": {
+                    "lower": null,
+                    "upper": null
+                },
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "36": {
+                "to": 35,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 3,
+                    "tag": "RFConstant"
+                },
+                "from": 33,
+                "limits": {
+                    "lower": null,
+                    "upper": null
+                },
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

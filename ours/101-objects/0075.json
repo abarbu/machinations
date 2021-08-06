@@ -1,0 +1,97 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "graph": {
+        "stateEdges": {},
+        "vertices": {
+            "472": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": "Passive",
+                    "tag": "Drain"
+                }
+            },
+            "482": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "249d5625-95e9-4217-9c91-676b4ee9f13b",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "3593b9c2-46c4-4da9-8171-b92141fb9efb",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "704d1b77-0d07-4f31-8a5b-4b2a24f7f7a5",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "808c82bc-147b-4d1d-9211-939e30c200f5",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "890301e6-edd4-466f-9e9c-00c01b942f90",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "8c673471-dc0b-4344-b38c-d65bc68bcf92",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "8e7f1901-9fcd-4637-8416-4d76e268630d",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "9ed6bd96-bc14-47a9-8a90-34a69ebd3509",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "e14bf5e6-2e7b-4c4a-945d-7eb507bb8bc6",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "ef3289a1-eb61-4e13-912f-51d0ff629ed4",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            }
+        },
+        "resourceEdges": {
+            "483": {
+                "to": 472,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 482,
+                "limits": {
+                    "lower": null,
+                    "upper": null
+                },
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

@@ -1,0 +1,24 @@
+digraph {
+  graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
+  "74" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "75" [shape=star,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "77" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "79" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "80" [shape=circle,peripheries="1",label=<10>,labelfontcolor=Black,color=black];
+  "83" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "76" [label=<5>,peripheries="1",color=black,shape=septagon];
+  "74" -> "76" [color=black];
+  "76" -> "75" [color=black];
+  "78" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "75" -> "78" [color=black];
+  "78" -> "77" [color=black];
+  "81" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "75" -> "81" [color=black];
+  "81" -> "79" [color=black];
+  "82" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "80" -> "82" [color=black];
+  "82" -> "75" [color=black];
+  "84" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "83" -> "84" [color=black];
+  "84" -> "74" [color=black];
+}

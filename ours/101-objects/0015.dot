@@ -1,0 +1,12 @@
+digraph {
+  graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
+  "120" [shape=triangle,peripheries="1",label="",labelfontcolor=black,color=black];
+  "121" [shape=cds,peripheries="1",label="",labelfontcolor=black,color=black];
+  "123" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "122" [label=<5>,peripheries="1",color=black,shape=septagon];
+  "120" -> "122" [color=black];
+  "122" -> "121" [color=black];
+  "124" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "121" -> "124" [color=black];
+  "124" -> "123" [color=black];
+}

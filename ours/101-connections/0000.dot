@@ -1,0 +1,20 @@
+digraph {
+  graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
+  "1019" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "1020" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "1022" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "1034" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "1035" [shape=circle,peripheries="1",label=<0<SUB>p</SUB>>,labelfontcolor=black,color=black];
+  "1021" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "1019" -> "1021" [color=black];
+  "1021" -> "1020" [color=black];
+  "1036" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "1034" -> "1036" [color=black];
+  "1036" -> "1035" [color=black];
+  "1037" [label=<all>,peripheries="1",color=black,shape=septagon];
+  "1035" -> "1037" [color=black];
+  "1037" -> "1022" [color=black];
+  "1038" [label=<*>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "1020" -> "1038" [style=dashed,color=black];
+  "1038" -> "1035" [style=dashed,color=black];
+}

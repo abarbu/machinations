@@ -248,7 +248,7 @@ parseRegister obj = do
 parseResourceFormula :: Maybe Text -> ResourceFormula
 parseResourceFormula = maybe (RFConstant 1) (fromJust . parseRF)
 
-parseResource :: HasCallStack => Object -> Parser (ResourceLabel, ResourceEdge)
+parseResource :: HasCallStack => Object -> Parser (ResourceEdgeLabel, ResourceEdge)
 parseResource obj = do
   i <- obj .: "id"
   t <- obj .:? "target"
@@ -258,7 +258,7 @@ parseResource obj = do
   interval <- obj .:? "interval"
   transfer <- obj .: "resourceTransfer"
   shuffle <- obj .: "shuffleSource"
-  pure (ResourceLabel $ read' "" i
+  pure (ResourceEdgeLabel $ read' "" i
        , ResourceEdge
          -- TODO Unconnected edges are possible in Machinations but we don't allow them by construction
          { _from = NodeLabel $ maybe 0 (read' "") s
@@ -277,7 +277,7 @@ parseResource obj = do
 
 parseStateFormula x = x >>= parseSF
 
-parseState :: HasCallStack => Object -> Parser (StateLabel, StateEdge)
+parseState :: HasCallStack => Object -> Parser (StateEdgeLabel, StateEdge)
 parseState obj = do
   i <- obj .: "id"
   t <- obj .:? "target"
@@ -287,7 +287,7 @@ parseState obj = do
   res :: Object <- obj .: "Resource"
   restag :: ResourceTag <- res .: "name"
   colorCoding <- obj .: "colorCoding"
-  pure (StateLabel $ read' "" i
+  pure (StateEdgeLabel $ read' "" i
        , StateEdge
          -- TODO Unconnected edges are possible in Machinations but we don't allow them by construction
          { _from = AnyLabel $ maybe 0 (read' "") s

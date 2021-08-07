@@ -23,7 +23,7 @@ import Data.Bifunctor
 main = defaultMain tests
 
 tests :: TestTree
-tests = testGroup "Tests" [object101Tests,rfTests,sfTests,spdTests]
+tests = testGroup "Tests" [object101Tests] -- [object101Tests,rfTests,sfTests,spdTests]
 
 readMachination' :: FilePath -> Machination
 readMachination' = fromJust . unsafePerformIO . decodeFileStrict'
@@ -147,8 +147,7 @@ object101Tests = testGroup "101-objects"
       , test' 3 "0089.json" [(532, [("Black", 18)])]
       ]
     ]
-  , 
-    testGroup "gates"
+  , testGroup "gates"
     [
       -- NB The actual values here assume a seed of zero, reseeding at every
       -- iteration and that non-realized paths don't update the seed (which is
@@ -193,6 +192,41 @@ object101Tests = testGroup "101-objects"
       , test' 3 "0091.json" [(550, [("Black", 10)]) , (545, [("Black", 5)])]
       , test' 5 "gate-split-66-33.json" [(107, [("Black", 2)]) ,(106, [("Black", 1)])]
       ]
+    ]
+  , testGroup "converters"
+    [
+      test 123 1 "0015.json" []
+    , test 126 1 "0016.json" []
+    , test 134 1 "0017.json" [("Black",1)]
+    , test 138 1 "0018.json" [("Black",15)]
+    , test 217 1 "0026.json" [("Black",1)]
+    , test 209 1 "0027.json" [("Black",1)]
+    , test' 1 "0019.json" [(142, [("Black", 1)]), (146, [])]
+    , test' 2 "0019.json" [(142, [("Black", 1)]), (146, [])]
+    , test' 4 "0019.json" [(142, [("Black", 1)]), (146, [])]
+    , test' 5 "0019.json" [(142, [("Black", 1)]), (146, [])]
+    , test' 6 "0019.json" [(142, [("Black", 1)]), (146, [("Black", 1)])]
+    , test' 1 "0020.json" [(149, [("Black", 1)]), (153, [])]
+    , test' 2 "0020.json" [(149, [("Black", 2)]), (153, [])]
+    , test' 5 "0020.json" [(149, [("Black", 5)]), (153, [])]
+    , test' 6 "0020.json" [(149, [("Black", 1)]), (153, [("Black", 1)])]
+    , test' 1 "0021.json" [(157, [("Black", 1)]), (164, [("Black", 1)]), (161, [])]
+    , test' 2 "0021.json" [(157, [("Black", 1)]), (164, [("Black", 1)]), (161, [])]
+    , test' 3 "0021.json" [(157, [("Black", 1)]), (164, [("Black", 1)]), (161, [])]
+    , test' 5 "0021.json" [(157, [("Black", 1)]), (164, [("Black", 1)]), (161, [])]
+    , test' 6 "0021.json" [(157, [("Black", 1)]), (164, [("Black", 1)]), (161, [("Black", 1)])]
+    , test' 1 "0022.json" [(168, [("Black", 1)]), (175, [("Black", 1)]), (172, [])]
+    , test' 2 "0022.json" [(168, [("Black", 2)]), (175, [("Black", 2)]), (172, [])]
+    , test' 3 "0022.json" [(168, [("Black", 3)]), (175, [("Black", 3)]), (172, [])]
+    , test' 5 "0022.json" [(168, [("Black", 5)]), (175, [("Black", 5)]), (172, [])]
+    , test' 6 "0022.json" [(168, [("Black", 1)]), (175, [("Black", 4)]), (172, [("Black", 1)])]
+    , test' 6 "0024.json" [(182, [("Black", 6)]), (186, []), (188, [])] -- TODO Test node failure
+    , test' 1 "0025.json" [(192, [("Black", 1)]), (198, []), (200, [])]
+    , test' 5 "0025.json" [(192, [("Black", 5)]), (198, []), (200, [])]
+    , test' 6 "0025.json" [(192, [("Black", 1)]), (198, [("Black", 5)]), (200, [("Black", 3)])]
+    , test' 1 "0090.json" [(538, [("Black", 15)]), (542, [])]
+    , test' 2 "0090.json" [(538, [("Black", 26)]), (542, [("Black", 1)])]
+    , test' 3 "0090.json" [(538, [("Black", 37)]), (542, [("Black", 2)])]
     ]
   ]
   where read' x = readMachination' ("ours/101-objects/" </> x)

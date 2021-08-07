@@ -122,7 +122,7 @@ resourceFormulaToLabel (RFDice (RFConstant 1) y) = "D" <> resourceFormulaToLabel
 resourceFormulaToLabel (RFDice x y) = resourceFormulaToLabel x <> "D" <> resourceFormulaToLabel y
 resourceFormulaToLabel (RFConstant f) = show' f
 
-resourceEdgeToStatement :: ResourceLabel -> ResourceEdge -> [Statement]
+resourceEdgeToStatement :: ResourceEdgeLabel -> ResourceEdge -> [Statement]
 resourceEdgeToStatement l e =
   [StatementNode $ NodeStatement (show' l)
     [ Attribute "shape" "septagon"
@@ -167,7 +167,7 @@ stateFormulaToLabel SFTrigger = "*"
 stateFormulaToLabel SFReverseTrigger = "!"
 stateFormulaToLabel (SFVariable i) = i
 
-stateEdgeToStatement :: StateLabel -> StateEdge -> [Statement]
+stateEdgeToStatement :: StateEdgeLabel -> StateEdge -> [Statement]
 stateEdgeToStatement l e =
   [StatementNode $ NodeStatement (show' l)
     [ Attribute "shape" "septagon"
@@ -210,8 +210,8 @@ connectedComponents m = loop (S.map toAnyLabel $ M.keysSet $ m^.graph.vertices)
           let ls = connectedComponent vs rs ss (S.elemAt 0 ns)
           in m { machinationGraph =
                    Graph { graphVertices = M.mapKeys toNodeLabel $ M.filterWithKey (\k _ -> k `S.member` ls) vs 
-                         , graphResourceEdges = M.mapKeys toResourceLabel $ M.filterWithKey (\k _ -> k `S.member` ls) rs
-                         , graphStateEdges = M.mapKeys toStateLabel $ M.filterWithKey (\k _ -> k `S.member` ls) ss
+                         , graphResourceEdges = M.mapKeys toResourceEdgeLabel $ M.filterWithKey (\k _ -> k `S.member` ls) rs
+                         , graphStateEdges = M.mapKeys toStateEdgeLabel $ M.filterWithKey (\k _ -> k `S.member` ls) ss
                          }
                } : loop (ns S.\\ ls)
         vs = M.mapKeys toAnyLabel $ m^.graph.vertices

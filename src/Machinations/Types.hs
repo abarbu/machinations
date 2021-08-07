@@ -32,21 +32,21 @@ makePrisms ''NodeLabel
 -- deriving instance ToJSONKey NodeLabel
 -- deriving instance FromJSONKey NodeLabel
 
-newtype ResourceLabel = ResourceLabel { unResourceLabel :: Int }
+newtype ResourceEdgeLabel = ResourceEdgeLabel { unResourceEdgeLabel :: Int }
   deriving (Show, Eq, Ord)
   deriving newtype (ToJSON, FromJSON, ToJSONKey, FromJSONKey)
--- deriveJSON mjsonOptionsSingle ''ResourceLabel
-makePrisms ''ResourceLabel
--- deriving instance ToJSONKey ResourceLabel
--- deriving instance FromJSONKey ResourceLabel
+-- deriveJSON mjsonOptionsSingle ''ResourceEdgeLabel
+makePrisms ''ResourceEdgeLabel
+-- deriving instance ToJSONKey ResourceEdgeLabel
+-- deriving instance FromJSONKey ResourceEdgeLabel
 
-newtype StateLabel = StateLabel { unStateLabel :: Int }
+newtype StateEdgeLabel = StateEdgeLabel { unStateEdgeLabel :: Int }
   deriving (Show, Eq, Ord)
   deriving newtype (ToJSON, FromJSON, ToJSONKey, FromJSONKey)
--- deriveJSON mjsonOptionsSingle ''StateLabel
-makePrisms ''StateLabel
--- deriving instance ToJSONKey StateLabel
--- deriving instance FromJSONKey StateLabel
+-- deriveJSON mjsonOptionsSingle ''StateEdgeLabel
+makePrisms ''StateEdgeLabel
+-- deriving instance ToJSONKey StateEdgeLabel
+-- deriving instance FromJSONKey StateEdgeLabel
 
 newtype AnyLabel = AnyLabel Int
   deriving (Show, Eq, Ord)
@@ -57,14 +57,14 @@ class ToAnyLabel a where
   toAnyLabel :: a -> AnyLabel
 instance ToAnyLabel NodeLabel where
   toAnyLabel (NodeLabel l) = AnyLabel l
-instance ToAnyLabel ResourceLabel where
-  toAnyLabel (ResourceLabel l) = AnyLabel l
-instance ToAnyLabel StateLabel where
-  toAnyLabel (StateLabel l) = AnyLabel l
+instance ToAnyLabel ResourceEdgeLabel where
+  toAnyLabel (ResourceEdgeLabel l) = AnyLabel l
+instance ToAnyLabel StateEdgeLabel where
+  toAnyLabel (StateEdgeLabel l) = AnyLabel l
 
 toNodeLabel (AnyLabel l) = NodeLabel l
-toResourceLabel (AnyLabel l) = ResourceLabel l
-toStateLabel (AnyLabel l) = StateLabel l
+toResourceEdgeLabel (AnyLabel l) = ResourceEdgeLabel l
+toStateEdgeLabel (AnyLabel l) = StateEdgeLabel l
 
 data Resource = Resource { resourceTag :: ResourceTag,
                            resourceUUID :: Text }
@@ -132,8 +132,8 @@ deriveJSON mjsonOptions ''PushPullAction
 makePrisms ''PushPullAction
 
 -- NB This is not a "distribution"
-data DistributionType = Deterministic { _counts :: Maybe (Map ResourceLabel Int, Int)
-                                      , _lastEdge :: Maybe ResourceLabel }
+data DistributionType = Deterministic { _counts :: Maybe (Map ResourceEdgeLabel Int, Int)
+                                      , _lastEdge :: Maybe ResourceEdgeLabel }
                       | Random
   deriving (Show, Eq)
 deriveJSON (prefixOptions "deterministic") ''DistributionType
@@ -241,7 +241,7 @@ data NodeType = Source { _activation :: NodeActivation
               | Converter { _activation :: NodeActivation
                           , _pullAction :: PullAction
                           , _resourceTypes :: Set ResourceTag
-                          , _storage :: Map ResourceLabel (Set Resource)
+                          , _storage :: Map ResourceEdgeLabel (Set Resource)
                           }
               | RegisterFn { _registerFormula :: Formula
                            , _limits :: Limits }
@@ -298,8 +298,8 @@ deriveJSON mjsonOptions ''StateEdge
 makeFieldsNoPrefix ''StateEdge
 
 data Graph = Graph { graphVertices :: Map NodeLabel Node
-                   , graphResourceEdges :: Map ResourceLabel ResourceEdge
-                   , graphStateEdges :: Map StateLabel StateEdge
+                   , graphResourceEdges :: Map ResourceEdgeLabel ResourceEdge
+                   , graphStateEdges :: Map StateEdgeLabel StateEdge
                    }
   deriving (Show, Eq)
 deriveJSON (prefixOptions "graph") ''Graph
@@ -315,9 +315,9 @@ deriveJSON (prefixOptions "Machination") ''Machination
 makeFields ''Machination
 
 -- data RunResult = RunResult { runResultUpdate :: Machination
---                            , runResultActivated :: ResourceLabel
---                            , runResultFailed :: ResourceLabel
---                            , runResultTriggered :: StateLabel
+--                            , runResultActivated :: ResourceEdgeLabel
+--                            , runResultFailed :: ResourceEdgeLabel
+--                            , runResultTriggered :: StateEdgeLabel
 --                            }
 --   deriving (Show, Eq)
 -- deriveJSON mjsonOptions ''RunResult
@@ -330,6 +330,10 @@ isPool _ = False
 isGate :: NodeType -> Bool
 isGate Gate{} = True
 isGate _ = False
+
+isConverter :: NodeType -> Bool
+isConverter Converter{} = True
+isConverter _ = False
 
 isLatched :: NodeType -> Bool
 isLatched Source{} = True

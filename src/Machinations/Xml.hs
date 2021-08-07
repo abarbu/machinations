@@ -71,7 +71,7 @@ parseDistribution "dice" = Random
 parseOptionalInt (-1) = Nothing
 parseOptionalInt n = Just n
 
-parseOneOrMode :: HasCallStack => Text -> (Object -> Parser (Int, o)) -> Object -> Parser [(Int, o)]
+parseOneOrMode :: HasCallStack => Text -> (Object -> Parser (l, o)) -> Object -> Parser [(l, o)]
 parseOneOrMode label parser root = do
   (pools :: Maybe Value) <- root .:? label
   case pools of
@@ -84,7 +84,7 @@ parseOneOrMode label parser root = do
                     pure [x])
       Nothing -> pure []
 
-parsePool :: HasCallStack => Object -> Parser (Int, Node)
+parsePool :: HasCallStack => Object -> Parser (NodeLabel, Node)
 parsePool obj = do
   i <- obj .: "id"
   l <- obj .:? "value"
@@ -95,52 +95,52 @@ parsePool obj = do
   restag :: ResourceTag <- res .: "name"
   o <- obj .: "overflow"
   c <- obj .: "capacity"
-  pure $ (read' "" i
-         , Node { nodeTy =
-                    Pool { _activation = parseActivation a
-                         , _pushPullAction = parsePushPullAction ppa
-                         , _resources =
-                             S.fromList
-                             $ unsafePerformIO
-                             $ mapM (\_ -> Resource restag <$> mkUuid) [1..read' "" amount]
-                         , _overflow = parseOverflow o
-                         , _limit = parseOptionalInt $ read' "" c }
-                  , nodeLabel = fromMaybe "" l
-                  , nodeColor = "black"
-                  })
+  pure (NodeLabel $ read' "" i
+        , Node { nodeTy =
+                   Pool { _activation = parseActivation a
+                        , _pushPullAction = parsePushPullAction ppa
+                        , _resources =
+                            S.fromList
+                            $ unsafePerformIO
+                            $ mapM (\_ -> Resource restag <$> mkUuid) [1..read' "" amount]
+                        , _overflow = parseOverflow o
+                        , _limit = parseOptionalInt $ read' "" c }
+                 , nodeLabel = fromMaybe "" l
+                 , nodeColor = "black"
+                 })
 
-parseSource :: HasCallStack => Object -> Parser (Int, Node)
+parseSource :: HasCallStack => Object -> Parser (NodeLabel, Node)
 parseSource obj = do
   i <- obj .: "id"
   l <- obj .:? "value"
   a <- obj .: "activation"
   res :: Object <- obj .: "Resource"
   restag :: ResourceTag <- res .: "name"
-  pure $ (read' "" i
-         , Node { nodeTy =
-                    Source { _activation = parseActivation a
-                           , _resourceTypes = S.fromList [restag]
-                           }
-                  , nodeLabel = fromMaybe "" l
-                  , nodeColor = "black"
-                  })
+  pure (NodeLabel $ read' "" i
+        , Node { nodeTy =
+                   Source { _activation = parseActivation a
+                          , _resourceTypes = [restag]
+                          }
+                 , nodeLabel = fromMaybe "" l
+                 , nodeColor = "black"
+                 })
 
-parseDrain :: HasCallStack => Object -> Parser (Int, Node)
+parseDrain :: HasCallStack => Object -> Parser (NodeLabel, Node)
 parseDrain obj = do
   i <- obj .: "id"
   l <- obj .:? "value"
   a <- obj .: "activation"
   pa <- obj .: "actionMode"
-  pure $ (read' "" i
-         , Node { nodeTy =
-                    Drain { _activation = parseActivation a
-                          , _pullAction = parsePullAction pa
-                          }
-                  , nodeLabel = fromMaybe "" l
-                  , nodeColor = "black"
-                  })
+  pure (NodeLabel $ read' "" i
+        , Node { nodeTy =
+                   Drain { _activation = parseActivation a
+                         , _pullAction = parsePullAction pa
+                         }
+                 , nodeLabel = fromMaybe "" l
+                 , nodeColor = "black"
+                 })
 
-parseConverter :: HasCallStack => Object -> Parser (Int, Node)
+parseConverter :: HasCallStack => Object -> Parser (NodeLabel, Node)
 parseConverter obj = do
   i <- obj .: "id"
   l <- obj .:? "value"
@@ -148,34 +148,35 @@ parseConverter obj = do
   pa <- obj .: "actionMode"
   res :: Object <- obj .: "Resource"
   restag :: ResourceTag <- res .: "name"
-  pure (read' "" i
+  pure (NodeLabel $ read' "" i
        , Node { nodeTy =
                   Converter { _activation = parseActivation a
                             , _pullAction = parsePullAction pa
-                            , _resourceTypes = S.fromList [restag]
+                            , _resourceTypes = [restag]
+                            , _storage = []
                             }
               , nodeLabel = fromMaybe "" l
               , nodeColor = "black"
               })
 
-parseEndCondition :: HasCallStack => Object -> Parser (Int, Node)
+parseEndCondition :: HasCallStack => Object -> Parser (NodeLabel, Node)
 parseEndCondition obj = do
   i <- obj .: "id"
   l <- obj .:? "value"
-  pure (read' "" i
+  pure (NodeLabel $ read' "" i
        , Node { nodeTy = EndCondition
               , nodeLabel = fromMaybe "" l
               , nodeColor = "black"
               })
 
-parseGate :: HasCallStack => Object -> Parser (Int, Node)
+parseGate :: HasCallStack => Object -> Parser (NodeLabel, Node)
 parseGate obj = do
   i <- obj .: "id"
   l <- obj .:? "value"
   a <- obj .: "activation"
   pa <- obj .: "actionMode"
   dm <- obj .: "distributionMode"
-  pure (read' "" i
+  pure (NodeLabel $ read' "" i
        , Node { nodeTy =
                   Gate { _activation = parseActivation a
                        , _pullAction = parsePullAction pa
@@ -185,25 +186,25 @@ parseGate obj = do
               , nodeColor = "black"
               })
 
-parseTrader :: HasCallStack => Object -> Parser (Int, Node)
+parseTrader :: HasCallStack => Object -> Parser (NodeLabel, Node)
 parseTrader obj = do
   i <- obj .: "id"
   l <- obj .:? "value"
   a <- obj .: "activation"
-  pure (read' "" i
+  pure (NodeLabel $ read' "" i
        , Node { nodeTy =
                   Trader { _activation = parseActivation a }
               , nodeLabel = fromMaybe "" l
               , nodeColor = "black"
               })
 
-parseDelayOrQueue :: HasCallStack => Object -> Parser (Int, Node)
+parseDelayOrQueue :: HasCallStack => Object -> Parser (NodeLabel, Node)
 parseDelayOrQueue obj = do
   i <- obj .: "id"
   l <- obj .:? "value"
   a <- obj .: "activation"
   q <- obj .: "queue"
-  pure (read' "" i
+  pure (NodeLabel $ read' "" i
        , Node { nodeTy =
                   case q :: Text of
                     "0" -> Delay { _activation = parseActivation a, _waitingResources = [] }
@@ -221,7 +222,7 @@ convertLimits min max = Limits (oneLimit min) (oneLimit max)
 -- TODO
 parseFormula = maybe (FConstant 0) (fromJust . parseF)
 
-parseRegister :: HasCallStack => Object -> Parser (Int, Node)
+parseRegister :: HasCallStack => Object -> Parser (NodeLabel, Node)
 parseRegister obj = do
   i <- obj .: "id"
   l <- obj .:? "value"
@@ -231,7 +232,7 @@ parseRegister obj = do
   max <- obj .: "maxValue"
   min <- obj .: "minValue"
   formula :: Maybe Text <- obj .:? "formula"
-  pure (read' "" i
+  pure (NodeLabel $ read' "" i
        , Node { nodeTy =
                   case isIn :: Text of
                     "1" -> RegisterInteractive { _initial = read' "" init
@@ -247,7 +248,7 @@ parseRegister obj = do
 parseResourceFormula :: Maybe Text -> ResourceFormula
 parseResourceFormula = maybe (RFConstant 1) (fromJust . parseRF)
 
-parseResource :: HasCallStack => Object -> Parser (Int, ResourceEdge)
+parseResource :: HasCallStack => Object -> Parser (ResourceLabel, ResourceEdge)
 parseResource obj = do
   i <- obj .: "id"
   t <- obj .:? "target"
@@ -257,11 +258,11 @@ parseResource obj = do
   interval <- obj .:? "interval"
   transfer <- obj .: "resourceTransfer"
   shuffle <- obj .: "shuffleSource"
-  pure (read' "" i
+  pure (ResourceLabel $ read' "" i
        , ResourceEdge
          -- TODO Unconnected edges are possible in Machinations but we don't allow them by construction
-         { _from = maybe 0 (read' "") s
-         , _to = maybe 0 (read' "") t
+         { _from = NodeLabel $ maybe 0 (read' "") s
+         , _to = NodeLabel $ maybe 0 (read' "") t
          , _resourceFormula = parseResourceFormula (T.takeWhile (/='|') <$> (formula <|> value))
          , _interval = Interval (RFConstant $ maybe 1 (read' "") interval) 0
          , _transfer = case transfer :: Text of
@@ -276,7 +277,7 @@ parseResource obj = do
 
 parseStateFormula x = x >>= parseSF
 
-parseState :: HasCallStack => Object -> Parser (Int, StateEdge)
+parseState :: HasCallStack => Object -> Parser (StateLabel, StateEdge)
 parseState obj = do
   i <- obj .: "id"
   t <- obj .:? "target"
@@ -286,11 +287,11 @@ parseState obj = do
   res :: Object <- obj .: "Resource"
   restag :: ResourceTag <- res .: "name"
   colorCoding <- obj .: "colorCoding"
-  pure (read' "" i
+  pure (StateLabel $ read' "" i
        , StateEdge
          -- TODO Unconnected edges are possible in Machinations but we don't allow them by construction
-         { _from = maybe 0 (read' "") s
-         , _to = maybe 0 (read' "") t
+         { _from = AnyLabel $ maybe 0 (read' "") s
+         , _to = AnyLabel $ maybe 0 (read' "") t
          , _stateFormula = parseStateFormula (formula <|> value)
          , _resourceFilter =
              -- Yes, this is where they store the filter

@@ -27,7 +27,7 @@ showf f | f - fromIntegral (round f) < 10e-6 = fromString $ show $ round f
 instance Semigroup Id where
   Id a <> Id b = Id $ a <> b
 
-nodeToStatement :: GraphLabel -> Node -> Statement
+nodeToStatement :: NodeLabel -> Node -> Statement
 nodeToStatement l n =
   StatementNode $ NodeStatement (show' l)
     [ Attribute "color" (Id $ n^.color)
@@ -122,7 +122,7 @@ resourceFormulaToLabel (RFDice (RFConstant 1) y) = "D" <> resourceFormulaToLabel
 resourceFormulaToLabel (RFDice x y) = resourceFormulaToLabel x <> "D" <> resourceFormulaToLabel y
 resourceFormulaToLabel (RFConstant f) = show' f
 
-resourceEdgeToStatement :: GraphLabel -> ResourceEdge -> [Statement]
+resourceEdgeToStatement :: ResourceLabel -> ResourceEdge -> [Statement]
 resourceEdgeToStatement l e =
   [StatementNode $ NodeStatement (show' l)
     [ Attribute "shape" "septagon"
@@ -167,7 +167,7 @@ stateFormulaToLabel SFTrigger = "*"
 stateFormulaToLabel SFReverseTrigger = "!"
 stateFormulaToLabel (SFVariable i) = i
 
-stateEdgeToStatement :: GraphLabel -> StateEdge -> [Statement]
+stateEdgeToStatement :: StateLabel -> StateEdge -> [Statement]
 stateEdgeToStatement l e =
   [StatementNode $ NodeStatement (show' l)
     [ Attribute "shape" "septagon"
@@ -204,35 +204,35 @@ toGraph m = DotGraph NonStrict Directed Nothing
 
 -- -- NB All of these will share the same seed!
 connectedComponents :: Machination -> [Machination]
-connectedComponents m = loop (M.keysSet $ m^.graph.vertices)
+connectedComponents m = loop (S.map toAnyLabel $ M.keysSet $ m^.graph.vertices)
   where loop [] = []
         loop ns =
           let ls = connectedComponent vs rs ss (S.elemAt 0 ns)
           in m { machinationGraph =
-                   Graph { graphVertices = M.filterWithKey (\k _ -> k `S.member` ls) vs 
-                         , graphResourceEdges = M.filterWithKey (\k _ -> k `S.member` ls) rs
-                         , graphStateEdges = M.filterWithKey (\k _ -> k `S.member` ls) ss
+                   Graph { graphVertices = M.mapKeys toNodeLabel $ M.filterWithKey (\k _ -> k `S.member` ls) vs 
+                         , graphResourceEdges = M.mapKeys toResourceLabel $ M.filterWithKey (\k _ -> k `S.member` ls) rs
+                         , graphStateEdges = M.mapKeys toStateLabel $ M.filterWithKey (\k _ -> k `S.member` ls) ss
                          }
                } : loop (ns S.\\ ls)
-        vs = m^.graph.vertices
-        rs = m^.graph.resourceEdges
-        ss = m^.graph.stateEdges
+        vs = M.mapKeys toAnyLabel $ m^.graph.vertices
+        rs = M.mapKeys toAnyLabel $ m^.graph.resourceEdges
+        ss = M.mapKeys toAnyLabel $ m^.graph.stateEdges
 
-connectedComponent :: Map GraphLabel Node
-                   -> Map GraphLabel ResourceEdge
-                   -> Map GraphLabel StateEdge
-                   -> GraphLabel
-                   -> Set GraphLabel
+connectedComponent :: Map AnyLabel Node
+                   -> Map AnyLabel ResourceEdge
+                   -> Map AnyLabel StateEdge
+                   -> AnyLabel
+                   -> Set AnyLabel
 connectedComponent _ rs ss current = loop current []
-  where connections :: GraphLabel -> Set GraphLabel
+  where connections :: AnyLabel -> Set AnyLabel
         -- All edges and nodes directly connected to this label
         connections l =
-          let rs' = M.filter (\r -> r^.from == l) rs `M.union` M.filter (\r -> r^.to == l) rs
+          let rs' = M.filter (\r -> r^.from == toNodeLabel l) rs `M.union` M.filter (\r -> r^.to == toNodeLabel l) rs
               ss' = M.filter (\r -> r^.from == l) ss `M.union` M.filter (\r -> r^.to == l) ss
-          in S.fromList $ map (^.to) (M.elems rs') <> map (^.from) (M.elems rs')
+          in S.fromList $ map (toAnyLabel . (^.to)) (M.elems rs') <> map (toAnyLabel . (^.from)) (M.elems rs')
                        <> map (^.to) (M.elems ss') <> map (^.from) (M.elems ss')
                        <> M.keys rs' <> M.keys ss'
-        loop :: GraphLabel -> Set GraphLabel -> Set GraphLabel
+        loop :: AnyLabel -> Set AnyLabel -> Set AnyLabel
         loop current seen =
           case connections current S.\\ seen of
             [] -> S.insert current seen

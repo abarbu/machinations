@@ -27,7 +27,7 @@ tests = testGroup "Tests" [object101Tests,rfTests,sfTests,spdTests]
 
 readMachination' :: FilePath -> Machination
 readMachination' = fromJust . unsafePerformIO . decodeFileStrict'
-noderes n g = resourceStatsByTag <$> nodeResources g n
+noderes n g = resourceStatsByTag <$> nodeResources g (NodeLabel n)
 run' g = runNewUpdate $ run g []
 run2' = run' . run'
 runN' n x = iterate run' x !! n
@@ -162,7 +162,7 @@ object101Tests = testGroup "101-objects"
       , test' 1 "0032.json" [(238, [("Black", 1)])]
       , test' 5 "0032.json" [(238, [("Black", 1)])]
       , test' 100 "0033.json" [(245, [("Black", 50)]), (247, [("Black", 50)])]
-      , test' 1000 "0034.json" [(251, [("Black", 491)]), (252, [("Black", 509)])]
+      , test' 100 "0034.json" [(251, [("Black", 491)]), (252, [("Black", 509)])]
       , test' 1 "0040.json" [(299, [("Black", 1)])]
       , test' 5 "0040.json" [(299, [("Black", 5)])]
       , test' 5 "0041.json" [(305, [("Black", 5)])]

@@ -23,6 +23,11 @@ mjsonOptions :: Options
 mjsonOptions = defaultOptions{fieldLabelModifier = removeUnderscore
                              ,omitNothingFields = True}
 
+mjsonOptionsSingle :: Options
+mjsonOptionsSingle = defaultOptions{omitNothingFields = True
+                                   ,unwrapUnaryRecords = True
+                                   }
+
 removeUnderscore :: [Char] -> [Char]
 removeUnderscore ('_':t) = t
 removeUnderscore t = t

@@ -1,4 +1,7 @@
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE StandaloneDeriving #-}
 {-# LANGUAGE OverloadedStrings, TemplateHaskell, FlexibleInstances, MultiParamTypeClasses, FunctionalDependencies, DuplicateRecordFields, DeriveGeneric, DeriveAnyClass, Strict, StrictData #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Machinations.Types where
 import Data.Aeson
@@ -18,9 +21,50 @@ import Data.UUID
 type Variable = Text
 type ResourceTag = Text
 type Filter = ResourceTag
-type GraphLabel = Int
 type Probability = Float
 type Percentage = Float
+
+newtype NodeLabel = NodeLabel { unNodeLabel :: Int }
+  deriving (Show, Eq, Ord)
+  deriving newtype (ToJSON, FromJSON, ToJSONKey, FromJSONKey)
+-- deriveJSON mjsonOptionsSingle ''NodeLabel
+makePrisms ''NodeLabel
+-- deriving instance ToJSONKey NodeLabel
+-- deriving instance FromJSONKey NodeLabel
+
+newtype ResourceLabel = ResourceLabel { unResourceLabel :: Int }
+  deriving (Show, Eq, Ord)
+  deriving newtype (ToJSON, FromJSON, ToJSONKey, FromJSONKey)
+-- deriveJSON mjsonOptionsSingle ''ResourceLabel
+makePrisms ''ResourceLabel
+-- deriving instance ToJSONKey ResourceLabel
+-- deriving instance FromJSONKey ResourceLabel
+
+newtype StateLabel = StateLabel { unStateLabel :: Int }
+  deriving (Show, Eq, Ord)
+  deriving newtype (ToJSON, FromJSON, ToJSONKey, FromJSONKey)
+-- deriveJSON mjsonOptionsSingle ''StateLabel
+makePrisms ''StateLabel
+-- deriving instance ToJSONKey StateLabel
+-- deriving instance FromJSONKey StateLabel
+
+newtype AnyLabel = AnyLabel Int
+  deriving (Show, Eq, Ord)
+deriveJSON mjsonOptionsSingle ''AnyLabel
+makePrisms ''AnyLabel
+
+class ToAnyLabel a where
+  toAnyLabel :: a -> AnyLabel
+instance ToAnyLabel NodeLabel where
+  toAnyLabel (NodeLabel l) = AnyLabel l
+instance ToAnyLabel ResourceLabel where
+  toAnyLabel (ResourceLabel l) = AnyLabel l
+instance ToAnyLabel StateLabel where
+  toAnyLabel (StateLabel l) = AnyLabel l
+
+toNodeLabel (AnyLabel l) = NodeLabel l
+toResourceLabel (AnyLabel l) = ResourceLabel l
+toStateLabel (AnyLabel l) = StateLabel l
 
 data Resource = Resource { resourceTag :: ResourceTag,
                            resourceUUID :: Text }
@@ -88,8 +132,8 @@ deriveJSON mjsonOptions ''PushPullAction
 makePrisms ''PushPullAction
 
 -- NB This is not a "distribution"
-data DistributionType = Deterministic { _counts :: Maybe (Map GraphLabel Int, Int)
-                                      , _lastNode :: Maybe Int }
+data DistributionType = Deterministic { _counts :: Maybe (Map ResourceLabel Int, Int)
+                                      , _lastEdge :: Maybe ResourceLabel }
                       | Random
   deriving (Show, Eq)
 deriveJSON (prefixOptions "deterministic") ''DistributionType
@@ -197,6 +241,7 @@ data NodeType = Source { _activation :: NodeActivation
               | Converter { _activation :: NodeActivation
                           , _pullAction :: PullAction
                           , _resourceTypes :: Set ResourceTag
+                          , _storage :: Map ResourceLabel (Set Resource)
                           }
               | RegisterFn { _registerFormula :: Formula
                            , _limits :: Limits }
@@ -222,8 +267,8 @@ data Node = Node { nodeTy :: NodeType
 deriveJSON mjsonOptions ''Node
 makeFields ''Node
 
-data ResourceEdge = ResourceEdge { _from :: GraphLabel
-                                 , _to :: GraphLabel
+data ResourceEdge = ResourceEdge { _from :: NodeLabel
+                                 , _to :: NodeLabel
                                  , _resourceFormula :: ResourceFormula
                                  , _interval :: Interval
                                  , _transfer :: TransferType
@@ -242,8 +287,8 @@ makeFieldsNoPrefix ''ResourceEdge
 -- triggers
 -- activators
 
-data StateEdge = StateEdge { _from :: GraphLabel
-                           , _to :: GraphLabel
+data StateEdge = StateEdge { _from :: AnyLabel
+                           , _to :: AnyLabel
                            , _stateFormula :: Maybe StateFormula
                            , _resourceFilter :: Maybe Filter
                            , _active :: Bool
@@ -252,9 +297,9 @@ data StateEdge = StateEdge { _from :: GraphLabel
 deriveJSON mjsonOptions ''StateEdge
 makeFieldsNoPrefix ''StateEdge
 
-data Graph = Graph { graphVertices :: Map GraphLabel Node
-                   , graphResourceEdges :: Map GraphLabel ResourceEdge
-                   , graphStateEdges :: Map GraphLabel StateEdge
+data Graph = Graph { graphVertices :: Map NodeLabel Node
+                   , graphResourceEdges :: Map ResourceLabel ResourceEdge
+                   , graphStateEdges :: Map StateLabel StateEdge
                    }
   deriving (Show, Eq)
 deriveJSON (prefixOptions "graph") ''Graph
@@ -269,30 +314,15 @@ data Machination = Machination { machinationGraph :: Graph
 deriveJSON (prefixOptions "Machination") ''Machination
 makeFields ''Machination
 
-data NodeOrEdge = N (GraphLabel, Node)
-                | R (GraphLabel, ResourceEdge)
-                | S (GraphLabel, StateEdge)
-makePrisms ''NodeOrEdge
-
-instance Eq NodeOrEdge where
-  x == x' = toLabel x == toLabel x'
-
-instance Ord NodeOrEdge where
-  x `compare` x' = toLabel x `compare` toLabel x'
-
-toLabel :: NodeOrEdge -> GraphLabel
-toLabel (N (l, _)) = l
-toLabel (R (l, _)) = l
-toLabel (S (l, _)) = l
-
-data RunResult = RunResult { runResultUpdate :: Machination
-                           , runResultActivated :: GraphLabel
-                           , runResultFailed :: GraphLabel
-                           }
-  deriving (Show, Eq)
-deriveJSON mjsonOptions ''RunResult
-makeFields ''RunResult
-
+-- data RunResult = RunResult { runResultUpdate :: Machination
+--                            , runResultActivated :: ResourceLabel
+--                            , runResultFailed :: ResourceLabel
+--                            , runResultTriggered :: StateLabel
+--                            }
+--   deriving (Show, Eq)
+-- deriveJSON mjsonOptions ''RunResult
+-- makeFields ''RunResult
+ 
 isPool :: NodeType -> Bool
 isPool Pool{} = True
 isPool _ = False

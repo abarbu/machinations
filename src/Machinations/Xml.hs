@@ -92,7 +92,7 @@ parsePool obj = do
   ppa <- obj .: "actionMode"
   amount <- obj .: "number"
   res :: Object <- obj .: "Resource"
-  restag :: ResourceTag <- res .: "name"
+  resTag :: ResourceTag <- res .: "name"
   o <- obj .: "overflow"
   c <- obj .: "capacity"
   pure (NodeLabel $ read' "" i
@@ -102,7 +102,7 @@ parsePool obj = do
                         , _resources =
                             S.fromList
                             $ unsafePerformIO
-                            $ mapM (\_ -> Resource restag <$> mkUuid) [1..read' "" amount]
+                            $ mapM (\_ -> Resource resTag <$> mkUuid) [1..read' "" amount]
                         , _overflow = parseOverflow o
                         , _limit = parseOptionalInt $ read' "" c }
                  , nodeLabel = fromMaybe "" l
@@ -115,11 +115,11 @@ parseSource obj = do
   l <- obj .:? "value"
   a <- obj .: "activation"
   res :: Object <- obj .: "Resource"
-  restag :: ResourceTag <- res .: "name"
+  resTag :: ResourceTag <- res .: "name"
   pure (NodeLabel $ read' "" i
         , Node { nodeTy =
                    Source { _activation = parseActivation a
-                          , _resourceTypes = [restag]
+                          , _resourceTypes = [resTag]
                           }
                  , nodeLabel = fromMaybe "" l
                  , nodeColor = "black"
@@ -147,12 +147,12 @@ parseConverter obj = do
   a <- obj .: "activation"
   pa <- obj .: "actionMode"
   res :: Object <- obj .: "Resource"
-  restag :: ResourceTag <- res .: "name"
+  resTag :: ResourceTag <- res .: "name"
   pure (NodeLabel $ read' "" i
        , Node { nodeTy =
                   Converter { _activation = parseActivation a
                             , _pullAction = parsePullAction pa
-                            , _resourceTypes = [restag]
+                            , _resourceTypes = [resTag]
                             , _storage = []
                             }
               , nodeLabel = fromMaybe "" l
@@ -256,6 +256,11 @@ parseResource obj = do
   value <- obj .:? "value"
   formula <- obj .:? "formula"
   interval <- obj .:? "interval"
+  -- resource filter
+  res :: Object <- obj .: "Resource"
+  resTag :: ResourceTag <- res .: "name"
+  colorCoding <- obj .: "colorCoding"
+  --
   transfer <- obj .: "resourceTransfer"
   shuffle <- obj .: "shuffleSource"
   pure (ResourceEdgeLabel $ read' "" i
@@ -269,8 +274,9 @@ parseResource obj = do
                          "interval-based" -> IntervalTransfer
                          _ -> InstantTransfer
          , _shuffleOrigin = (shuffle :: Text) == "1"
-         -- TODO resourceFilter
-         , _resourceFilter = Nothing
+         , _resourceFilter = if (colorCoding :: Text) == "1" then
+                               Just resTag else
+                               Nothing
                              -- TODO limits
          , _limits = Limits Nothing Nothing
          })
@@ -285,7 +291,7 @@ parseState obj = do
   value <- obj .:? "value"
   formula <- obj .:? "formula"
   res :: Object <- obj .: "Resource"
-  restag :: ResourceTag <- res .: "name"
+  resTag :: ResourceTag <- res .: "name"
   colorCoding <- obj .: "colorCoding"
   pure (StateEdgeLabel $ read' "" i
        , StateEdge
@@ -297,7 +303,7 @@ parseState obj = do
              -- Yes, this is where they store the filter
              case colorCoding :: Text of
                "0" -> Nothing
-               "1" -> Just restag
+               "1" -> Just resTag
          , _active = False
          })
 

@@ -24,7 +24,7 @@ import qualified Data.Set as S
 import Data.Map.Strict(Map)
 import qualified Data.Map.Strict as M
 import Control.Monad
-import System.Random(mkStdGen,StdGen,random)
+import System.Random(mkStdGen,StdGen,random,randomR)
 import Text.Printf
 import System.Directory
 import System.FilePath
@@ -94,7 +94,11 @@ import qualified Text.PrettyPrint as P
     conduit for shuttling resources aroound. And their ability to control state
     edges goes away, the state edges fire only when the gate is triggered and they always fired.
     These semantics make no sense. Gates should keep their behavior!
-     If they're activated they should control state edges as needed.
+    If they're activated they should control state edges as needed.
+
+ NB Resource edge draws are not cached! In other words Source -> Pool where both
+    the source and the pool are activated with an edge that has a D5 on it, will
+    draw different values for every activation of the resource edge.
 -}
 
 data Run = Run { runOldUpdate          :: Machination
@@ -150,7 +154,8 @@ nodeLookup :: Machination -> NodeLabel -> (NodeLabel, Node)
 nodeLookup m l = (l, fromJust $ M.lookup l (m^.graph.vertices))
 
 resourceStatsByTag :: Set Resource -> Map ResourceTag Int
-resourceStatsByTag s = M.fromList $ map (\a@(h:_) -> (resourceTag h, length a)) $ groupBy (\x y -> resourceTag x == resourceTag y) $ S.toList s
+resourceStatsByTag s = M.fromList $ map (\a@(h:_) -> (resourceTag h, length a))
+                     $ groupBy (\x y -> resourceTag x == resourceTag y) $ sortOn resourceTag $ S.toList s
 
 nodeResources :: Machination -> NodeLabel -> Maybe (Set Resource)
 nodeResources m l = m^?graph.vertices.ix l.ty.resources
@@ -181,32 +186,40 @@ allReachableNodes f candidates seen = loop f (candidates S.\\ seen) (candidates 
 isActiveResourceEdge :: Run -> ResourceEdgeLabel -> Bool
 isActiveResourceEdge _ _ = True
 
-resourceFormulaValue :: Run -> ResourceFormula -> Maybe Int
-resourceFormulaValue r RFAll = Nothing
+-- TODO This is wonky, should separate out [all, int, percentage, and condition] but machinations doesn't!
+resourceFormulaValue :: Run -> ResourceFormula -> (Run, Maybe Int)
+resourceFormulaValue r RFAll = (r, Nothing)
 resourceFormulaValue r (RFMultiply x y) = do
-  x' <- resourceFormulaValue r x
-  y' <- resourceFormulaValue r y
-  pure $ x'*y'
+  let (r', x')  = resourceFormulaValue r x
+      (r'', y') = resourceFormulaValue r' y
+    in (r'', liftM2 (*) x' y')
 resourceFormulaValue r (RFAdd x y) = do
-  x' <- resourceFormulaValue r x
-  y' <- resourceFormulaValue r y
-  pure $ x'+y'
-resourceFormulaValue r (RFConstant x) = pure x
+  let (r', x')  = resourceFormulaValue r x
+      (r'', y') = resourceFormulaValue r' y
+    in (r'', liftM2 (+) x' y')
+resourceFormulaValue r (RFConstant x) = (r, pure x)
 resourceFormulaValue r (RFPercentage x) = resourceFormulaValue r x
-resourceFormulaValue _ RFCondition{} = Nothing -- TODO These kinds of resource formulas have no value, they're a filter
+  -- TODO These kinds of resource formulas have no value, they're a filter
+resourceFormulaValue _ RFCondition{} = error "I don't undertand what conditions on resource edges mean"
+resourceFormulaValue r (RFDice (RFConstant nr) (RFConstant sides)) =
+  let (g', l::[Int]) = mapAccumL (\g _ -> inv $ randomR (1,sides) g) (r^.stdGen) [0..nr-1]
+  in (r & stdGen .~ g', Just $ sum l)
 
-gateByInterval :: Run -> ResourceEdgeLabel -> ResourceEdge -> Maybe (Run, Set Resource) -> Maybe (Run, Set Resource)
+gateByInterval :: Run -> ResourceEdgeLabel -> ResourceEdge -> (Run -> Maybe (Run, Set Resource)) -> Maybe (Run, Set Resource)
 gateByInterval r l e f =
-  if fromJust (resourceFormulaValue r (e^?!interval.formula)) >= e^?!interval.counter + 1 then do
-      (f', remaining) <- f
-      pure (f' & newUpdate . graph . resourceEdges . ix l . interval . counter .~ 0
-           ,remaining)
-  else
-    -- We aren't ready to run, just increment the counter and do nothing
-    -- NB This is not a failed edge!
-    -- TODO Nor is it an activated edge. What is it?
-    Just (r & newUpdate . graph . resourceEdges . ix l . interval . counter +~ 1
-         ,[])
+  case resourceFormulaValue r (e^?!interval.formula) of
+    (r', Just val) ->
+      if val >= e^?!interval.counter + 1 then do
+        (f', remaining) <- f r'
+        pure (f' & newUpdate . graph . resourceEdges . ix l . interval . counter .~ 0
+             ,remaining)
+      else
+        -- We aren't ready to run, just increment the counter and do nothing
+        -- NB This is not a failed edge!
+        -- TODO Nor is it an activated edge. What is it?
+        Just (r' & newUpdate . graph . resourceEdges . ix l . interval . counter +~ 1
+             ,[])
+    _ -> Nothing -- Intervals need to be numbers
 
 type CreditNodeFn' rel nl = Run -> rel -> Set Resource -> nl -> Maybe (Run, Set Resource)
 type CreditNodeFn = CreditNodeFn' ResourceEdgeLabel NodeLabel
@@ -238,10 +251,11 @@ distributeDeterministicGatedResources r nodeLabel resources
    case first (filterInactive r) $ fromMaybe mkCounts $ n^?! ty.distribution.counts of
      ([],_) -> mzero -- Can't distribute anything if we have no outgoing edges
      (counts' :: (Map ResourceEdgeLabel Int, Int)) ->
-       let targetDistribution_ = M.mapWithKey
-                                 (\l _ -> fromIntegral $ fromMaybe 0
-                                         $ resourceFormulaValue r (r^?!newUpdate.graph.resourceEdges.ix l.resourceFormula))
-                                 (fst counts')
+       let (r', targetDistribution_) = M.mapAccumWithKey
+                                       (\r l _ -> second (fromIntegral . fromMaybe 0)
+                                                 $ resourceFormulaValue r (r^?!newUpdate.graph.resourceEdges.ix l.resourceFormula))
+                                       r
+                                       (fst counts')
            targetDistribution = (M.map (/100) targetDistribution_, (0 `max` 100 - M.foldl' (+) 0 targetDistribution_)/100)
            onePass' :: Run -> (Map ResourceEdgeLabel Float, Float) -> (Map ResourceEdgeLabel Int, Int) -> Set Resource -> Maybe Run
            onePass' r _ _ [] = Just r
@@ -280,14 +294,17 @@ distributeDeterministicGatedResources r nodeLabel resources
                                   outbound maxKey
                           | leftoverGap > minGap -> leftovers
                           | otherwise -> outbound minKey
-       in onePass' r targetDistribution counts' resources
+       in onePass' r' targetDistribution counts' resources
   | otherwise =
    case fromMaybe mkCounts $ n^?! ty.distribution.counts of
      ([],_) -> mzero -- Can't distribute anything if we have no outgoing edges
      (counts' :: (Map ResourceEdgeLabel Int, Int)) ->
        let last = fromMaybe (ResourceEdgeLabel 0) $ n^?! ty.distribution.lastEdge
-           capacities = M.mapWithKey (\l _ -> fromMaybe 0 $ resourceFormulaValue r (r^?!newUpdate.graph.resourceEdges.ix l.resourceFormula)) (fst counts')
-       in onePass r capacities last counts' resources
+           (r', capacities) = M.mapAccumWithKey (\r l _ -> second (fromMaybe 0)
+                                                          $ resourceFormulaValue r (r^?!newUpdate.graph.resourceEdges.ix l.resourceFormula))
+                              r
+                              (fst counts')
+       in onePass r' capacities last counts' resources
   where allOutbound' = outResourceEdges (r^.newUpdate) nodeLabel
         allOutbound = map fst allOutbound'
         n = r ^?! newUpdate . graph . vertices . ix nodeLabel
@@ -342,7 +359,12 @@ distributeRandomGatedResources r nodeLabel resources = do
   -- resources being distributed evenly but the rest being dropped.
   -- TODO We should probably switch out of Maybe so that we can propagate errors
   when mixedPercentage mzero
-  let tempWeights = mapMaybe (\e -> (Just $ (snd e ^. to, fst e),) <$> resourceFormulaValue r (e^._2.resourceFormula)) es
+  let (r', tempWeights) = second catMaybes
+                        $ mapAccumL (\r e ->
+                                       second
+                                       (fmap (Just $ (snd e ^. to, fst e),))
+                                       (resourceFormulaValue r (e^._2.resourceFormula)))
+                          r es
   let weights = if allPercentage && sum (map snd tempWeights) < 100 then
                   (Nothing, 100-sum (map snd tempWeights)) : tempWeights
                   else
@@ -357,6 +379,29 @@ distributeRandomGatedResources r nodeLabel resources = do
         creditNode' r Nothing res _ = Just (r & killedResources <>~ res, [])
         creditNode' r (Just e) res (Just l) = creditNode r e res l
 
+traderInputsOutputs :: Run -> NodeLabel -> Node -> Maybe (((ResourceEdgeLabel, ResourceEdge, Filter),
+                                                       (ResourceEdgeLabel, ResourceEdge, Filter)),
+                                                      ((ResourceEdgeLabel, ResourceEdge, Filter),
+                                                       (ResourceEdgeLabel, ResourceEdge, Filter)))
+traderInputsOutputs r l n = 
+      case (allInboundOld, allOutboundOld) of
+        -- You can only run with exactly 2 inputs and 2 outputs
+        ([(il1,ie1),(il2,ie2)],[(ol1,oe1),(ol2,oe2)]) ->
+          case (ie1^.resourceFilter,ie2^.resourceFilter,oe1^.resourceFilter,oe2^.resourceFilter) of
+            -- They must all have filters
+            (Just if1, Just if2, Just of1, Just of2) ->
+              -- And edges must be matched in pairs
+              if | if1 == if2 || of1 == of2 -> Nothing
+                 | if1 == of1 && if2 == of2 -> Just (((il1,ie1,if1),(ol1,oe1,of1)),((il2,ie2,if2),(ol2,oe2,of2)))
+                 | if1 == of2 && if2 == of1 -> Just (((il1,ie1,if1),(ol2,oe2,of2)),((il2,ie2,if2),(ol1,oe1,of1)))
+                 | otherwise -> Nothing
+            _ -> Nothing
+          -- _ -- $ ie1^.resourceFilter /= ie2^.resourceFilter
+          -- undefined
+        _ -> Nothing
+  where allInboundOld = filter (isActiveResourceEdge r . fst) $ inResourceEdges (r^.oldUpdate) l
+        allOutboundOld = filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.newUpdate) l
+
 generateResources :: Run -> ResourceTag -> Int -> (Run, Set Resource)
 generateResources r tag nr = 
       let (newGen,createdResources) = second S.fromList
@@ -364,6 +409,38 @@ generateResources r tag nr =
       in (r & generatedResources <>~ createdResources
             & stdGen .~ newGen
          , createdResources)
+
+fireConverterIfPossible :: Run -> NodeLabel -> Maybe Run
+fireConverterIfPossible r l =
+  let (r', inResourceEdgeValues) =
+        mapAccumL (\r (elabel,edge) -> second (((elabel,edge),) . fromMaybe 0) (resourceFormulaValue r (edge^.resourceFormula)))
+                  r
+        allInboundOld
+  in if all (\((elabel,edge),evalue) ->
+               -- TODO Should this default to 0 or 1?
+                maybe 0 S.size (available ^? ix elabel) >= evalue
+             ) inResourceEdgeValues
+        then
+          case allOutboundOld of
+            [] -> Just $ clearStorage r'
+            [(olabel, oedge)] -> do
+              case n^.resourceTypes of
+                [rtag] ->
+                  -- TODO Is the default here 0 or 1?
+                  let (r'', val) = second (fromMaybe 0) $ resourceFormulaValue r (oedge^.resourceFormula)
+                      (r''', res) = generateResources r'' rtag val
+                  in Just $ maybe (clearStorage r''') fst $ creditNode (clearStorage r''') olabel res (oedge^.to)
+                _ -> pure r'
+            _ -> Nothing -- Only one active outbound edge
+       else
+          pure r
+  where -- NB Inactive inbound edges count. Inactive outbound edges do not!
+        allInboundOld = inResourceEdges (r^.oldUpdate) l
+        allOutboundOld = filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.newUpdate) l
+        n = r ^?! oldUpdate . graph . vertices . ix l . ty
+        available = n^.storage
+	clearStorage r = r & oldUpdate . graph . vertices . ix l . ty . storage .~ []
+                           & newUpdate . graph . vertices . ix l . ty . storage .~ []
 
 debitNode :: Run -> ResourceEdgeLabel -> Maybe Int -> Maybe ResourceTag -> NodeLabel -> Maybe (Run, Set Resource)
 debitNode r l amount resourceTag from =
@@ -392,7 +469,7 @@ debitNode r l amount resourceTag from =
       let (out, remaining) = case amount of
             Nothing -> (filteredResources, [])
             Just amount -> S.splitAt (amount `min` S.size filteredResources) filteredResources
-      pure (r & oldUpdate . graph . vertices . ix from . ty . resources .~ remaining
+      pure (r & oldUpdate . graph . vertices . ix from . ty . resources %~ (S.\\ out) -- .~ remaining
               & newUpdate . graph . vertices . ix from . ty . resources %~ (S.\\ out)
               & activatedNodes <>~ [from]
            ,out)
@@ -401,66 +478,48 @@ debitNode r l amount resourceTag from =
   where n = r ^?! oldUpdate . graph . vertices . ix from
 
 creditNode :: Run -> ResourceEdgeLabel -> Set Resource -> NodeLabel -> Maybe (Run, Set Resource)
-creditNode r sourceEdge incoming to =
+creditNode r sourceEdge incoming toNode =
   -- TODO Check limits on the credited node and fail or overflow
   case n'^.ty of
     Source{} -> Nothing
-    Drain{} -> pure (r & activatedNodes <>~ [to], [])
+    Drain{} -> pure (r & activatedNodes <>~ [toNode], [])
     p@Pool{} -> do
       let overCapacity = not $
             case p^?!limit of
               Nothing -> True
               Just maximum ->
                 maximum >=
-                S.size ((r ^. newUpdate . graph . vertices . ix to . ty . resources)
+                S.size ((r ^. newUpdate . graph . vertices . ix toNode . ty . resources)
                          <> incoming)
       if overCapacity then
         case p^?!overflow of
           OverflowBlock -> mzero
-          OverflowDrain -> pure (r & activatedNodes <>~ [to]
+          OverflowDrain -> pure (r & activatedNodes <>~ [toNode]
                                   & killedResources <>~ incoming -- TODO Update for partial pushes
                                , [])
-        else pure (r & newUpdate . graph . vertices . ix to . ty . resources <>~ incoming
-                    & activatedNodes <>~ [to]
+        else pure (r & newUpdate . graph . vertices . ix toNode . ty . resources <>~ incoming
+                    & activatedNodes <>~ [toNode]
                   ,[])
     Gate{} ->
       -- TOOD This doesn't allow for partial pushes
-      (,[]) <$> distributeGatedResources r to incoming
+      (,[]) <$> distributeGatedResources r toNode incoming
     Converter{} ->
       -- NB One of the few cases where we update both the old and the new!
       -- This allows converters to operate without a delay
       (,[]) <$>
-       fireConverterIfPossible (r & newUpdate . graph . vertices . ix to . ty . storage . at sourceEdge . non [] <>~ incoming
-                                  & oldUpdate . graph . vertices . ix to . ty . storage . at sourceEdge . non [] <>~ incoming)
-                                        to
-  where n' = r ^?! newUpdate . graph . vertices . ix to
-
-fireConverterIfPossible :: Run -> NodeLabel -> Maybe Run
-fireConverterIfPossible r l = 
-  if all (\((elabel::ResourceEdgeLabel),(edge :: ResourceEdge)) ->
-            -- TODO Should this default to 0 or 1?
-             maybe 0 S.size (available ^? ix elabel) >= fromMaybe 1 (resourceFormulaValue r (edge^.resourceFormula))
-          ) (allInboundOld :: [(ResourceEdgeLabel,ResourceEdge)])
-     then
-    case allOutboundOld of
-      [] -> Just $ clearStorage r
-      [(olabel, oedge)] -> do
-        case n^.resourceTypes of
-          [rtag] ->
-            -- TODO Is the default here 0 or 1?
-            let (r', res) = generateResources r rtag (fromMaybe 0 $ resourceFormulaValue r (oedge^.resourceFormula))
-            in Just $ maybe (clearStorage r') fst $ creditNode (clearStorage r') olabel res (oedge^.to)
-          _ -> pure r
-      _ -> Nothing -- Only one active outbound edge
-    else
-    pure r
-  where -- NB Inactive inbound edges count. Inactive outbound edges do not!
-        allInboundOld = inResourceEdges (r^.oldUpdate) l
-        allOutboundOld = filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.newUpdate) l
-        n = r ^?! oldUpdate . graph . vertices . ix l . ty
-        available = n^.storage
-	clearStorage r = r & oldUpdate . graph . vertices . ix l . ty . storage .~ []
-                           & newUpdate . graph . vertices . ix l . ty . storage .~ []
+       fireConverterIfPossible (r & newUpdate . graph . vertices . ix toNode . ty . storage . at sourceEdge . non [] <>~ incoming
+                                  & oldUpdate . graph . vertices . ix toNode . ty . storage . at sourceEdge . non [] <>~ incoming)
+                                        toNode
+    t@Trader{} -> do
+      ((i1,o1),(i2,o2)) <- traderInputsOutputs r toNode (r ^?! oldUpdate . graph . vertices . ix toNode)
+      (i,o) <- (if
+                  | sourceEdge == i1^._1 -> Just (i1,o1)
+                  | sourceEdge == i2^._1 -> Just (i2,o2)
+                  | otherwise -> Nothing)
+      -- We use up all the resources no matter what happens
+      -- pure $ fromMaybe (r, []) creditNode
+      creditNode r (o^._1) incoming (o^._2.to)
+  where n' = r ^?! newUpdate . graph . vertices . ix toNode
 
 runResourceEdge :: DebitNodeFn -> CreditNodeFn
                 -> Bool -> Node -> Run -> (ResourceEdgeLabel, ResourceEdge)
@@ -469,18 +528,19 @@ runResourceEdge :: DebitNodeFn -> CreditNodeFn
 runResourceEdge debitFn creditFn maxNeeded n r (l,e) =
   -- TODO this only applies to the latched nodes
     if | isLatched $ oldSource^.ty ->
-         gateByInterval r l e $ do
-           let amount = resourceFormulaValue r (e^.resourceFormula)
+         gateByInterval r l e $ \r -> do
+           let (r', amount) = resourceFormulaValue r (e^.resourceFormula)
            -- TODO Check limits on the credited node so we don't ask for too much
            -- TODO Check limits on resource edge
-           (r',resources) <- debitFn r l amount (e^.resourceFilter) (e^.from)
+           (r'',resources) <- debitFn r' l amount (e^.resourceFilter) (e^.from)
            when (maxNeeded && Just (S.size resources) /= amount) mzero
-           (r'',remainingResources) <- creditFn r' l resources (e^.to)
-           pure (r'' & activatedEdges <>~ [l]
-                     & edgeFlows . at l . non S.empty <>~ resources
+           (r''',remainingResources) <- creditFn r'' l resources (e^.to)
+           pure (r''' & activatedEdges <>~ [l]
+                      & edgeFlows . at l . non S.empty <>~ resources
                 , remainingResources)
        | isGate $ oldSource^.ty -> mzero -- TODO?
        | isConverter $ oldSource^.ty -> mzero -- TODO?
+       | isTrader $ oldSource^.ty -> mzero -- TODO?
   where oldSource = r ^?! oldUpdate . graph . vertices . ix (e^.from)
         oldTarget = r ^?! oldUpdate . graph . vertices . ix (e^.from)
 
@@ -509,6 +569,10 @@ runNode r (l, n) =
     s@Converter{} -> case _pullAction s of
                   PullAny -> pushPullAny allInboundOld
                   PullAll -> pushPullAll allInboundOld
+    Trader{} ->
+      case traderInputsOutputs r l n of
+        Just ((i1,_),(i2,_)) -> pushPullAll [(i1^._1,i1^._2),(i2^._1,i2^._2)]
+        Nothing -> r
   where -- NB Inactive resources edges don't count
         allInboundOld = filter (isActiveResourceEdge r . fst) $ inResourceEdges (r^.oldUpdate) l
         allOutboundOld = filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.newUpdate) l
@@ -584,3 +648,4 @@ renderAllInDirectory directory = do
                   , T.pack $ dropExtension f <> ".dot"
                   , "-o"
                   , T.pack $ dropExtension f <> ".pdf"]) fms
+

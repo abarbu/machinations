@@ -23,7 +23,7 @@ import Data.Bifunctor
 main = defaultMain tests
 
 tests :: TestTree
-tests = testGroup "Tests" [object101Tests] -- [object101Tests,rfTests,sfTests,spdTests]
+tests = testGroup "Tests" [object101Tests,rfTests,sfTests,spdTests]
 
 readMachination' :: FilePath -> Machination
 readMachination' = fromJust . unsafePerformIO . decodeFileStrict'
@@ -227,6 +227,25 @@ object101Tests = testGroup "101-objects"
     , test' 1 "0090.json" [(538, [("Black", 15)]), (542, [])]
     , test' 2 "0090.json" [(538, [("Black", 26)]), (542, [("Black", 1)])]
     , test' 3 "0090.json" [(538, [("Black", 37)]), (542, [("Black", 2)])]
+    ]
+  , testGroup "traders"
+    [
+      test' 1 "0013.json" [(101, [("Black",1),("Blue",3),("Green",2),("Orange",3),("Red",3)])
+                          ,(102, []),(103, []),(104, []),(105, []),(106, [])]
+    , test' 2 "0013.json" [(101, [("Black",3),("Blue",3),("Green",3),("Orange",2),("Red",3)])
+                          ,(102, [("Red",1)]),(103, [("Orange",3)]),(104, [("Green",2)]),(105, [("Blue",2)]),(106, [("Black",1)])]
+    , test' 1 "0009.json" [(52, [("Blue",1)]),(55, []),(58, [("Black",10)]),(57, [])]
+    , test' 5 "0009.json" [(52, [("Blue",5)]),(55, []),(58, [("Black",10)]),(57, [])]
+    , test' 6 "0009.json" [(52, [("Blue",6)]),(55, []),(58, [("Black",10)]),(57, [])]
+    , test' 1 "0010.json" [(63, [("Blue",1)]),(66, []),(69, [("Black",10)]),(68, [])]
+    , test' 5 "0010.json" [(63, [("Blue",5)]),(66, []),(69, [("Black",10)]),(68, [])]
+    , test' 6 "0010.json" [(63, [("Blue",6)]),(66, []),(69, [("Black",10)]),(68, [])]
+    , test' 1 "0011.json" [(74, [("Blue",1)]),(77, []),(80, [("Black",10)]),(79, [])]
+    , test' 5 "0011.json" [(74, [("Blue",5)]),(77, []),(80, [("Black",10)]),(79, [])]
+    , test' 6 "0011.json" [(74, [("Blue",1)]),(77, [("Blue",5)]),(80, [("Black",9)]),(79, [("Black",1)])]
+    , test' 1 "0012.json" [(85, [("Blue",1)]),(88, []),(91, [("Black",10)]),(90, [])]
+    , test' 5 "0012.json" [(85, [("Blue",5)]),(88, []),(91, [("Black",10)]),(90, [])]
+    , test' 6 "0012.json" [(85, [("Blue",6)]),(88, []),(91, [("Black",10)]),(90, [])]
     ]
   ]
   where read' x = readMachination' ("ours/101-objects/" </> x)

@@ -331,6 +331,10 @@ isGate :: NodeType -> Bool
 isGate Gate{} = True
 isGate _ = False
 
+isTrader :: NodeType -> Bool
+isTrader Trader{} = True
+isTrader _ = False
+
 isConverter :: NodeType -> Bool
 isConverter Converter{} = True
 isConverter _ = False

@@ -165,28 +165,22 @@ object101Tests = testGroup "101-objects"
       , test' 1 "0040.json" [(299, [("Black", 1)])]
       , test' 5 "0040.json" [(299, [("Black", 5)])]
       , test' 5 "0041.json" [(305, [("Black", 5)])]
-      , 
-
-        test' 1 "0035.json" [(259, [("Black", 1)]), (261, [])]
+      , test' 1 "0035.json" [(259, [("Black", 1)]), (261, [])]
       , test' 2 "0035.json" [(259, [("Black", 1)]), (261, [("Black", 1)])]
       , test' 3 "0035.json" [(259, [("Black", 2)]), (261, [("Black", 1)])]
       , test' 4 "0035.json" [(259, [("Black", 2)]), (261, [("Black", 2)])]
-
       , test' 100 "0036.json" [(266, [("Black", 52)]), (268, [("Black", 48)])]
       , test' 100 "0037.json" [(273, []), (275, [])]
-      
       , test' 1 "0038.json" [(281, []), (283, [])]
       , test' 2 "0038.json" [(281, [("Black", 1)]), (283, [])]
       , test' 3 "0038.json" [(281, [("Black", 1)]), (283, [("Black", 1)])]
       , test' 4 "0038.json" [(281, [("Black", 1)]), (283, [("Black", 1)])]
       , test' 5 "0038.json" [(281, [("Black", 1)]), (283, [("Black", 1)])]
-
       , test' 100 "0039.json" [(290, [("Black", 50)]), (292, [("Black", 50)])]
       , test' 5 "0042.json" [(311, [("Black", 5)]), (313, []), (314, [])]
       , test' 6 "0042.json" [(311, [("Black", 1)]), (313, [("Black", 2)]), (314, [("Black", 3)])]
       , test' 5 "0043.json" [(320, [("Black", 5)]), (322, []), (323, [])]
       , test' 6 "0043.json" [(320, [("Black", 1)]), (322, [("Black", 2)]), (323, [("Black", 3)])]
-
       , test' 1 "0091.json" [(550, [("Black", 3)]), (545, [("Black", 2)])]
       , test' 2 "0091.json" [(550, [("Black", 6)]), (545, [("Black", 4)])]
       , test' 3 "0091.json" [(550, [("Black", 10)]) , (545, [("Black", 5)])]
@@ -247,6 +241,25 @@ object101Tests = testGroup "101-objects"
     , test' 5 "0012.json" [(85, [("Blue",5)]),(88, []),(91, [("Black",10)]),(90, [])]
     , test' 6 "0012.json" [(85, [("Blue",6)]),(88, []),(91, [("Black",10)]),(90, [])]
     ]
+  , testGroup "delay"
+    [
+      test' 1 "0000.json" [(6, [("Black",10)]),(9, [])]
+    , test' 2 "0000.json" [(6, [("Black",10)]),(9, [])]
+    , test' 3 "0000.json" [(6, [("Black",10)]),(9, [])]
+    , test' 4 "0000.json" [(6, [("Black",10)]),(9, [])]
+    , test' 1 "0001.json" [(11, [("Black",10)]),(14, [])]
+    , test' 2 "0001.json" [(11, [("Black",10)]),(14, [])]
+    , test' 3 "0001.json" [(11, [("Black",10)]),(14, [])]
+    , test' 4 "0001.json" [(11, [("Black",10)]),(14, [])]
+    , test' 1 "0002.json" [(16, [("Black",9)]),(19, [])]
+    , test' 2 "0002.json" [(16, [("Black",8)]),(19, [])]
+    , test' 3 "0002.json" [(16, [("Black",7)]),(19, [])]
+    , test' 4 "0002.json" [(16, [("Black",6)]),(19, [("Black",1)])]
+    , test' 1 "0003.json" [(21, [("Black",9)]),(24, [])]
+    , test' 2 "0003.json" [(21, [("Black",9)]),(24, [])]
+    , test' 3 "0003.json" [(21, [("Black",9)]),(24, [])]
+    , test' 4 "0003.json" [(21, [("Black",9)]),(24, [])]
+    ]
   ]
   where read' x = readMachination' ("ours/101-objects/" </> x)
         testRaw node steps file right =
@@ -261,7 +274,7 @@ object101Tests = testGroup "101-objects"
                      $ noderes node r @?= right)
              noderights
         test' steps file =
-          testRaw' steps file . map (\(n,r) -> (n,Just r))
+          testRaw' steps file . map (second Just)
           
 spdTests = testGroup "SourcePoolDrain"
   [ testCase "static" $

@@ -214,7 +214,6 @@ deriveJSON mjsonOptions ''StateFormula
 makePrisms ''StateFormula
 
 data Waiting = Waiting { _waitingStartTime :: Int
-                       , _waitingAmount :: Int
                        , _waitingResource :: Resource }
   deriving (Show, Eq)
 deriveJSON (prefixOptions "_waiting") ''Waiting
@@ -313,15 +312,6 @@ data Machination = Machination { machinationGraph :: Graph
   deriving (Show, Eq)
 deriveJSON (prefixOptions "Machination") ''Machination
 makeFields ''Machination
-
--- data RunResult = RunResult { runResultUpdate :: Machination
---                            , runResultActivated :: ResourceEdgeLabel
---                            , runResultFailed :: ResourceEdgeLabel
---                            , runResultTriggered :: StateEdgeLabel
---                            }
---   deriving (Show, Eq)
--- deriveJSON mjsonOptions ''RunResult
--- makeFields ''RunResult
  
 isPool :: NodeType -> Bool
 isPool Pool{} = True

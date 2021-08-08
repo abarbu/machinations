@@ -18,7 +18,7 @@ import Control.Lens hiding (from,to)
 import Dot hiding (Graph,Node)
 import qualified Data.ByteString.Lazy as B
 import Data.Maybe
-import Data.List (foldl', nubBy, groupBy, sortOn, mapAccumL)
+import Data.List (foldl', nubBy, groupBy, sortOn, mapAccumL, partition, (\\))
 import Data.Set(Set)
 import qualified Data.Set as S
 import Data.Map.Strict(Map)
@@ -427,7 +427,7 @@ fireConverterIfPossible r l =
               case n^.resourceTypes of
                 [rtag] ->
                   -- TODO Is the default here 0 or 1?
-                  let (r'', val) = second (fromMaybe 0) $ resourceFormulaValue r (oedge^.resourceFormula)
+                  let (r'', val) = second (fromMaybe 0) $ resourceFormulaValue r' (oedge^.resourceFormula)
                       (r''', res) = generateResources r'' rtag val
                   in Just $ maybe (clearStorage r''') fst $ creditNode (clearStorage r''') olabel res (oedge^.to)
                 _ -> pure r'
@@ -519,6 +519,12 @@ creditNode r sourceEdge incoming toNode =
       -- We use up all the resources no matter what happens
       -- pure $ fromMaybe (r, []) creditNode
       creditNode r (o^._1) incoming (o^._2.to)
+    Delay{} ->
+      case filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.oldUpdate) toNode of
+        [outEdge] ->
+          let now = r^.oldUpdate.time
+              (r', val) = second (fromMaybe 0) $ resourceFormulaValue r (outEdge^._2.resourceFormula)
+          in Just $ (,[]) $ r' & newUpdate . graph . vertices . ix toNode . ty . waitingResources <>~ (map (Waiting $ now + val) (S.toList incoming))
   where n' = r ^?! newUpdate . graph . vertices . ix toNode
 
 runResourceEdge :: DebitNodeFn -> CreditNodeFn
@@ -543,6 +549,16 @@ runResourceEdge debitFn creditFn maxNeeded n r (l,e) =
        | isTrader $ oldSource^.ty -> mzero -- TODO?
   where oldSource = r ^?! oldUpdate . graph . vertices . ix (e^.from)
         oldTarget = r ^?! oldUpdate . graph . vertices . ix (e^.from)
+
+pushDelayedResources :: Run -> ResourceEdgeLabel -> NodeLabel -> Node -> NodeType -> NodeLabel -> Run
+pushDelayedResources r edgel l n d dest =
+  case creditNode r edgel (S.fromList $ map (^.resource) alive) dest of
+    Nothing -> r -- We hold on to the resources
+    Just (r, leftovers) ->
+      r & oldUpdate . graph . vertices . ix l . ty . waitingResources %~
+         (\prev -> let dead = filter (\a -> not ((a^.resource) `S.member` leftovers)) alive
+                  in prev \\ dead)
+  where (alive, sleeping) = partition (\x -> x^.startTime <= r^.oldUpdate.time) $ d^.waitingResources
 
 runNode :: Run -> (NodeLabel, Node) -> Run
 runNode r (l, n) =
@@ -569,10 +585,12 @@ runNode r (l, n) =
     s@Converter{} -> case _pullAction s of
                   PullAny -> pushPullAny allInboundOld
                   PullAll -> pushPullAll allInboundOld
-    Trader{} ->
-      case traderInputsOutputs r l n of
-        Just ((i1,_),(i2,_)) -> pushPullAll [(i1^._1,i1^._2),(i2^._1,i2^._2)]
-        Nothing -> r
+    Trader{} -> case traderInputsOutputs r l n of
+                 Just ((i1,_),(i2,_)) -> pushPullAll [(i1^._1,i1^._2),(i2^._1,i2^._2)]
+                 Nothing -> r
+    d@Delay{} -> case allOutboundOld of
+      [dest] -> pushDelayedResources (pushPullAny allInboundOld) (dest^._1) l n d (dest^._2.to)
+      _ -> r -- We fail if there are multiple outputs
   where -- NB Inactive resources edges don't count
         allInboundOld = filter (isActiveResourceEdge r . fst) $ inResourceEdges (r^.oldUpdate) l
         allOutboundOld = filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.newUpdate) l
@@ -605,8 +623,8 @@ run m clicked =
                (automaticNodes m
                 <> (if m^.time == 0 then startNodes m else [])
                 <> map (nodeLookup m) clicked)
-          & newUpdate . time +~ 1
   in r & newUpdate . seed .~ fst (random $ r^.stdGen)
+       & newUpdate . time +~ 1
   where loop :: Run -> [(NodeLabel, Node)] -> Run
         loop m active = foldl' runNode m active
 

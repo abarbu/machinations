@@ -208,7 +208,7 @@ parseDelayOrQueue obj = do
        , Node { nodeTy =
                   case q :: Text of
                     "0" -> Delay { _activation = parseActivation a, _waitingResources = [] }
-                    "1" -> Queue { _activation = parseActivation a, _waitingResources = [] }
+                    "1" -> Queue { _activation = parseActivation a, _waitingResources = [], _nextTimeAvailable = Nothing }
               , nodeLabel = fromMaybe "" l
               , nodeColor = "black"
               })

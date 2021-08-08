@@ -251,7 +251,8 @@ data NodeType = Source { _activation :: NodeActivation
               | Delay { _activation :: NodeActivation
                       , _waitingResources :: [Waiting] }
               | Queue { _activation :: NodeActivation
-                      , _waitingResources :: [Waiting] }
+                      , _waitingResources :: [Waiting]
+                      , _nextTimeAvailable :: Maybe Int }
               | EndCondition
   deriving (Show, Eq)
 deriveJSON mjsonOptions ''NodeType

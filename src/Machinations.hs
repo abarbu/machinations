@@ -18,7 +18,7 @@ import Control.Lens hiding (from,to)
 import Dot hiding (Graph,Node)
 import qualified Data.ByteString.Lazy as B
 import Data.Maybe
-import Data.List (foldl', nubBy, groupBy, sortOn, mapAccumL, partition, (\\))
+import Data.List (foldl', nubBy, groupBy, sortOn, mapAccumL, partition, (\\), delete)
 import Data.Set(Set)
 import qualified Data.Set as S
 import Data.Map.Strict(Map)
@@ -525,7 +525,13 @@ creditNode r sourceEdge incoming toNode =
           let now = r^.oldUpdate.time
               (r', val) = second (fromMaybe 0) $ resourceFormulaValue r (outEdge^._2.resourceFormula)
           in Just $ (,[]) $ r' & newUpdate . graph . vertices . ix toNode . ty . waitingResources <>~ (map (Waiting $ now + val) (S.toList incoming))
+    Queue{} ->
+      case filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.oldUpdate) toNode of
+        [outEdge] ->
+          let (r', val) = second (fromMaybe 0) $ resourceFormulaValue r (outEdge^._2.resourceFormula)
+          in Just $ (,[]) $ r' & newUpdate . graph . vertices . ix toNode . ty . waitingResources <>~ (map (Waiting $ now + val) (S.toList incoming))
   where n' = r ^?! newUpdate . graph . vertices . ix toNode
+        now = r^.oldUpdate.time
 
 runResourceEdge :: DebitNodeFn -> CreditNodeFn
                 -> Bool -> Node -> Run -> (ResourceEdgeLabel, ResourceEdge)
@@ -552,13 +558,38 @@ runResourceEdge debitFn creditFn maxNeeded n r (l,e) =
 
 pushDelayedResources :: Run -> ResourceEdgeLabel -> NodeLabel -> Node -> NodeType -> NodeLabel -> Run
 pushDelayedResources r edgel l n d dest =
-  case creditNode r edgel (S.fromList $ map (^.resource) alive) dest of
-    Nothing -> r -- We hold on to the resources
-    Just (r, leftovers) ->
-      r & oldUpdate . graph . vertices . ix l . ty . waitingResources %~
-         (\prev -> let dead = filter (\a -> not ((a^.resource) `S.member` leftovers)) alive
-                  in prev \\ dead)
-  where (alive, sleeping) = partition (\x -> x^.startTime <= r^.oldUpdate.time) $ d^.waitingResources
+  case alive of
+    [] -> r
+    _ -> case creditNode r edgel (S.fromList $ map (^.resource) alive) dest of
+          Nothing -> r -- We hold on to the resources
+          Just (r, leftovers) ->
+            r & oldUpdate . graph . vertices . ix l . ty . waitingResources %~
+                   (\prev -> let dead = filter (\a -> not ((a^.resource) `S.member` leftovers)) alive
+                            in prev \\ dead)
+              & newUpdate . graph . vertices . ix l . ty . waitingResources %~
+                   (\prev -> let dead = filter (\a -> not ((a^.resource) `S.member` leftovers)) alive
+                            in prev \\ dead)
+  where alive = filter (\x -> x^.startTime <= r^.oldUpdate.time) $ d^.waitingResources
+
+pushQueuedResources :: Run -> (ResourceEdgeLabel, ResourceEdge) -> NodeLabel -> Node -> NodeType -> NodeLabel -> Run
+pushQueuedResources r (edgel,edge) l _ d dest =
+  case alive of
+    [] -> r
+    (h:_) -> 
+      if h^.startTime <= now && (maybe True (now >=) (d^?!nextTimeAvailable)) then
+        case creditNode r' edgel [h^.resource] dest of
+              Nothing -> r' -- We hold on to the resources
+              Just (r'', []) -> r'' & oldUpdate . graph . vertices . ix l . ty . waitingResources %~ delete h
+                                   & newUpdate . graph . vertices . ix l . ty . waitingResources %~ delete h
+                                   & oldUpdate . graph . vertices . ix l . ty . nextTimeAvailable .~ Just (now+val)
+                                   & newUpdate . graph . vertices . ix l . ty . nextTimeAvailable .~ Just (now+val)
+              Just (r', [_]) -> r -- there can only be one, we abort
+              _ -> error "pushQueuedResources shouldn't be able to have more leftovers"
+      else
+        r
+  where alive = filter (\x -> x^.startTime <= r^.oldUpdate.time) $ d^.waitingResources
+        now = r^.oldUpdate.time
+        (r', val) = second (fromMaybe 0) $ resourceFormulaValue r (edge^.resourceFormula)
 
 runNode :: Run -> (NodeLabel, Node) -> Run
 runNode r (l, n) =
@@ -591,6 +622,9 @@ runNode r (l, n) =
     d@Delay{} -> case allOutboundOld of
       [dest] -> pushDelayedResources (pushPullAny allInboundOld) (dest^._1) l n d (dest^._2.to)
       _ -> r -- We fail if there are multiple outputs
+    q@Queue{} -> case allOutboundOld of
+      [dest] -> pushQueuedResources (pushPullAny allInboundOld) dest l n q (dest^._2.to)
+      _ -> undefined -- We fail if there are multiple outputs
   where -- NB Inactive resources edges don't count
         allInboundOld = filter (isActiveResourceEdge r . fst) $ inResourceEdges (r^.oldUpdate) l
         allOutboundOld = filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.newUpdate) l
@@ -619,14 +653,14 @@ runNode r (l, n) =
 
 run :: Machination -> [NodeLabel] -> Run
 run m clicked =
-  let r = loop (Run m m S.empty S.empty S.empty S.empty S.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty)
+  let r = loop (Run m' m' S.empty S.empty S.empty S.empty S.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty)
                (automaticNodes m
                 <> (if m^.time == 0 then startNodes m else [])
                 <> map (nodeLookup m) clicked)
   in r & newUpdate . seed .~ fst (random $ r^.stdGen)
-       & newUpdate . time +~ 1
   where loop :: Run -> [(NodeLabel, Node)] -> Run
         loop m active = foldl' runNode m active
+        m' = m & time +~ 1
 
 exSourcePoolDrain :: NodeActivation -> NodeActivation -> PushPullAction -> NodeActivation -> Int -> Int -> Machination
 exSourcePoolDrain sa pa pt da rsp rpd =

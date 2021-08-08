@@ -260,6 +260,21 @@ object101Tests = testGroup "101-objects"
     , test' 3 "0003.json" [(21, [("Black",9)]),(24, [])]
     , test' 4 "0003.json" [(21, [("Black",9)]),(24, [])]
     ]
+  , testGroup "queue"
+    [
+      test' 1 "0006.json" [(37, [("Black",9)]),(40, [])]
+    , test' 2 "0006.json" [(37, [("Black",8)]),(40, [])]
+    , test' 3 "0006.json" [(37, [("Black",7)]),(40, [])]
+    , test' 4 "0006.json" [(37, [("Black",6)]),(40, [("Black",1)])]
+    , test' 5 "0006.json" [(37, [("Black",5)]),(40, [("Black",1)])]
+    , test' 6 "0006.json" [(37, [("Black",4)]),(40, [("Black",1)])]
+    , test' 7 "0006.json" [(37, [("Black",3)]),(40, [("Black",2)])]
+    , test' 8 "0006.json" [(37, [("Black",2)]),(40, [("Black",2)])]
+    , test' 1 "0007.json" [(42, [("Black",9)]),(45, [])]
+    , test' 2 "0007.json" [(42, [("Black",9)]),(45, [])]
+    , test' 3 "0007.json" [(42, [("Black",9)]),(45, [])]
+    , test' 4 "0007.json" [(42, [("Black",9)]),(45, [])]
+    ]
   ]
   where read' x = readMachination' ("ours/101-objects/" </> x)
         testRaw node steps file right =

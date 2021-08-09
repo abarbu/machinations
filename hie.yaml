@@ -1,7 +1,11 @@
 cradle:
   stack:
-    - path: "./"
+    - path: "./src"
       component: "machinations:lib"
+    - path: "./server"
+      component: "machinations:exe:machinations-server"
+    - path: "./test"
+      component: "machinations:test:test"
 
 #   stack:
 #     - path: "./src"

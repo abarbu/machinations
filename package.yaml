@@ -20,55 +20,85 @@ description:         Please see the README on Github at <https://github.com/abar
 
 dependencies:
 - base >= 4.7 && < 5
+- bytestring
+- containers
+- directory
+- extra
+- filepath
+- mtl
+- text
+- time
+- unix
+- vector
+- monad-logger
+- string-interpolate
+- shelly
+- aeson
+- aeson-pretty
+- transformers
+- constraints
+- singletons
+- ghc-prim
+- lens
+- indexed
+- stm
+- mono-traversable
+- nondeterminism
+- megaparsec
+- parser-combinators
+- hashable
+- unordered-containers
+- language-c
+- pretty
+- dot
+- random
+- uuid
+- tasty
+- tasty-quickcheck
+- tasty-golden
+- tasty-program
+- tasty-smallcheck
+- tasty-hunit
+- tasty-expected-failure
+- xml-to-json
+- silently
+- servant
+- bifunctors
+- either
+- time
+#
+- servant
+- servant-server
+- warp
+- wai
+- wai-logger
+- wai-extra
+- wai-cors
+- monad-logger
+- jwt
+- persistent
+- persistent-sqlite
+- persistent-template
+- resourcet
+- bcrypt
+- openapi3
+- servant-openapi3
+- servant-swagger-ui
+- servant-swagger-ui-core
+
+executables:
+  machinations-server:
+    main:                Main.hs
+    source-dirs:         server
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - machinations
 
 library:
   source-dirs: src
-  dependencies:
-    - bytestring
-    - containers
-    - directory
-    - extra
-    - filepath
-    - mtl
-    - text
-    - time
-    - unix
-    - vector
-    - monad-logger
-    - string-interpolate
-    - shelly
-    - aeson
-    - aeson-pretty
-    - transformers
-    - constraints
-    - singletons
-    - ghc-prim
-    - lens
-    - indexed
-    - stm
-    - mono-traversable
-    - nondeterminism
-    - megaparsec
-    - parser-combinators
-    - hashable
-    - unordered-containers
-    - language-c
-    - pretty
-    - dot
-    - random
-    - uuid
-    - tasty
-    - tasty-quickcheck
-    - tasty-golden
-    - tasty-program
-    - tasty-smallcheck
-    - tasty-hunit
-    - tasty-expected-failure
-    - xml-to-json
-    - silently
-    - servant
-    - bifunctors
-
 
 tests:
   test:

@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleContexts, RecordWildCards #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE StandaloneDeriving #-}
 {-# LANGUAGE OverloadedStrings, TemplateHaskell, FlexibleInstances, MultiParamTypeClasses, FunctionalDependencies, DuplicateRecordFields, DeriveGeneric, DeriveAnyClass, Strict, StrictData #-}
@@ -17,6 +18,8 @@ import qualified Data.Set as S
 import Data.Map(Map)
 import qualified Data.Map as M
 import Data.UUID
+import qualified Text.PrettyPrint as P
+import System.Random(mkStdGen,random,randomR,StdGen)
 
 type Variable = Text
 type ResourceTag = Text
@@ -27,29 +30,20 @@ type Percentage = Float
 newtype NodeLabel = NodeLabel { unNodeLabel :: Int }
   deriving (Show, Eq, Ord)
   deriving newtype (ToJSON, FromJSON, ToJSONKey, FromJSONKey)
--- deriveJSON mjsonOptionsSingle ''NodeLabel
 makePrisms ''NodeLabel
--- deriving instance ToJSONKey NodeLabel
--- deriving instance FromJSONKey NodeLabel
 
 newtype ResourceEdgeLabel = ResourceEdgeLabel { unResourceEdgeLabel :: Int }
   deriving (Show, Eq, Ord)
   deriving newtype (ToJSON, FromJSON, ToJSONKey, FromJSONKey)
--- deriveJSON mjsonOptionsSingle ''ResourceEdgeLabel
 makePrisms ''ResourceEdgeLabel
--- deriving instance ToJSONKey ResourceEdgeLabel
--- deriving instance FromJSONKey ResourceEdgeLabel
 
 newtype StateEdgeLabel = StateEdgeLabel { unStateEdgeLabel :: Int }
   deriving (Show, Eq, Ord)
   deriving newtype (ToJSON, FromJSON, ToJSONKey, FromJSONKey)
--- deriveJSON mjsonOptionsSingle ''StateEdgeLabel
 makePrisms ''StateEdgeLabel
--- deriving instance ToJSONKey StateEdgeLabel
--- deriving instance FromJSONKey StateEdgeLabel
 
 newtype AnyLabel = AnyLabel Int
-  deriving (Show, Eq, Ord)
+  deriving (Show, Eq, Generic, Ord)
 deriveJSON mjsonOptionsSingle ''AnyLabel
 makePrisms ''AnyLabel
 
@@ -68,7 +62,7 @@ toStateEdgeLabel (AnyLabel l) = StateEdgeLabel l
 
 data Resource = Resource { resourceTag :: ResourceTag,
                            resourceUUID :: Text }
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "resource") ''Resource
 makeFields ''Resource
 
@@ -81,7 +75,7 @@ data Condition = CEqual
                | CLt
                | CGtEq
                | CLtEq
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''Condition
 makePrisms ''Condition
 
@@ -95,39 +89,39 @@ data ResourceFormula = RFAll
                      | RFDice ResourceFormula ResourceFormula
                      | RFConstant Int
                      | RFCondition Condition ResourceFormula
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''ResourceFormula
 makePrisms ''ResourceFormula
 
 data Interval = Interval { intervalFormula :: ResourceFormula
                          , intervalCounter :: Int }
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "interval") ''Interval
 makeFields ''Interval
 
 data Limits = Limits { limitsLower :: Maybe Int
                      , limitsUpper :: Maybe Int }
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "limits") ''Limits
 makeFields ''Limits
 
 data Overflow = OverflowBlock | OverflowDrain
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''Overflow
 makePrisms ''Overflow
 
 data PushAction = PushAny | PushAll
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''PushAction
 makePrisms ''PushAction
 
 data PullAction = PullAny | PullAll
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''PullAction
 makePrisms ''PullAction
 
 data PushPullAction = Pushing PushAction | Pulling PullAction
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''PushPullAction
 makePrisms ''PushPullAction
 
@@ -135,7 +129,7 @@ makePrisms ''PushPullAction
 data DistributionType = Deterministic { _counts :: Maybe (Map ResourceEdgeLabel Int, Int)
                                       , _lastEdge :: Maybe ResourceEdgeLabel }
                       | Random
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "deterministic") ''DistributionType
 makePrisms ''DistributionType
 makeFieldsNoPrefix ''DistributionType
@@ -144,12 +138,12 @@ data NodeActivation = Passive
                     | Interactive
                     | Automatic
                     | OnStart
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''NodeActivation
 makePrisms ''NodeActivation
 
 data TransferType = IntervalTransfer | InstantTransfer
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''TransferType
 makePrisms ''TransferType
 
@@ -166,33 +160,33 @@ data Formula = FVar Variable
              | FSub Formula Formula
              | FMul Formula Formula
              | FDiv Formula Formula
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''Formula
 makePrisms ''Formula
 
 data Dice = Dice { diceNr :: Int
                  , diceSide :: Int }
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''Dice
 makeFields ''Dice
 
 data RandomRate = RandomDice { randomRateDice :: Dice }
                 | RandomChance Probability
                 | RandomPercentage Percentage
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''RandomRate
 makePrisms ''RandomRate
 
 data Range = Range { rangeLower :: Int
                    , rangeUpper :: Int }
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''Range
 makeFields ''Range
 
 -- data Modifier = Plus Int
 --               | PlusProbability Probability
 --               | PlusInterval Int
---   deriving (Show, Eq)
+--   deriving (Show, Eq, Generic)
 -- deriveJSON mjsonOptions ''Modifier
 -- makePrisms ''Modifier
 
@@ -209,13 +203,13 @@ data StateFormula = SFAdd StateFormula
                   | SFTrigger
                   | SFReverseTrigger
                   | SFVariable Text
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''StateFormula
 makePrisms ''StateFormula
 
 data Waiting = Waiting { _waitingStartTime :: Int
                        , _waitingResource :: Resource }
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "_waiting") ''Waiting
 makeFields ''Waiting
 
@@ -254,7 +248,7 @@ data NodeType = Source { _activation :: NodeActivation
                       , _waitingResources :: [Waiting]
                       , _nextTimeAvailable :: Maybe Int }
               | EndCondition
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''NodeType
 makePrisms ''NodeType
 makeFieldsNoPrefix ''NodeType
@@ -263,7 +257,7 @@ data Node = Node { nodeTy :: NodeType
                  , nodeLabel :: Text
                  , nodeColor :: Text
                  }
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''Node
 makeFields ''Node
 
@@ -276,7 +270,7 @@ data ResourceEdge = ResourceEdge { _from :: NodeLabel
                                  , _shuffleOrigin :: Bool
                                  , _limits :: Limits
                                  }
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''ResourceEdge
 makeFieldsNoPrefix ''ResourceEdge
 
@@ -293,7 +287,7 @@ data StateEdge = StateEdge { _from :: AnyLabel
                            , _resourceFilter :: Maybe Filter
                            , _active :: Bool
                            }
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''StateEdge
 makeFieldsNoPrefix ''StateEdge
 
@@ -301,7 +295,7 @@ data Graph = Graph { graphVertices :: Map NodeLabel Node
                    , graphResourceEdges :: Map ResourceEdgeLabel ResourceEdge
                    , graphStateEdges :: Map StateEdgeLabel StateEdge
                    }
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "graph") ''Graph
 makeFields ''Graph
 
@@ -310,7 +304,7 @@ data Machination = Machination { machinationGraph :: Graph
                                , machinationTime :: Int
                                , machinationSeed :: Int
                                }
-  deriving (Show, Eq)
+  deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "Machination") ''Machination
 makeFields ''Machination
  
@@ -335,3 +329,62 @@ isLatched Source{} = True
 isLatched Drain{} = True
 isLatched Pool{} = True
 isLatched _ = False
+
+data Run = Run { runOldUpdate          :: Machination
+               , runNewUpdate          :: Machination
+               , runActivatedEdges     :: Set ResourceEdgeLabel
+               , runFailedEdges        :: Set ResourceEdgeLabel
+               , runActivatedNodes     :: Set NodeLabel
+               , runFailedNodes        :: Set NodeLabel
+               , runTriggeredEdges     :: Set StateEdgeLabel
+               , runEdgeFlows          :: Map ResourceEdgeLabel (Set Resource)
+               , runGeneratedResources :: Set Resource
+               -- TODO Retrofit this everywhere
+               , runKilledResources    :: Set Resource
+               , runStdGen             :: StdGen
+               , runErrors             :: Map AnyLabel Text
+               }
+  deriving (Show, Eq, Generic)
+makeFields ''Run
+
+data RunMachination = RunMachination { runMachinationMachine         :: Machination
+                                     , runMachinationActiveNodes     :: Set NodeLabel
+                                     }
+  deriving (Show, Eq, Generic)
+deriveJSON (prefixOptions "runMachination") ''RunMachination
+makeFields ''RunMachination
+
+data RunResult = RunResult { runResultMachine            :: Machination
+                           , runResultActivatedEdges     :: Set ResourceEdgeLabel
+                           , runResultFailedEdges        :: Set ResourceEdgeLabel
+                           , runResultActivatedNodes     :: Set NodeLabel
+                           , runResultFailedNodes        :: Set NodeLabel
+                           , runResultTriggeredEdges     :: Set StateEdgeLabel
+                           , runResultEdgeFlows          :: Map ResourceEdgeLabel (Set Resource)
+                           , runResultGeneratedResources :: Set Resource
+                           -- TODO Retrofit this everywhere
+                           , runResultKilledResources    :: Set Resource
+                           , runResultErrors             :: Map Int Text
+                           }
+  deriving (Show, Eq, Generic)
+deriveJSON (prefixOptions "runResult") ''RunResult
+makeFields ''RunResult
+
+runToResult :: Run -> RunResult
+runToResult Run{..} = RunResult runNewUpdate runActivatedEdges runFailedEdges runActivatedNodes
+                               runFailedNodes runTriggeredEdges runEdgeFlows
+                               runGeneratedResources runKilledResources
+                               (M.mapKeys (\(AnyLabel l) -> l) runErrors)
+                              
+
+summarize :: Run -> String
+summarize r = P.render $
+  "" P.$$ P.text "Run summary:" P.$$
+  P.nest 1 (P.text "Old:" P.$$ (sm $ r^.oldUpdate)
+   P.$$
+   P.text "New:" P.$$ (sm $ r^.newUpdate)
+   P.$$ P.text "Generated" P.<+> P.int (S.size (r^.generatedResources))
+   P.$$ P.text "Killed" P.<+> P.int (S.size (r^.killedResources)))
+  where sm m = P.nest 2 $ P.vcat $ map sp $ M.toList $ M.filter (\n -> isPool $ n^.ty) $ m^.graph . vertices
+        sp (l,Node p@Pool{} _ _) = P.sizedText 6 (show l) P.<+> P.sizedText 6 "Pool" P.<+> P.sizedText 6 (show $ S.size $ _resources p)
+        sp _ = ""

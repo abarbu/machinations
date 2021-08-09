@@ -30,7 +30,6 @@ import System.Directory
 import System.FilePath
 import qualified Shelly as S
 import Data.Bifunctor
-import qualified Text.PrettyPrint as P
 
 -- TODO Implement edge inactivation
 -- TODO We don't yet handle resources edges with filters like >3
@@ -100,35 +99,6 @@ import qualified Text.PrettyPrint as P
     the source and the pool are activated with an edge that has a D5 on it, will
     draw different values for every activation of the resource edge.
 -}
-
-data Run = Run { runOldUpdate          :: Machination
-               , runNewUpdate          :: Machination
-               , runActivatedEdges     :: Set ResourceEdgeLabel
-               , runFailedEdges        :: Set ResourceEdgeLabel
-               , runActivatedNodes     :: Set NodeLabel
-               , runFailedNodes        :: Set NodeLabel
-               , runTriggeredEdges     :: Set StateEdgeLabel
-               , runEdgeFlows          :: Map ResourceEdgeLabel (Set Resource)
-               , runGeneratedResources :: Set Resource
-               -- TODO Retrofit this everywhere
-               , runKilledResources    :: Set Resource
-               , runStdGen             :: StdGen
-               , runErrors             :: Map AnyLabel Text
-               }
-  deriving (Show)
-makeFields ''Run
-
-summarize :: Run -> String
-summarize r = P.render $
-  "" P.$$ P.text "Run summary:" P.$$
-  P.nest 1 (P.text "Old:" P.$$ (sm $ r^.oldUpdate)
-   P.$$
-   P.text "New:" P.$$ (sm $ r^.newUpdate)
-   P.$$ P.text "Generated" P.<+> P.int (S.size (r^.generatedResources))
-   P.$$ P.text "Killed" P.<+> P.int (S.size (r^.killedResources)))
-  where sm m = P.nest 2 $ P.vcat $ map sp $ M.toList $ M.filter (\n -> isPool $ n^.ty) $ m^.graph . vertices
-        sp (l,Node p@Pool{} _ _) = P.sizedText 6 (show l) P.<+> P.sizedText 6 "Pool" P.<+> P.sizedText 6 (show $ S.size $ _resources p)
-        sp _ = ""
 
 -- Full nodes don't count for some operations, like those affecting gates
 isNodeFull :: NodeType -> Bool
@@ -651,12 +621,12 @@ runNode r (l, n) =
               Just (r, s) -> (r & activatedNodes <>~ [l], s)
         pushPullAll edges = fst $ pushPullAll' edges creditNode
 
-run :: Machination -> [NodeLabel] -> Run
+run :: Machination -> Set NodeLabel -> Run
 run m clicked =
   let r = loop (Run m' m' S.empty S.empty S.empty S.empty S.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty)
                (automaticNodes m
                 <> (if m^.time == 0 then startNodes m else [])
-                <> map (nodeLookup m) clicked)
+                <> map (nodeLookup m) (S.toList clicked))
   in r & newUpdate . seed .~ fst (random $ r^.stdGen)
   where loop :: Run -> [(NodeLabel, Node)] -> Run
         loop m active = foldl' runNode m active

@@ -621,9 +621,13 @@ runNode r (l, n) =
               Just (r, s) -> (r & activatedNodes <>~ [l], s)
         pushPullAll edges = fst $ pushPullAll' edges creditNode
 
+updateStateEdge :: Run -> (StateEdgeLabel, StateEdge) -> Run
+updateStateEdge r (sel, se) =
+  r
+
 run :: Machination -> Set NodeLabel -> Run
 run m clicked =
-  let r = loop (Run m' m' S.empty S.empty S.empty S.empty S.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty)
+  let r = loop (mkRun m')
                (automaticNodes m
                 <> (if m^.time == 0 then startNodes m else [])
                 <> map (nodeLookup m) (S.toList clicked))
@@ -642,7 +646,7 @@ exSourcePoolDrain sa pa pt da rsp rpd =
                 [(ResourceEdgeLabel 100, ResourceEdge (NodeLabel 0) (NodeLabel 1) (RFConstant rsp) (Interval (RFConstant 1) 0) IntervalTransfer Nothing False (Limits Nothing Nothing))
                 ,(ResourceEdgeLabel 101, ResourceEdge (NodeLabel 1) (NodeLabel 2) (RFConstant rpd) (Interval (RFConstant 1) 0) IntervalTransfer Nothing False (Limits Nothing Nothing))]
                 [])
-            [("life", "red")] 0 0
+            [("life", "red")] 0 0 Nothing
 
 startHere :: Machination
 startHere = exSourcePoolDrain Automatic Passive (Pushing PushAny) Passive 3 0

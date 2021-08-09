@@ -75,7 +75,7 @@ data Condition = CEqual
                | CLt
                | CGtEq
                | CLtEq
-  deriving (Show, Eq, Generic)
+  deriving (Show, Eq, Ord, Generic)
 deriveJSON mjsonOptions ''Condition
 makePrisms ''Condition
 
@@ -203,7 +203,7 @@ data StateFormula = SFAdd StateFormula
                   | SFTrigger
                   | SFReverseTrigger
                   | SFVariable Text
-  deriving (Show, Eq, Generic)
+  deriving (Show, Eq, Generic, Ord)
 deriveJSON mjsonOptions ''StateFormula
 makePrisms ''StateFormula
 
@@ -299,10 +299,23 @@ data Graph = Graph { graphVertices :: Map NodeLabel Node
 deriveJSON (prefixOptions "graph") ''Graph
 makeFields ''Graph
 
+data StateEdgeModifiers =
+  StateEdgeModifiers { _triggerNode :: Set NodeLabel
+                     , _enableNode :: Set NodeLabel
+                     , _disableNode :: Set NodeLabel
+                     , _enableResourceEdge :: Set ResourceEdgeLabel
+                     , _disableResourceEdge :: Set ResourceEdgeLabel
+                     , _modifyResourceFormula :: Map ResourceEdgeLabel (Set StateFormula)
+                     , _modifyNode :: Map NodeLabel (Set StateFormula) }
+  deriving (Show, Eq, Generic)
+deriveJSON mjsonOptions ''StateEdgeModifiers
+makeFieldsNoPrefix ''StateEdgeModifiers
+
 data Machination = Machination { machinationGraph :: Graph
                                , machinationResourceTagColor :: Map ResourceTag Text
                                , machinationTime :: Int
                                , machinationSeed :: Int
+                               , machinationModifiers :: Maybe StateEdgeModifiers
                                }
   deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "Machination") ''Machination
@@ -332,6 +345,7 @@ isLatched _ = False
 
 data Run = Run { runOldUpdate          :: Machination
                , runNewUpdate          :: Machination
+               , runStateEdgeModifiers :: StateEdgeModifiers
                , runActivatedEdges     :: Set ResourceEdgeLabel
                , runFailedEdges        :: Set ResourceEdgeLabel
                , runActivatedNodes     :: Set NodeLabel
@@ -369,6 +383,9 @@ data RunResult = RunResult { runResultMachine            :: Machination
   deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "runResult") ''RunResult
 makeFields ''RunResult
+
+mkRun :: Machination -> Run
+mkRun m = Run m m (StateEdgeModifiers S.empty S.empty S.empty S.empty S.empty M.empty M.empty) S.empty S.empty S.empty S.empty S.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty
 
 runToResult :: Run -> RunResult
 runToResult Run{..} = RunResult runNewUpdate runActivatedEdges runFailedEdges runActivatedNodes

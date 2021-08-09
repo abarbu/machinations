@@ -216,6 +216,7 @@ parseDelayOrQueue obj = do
 -- TODO I can't see any way to work around this hack, hope no one wants 9999 as a limit!
 convertLimits min max = Limits (oneLimit min) (oneLimit max)
   where oneLimit "9999" = Nothing
+        oneLimit "-9999" = Nothing
         oneLimit "-1" = Nothing
         oneLimit n = Just $ read' "" n
 
@@ -347,4 +348,5 @@ readMachinationsXml fname = do
       , machinationResourceTagColor = M.empty
       , machinationTime = 0
       , machinationSeed = 0
+      , machinationModifiers = Nothing
       }

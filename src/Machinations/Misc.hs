@@ -33,7 +33,7 @@ removeUnderscore ('_':t) = t
 removeUnderscore t = t
 
 prefixOptions :: String -> Options
-prefixOptions p = defaultOptions{fieldLabelModifier = prefixed p}
+prefixOptions p = defaultOptions{fieldLabelModifier = prefixed p, omitNothingFields = True}
   where prefixed p s = case drop (length p) s of
                          (h:t) -> toLower h : t
                          x -> x

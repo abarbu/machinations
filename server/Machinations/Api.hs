@@ -13,16 +13,17 @@ import Servant.Swagger.UI
 import Servant.Swagger.UI.Core
 import Control.Lens
 
-instance (ToSchema StateFormula)
-instance (ToSchema Limits)
-instance (ToSchema Formula)
-instance (ToSchema Waiting)
-instance (ToSchema AnyLabel)
-instance (ToSchema TransferType)
-instance (ToSchema DistributionType)
-instance (ToSchema PushAction)
-instance (ToSchema Interval)
-instance (ToSchema Overflow)
+instance ToSchema StateEdgeModifiers
+instance ToSchema StateFormula
+instance ToSchema Limits
+instance ToSchema Formula
+instance ToSchema Waiting
+instance ToSchema AnyLabel
+instance ToSchema TransferType
+instance ToSchema DistributionType
+instance ToSchema PushAction
+instance ToSchema Interval
+instance ToSchema Overflow
 instance ToSchema ResourceFormula
 instance ToSchema PushPullAction
 instance ToSchema StateEdge

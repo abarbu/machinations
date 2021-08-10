@@ -220,7 +220,7 @@ convertLimits min max = Limits (oneLimit min) (oneLimit max)
         oneLimit "-1" = Nothing
         oneLimit n = Just $ read' "" n
 
--- TODO
+-- todo
 parseFormula = maybe (FConstant 0) (fromJust . parseF)
 
 parseRegister :: HasCallStack => Object -> Parser (NodeLabel, Node)
@@ -348,5 +348,5 @@ readMachinationsXml fname = do
       , machinationResourceTagColor = M.empty
       , machinationTime = 0
       , machinationSeed = 0
-      , machinationModifiers = Nothing
+      , machinationStateEdgeModifiers = Nothing
       }

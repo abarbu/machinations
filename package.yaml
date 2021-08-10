@@ -18,6 +18,9 @@ extra-source-files:
 # common to point users to the README.md file.
 description:         Please see the README on Github at <https://github.com/abarbu/machinations#readme>
 
+ghc-options:
+  -fplugin=StackTrace.Plugin
+
 dependencies:
 - base >= 4.7 && < 5
 - bytestring
@@ -85,6 +88,7 @@ dependencies:
 - servant-openapi3
 - servant-swagger-ui
 - servant-swagger-ui-core
+- haskell-stack-trace-plugin
 
 executables:
   machinations-server:

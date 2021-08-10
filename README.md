@@ -1,7 +1,7 @@
 Machinations.io implementation in Haskell with some extra abilities
 
 Supports: Sources, Pools, Drains, Gates, Converters, Traders, Delays, Queues and Resource edges
-
+Generated resources and killed resources are accurate, other stats are not yet tested
 
 
 

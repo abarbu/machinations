@@ -315,11 +315,16 @@ data Machination = Machination { machinationGraph :: Graph
                                , machinationResourceTagColor :: Map ResourceTag Text
                                , machinationTime :: Int
                                , machinationSeed :: Int
-                               , machinationModifiers :: Maybe StateEdgeModifiers
+                               , machinationStateEdgeModifiers :: Maybe StateEdgeModifiers
                                }
   deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "Machination") ''Machination
 makeFields ''Machination
+
+data ResolvedLabel = RNode NodeLabel Node
+                   | RResource ResourceEdgeLabel ResourceEdge
+                   | RState StateEdgeLabel StateEdge
+                   deriving (Show, Eq)
  
 isPool :: NodeType -> Bool
 isPool Pool{} = True
@@ -345,15 +350,25 @@ isLatched _ = False
 
 data Run = Run { runOldUpdate          :: Machination
                , runNewUpdate          :: Machination
-               , runStateEdgeModifiers :: StateEdgeModifiers
+               -- TODO Verify this
                , runActivatedEdges     :: Set ResourceEdgeLabel
+               -- TODO Verify this
                , runFailedEdges        :: Set ResourceEdgeLabel
+               -- TODO Verify this
                , runActivatedNodes     :: Set NodeLabel
+               -- TODO Verify this
                , runFailedNodes        :: Set NodeLabel
+               -- TODO Verify this
                , runTriggeredEdges     :: Set StateEdgeLabel
+               -- TODO Verify this
                , runEdgeFlows          :: Map ResourceEdgeLabel (Set Resource)
+               -- TODO Verify this
+               , runNodeInflow         :: Map NodeLabel (Set Resource)
+               -- TODO Verify this
+               , runNodeOutflow        :: Map NodeLabel (Set Resource)
+               -- NB Checked against the model
                , runGeneratedResources :: Set Resource
-               -- TODO Retrofit this everywhere
+               -- NB Checked against the model
                , runKilledResources    :: Set Resource
                , runStdGen             :: StdGen
                , runErrors             :: Map AnyLabel Text
@@ -376,7 +391,6 @@ data RunResult = RunResult { runResultMachine            :: Machination
                            , runResultTriggeredEdges     :: Set StateEdgeLabel
                            , runResultEdgeFlows          :: Map ResourceEdgeLabel (Set Resource)
                            , runResultGeneratedResources :: Set Resource
-                           -- TODO Retrofit this everywhere
                            , runResultKilledResources    :: Set Resource
                            , runResultErrors             :: Map Int Text
                            }
@@ -384,8 +398,11 @@ data RunResult = RunResult { runResultMachine            :: Machination
 deriveJSON (prefixOptions "runResult") ''RunResult
 makeFields ''RunResult
 
+mkStateEdgeModifiers :: StateEdgeModifiers
+mkStateEdgeModifiers = StateEdgeModifiers S.empty S.empty S.empty S.empty S.empty M.empty M.empty
+
 mkRun :: Machination -> Run
-mkRun m = Run m m (StateEdgeModifiers S.empty S.empty S.empty S.empty S.empty M.empty M.empty) S.empty S.empty S.empty S.empty S.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty
+mkRun m = Run m m S.empty S.empty S.empty S.empty S.empty M.empty M.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty
 
 runToResult :: Run -> RunResult
 runToResult Run{..} = RunResult runNewUpdate runActivatedEdges runFailedEdges runActivatedNodes

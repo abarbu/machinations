@@ -7,6 +7,7 @@ import Machinations
 import Machinations.Types
 import Machinations.Misc
 import Machinations.Formulas
+import Machinations.Utils
 import Data.Set(Set)
 import qualified Data.Set as S
 import Data.Map(Map)
@@ -23,7 +24,7 @@ import Data.Bifunctor
 main = defaultMain tests
 
 tests :: TestTree
-tests = testGroup "Tests" [object101Tests,rfTests,sfTests,spdTests]
+tests = testGroup "Tests" [object101Tests,connections101Tests,rfTests,sfTests,spdTests]
 
 readMachination' :: FilePath -> Machination
 readMachination' = fromJust . unsafePerformIO . decodeFileStrict'
@@ -31,6 +32,19 @@ noderes n g = resourceStatsByTag <$> nodeResources g (NodeLabel n)
 run' g = runNewUpdate $ run g []
 run2' = run' . run'
 runN' n x = iterate run' x !! n
+
+testOneNodeResourcesRaw node steps file right =
+  testCase (show node <> " x" <> show steps <> " " <> file)
+  $ noderes node (runN' steps $ readMachination' file) @?= right
+testOneNodeResources node steps file right = testOneNodeResourcesRaw node steps file (Just right)
+testNodeResourcesRaw steps file noderights =
+  let r = runN' steps $ readMachination' file
+  in testGroup (show (map fst noderights) <> " x" <> show steps <> " " <> file)
+     $ map (\(node,right) ->
+               testCase (show node <> " x" <> show steps)
+               $ noderes node r @?= right)
+     noderights
+testNodeResources steps file = testNodeResourcesRaw steps file . map (second Just)
 
 object101Tests = testGroup "101-objects"
   [
@@ -276,20 +290,59 @@ object101Tests = testGroup "101-objects"
     , test' 4 "0007.json" [(42, [("Black",9)]),(45, [])]
     ]
   ]
-  where read' x = readMachination' ("ours/101-objects/" </> x)
-        testRaw node steps file right =
-          testCase (show node <> " x" <> show steps <> " " <> file)
-          $ noderes node (runN' steps $ read' file) @?= right
-        test node steps file right = testRaw node steps file (Just right)
-        testRaw' steps file noderights =
-          let r = runN' steps $ read' file
-          in testGroup (show (map fst noderights) <> " x" <> show steps <> " " <> file)
-             $ map (\(node,right) ->
-                      testCase (show node <> " x" <> show steps)
-                     $ noderes node r @?= right)
-             noderights
-        test' steps file =
-          testRaw' steps file . map (second Just)
+  where testRaw node steps file right = testOneNodeResourcesRaw node steps ("ours/101-objects/" </> file) right
+        test node steps file right = testOneNodeResources node steps ("ours/101-objects/" </> file) right
+        testRaw' steps file noderights = testNodeResourcesRaw steps ("ours/101-objects/" </> file) noderights
+        test' steps file = testNodeResources steps ("ours/101-objects/" </> file)
+
+connections101Tests = testGroup "101-connections"
+  [
+    testGroup "state"
+    [
+      testGroup "intervals"
+      [
+        test' 1 "0040.json" [(312, []),(314, [])]
+      , test' 2 "0040.json" [(312, []),(314, [])]
+      , test' 3 "0040.json" [(312, [("Black",1)]),(314, [])]
+      ]
+    , 
+      testGroup "triggers"
+      [
+        test' 4 "0040.json" [(312, [("Black",1)]),(314, [("Black",1)])]
+      , test' 5 "0040.json" [(312, [("Black",1)]),(314, [("Black",1)])]
+      , test' 6 "0040.json" [(312, [("Black",2)]),(314, [("Black",1)])]
+      , test' 7 "0040.json" [(312, [("Black",2)]),(314, [("Black",2)])]
+      , test' 1 "0042.json" [(330, []),(332, [])]
+      , test' 2 "0042.json" [(330, []),(332, [])]
+      , test' 3 "0042.json" [(330, [("Black",1)]),(332, [])]
+      , test' 4 "0042.json" [(330, [("Black",1)]),(332, [("Black",5)])]
+      , test' 1 "0043.json" [(337, []),(339, [("Black",1)])]
+      , test' 2 "0043.json" [(337, []),(339, [("Black",2)])]
+      , test' 3 "0043.json" [(337, [("Black",1)]),(339, [("Black",3)])]
+      , test' 4 "0043.json" [(337, [("Black",1)]),(339, [("Black",4)])]
+      , test' 1 "0044.json" [(346, [("Black",9)]),(348, []),(350, [("Black",1)])]
+      , test' 2 "0044.json" [(346, [("Black",8)]),(348, []),(350, [("Black",2)])]
+      , test' 3 "0044.json" [(346, [("Black",8)]),(348, []),(350, [("Black",3)])]
+      , test' 4 "0044.json" [(346, [("Black",7)]),(348, [("Black",3)]),(350, [("Black",1)])]
+      , test' 1 "0045.json" [(358, []),(356, []),(362, []),(366, [])]
+      , test' 2 "0045.json" [(358, []),(356, []),(362, []),(366, [])]
+      , test' 3 "0045.json" [(358, []),(356, [("Black",1)]),(362, []),(366, [])]
+      , test' 4 "0045.json" [(358, [("Black",1)]),(356, [("Black",1)]),(362, [("Black",1)]),(366, [("Black",1)])]
+      , test' 5 "0045.json" [(358, [("Black",1)]),(356, [("Black",1)]),(362, [("Black",1)]),(366, [("Black",1)])]
+      -- TODO 374,
+      , test' 1 "0047.json" [(386, [("Black",1)]),(390, []),(392, [])]
+      , test' 2 "0047.json" [(386, [("Black",5)]),(390, []),(392, [("Black",1)])]
+      , test' 6 "0047.json" [(386, [("Black",19)]),(390, []),(392, [("Black",5)])]
+      , test' 7 "0047.json" [(386, [("Black",21)]),(390, []),(392, [("Black",6)])]
+      , test' 8 "0047.json" [(386, [("Black",4)]),(390, [("Black",1)]),(392, [("Black",7)])]
+      , test' 9 "0047.json" [(386, [("Black",7)]),(390, [("Black",1)]),(392, [])]
+      ]
+    ]
+  ]
+  where testRaw node steps file right = testOneNodeResourcesRaw node steps ("ours/101-connections/" </> file) right
+        test node steps file right = testOneNodeResources node steps ("ours/101-connections/" </> file) right
+        testRaw' steps file noderights = testNodeResourcesRaw steps ("ours/101-connections/" </> file) noderights
+        test' steps file = testNodeResources steps ("ours/101-connections/" </> file)
           
 spdTests = testGroup "SourcePoolDrain"
   [ testCase "static" $

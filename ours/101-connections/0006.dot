@@ -1,8 +1,12 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "2016" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "2017" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "13024" [label=<3*D5>,peripheries="1",color=black,shape=septagon];
-  "2017" -> "13024" [color=black];
-  "13024" -> "2016" [color=black];
+  "63" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "64" [shape=Msquare,peripheries="1",label="",labelfontcolor=black,color=black];
+  "75" [shape=triangle,peripheries="2",label="",labelfontcolor=black,color=black];
+  "76" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "75" -> "76" [color=black];
+  "76" -> "63" [color=black];
+  "65" [label=<&gt;0>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "63" -> "65" [style=dashed,color=black];
+  "65" -> "64" [style=dashed,color=black];
 }

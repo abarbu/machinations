@@ -29,7 +29,7 @@ instance Semigroup Id where
 
 nodeToStatement :: NodeLabel -> Node -> Statement
 nodeToStatement l n =
-  StatementNode $ NodeStatement (show' l)
+  StatementNode $ NodeStatement (show' $ unNodeLabel l)
     [ Attribute "color" (Id $ n^.color)
     , Attribute "shape" (Id $ case n^.ty of
                             Source{} -> "triangle"
@@ -124,7 +124,7 @@ resourceFormulaToLabel (RFConstant f) = show' f
 
 resourceEdgeToStatement :: ResourceEdgeLabel -> ResourceEdge -> [Statement]
 resourceEdgeToStatement l e =
-  [StatementNode $ NodeStatement (show' l)
+  [StatementNode $ NodeStatement (show' $ unResourceEdgeLabel l)
     [ Attribute "shape" "septagon"
     , HtmlAttribute "label" ((case e^?resourceFormula of
                                 Just rf -> Id $ resourceFormulaToLabel rf)
@@ -138,9 +138,9 @@ resourceEdgeToStatement l e =
                                   _ -> "1")
     , color
     ]
-  ,StatementEdge $ EdgeStatement (ListTwo (EdgeNode $ show' $ e^.from) (EdgeNode $ show' l) [])
+  ,StatementEdge $ EdgeStatement (ListTwo (EdgeNode $ show' $ unNodeLabel $ e^.from) (EdgeNode $ show' $ unResourceEdgeLabel l) [])
     [ color ]
-  ,StatementEdge $ EdgeStatement (ListTwo (EdgeNode $ show' l) (EdgeNode $ show' $ e^.to) [])
+  ,StatementEdge $ EdgeStatement (ListTwo (EdgeNode $ show' $ unResourceEdgeLabel l) (EdgeNode $ show' $ unNodeLabel $ e^.to) [])
     [ color ]]
   where color = Attribute "color" (case e^.resourceFilter of
                                   Just r -> Id r
@@ -169,7 +169,7 @@ stateFormulaToLabel (SFVariable i) = i
 
 stateEdgeToStatement :: StateEdgeLabel -> StateEdge -> [Statement]
 stateEdgeToStatement l e =
-  [StatementNode $ NodeStatement (show' l)
+  [StatementNode $ NodeStatement (show' $ unStateEdgeLabel l)
     [ Attribute "shape" "septagon"
     , HtmlAttribute "label" (case e^?stateFormula of
                                 Just rf -> Id $ maybe "" stateFormulaToLabel rf)
@@ -179,9 +179,9 @@ stateEdgeToStatement l e =
     , color
     , style
     ]
-  ,StatementEdge $ EdgeStatement (ListTwo (EdgeNode $ show' $ e^.from) (EdgeNode $ show' l) [])
+  ,StatementEdge $ EdgeStatement (ListTwo (EdgeNode $ show' $ unAnyLabel $ e^.from) (EdgeNode $ show' $ unStateEdgeLabel l) [])
     [ color, style ]
-  ,StatementEdge $ EdgeStatement (ListTwo (EdgeNode $ show' l) (EdgeNode $ show' $ e^.to) [])
+  ,StatementEdge $ EdgeStatement (ListTwo (EdgeNode $ show' $ unStateEdgeLabel l) (EdgeNode $ show' $ unAnyLabel $ e^.to) [])
     [ color, style ]]
   where color = Attribute "color" (case e^.resourceFilter of
                                   Just r -> Id r

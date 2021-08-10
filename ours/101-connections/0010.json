@@ -2,20 +2,22 @@
     "seed": 0,
     "resourceTagColor": {},
     "graph": {
-        "stateEdges": {},
+        "stateEdges": {
+            "90": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 1,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 89,
+                "active": false,
+                "from": 87
+            }
+        },
         "vertices": {
-            "2029": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
-                }
-            },
-            "2028": {
+            "89": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -28,11 +30,36 @@
                     },
                     "tag": "Pool"
                 }
+            },
+            "87": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "86": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Automatic",
+                    "tag": "Source"
+                }
             }
         },
         "resourceEdges": {
-            "13025": {
-                "to": 2028,
+            "88": {
+                "to": 87,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -41,10 +68,10 @@
                     }
                 },
                 "resourceFormula": {
-                    "contents": 5,
+                    "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 2029,
+                "from": 86,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

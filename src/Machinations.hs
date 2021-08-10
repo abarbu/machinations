@@ -8,28 +8,16 @@ module Machinations where
 import Machinations.Types
 import Machinations.Utils
 import Machinations.Misc
-import Machinations.Xml
-import Machinations.Rendering
 import Machinations.Formulas
-import Data.Aeson
-import Data.Aeson.Encode.Pretty
-import Data.Text(Text)
-import qualified Data.Text as T
 import Control.Lens hiding (from,to)
-import Dot hiding (Graph,Node)
-import qualified Data.ByteString.Lazy as B
 import Data.Maybe
-import Data.List (foldl', sortOn, mapAccumL, (\\), delete)
+import Data.List (foldl', sortOn, mapAccumL, (\\), delete, nub)
 import Data.Set(Set)
 import qualified Data.Set as S
 import Data.Map.Strict(Map)
 import qualified Data.Map.Strict as M
 import Control.Monad
-import System.Random(mkStdGen,StdGen,random,randomR)
-import Text.Printf
-import System.Directory
-import System.FilePath
-import qualified Shelly as S
+import System.Random(random)
 import Data.Bifunctor
 
 -- TODO Implement edge inactivation
@@ -107,7 +95,7 @@ gateByInterval :: Run -> ResourceEdgeLabel -> ResourceEdge -> (Run -> Maybe (Run
 gateByInterval r l e f =
   case resourceFormulaValue r (e^?!interval.formula) of
     (r', Just val) ->
-      if val >= e^?!interval.counter + 1 then do
+      if val <= e^?!interval.counter + 1 then do
         (f', remaining) <- f r'
         pure (f' & newUpdate . graph . resourceEdges . ix l . interval . counter .~ 0
              ,remaining)
@@ -115,8 +103,8 @@ gateByInterval r l e f =
         -- We aren't ready to run, just increment the counter and do nothing
         -- NB This is not a failed edge!
         -- TODO Nor is it an activated edge. What is it?
-        Just (r' & newUpdate . graph . resourceEdges . ix l . interval . counter +~ 1
-             ,[])
+        Just $ (r' & newUpdate . graph . resourceEdges . ix l . interval . counter +~ 1
+               ,[])
     _ -> Nothing -- Intervals need to be numbers
 
 type CreditNodeFn' rel nl = Run -> rel -> Set Resource -> nl -> Maybe (Run, Set Resource)
@@ -237,7 +225,9 @@ distributeDeterministicGatedResources r nodeLabel resources
                (r', last', newCounts', []) -> updateRun r' newCounts' last'
                (r', Nothing, newCounts', leftover) -> if newCounts' /= newCounts then
                                                        onePass r' capacities (ResourceEdgeLabel 0) newCounts' leftover else
-                                                       onePass r' capacities (ResourceEdgeLabel 0) newCounts' leftover -- TODO updateRun r' newCounts' (Just 0)
+                                                       onePass r' capacities (ResourceEdgeLabel 0) newCounts' leftover
+                                                       -- TODO updateRun r' newCounts' (Just 0)
+                                                       -- Why isn't this the right move here?
         updateRun r' counts' lastEdge' =
              pure $ r' & newUpdate . graph . vertices . ix nodeLabel . ty . distribution . counts ?~ counts'
                        & newUpdate . graph . vertices . ix nodeLabel . ty . distribution . lastEdge .~ lastEdge'
@@ -294,8 +284,6 @@ traderInputsOutputs r l _ =
                  | if1 == of2 && if2 == of1 -> Just (((il1,ie1,if1),(ol2,oe2,of2)),((il2,ie2,if2),(ol1,oe1,of1)))
                  | otherwise -> Nothing
             _ -> Nothing
-          -- _ -- $ ie1^.resourceFilter /= ie2^.resourceFilter
-          -- undefined
         _ -> Nothing
   where allInboundOld = filter (isActiveResourceEdge r . fst) $ inResourceEdges (r^.oldUpdate) l
         allOutboundOld = filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.newUpdate) l
@@ -342,7 +330,7 @@ fireConverterIfPossible r l =
                            & killedResources <>~ (S.unions $ M.elems $ r ^. oldUpdate . graph . vertices . ix l . ty . storage)
 
 debitNode :: Run -> ResourceEdgeLabel -> Maybe Int -> Maybe ResourceTag -> NodeLabel -> Maybe (Run, Set Resource)
-debitNode r _ amount resourceTag from =
+debitNode r destEdge amount resourceTag from = updateNodeStats $
   case n^.ty of
     Drain{} -> Nothing
     Source{} -> do
@@ -375,9 +363,14 @@ debitNode r _ amount resourceTag from =
     Converter{} ->
       (,[]) <$> fireConverterIfPossible r from
   where n = r ^?! oldUpdate . graph . vertices . ix from
+        updateNodeStats Nothing = Nothing
+        updateNodeStats (Just (r, debited)) =
+          Just (r & edgeflow . at destEdge . non [] <>~ debited
+                  & nodeOutflow . at from . non [] <>~ debited
+               , debited)
 
 creditNode :: Run -> ResourceEdgeLabel -> Set Resource -> NodeLabel -> Maybe (Run, Set Resource)
-creditNode r sourceEdge incoming toNode =
+creditNode r sourceEdge incoming toNode = updateNodeStats $
   -- TODO Check limits on the credited node and fail or overflow
   case n'^.ty of
     Source{} -> Nothing
@@ -385,13 +378,8 @@ creditNode r sourceEdge incoming toNode =
                       & killedResources <>~ incoming
                    , [])
     p@Pool{} -> do
-      let overCapacity = not $
-            case p^?!limit of
-              Nothing -> True
-              Just maximum ->
-                maximum >=
-                S.size ((r ^. newUpdate . graph . vertices . ix toNode . ty . resources)
-                         <> incoming)
+      let overCapacity = maybe False (< S.size ((r ^. newUpdate . graph . vertices . ix toNode . ty . resources) <> incoming))
+                                     (p^?!limit)
       if overCapacity then
         case p^?!overflow of
           OverflowBlock -> mzero
@@ -410,7 +398,7 @@ creditNode r sourceEdge incoming toNode =
       (,[]) <$>
        fireConverterIfPossible (r & newUpdate . graph . vertices . ix toNode . ty . storage . at sourceEdge . non [] <>~ incoming
                                   & oldUpdate . graph . vertices . ix toNode . ty . storage . at sourceEdge . non [] <>~ incoming)
-                                        toNode
+                               toNode
     Trader{} -> do
       ((i1,o1),(i2,o2)) <- traderInputsOutputs r toNode (r ^?! oldUpdate . graph . vertices . ix toNode)
       (_,o) <- (if
@@ -433,6 +421,11 @@ creditNode r sourceEdge incoming toNode =
           in Just $ (,[]) $ r' & newUpdate . graph . vertices . ix toNode . ty . waitingResources <>~ map (Waiting $ now + val) (S.toList incoming)
   where n' = r ^?! newUpdate . graph . vertices . ix toNode
         now = r^.oldUpdate.time
+        updateNodeStats Nothing = Nothing
+        updateNodeStats (Just (r, leftovers)) =
+          Just (r & edgeflow . at sourceEdge . non [] <>~ incoming S.\\ leftovers
+                  & nodeInflow . at toNode . non [] <>~ incoming S.\\ leftovers
+               , leftovers)
 
 runResourceEdge :: DebitNodeFn -> CreditNodeFn
                 -> Bool -> Node -> Run -> (ResourceEdgeLabel, ResourceEdge)
@@ -449,7 +442,7 @@ runResourceEdge debitFn creditFn maxNeeded _ r (l,e) =
            when (maxNeeded && Just (S.size resources) /= amount) mzero
            (r''',remainingResources) <- creditFn r'' l resources (e^.to)
            pure (r''' & activatedEdges <>~ [l]
-                      & edgeFlows . at l . non S.empty <>~ resources
+                      & edgeflow . at l . non S.empty <>~ resources
                 , remainingResources)
        | isGate $ oldSource^.ty -> mzero -- TODO?
        | isConverter $ oldSource^.ty -> mzero -- TODO?
@@ -525,7 +518,7 @@ runNode r (l, n) =
       _ -> r -- We fail if there are multiple outputs
     q@Queue{} -> case allOutboundOld of
       [dest] -> pushQueuedResources (pushPullAny allInboundOld) dest l n q (dest^._2.to)
-      _ -> undefined -- We fail if there are multiple outputs
+      _ -> r -- We fail if there are multiple outputs
   where -- NB Inactive resources edges don't count
         allInboundOld = filter (isActiveResourceEdge r . fst) $ inResourceEdges (r^.oldUpdate) l
         allOutboundOld = filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.newUpdate) l
@@ -562,27 +555,36 @@ resolveAnyLabel m (AnyLabel l) =
 
 updateStateEdge :: Run -> (StateEdgeLabel, StateEdge) -> Run
 updateStateEdge r (sel, se) =
-  case resolveAnyLabel (r^.oldUpdate) $ se^.to of
-    RNode nl n ->
+  case (resolveAnyLabel (r^.oldUpdate) $ se^.from, resolveAnyLabel (r^.oldUpdate) $ se^.to) of
+    (RNode nlfrom nfrom, RNode nlto nto) ->
       case se^.stateFormula of
-        Just SFTrigger        -> if maybe False ((>0) . S.size) $ r^?nodeInflow.ix nl then trigger r nl else r
-        Just SFReverseTrigger -> if maybe True          S.null  $ r^?nodeInflow.ix nl then trigger r nl else r
-    RResource rl r -> undefined
-    RState{} -> error "State edges can't be connected to other state edges"
+        Just SFTrigger        -> if maybe False ((>0) . S.size) $ r^?nodeInflow.ix nlfrom then trigger r nlto else r
+        Just SFReverseTrigger -> if maybe True          S.null  $ r^?nodeInflow.ix nlfrom then trigger r nlto else r
+        -- TODO
+        _ -> undefined
+    -- TODO
+    -- RResource rl r -> undefined
+    -- RState{} -> error "State edges can't be connected to other state edges"
+    _ -> undefined
   where trigger :: Run -> NodeLabel -> Run
-        trigger (r :: Run) nlabel = r & newUpdate . stateEdgeModifiers . non mkStateEdgeModifiers . triggerNode <>~ [nlabel]
+        trigger r nlabel = r & newUpdate . stateEdgeModifiers . non mkStateEdgeModifiers . triggerNode <>~ [nlabel]
 
 run :: Machination -> Set NodeLabel -> Run
 run m clicked =
   withCheckingResourceBalance (mkRun m') $ \r0 ->
       let r = loop r0
-                   (automaticNodes m'
+                   (nub
+                    $ automaticNodes m'
                     <> (if m^.time == 0 then startNodes m' else [])
-                    <> map (nodeLookup m') (S.toList clicked))
-      in r & newUpdate . seed .~ fst (random $ r^.stdGen)
+                    <> map (nodeLookup m') (S.toList clicked)
+                    <> maybe [] (map (nodeLookup m) . S.toList) (m ^? stateEdgeModifiers._Just.triggerNode)
+                   )
+          r' = foldl' updateStateEdge r $ M.toList $ r^.newUpdate. graph. stateEdges
+      in r' & newUpdate . seed .~ fst (random $ r^.stdGen)
   where loop :: Run -> [(NodeLabel, Node)] -> Run
         loop m active = foldl' runNode m active
         m' = m & time +~ 1
+               & stateEdgeModifiers .~ Nothing
 
 exSourcePoolDrain :: NodeActivation -> NodeActivation -> PushPullAction -> NodeActivation -> Int -> Int -> Machination
 exSourcePoolDrain sa pa pt da rsp rpd =
@@ -598,28 +600,4 @@ exSourcePoolDrain sa pa pt da rsp rpd =
 
 startHere :: Machination
 startHere = exSourcePoolDrain Automatic Passive (Pushing PushAny) Passive 3 0
-
-splitMachinationsXml :: FilePath -> Maybe FilePath -> Maybe FilePath -> FilePath -> IO ()
-splitMachinationsXml filename convertedFile renderFile destDirectory = do
-  Just g <- readMachinationsXml filename
-  -- print g
-  maybe (pure ()) (\rf -> encodeToFile rf (toGraph g)) renderFile
-  maybe (pure ()) (\cf -> B.writeFile cf $ encodePretty g) convertedFile
-  let ccs = connectedComponents g
-  print $ length ccs
-  zipWithM_ (\cc i -> B.writeFile (destDirectory <> printf "%04d" (i :: Int) <> ".json")
-                   $ encodePretty cc)
-            (sortOn (fst . M.findMin . (^.graph.vertices)) ccs)
-            [0..]
-
-renderAllInDirectory :: FilePath -> IO ()
-renderAllInDirectory directory = do
-  fs <- map (directory</>) . filter ((== ".json") . takeExtension) <$> listDirectory directory
-  fms <- catMaybes <$> mapM (\f -> fmap (f,) <$> decodeFileStrict' f) fs
-  mapM_ (\(f,m) -> encodeToFile (dropExtension f <> ".dot") (toGraph m)) fms
-  mapM_ (\(f,_) -> S.shelly $ S.silently $ S.run_ "dot"
-                  ["-Tpdf"
-                  , T.pack $ dropExtension f <> ".dot"
-                  , "-o"
-                  , T.pack $ dropExtension f <> ".pdf"]) fms
 

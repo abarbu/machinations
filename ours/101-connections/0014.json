@@ -2,9 +2,34 @@
     "seed": 0,
     "resourceTagColor": {},
     "graph": {
-        "stateEdges": {},
+        "stateEdges": {
+            "109": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 5,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 108,
+                "active": false,
+                "from": 106
+            },
+            "129": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 2,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 128,
+                "active": false,
+                "from": 108
+            }
+        },
         "vertices": {
-            "2041": {
+            "105": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -15,7 +40,35 @@
                     "tag": "Source"
                 }
             },
-            "2040": {
+            "108": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "106": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "128": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -31,8 +84,8 @@
             }
         },
         "resourceEdges": {
-            "2042": {
-                "to": 2040,
+            "107": {
+                "to": 106,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -41,40 +94,10 @@
                     }
                 },
                 "resourceFormula": {
-                    "contents": [
-                        {
-                            "contents": 1,
-                            "tag": "RFConstant"
-                        },
-                        {
-                            "contents": [
-                                {
-                                    "contents": [
-                                        {
-                                            "contents": 1,
-                                            "tag": "RFConstant"
-                                        },
-                                        {
-                                            "contents": 5,
-                                            "tag": "RFConstant"
-                                        }
-                                    ],
-                                    "tag": "RFDice"
-                                },
-                                {
-                                    "contents": {
-                                        "contents": 10,
-                                        "tag": "RFConstant"
-                                    },
-                                    "tag": "RFPercentage"
-                                }
-                            ],
-                            "tag": "RFMultiply"
-                        }
-                    ],
-                    "tag": "RFAdd"
+                    "contents": 1,
+                    "tag": "RFConstant"
                 },
-                "from": 2041,
+                "from": 105,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

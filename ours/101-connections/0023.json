@@ -3,32 +3,24 @@
     "resourceTagColor": {},
     "graph": {
         "stateEdges": {
-            "6045": {
-                "to": 6042,
-                "active": false,
-                "from": 6038
-            },
-            "6043": {
+            "179": {
                 "stateFormula": {
-                    "contents": "a",
-                    "tag": "SFVariable"
+                    "contents": {
+                        "contents": {
+                            "contents": 1,
+                            "tag": "SFConstant"
+                        },
+                        "tag": "SFInterval"
+                    },
+                    "tag": "SFSub"
                 },
-                "to": 6042,
+                "to": 178,
                 "active": false,
-                "from": 6034
-            },
-            "6044": {
-                "stateFormula": {
-                    "contents": "letter",
-                    "tag": "SFVariable"
-                },
-                "to": 6042,
-                "active": false,
-                "from": 6036
+                "from": 175
             }
         },
         "vertices": {
-            "6036": {
+            "177": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -42,51 +34,7 @@
                     "tag": "Pool"
                 }
             },
-            "6042": {
-                "nodeColor": "black",
-                "nodeLabel": "a+letter+word",
-                "nodeTy": {
-                    "registerFormula": {
-                        "contents": [
-                            {
-                                "contents": [
-                                    {
-                                        "contents": "a",
-                                        "tag": "FVar"
-                                    },
-                                    {
-                                        "contents": "letter",
-                                        "tag": "FVar"
-                                    }
-                                ],
-                                "tag": "FAdd"
-                            },
-                            {
-                                "contents": "word",
-                                "tag": "FVar"
-                            }
-                        ],
-                        "tag": "FAdd"
-                    },
-                    "limits": {},
-                    "tag": "RegisterFn"
-                }
-            },
-            "6038": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "activation": "Passive",
-                    "overflow": "OverflowBlock",
-                    "resources": [],
-                    "pushPullAction": {
-                        "contents": "PullAny",
-                        "tag": "Pulling"
-                    },
-                    "tag": "Pool"
-                }
-            },
-            "6032": {
+            "173": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -97,7 +45,7 @@
                     "tag": "Source"
                 }
             },
-            "6034": {
+            "175": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -111,18 +59,7 @@
                     "tag": "Pool"
                 }
             },
-            "6029": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
-                }
-            },
-            "6030": {
+            "174": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -135,12 +72,12 @@
             }
         },
         "resourceEdges": {
-            "6037": {
-                "to": 6036,
+            "176": {
+                "to": 175,
                 "interval": {
                     "counter": 0,
                     "formula": {
-                        "contents": 1,
+                        "contents": 2,
                         "tag": "RFConstant"
                     }
                 },
@@ -148,17 +85,17 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 6030,
+                "from": 174,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"
             },
-            "6039": {
-                "to": 6038,
+            "178": {
+                "to": 177,
                 "interval": {
                     "counter": 0,
                     "formula": {
-                        "contents": 1,
+                        "contents": 10,
                         "tag": "RFConstant"
                     }
                 },
@@ -166,25 +103,7 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 6032,
-                "limits": {},
-                "shuffleOrigin": false,
-                "transfer": "IntervalTransfer"
-            },
-            "6035": {
-                "to": 6034,
-                "interval": {
-                    "counter": 0,
-                    "formula": {
-                        "contents": 1,
-                        "tag": "RFConstant"
-                    }
-                },
-                "resourceFormula": {
-                    "contents": 1,
-                    "tag": "RFConstant"
-                },
-                "from": 6029,
+                "from": 173,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

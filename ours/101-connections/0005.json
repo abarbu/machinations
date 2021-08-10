@@ -4,115 +4,15 @@
     "graph": {
         "stateEdges": {},
         "vertices": {
-            "2014": {
+            "62": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
-                    "activation": "Automatic",
-                    "overflow": "OverflowBlock",
-                    "resources": [],
-                    "pushPullAction": {
-                        "contents": "PullAny",
-                        "tag": "Pulling"
-                    },
-                    "tag": "Pool"
-                }
-            },
-            "2013": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "activation": "Passive",
-                    "overflow": "OverflowBlock",
-                    "resources": [
-                        {
-                            "uUID": "14868a63-8c99-4b2b-97f8-b1ce62d18f0c",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "232d8227-007f-4e08-8e38-4c4308a4d33c",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "2a98eea1-35e5-4f11-8e8d-96f77f57f264",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "53052aca-9d83-49e1-bfde-3a3e68a328c8",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "65c144f8-a3b0-4b52-8cd4-e4fb4c17e50b",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "6c7b18c9-9493-4f02-8fb3-38a5bdce14b3",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "6d34752e-8129-4723-a68c-6723fd4badc2",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "83e66d6a-e896-4af0-b886-9226ff51b0d1",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "b67c12e8-0775-4842-b6c4-9bee23856709",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "be290e70-3872-4417-83a9-25228f71e0d9",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "cbf98913-45b9-4647-9175-8d592843b330",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "cf3ea0a4-2d4e-4860-a928-193e93b06beb",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "d57cbdff-9370-4230-97cc-8b5482f2e228",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "faf3b57b-9c2a-4e83-81ef-869dbf92eb5c",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "fdbe928b-a7a0-44f2-a1db-4a01b164fe0c",
-                            "tag": "Black"
-                        }
-                    ],
-                    "pushPullAction": {
-                        "contents": "PullAny",
-                        "tag": "Pulling"
-                    },
-                    "tag": "Pool"
+                    "tag": "EndCondition"
                 }
             }
         },
-        "resourceEdges": {
-            "2015": {
-                "to": 2014,
-                "interval": {
-                    "counter": 0,
-                    "formula": {
-                        "contents": 1,
-                        "tag": "RFConstant"
-                    }
-                },
-                "resourceFormula": {
-                    "tag": "RFAll"
-                },
-                "from": 2013,
-                "limits": {},
-                "shuffleOrigin": false,
-                "transfer": "IntervalTransfer"
-            }
-        }
+        "resourceEdges": {}
     },
     "time": 0
 }

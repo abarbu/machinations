@@ -1,16 +1,24 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "22160" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "22161" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "22162" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "22164" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "22163" [label=<1>,peripheries="1",color=black,shape=septagon];
-  "22161" -> "22163" [color=black];
-  "22163" -> "22162" [color=black];
-  "22165" [label=<1>,peripheries="1",color=black,shape=septagon];
-  "22160" -> "22165" [color=black];
-  "22165" -> "22164" [color=black];
-  "22166" [label=<+1i>,peripheries="1",color=black,style=dashed,shape=septagon];
-  "22162" -> "22166" [style=dashed,color=black];
-  "22166" -> "22165" [style=dashed,color=black];
+  "317" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "318" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "319" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "321" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "324" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "325" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "320" [label=<1 | RFConstant 2>,peripheries="1",color=black,shape=septagon];
+  "318" -> "320" [color=black];
+  "320" -> "319" [color=black];
+  "322" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "317" -> "322" [color=black];
+  "322" -> "321" [color=black];
+  "326" [label=<1 | RFConstant 3>,peripheries="1",color=black,shape=septagon];
+  "325" -> "326" [color=black];
+  "326" -> "324" [color=black];
+  "323" [label=<+1>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "319" -> "323" [style=dashed,color=black];
+  "323" -> "322" [style=dashed,color=black];
+  "327" [label=<+1i>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "324" -> "327" [style=dashed,color=black];
+  "327" -> "322" [style=dashed,color=black];
 }

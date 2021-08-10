@@ -1,12 +1,16 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "22000" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "22001" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "22003" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "22002" [label=<1>,peripheries="1",color=black,shape=septagon];
-  "22000" -> "22002" [color=black];
-  "22002" -> "22001" [color=black];
-  "22005" [label=<+1>,peripheries="1",color=black,style=dashed,shape=septagon];
-  "22001" -> "22005" [style=dashed,color=black];
-  "22005" -> "22003" [style=dashed,color=black];
+  "221" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "222" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "223" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "225" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "224" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "222" -> "224" [color=black];
+  "224" -> "223" [color=black];
+  "226" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "221" -> "226" [color=black];
+  "226" -> "225" [color=black];
+  "227" [label=<==2>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "223" -> "227" [style=dashed,color=black];
+  "227" -> "226" [style=dashed,color=black];
 }

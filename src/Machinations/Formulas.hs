@@ -75,6 +75,7 @@ rOperatorTable =
         prefix  name f = Prefix  (f <$ symbol name)
         postfix name f = Postfix (f <$ symbol name)
 
+parseRF "" = pure $ RFConstant 0 -- Machinations allows empty edges :(
 parseRF "all" = Just RFAll
 parseRF s = parseMaybe (rExpr <* eof) s
 
@@ -167,6 +168,7 @@ fOperatorTable =
         prefix  name f = Prefix  (f <$ symbol name)
         postfix name f = Postfix (f <$ symbol name)
 
+parseF "" = pure $ FConstant 0 -- these can happen in registers
 parseF s = parseMaybe (fExpr <* eof) s
 
 debugParser = parseTest (fExpr <* eof) "3+woof(woof+2,2)"

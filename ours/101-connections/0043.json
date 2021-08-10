@@ -3,24 +3,17 @@
     "resourceTagColor": {},
     "graph": {
         "stateEdges": {
-            "22184": {
+            "341": {
                 "stateFormula": {
-                    "contents": {
-                        "contents": {
-                            "contents": 1,
-                            "tag": "SFConstant"
-                        },
-                        "tag": "SFPercentage"
-                    },
-                    "tag": "SFAdd"
+                    "tag": "SFTrigger"
                 },
-                "to": 22183,
+                "to": 335,
                 "active": false,
-                "from": 22176
+                "from": 337
             }
         },
         "vertices": {
-            "22176": {
+            "337": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -34,19 +27,29 @@
                     "tag": "Pool"
                 }
             },
-            "22181": {
+            "336": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
-                    "pullAction": "PullAny",
-                    "distribution": {
-                        "tag": "Random"
-                    },
-                    "activation": "Passive",
-                    "tag": "Gate"
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Automatic",
+                    "tag": "Source"
                 }
             },
-            "22178": {
+            "335": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Automatic",
+                    "tag": "Source"
+                }
+            },
+            "339": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -58,34 +61,12 @@
                         "tag": "Pulling"
                     },
                     "tag": "Pool"
-                }
-            },
-            "22175": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
-                }
-            },
-            "22174": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
                 }
             }
         },
         "resourceEdges": {
-            "22177": {
-                "to": 22176,
+            "340": {
+                "to": 339,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -97,17 +78,17 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 22175,
+                "from": 335,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"
             },
-            "22182": {
-                "to": 22181,
+            "338": {
+                "to": 337,
                 "interval": {
                     "counter": 0,
                     "formula": {
-                        "contents": 1,
+                        "contents": 3,
                         "tag": "RFConstant"
                     }
                 },
@@ -115,28 +96,7 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 22174,
-                "limits": {},
-                "shuffleOrigin": false,
-                "transfer": "IntervalTransfer"
-            },
-            "22183": {
-                "to": 22178,
-                "interval": {
-                    "counter": 0,
-                    "formula": {
-                        "contents": 1,
-                        "tag": "RFConstant"
-                    }
-                },
-                "resourceFormula": {
-                    "contents": {
-                        "contents": 10,
-                        "tag": "RFConstant"
-                    },
-                    "tag": "RFPercentage"
-                },
-                "from": 22181,
+                "from": 336,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

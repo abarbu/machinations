@@ -2,20 +2,39 @@
     "seed": 0,
     "resourceTagColor": {},
     "graph": {
-        "stateEdges": {},
+        "stateEdges": {
+            "71": {
+                "stateFormula": {
+                    "contents": [
+                        "CGt",
+                        {
+                            "contents": {
+                                "contents": 3,
+                                "tag": "SFConstant"
+                            },
+                            "tag": "SFOverwrite"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 70,
+                "active": false,
+                "from": 69
+            }
+        },
         "vertices": {
-            "2023": {
+            "79": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
                     "resourceTypes": [
                         "Black"
                     ],
-                    "activation": "Automatic",
+                    "activation": "Interactive",
                     "tag": "Source"
                 }
             },
-            "2022": {
+            "69": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -28,11 +47,18 @@
                     },
                     "tag": "Pool"
                 }
+            },
+            "70": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "tag": "EndCondition"
+                }
             }
         },
         "resourceEdges": {
-            "2024": {
-                "to": 2022,
+            "80": {
+                "to": 69,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -41,28 +67,10 @@
                     }
                 },
                 "resourceFormula": {
-                    "contents": [
-                        {
-                            "contents": 6,
-                            "tag": "RFConstant"
-                        },
-                        {
-                            "contents": [
-                                {
-                                    "contents": 1,
-                                    "tag": "RFConstant"
-                                },
-                                {
-                                    "contents": 5,
-                                    "tag": "RFConstant"
-                                }
-                            ],
-                            "tag": "RFDice"
-                        }
-                    ],
-                    "tag": "RFAdd"
+                    "contents": 2,
+                    "tag": "RFConstant"
                 },
-                "from": 2023,
+                "from": 79,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

@@ -2,29 +2,13 @@
     "seed": 0,
     "resourceTagColor": {},
     "graph": {
-        "stateEdges": {
-            "22259": {
-                "stateFormula": {
-                    "contents": [
-                        "CLt",
-                        {
-                            "contents": 5,
-                            "tag": "SFConstant"
-                        }
-                    ],
-                    "tag": "SFCondition"
-                },
-                "to": 22253,
-                "active": false,
-                "from": 22255
-            }
-        },
+        "stateEdges": {},
         "vertices": {
-            "22257": {
+            "422": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
-                    "activation": "Passive",
+                    "activation": "Automatic",
                     "overflow": "OverflowBlock",
                     "resources": [],
                     "pushPullAction": {
@@ -34,35 +18,74 @@
                     "tag": "Pool"
                 }
             },
-            "22253": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
-                }
-            },
-            "22254": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
-                }
-            },
-            "22255": {
+            "421": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
                     "activation": "Passive",
                     "overflow": "OverflowBlock",
-                    "resources": [],
+                    "resources": [
+                        {
+                            "uUID": "075c917d-d74c-48ca-8101-342553a1084c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "1e34dade-18ff-422c-bf74-b4a8f3828b74",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "22eb3519-a87b-454c-a739-991971356da8",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "33df789a-848f-43a8-9bdd-8e8d6fffe521",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "7e41754e-4f44-4d2c-be9d-28a0ed71ce50",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "89c50db0-d38b-4b41-b316-d35b8e479614",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "a3049e91-9a1e-405f-8960-e55c65c4d428",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "a724910d-4cd7-4dbf-b8ae-83453f4bf18c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "b3184c6b-d642-45fd-9659-16cf51b4f4cb",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "b5a8ea14-7fe4-43a8-adc0-a530d25f1747",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "b5e55687-c841-4fd9-8163-525386dcd5ed",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "f002163a-f574-4b19-bb93-6efd4f56deb0",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "f011f308-f066-4bd4-a53a-81bfff0c1e0d",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "f7b1cf1e-b946-41de-84f4-f194f121ad7e",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "faf5b835-7fbb-4745-a077-31c59fcb75fc",
+                            "tag": "Black"
+                        }
+                    ],
                     "pushPullAction": {
                         "contents": "PullAny",
                         "tag": "Pulling"
@@ -72,8 +95,8 @@
             }
         },
         "resourceEdges": {
-            "22256": {
-                "to": 22255,
+            "423": {
+                "to": 422,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -82,28 +105,9 @@
                     }
                 },
                 "resourceFormula": {
-                    "contents": 1,
-                    "tag": "RFConstant"
+                    "tag": "RFAll"
                 },
-                "from": 22254,
-                "limits": {},
-                "shuffleOrigin": false,
-                "transfer": "IntervalTransfer"
-            },
-            "22258": {
-                "to": 22257,
-                "interval": {
-                    "counter": 0,
-                    "formula": {
-                        "contents": 1,
-                        "tag": "RFConstant"
-                    }
-                },
-                "resourceFormula": {
-                    "contents": 1,
-                    "tag": "RFConstant"
-                },
-                "from": 22253,
+                "from": 421,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

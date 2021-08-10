@@ -3,24 +3,39 @@
     "resourceTagColor": {},
     "graph": {
         "stateEdges": {
-            "22173": {
+            "334": {
                 "stateFormula": {
-                    "contents": {
-                        "contents": {
-                            "contents": 1,
-                            "tag": "SFConstant"
-                        },
-                        "tag": "SFInterval"
-                    },
-                    "tag": "SFSub"
+                    "tag": "SFTrigger"
                 },
-                "to": 22172,
+                "to": 328,
                 "active": false,
-                "from": 22169
+                "from": 330
             }
         },
         "vertices": {
-            "22171": {
+            "328": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Passive",
+                    "tag": "Source"
+                }
+            },
+            "329": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Automatic",
+                    "tag": "Source"
+                }
+            },
+            "330": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -34,18 +49,7 @@
                     "tag": "Pool"
                 }
             },
-            "22168": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
-                }
-            },
-            "22169": {
+            "332": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -57,27 +61,16 @@
                         "tag": "Pulling"
                     },
                     "tag": "Pool"
-                }
-            },
-            "22167": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
                 }
             }
         },
         "resourceEdges": {
-            "22170": {
-                "to": 22169,
+            "331": {
+                "to": 330,
                 "interval": {
                     "counter": 0,
                     "formula": {
-                        "contents": 1,
+                        "contents": 3,
                         "tag": "RFConstant"
                     }
                 },
@@ -85,13 +78,13 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 22168,
+                "from": 329,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"
             },
-            "22172": {
-                "to": 22171,
+            "333": {
+                "to": 332,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -100,10 +93,10 @@
                     }
                 },
                 "resourceFormula": {
-                    "contents": 1,
+                    "contents": 5,
                     "tag": "RFConstant"
                 },
-                "from": 22167,
+                "from": 328,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

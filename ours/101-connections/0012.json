@@ -2,9 +2,22 @@
     "seed": 0,
     "resourceTagColor": {},
     "graph": {
-        "stateEdges": {},
+        "stateEdges": {
+            "401": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 1,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 98,
+                "active": false,
+                "from": 97
+            }
+        },
         "vertices": {
-            "2035": {
+            "96": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -15,7 +28,7 @@
                     "tag": "Source"
                 }
             },
-            "2034": {
+            "97": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -28,11 +41,34 @@
                     },
                     "tag": "Pool"
                 }
+            },
+            "98": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "99": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": "Automatic",
+                    "tag": "Drain"
+                }
             }
         },
         "resourceEdges": {
-            "2036": {
-                "to": 2034,
+            "400": {
+                "to": 97,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -41,22 +77,28 @@
                     }
                 },
                 "resourceFormula": {
-                    "contents": [
-                        {
-                            "contents": 2,
-                            "tag": "RFConstant"
-                        },
-                        {
-                            "contents": {
-                                "contents": 25,
-                                "tag": "RFConstant"
-                            },
-                            "tag": "RFPercentage"
-                        }
-                    ],
-                    "tag": "RFMultiply"
+                    "contents": 5,
+                    "tag": "RFConstant"
                 },
-                "from": 2035,
+                "from": 96,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "402": {
+                "to": 99,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 2,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 10,
+                    "tag": "RFConstant"
+                },
+                "from": 98,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

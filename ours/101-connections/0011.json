@@ -2,9 +2,22 @@
     "seed": 0,
     "resourceTagColor": {},
     "graph": {
-        "stateEdges": {},
+        "stateEdges": {
+            "95": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 5,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 94,
+                "active": false,
+                "from": 92
+            }
+        },
         "vertices": {
-            "2032": {
+            "91": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -15,7 +28,21 @@
                     "tag": "Source"
                 }
             },
-            "2031": {
+            "94": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "92": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -31,8 +58,8 @@
             }
         },
         "resourceEdges": {
-            "2033": {
-                "to": 2031,
+            "93": {
+                "to": 92,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -41,13 +68,10 @@
                     }
                 },
                 "resourceFormula": {
-                    "contents": {
-                        "contents": 50,
-                        "tag": "RFConstant"
-                    },
-                    "tag": "RFPercentage"
+                    "contents": 1,
+                    "tag": "RFConstant"
                 },
-                "from": 2032,
+                "from": 91,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

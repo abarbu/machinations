@@ -1,16 +1,8 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "22288" [shape=triangle,peripheries="1",label="",labelfontcolor=black,color=black];
-  "22289" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "22290" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "22292" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "22291" [label=<1>,peripheries="1",color=black,shape=septagon];
-  "22289" -> "22291" [color=black];
-  "22291" -> "22290" [color=black];
-  "22293" [label=<1>,peripheries="1",color=black,shape=septagon];
-  "22288" -> "22293" [color=black];
-  "22293" -> "22292" [color=black];
-  "22294" [label=<&gt;0>,peripheries="1",color=black,style=dashed,shape=septagon];
-  "22290" -> "22294" [style=dashed,color=black];
-  "22294" -> "22288" [style=dashed,color=black];
+  "436" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "437" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "438" [label=<1 | RFConstant 2>,peripheries="1",color=black,shape=septagon];
+  "437" -> "438" [color=black];
+  "438" -> "436" [color=black];
 }

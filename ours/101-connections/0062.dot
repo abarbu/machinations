@@ -1,16 +1,21 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "64032" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "64033" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "64034" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "64036" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "64035" [label=<1>,peripheries="1",color=black,shape=septagon];
-  "64033" -> "64035" [color=black];
-  "64035" -> "64034" [color=black];
-  "64037" [label=<1>,peripheries="1",color=black,shape=septagon];
-  "64032" -> "64037" [color=black];
-  "64037" -> "64036" [color=black];
-  "64038" [label=<*>,peripheries="1",color=black,style=dashed,shape=septagon];
-  "64034" -> "64038" [style=dashed,color=black];
-  "64038" -> "64032" [style=dashed,color=black];
+  "458" [shape=triangle,peripheries="1",label=<<SUP>S</SUP>>,labelfontcolor=black,color=black];
+  "459" [shape=cds,peripheries="1",label="",labelfontcolor=black,color=black];
+  "461" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "460" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "458" -> "460" [color=black];
+  "460" -> "459" [color=black];
+  "462" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "459" -> "462" [color=black];
+  "462" -> "461" [color=black];
+  "463" [label=<*>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "461" -> "463" [style=dashed,color=black];
+  "463" -> "458" [style=dashed,color=black];
+  "464" [label=<+2>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "461" -> "464" [style=dashed,color=black];
+  "464" -> "462" [style=dashed,color=black];
+  "465" [label=<+1>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "461" -> "465" [style=dashed,color=black];
+  "465" -> "460" [style=dashed,color=black];
 }

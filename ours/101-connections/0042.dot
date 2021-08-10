@@ -1,16 +1,16 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "22167" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "22168" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "22169" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "22171" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "22170" [label=<1>,peripheries="1",color=black,shape=septagon];
-  "22168" -> "22170" [color=black];
-  "22170" -> "22169" [color=black];
-  "22172" [label=<1>,peripheries="1",color=black,shape=septagon];
-  "22167" -> "22172" [color=black];
-  "22172" -> "22171" [color=black];
-  "22173" [label=<-1i>,peripheries="1",color=black,style=dashed,shape=septagon];
-  "22169" -> "22173" [style=dashed,color=black];
-  "22173" -> "22172" [style=dashed,color=black];
+  "328" [shape=triangle,peripheries="1",label="",labelfontcolor=black,color=black];
+  "329" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "330" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "332" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "331" [label=<1 | RFConstant 3>,peripheries="1",color=black,shape=septagon];
+  "329" -> "331" [color=black];
+  "331" -> "330" [color=black];
+  "333" [label=<5>,peripheries="1",color=black,shape=septagon];
+  "328" -> "333" [color=black];
+  "333" -> "332" [color=black];
+  "334" [label=<*>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "330" -> "334" [style=dashed,color=black];
+  "334" -> "328" [style=dashed,color=black];
 }

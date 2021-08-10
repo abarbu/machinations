@@ -1,4 +1,20 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "6001" [shape=Msquare,peripheries="1",label="",labelfontcolor=black,color=black];
+  "135" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "136" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "138" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "140" [shape=invtriangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "142" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "137" [label=<2>,peripheries="1",color=black,shape=septagon];
+  "135" -> "137" [color=black];
+  "137" -> "136" [color=black];
+  "141" [label=<6 | RFConstant 3>,peripheries="1",color=black,shape=septagon];
+  "136" -> "141" [color=black];
+  "141" -> "140" [color=black];
+  "139" [label=<+5>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "136" -> "139" [style=dashed,color=black];
+  "139" -> "138" [style=dashed,color=black];
+  "143" [label=<+2>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "138" -> "143" [style=dashed,color=black];
+  "143" -> "142" [style=dashed,color=black];
 }

@@ -2,20 +2,32 @@
     "seed": 0,
     "resourceTagColor": {},
     "graph": {
-        "stateEdges": {},
+        "stateEdges": {
+            "68": {
+                "stateFormula": {
+                    "contents": [
+                        "CEqual",
+                        {
+                            "contents": 2,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 67,
+                "active": false,
+                "from": 66
+            }
+        },
         "vertices": {
-            "2020": {
+            "67": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
+                    "tag": "EndCondition"
                 }
             },
-            "2019": {
+            "66": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -28,11 +40,22 @@
                     },
                     "tag": "Pool"
                 }
+            },
+            "77": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Interactive",
+                    "tag": "Source"
+                }
             }
         },
         "resourceEdges": {
-            "2021": {
-                "to": 2019,
+            "78": {
+                "to": 66,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -41,55 +64,10 @@
                     }
                 },
                 "resourceFormula": {
-                    "contents": [
-                        {
-                            "contents": [
-                                {
-                                    "contents": [
-                                        {
-                                            "contents": 1,
-                                            "tag": "RFConstant"
-                                        },
-                                        {
-                                            "contents": 5,
-                                            "tag": "RFConstant"
-                                        }
-                                    ],
-                                    "tag": "RFDice"
-                                },
-                                {
-                                    "contents": [
-                                        {
-                                            "contents": 1,
-                                            "tag": "RFConstant"
-                                        },
-                                        {
-                                            "contents": 5,
-                                            "tag": "RFConstant"
-                                        }
-                                    ],
-                                    "tag": "RFDice"
-                                }
-                            ],
-                            "tag": "RFAdd"
-                        },
-                        {
-                            "contents": [
-                                {
-                                    "contents": 1,
-                                    "tag": "RFConstant"
-                                },
-                                {
-                                    "contents": 5,
-                                    "tag": "RFConstant"
-                                }
-                            ],
-                            "tag": "RFDice"
-                        }
-                    ],
-                    "tag": "RFAdd"
+                    "contents": 1,
+                    "tag": "RFConstant"
                 },
-                "from": 2020,
+                "from": 77,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

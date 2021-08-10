@@ -29,7 +29,6 @@ import System.IO.Unsafe
 import Control.Applicative
 import Text.Read(readMaybe)
 import GHC.Stack(HasCallStack)
-import Debug.Trace
 
 conv = do
   f <- capture_ (xmlToJson [] ["/tmp/a.xml"])
@@ -270,7 +269,10 @@ parseResource obj = do
          { _from = NodeLabel $ maybe 0 (read' "") s
          , _to = NodeLabel $ maybe 0 (read' "") t
          , _resourceFormula = parseResourceFormula (T.takeWhile (/='|') <$> (formula <|> value))
-         , _interval = Interval (RFConstant $ maybe 1 (read' "") interval) 0
+         , _interval = Interval (parseResourceFormula (case T.dropWhile (/='|') <$> interval of
+                                                          Just "" -> interval
+                                                          x -> x)) 0
+           -- Interval (RFConstant $ maybe 1 (read' "") interval) 0
          , _transfer = case transfer :: Text of
                          "interval-based" -> IntervalTransfer
                          _ -> InstantTransfer

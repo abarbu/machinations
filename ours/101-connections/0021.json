@@ -3,45 +3,21 @@
     "resourceTagColor": {},
     "graph": {
         "stateEdges": {
-            "6010": {
+            "165": {
                 "stateFormula": {
-                    "contents": [
-                        "CGt",
-                        {
-                            "contents": {
-                                "contents": 3,
-                                "tag": "SFConstant"
-                            },
-                            "tag": "SFOverwrite"
-                        }
-                    ],
-                    "tag": "SFCondition"
+                    "contents": {
+                        "contents": 1,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFSub"
                 },
-                "to": 6009,
+                "to": 164,
                 "active": false,
-                "from": 6008
+                "from": 161
             }
         },
         "vertices": {
-            "6018": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Interactive",
-                    "tag": "Source"
-                }
-            },
-            "6009": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "tag": "EndCondition"
-                }
-            },
-            "6008": {
+            "163": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -54,11 +30,47 @@
                     },
                     "tag": "Pool"
                 }
+            },
+            "160": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Automatic",
+                    "tag": "Source"
+                }
+            },
+            "161": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "159": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Automatic",
+                    "tag": "Source"
+                }
             }
         },
         "resourceEdges": {
-            "6019": {
-                "to": 6008,
+            "164": {
+                "to": 163,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -67,10 +79,28 @@
                     }
                 },
                 "resourceFormula": {
-                    "contents": 2,
+                    "contents": 10,
                     "tag": "RFConstant"
                 },
-                "from": 6018,
+                "from": 159,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "162": {
+                "to": 161,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 2,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 160,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

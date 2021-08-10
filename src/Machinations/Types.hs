@@ -42,7 +42,7 @@ newtype StateEdgeLabel = StateEdgeLabel { unStateEdgeLabel :: Int }
   deriving newtype (ToJSON, FromJSON, ToJSONKey, FromJSONKey)
 makePrisms ''StateEdgeLabel
 
-newtype AnyLabel = AnyLabel Int
+newtype AnyLabel = AnyLabel { unAnyLabel :: Int }
   deriving (Show, Eq, Generic, Ord)
 deriveJSON mjsonOptionsSingle ''AnyLabel
 makePrisms ''AnyLabel
@@ -350,21 +350,14 @@ isLatched _ = False
 
 data Run = Run { runOldUpdate          :: Machination
                , runNewUpdate          :: Machination
-               -- TODO Verify this
+               -- TODO Verify these
                , runActivatedEdges     :: Set ResourceEdgeLabel
-               -- TODO Verify this
                , runFailedEdges        :: Set ResourceEdgeLabel
-               -- TODO Verify this
                , runActivatedNodes     :: Set NodeLabel
-               -- TODO Verify this
                , runFailedNodes        :: Set NodeLabel
-               -- TODO Verify this
                , runTriggeredEdges     :: Set StateEdgeLabel
-               -- TODO Verify this
-               , runEdgeFlows          :: Map ResourceEdgeLabel (Set Resource)
-               -- TODO Verify this
+               , runEdgeflow           :: Map ResourceEdgeLabel (Set Resource)
                , runNodeInflow         :: Map NodeLabel (Set Resource)
-               -- TODO Verify this
                , runNodeOutflow        :: Map NodeLabel (Set Resource)
                -- NB Checked against the model
                , runGeneratedResources :: Set Resource
@@ -389,7 +382,7 @@ data RunResult = RunResult { runResultMachine            :: Machination
                            , runResultActivatedNodes     :: Set NodeLabel
                            , runResultFailedNodes        :: Set NodeLabel
                            , runResultTriggeredEdges     :: Set StateEdgeLabel
-                           , runResultEdgeFlows          :: Map ResourceEdgeLabel (Set Resource)
+                           , runResultEdgeflow          :: Map ResourceEdgeLabel (Set Resource)
                            , runResultGeneratedResources :: Set Resource
                            , runResultKilledResources    :: Set Resource
                            , runResultErrors             :: Map Int Text
@@ -406,7 +399,7 @@ mkRun m = Run m m S.empty S.empty S.empty S.empty S.empty M.empty M.empty M.empt
 
 runToResult :: Run -> RunResult
 runToResult Run{..} = RunResult runNewUpdate runActivatedEdges runFailedEdges runActivatedNodes
-                               runFailedNodes runTriggeredEdges runEdgeFlows
+                               runFailedNodes runTriggeredEdges runEdgeflow
                                runGeneratedResources runKilledResources
                                (M.mapKeys (\(AnyLabel l) -> l) runErrors)
                               

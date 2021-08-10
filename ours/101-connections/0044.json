@@ -3,35 +3,17 @@
     "resourceTagColor": {},
     "graph": {
         "stateEdges": {
-            "22193": {
+            "353": {
                 "stateFormula": {
-                    "contents": {
-                        "contents": {
-                            "contents": 5,
-                            "tag": "SFConstant"
-                        },
-                        "tag": "SFPercentage"
-                    },
-                    "tag": "SFAdd"
+                    "tag": "SFTrigger"
                 },
-                "to": 22192,
+                "to": 350,
                 "active": false,
-                "from": 22187
+                "from": 346
             }
         },
         "vertices": {
-            "22186": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
-                }
-            },
-            "22187": {
+            "348": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -45,7 +27,30 @@
                     "tag": "Pool"
                 }
             },
-            "22185": {
+            "466": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": "Automatic",
+                    "tag": "Drain"
+                }
+            },
+            "350": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "349": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -56,25 +61,65 @@
                     "tag": "Source"
                 }
             },
-            "22190": {
+            "345": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
-                    "pullAction": "PullAny",
-                    "distribution": {
-                        "tag": "Random"
-                    },
-                    "activation": "Passive",
-                    "tag": "Gate"
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Automatic",
+                    "tag": "Source"
                 }
             },
-            "22189": {
+            "346": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
                     "activation": "Passive",
                     "overflow": "OverflowBlock",
-                    "resources": [],
+                    "resources": [
+                        {
+                            "uUID": "2faf2d6e-e61b-4f98-8f8d-c5c130a5a5cb",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "43cbd85c-29e8-4994-8784-93387704aae5",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "48ff0fa0-f8ec-40e1-981a-513091f293c0",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "add53c1c-1bad-4ab4-a12d-af6bfe01ed32",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "b5d0cb22-efe6-4a85-ad2a-28c7a6349a54",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "c298b689-a1e8-4978-bd24-48a308e37208",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "c46459e9-8631-4429-affb-12c6c5c2f0de",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "cb6e5a01-4274-496f-940a-66681cc8b60e",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "ebc59fc4-b470-4660-a19c-a7a1c2edefe8",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "eed5a2b9-2659-45ed-a7ae-49d9813b5e5a",
+                            "tag": "Black"
+                        }
+                    ],
                     "pushPullAction": {
                         "contents": "PullAny",
                         "tag": "Pulling"
@@ -84,29 +129,8 @@
             }
         },
         "resourceEdges": {
-            "22192": {
-                "to": 22189,
-                "interval": {
-                    "counter": 0,
-                    "formula": {
-                        "contents": 1,
-                        "tag": "RFConstant"
-                    }
-                },
-                "resourceFormula": {
-                    "contents": {
-                        "contents": 10,
-                        "tag": "RFConstant"
-                    },
-                    "tag": "RFPercentage"
-                },
-                "from": 22190,
-                "limits": {},
-                "shuffleOrigin": false,
-                "transfer": "IntervalTransfer"
-            },
-            "22191": {
-                "to": 22190,
+            "351": {
+                "to": 350,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -118,13 +142,48 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 22185,
+                "from": 349,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"
             },
-            "22188": {
-                "to": 22187,
+            "352": {
+                "to": 348,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "tag": "RFAll"
+                },
+                "from": 350,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "347": {
+                "to": 346,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 3,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 345,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "467": {
+                "to": 466,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -136,7 +195,7 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 22186,
+                "from": 346,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

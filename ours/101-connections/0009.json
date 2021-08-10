@@ -2,26 +2,52 @@
     "seed": 0,
     "resourceTagColor": {},
     "graph": {
-        "stateEdges": {},
+        "stateEdges": {
+            "74": {
+                "stateFormula": {
+                    "contents": [
+                        "CLt",
+                        {
+                            "contents": 1,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 73,
+                "active": false,
+                "from": 72
+            }
+        },
         "vertices": {
-            "2026": {
+            "73": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
+                    "tag": "EndCondition"
                 }
             },
-            "2025": {
+            "81": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": "Interactive",
+                    "tag": "Drain"
+                }
+            },
+            "72": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
                     "activation": "Passive",
                     "overflow": "OverflowBlock",
-                    "resources": [],
+                    "resources": [
+                        {
+                            "uUID": "a13240b2-d1cf-4ae4-af50-4b8807809262",
+                            "tag": "Black"
+                        }
+                    ],
                     "pushPullAction": {
                         "contents": "PullAny",
                         "tag": "Pulling"
@@ -31,8 +57,8 @@
             }
         },
         "resourceEdges": {
-            "2027": {
-                "to": 2025,
+            "82": {
+                "to": 81,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -44,7 +70,7 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 2026,
+                "from": 72,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

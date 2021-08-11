@@ -175,6 +175,11 @@ convertXml contents = do
     hClose handle
     readMachinationsXml fname
 
+convertXmlFile fname = do
+  contents <- T.readFile fname
+  m <- convertXml contents
+  encodeFile (dropExtension fname <> ".json") m
+
 splitMachinationsXml :: FilePath -> Maybe FilePath -> Maybe FilePath -> FilePath -> IO ()
 splitMachinationsXml filename convertedFile renderFile destDirectory = do
   Just g <- readMachinationsXml filename

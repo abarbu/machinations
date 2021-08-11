@@ -26,7 +26,7 @@ import Control.Lens hiding (from,to)
 main = defaultMain tests
 
 tests :: TestTree
-tests = testGroup "Tests" [object101Tests,connections101Tests,rfTests,sfTests,spdTests]
+tests = testGroup "Tests" [object101Tests,connections101Tests,rfTests,sfTests,spdTests,miscTests]
 
 readMachination' :: FilePath -> Machination
 readMachination' = fromJust . unsafePerformIO . decodeFileStrict'
@@ -486,6 +486,16 @@ spdTests = testGroup "SourcePoolDrain"
     noderes 1 (run' (exSourcePoolDrain Passive   Automatic (Pushing PushAny) Passive   3 7)) @?= Just []
   ,testCase "pool run" $
     noderes 1 (run' (exSourcePoolDrain Passive   Automatic (Pulling PullAny) Passive   3 7)) @?= Just [("life",4)]
+  ]
+
+miscTests = testGroup "discord-delay-bug" [
+    testNodeResources 1 "xmls/strange-loop-bug-delay.json" [(115,[]),(120,[])]
+  , testNodeResources 2 "xmls/strange-loop-bug-delay.json" [(115,[("Black",1)]),(120,[])]
+  , testNodeResources 3 "xmls/strange-loop-bug-delay.json" [(115,[]),(120,[("Black",1)])]
+  , testNodeResources 1 "xmls/strange-loop-bug-delay-2.json" [(115,[]),(120,[])]
+  , testNodeResources 2 "xmls/strange-loop-bug-delay-2.json" [(115,[]),(120,[])]
+  , testNodeResources 3 "xmls/strange-loop-bug-delay-2.json" [(115,[("Black",1)]),(120,[])]
+  , testNodeResources 4 "xmls/strange-loop-bug-delay-2.json" [(115,[]),(120,[("Black",1)])]
   ]
 
 testRF s = isJust (parseRF s) @? T.unpack s

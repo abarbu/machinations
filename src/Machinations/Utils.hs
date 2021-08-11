@@ -83,24 +83,54 @@ isActiveNode r l | isJust $ r^?newUpdate.stateEdgeModifiers._Just.enableNode.ix 
                  | isJust $ r^?newUpdate.stateEdgeModifiers._Just.disableNode.ix l = False
                  | otherwise = True
 
+-- | Compute the actual value of a resource formula, this doesn't apply any state edge modifiers
 -- TODO This is wonky, should separate out [all, int, percentage, and condition] but machinations doesn't!
-resourceFormulaValue :: Run -> ResourceFormula -> (Run, Maybe Int)
-resourceFormulaValue r RFAll = (r, Nothing)
-resourceFormulaValue r (RFMultiply x y) = do
-  let (r', x')  = resourceFormulaValue r x
-      (r'', y') = resourceFormulaValue r' y
+rawResourceFormulaValue :: Run -> ResourceFormula -> (Run, Maybe Int)
+rawResourceFormulaValue r RFAll = (r, Nothing)
+rawResourceFormulaValue r (RFMultiply x y) = do
+  let (r', x')  = rawResourceFormulaValue r x
+      (r'', y') = rawResourceFormulaValue r' y
     in (r'', liftM2 (*) x' y')
-resourceFormulaValue r (RFAdd x y) = do
-  let (r', x')  = resourceFormulaValue r x
-      (r'', y') = resourceFormulaValue r' y
+rawResourceFormulaValue r (RFAdd x y) = do
+  let (r', x')  = rawResourceFormulaValue r x
+      (r'', y') = rawResourceFormulaValue r' y
     in (r'', liftM2 (+) x' y')
-resourceFormulaValue r (RFConstant x) = (r, pure x)
-resourceFormulaValue r (RFPercentage x) = resourceFormulaValue r x
+rawResourceFormulaValue r (RFConstant x) = (r, pure x)
+rawResourceFormulaValue r (RFPercentage x) = rawResourceFormulaValue r x
   -- TODO These kinds of resource formulas have no value, they're a filter
-resourceFormulaValue _ RFCondition{} = error "I don't undertand what conditions on resource edges mean"
-resourceFormulaValue r (RFDice (RFConstant nr) (RFConstant sides)) =
+rawResourceFormulaValue _ RFCondition{} = error "I don't undertand what conditions on resource edges mean"
+rawResourceFormulaValue r (RFDice (RFConstant nr) (RFConstant sides)) =
   let (g', l::[Int]) = mapAccumL (\g _ -> inv $ randomR (1,sides) g) (r^.stdGen) [0..nr-1]
   in (r & stdGen .~ g', Just $ sum l)
+
+resourceFormulaValueF :: (StateFormula -> Int -> Int) -> Run -> ResourceEdgeLabel -> ResourceFormula -> (Run, Maybe Int)
+resourceFormulaValueF evalSF r el rf =
+  case rawResourceFormulaValue r rf of
+    out@(_, Nothing) -> out
+    orig@(r', Just val) -> case r^?newUpdate.stateEdgeModifiers._Just.modifyResourceFormula.at el.non [] of
+      Nothing -> orig
+      -- We don't allow negative values
+      Just sf -> (r', Just $ 0 `max` S.foldl' (flip evalSF) val sf)
+
+resourceFormulaValue :: Run -> ResourceEdgeLabel -> ResourceEdge -> (Run, Maybe Int)
+resourceFormulaValue r el e = resourceFormulaValueF evalSF r el (e^.resourceFormula)
+  where evalSF :: StateFormula -> Int -> Int
+        evalSF (SFAdd (SFInterval _)) val = val
+        evalSF (SFAdd x) val = val + evalSF x val
+        evalSF (SFSub (SFInterval _)) val = val
+        evalSF (SFSub x) val = val - evalSF x val
+        evalSF (SFConstant c) _ = c
+        evalSF f _ = error $ "Unsupported state edge to resource edge formula modifier " <> show f
+
+resourceFormulaValueInterval :: Run -> ResourceEdgeLabel -> Interval -> (Run, Maybe Int)
+resourceFormulaValueInterval r el i = resourceFormulaValueF evalSF r el (i^.formula)
+  where evalSF :: StateFormula -> Int -> Int
+        evalSF (SFAdd (SFInterval x)) val = val + evalSF x val
+        evalSF (SFAdd _) val = val
+        evalSF (SFSub (SFInterval x)) val = val - evalSF x val
+        evalSF (SFSub _) val = val
+        evalSF (SFConstant c) _ = c
+        evalSF f _ = error $ "Unsupported state edge to resource edge formula modifier " <> show f
 
 machinationResources :: Machination -> Set Resource
 machinationResources m = S.unions

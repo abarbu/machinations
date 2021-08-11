@@ -89,7 +89,7 @@ data ResourceFormula = RFAll
                      | RFDice ResourceFormula ResourceFormula
                      | RFConstant Int
                      | RFCondition Condition ResourceFormula
-  deriving (Show, Eq, Generic)
+  deriving (Show, Eq, Generic, Ord)
 deriveJSON mjsonOptions ''ResourceFormula
 makePrisms ''ResourceFormula
 
@@ -182,13 +182,6 @@ data Range = Range { rangeLower :: Int
   deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''Range
 makeFields ''Range
-
--- data Modifier = Plus Int
---               | PlusProbability Probability
---               | PlusInterval Int
---   deriving (Show, Eq, Generic)
--- deriveJSON mjsonOptions ''Modifier
--- makePrisms ''Modifier
 
 data StateFormula = SFAdd StateFormula
                   | SFSub StateFormula

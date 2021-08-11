@@ -171,4 +171,4 @@ fOperatorTable =
 parseF "" = pure $ FConstant 0 -- these can happen in registers
 parseF s = parseMaybe (fExpr <* eof) s
 
-debugParser = parseTest (sExpr <* eof) ">=2"
+debugParser = parseTest (sExpr <* eof) "+2i"

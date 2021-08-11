@@ -88,11 +88,13 @@ import Data.Bifunctor
     draw different values for every activation of the resource edge.
 
  NB State edges resolve at the end of execution
+
+ NB Negative values in Machinations are a mess. They also make no sense for us (a negative sprite?). We forbid them.
 -}
 
 gateByInterval :: Run -> ResourceEdgeLabel -> ResourceEdge -> (Run -> Maybe (Run, Set Resource)) -> Maybe (Run, Set Resource)
 gateByInterval r l e f =
-  case resourceFormulaValue r (e^?!interval.formula) of
+  case resourceFormulaValueInterval r l (e^?!interval) of
     (r', Just val) ->
       if val <= e^?!interval.counter + 1 then do
         (f', remaining) <- f r'
@@ -138,7 +140,7 @@ distributeDeterministicGatedResources r nodeLabel resources
      (counts' :: (Map ResourceEdgeLabel Int, Int)) ->
        let (r', targetDistribution_) = M.mapAccumWithKey
                                        (\r l _ -> second (fromIntegral . fromMaybe 0)
-                                                 $ resourceFormulaValue r (r^?!newUpdate.graph.resourceEdges.ix l.resourceFormula))
+                                                 $ resourceFormulaValue r l (r^?!newUpdate.graph.resourceEdges.ix l))
                                        r
                                        (fst counts')
            targetDistribution = (M.map (/100) targetDistribution_, (0 `max` 100 - M.foldl' (+) 0 targetDistribution_)/100)
@@ -186,7 +188,7 @@ distributeDeterministicGatedResources r nodeLabel resources
      (counts' :: (Map ResourceEdgeLabel Int, Int)) ->
        let last = fromMaybe (ResourceEdgeLabel 0) $ n^?! ty.distribution.lastEdge
            (r', capacities) = M.mapAccumWithKey (\r l _ -> second (fromMaybe 0)
-                                                          $ resourceFormulaValue r (r^?!newUpdate.graph.resourceEdges.ix l.resourceFormula))
+                                                          $ resourceFormulaValue r l (r^?!newUpdate.graph.resourceEdges.ix l))
                               r
                               (fst counts')
        in onePass r' capacities last counts' resources
@@ -250,7 +252,7 @@ distributeRandomGatedResources r nodeLabel resources = do
                         $ mapAccumL (\r e ->
                                        second
                                        (fmap (Just $ (snd e ^. to, fst e),))
-                                       (resourceFormulaValue r (e^._2.resourceFormula)))
+                                       (resourceFormulaValue r (fst e) (snd e)))
                           r es
   let weights = if allPercentage && sum (map snd tempWeights) < 100 then
                   (Nothing, 100-sum (map snd tempWeights)) : tempWeights
@@ -297,7 +299,7 @@ generateResources r tag nr =
 fireConverterIfPossible :: Run -> NodeLabel -> Maybe Run
 fireConverterIfPossible r l =
   let (r', inResourceEdgeValues) =
-        mapAccumL (\r (elabel,edge) -> second (((elabel,edge),) . fromMaybe 0) (resourceFormulaValue r (edge^.resourceFormula)))
+        mapAccumL (\r (elabel,edge) -> second (((elabel,edge),) . fromMaybe 0) (resourceFormulaValue r elabel edge))
                   r
         allInboundOld
   in if all (\((elabel,_),evalue) ->
@@ -311,7 +313,7 @@ fireConverterIfPossible r l =
               case n^.resourceTypes of
                 [rtag] ->
                   -- TODO Is the default here 0 or 1?
-                  let (r'', val) = second (fromMaybe 0) $ resourceFormulaValue r' (oedge^.resourceFormula)
+                  let (r'', val) = second (fromMaybe 0) $ resourceFormulaValue r' olabel oedge
                       (r''', res) = generateResources r'' rtag val
                   in Just $ maybe (clearStorage r''') fst $ creditNode (clearStorage r''') olabel res (oedge^.to)
                 _ -> pure r'
@@ -406,12 +408,12 @@ creditNode r sourceEdge incoming toNode | not $ isActiveNode r toNode = Nothing
       case filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.oldUpdate) toNode of
         [outEdge] ->
           let now = r^.oldUpdate.time
-              (r', val) = second (fromMaybe 0) $ resourceFormulaValue r (outEdge^._2.resourceFormula)
+              (r', val) = second (fromMaybe 0) $ resourceFormulaValue r (fst outEdge) (snd outEdge)
           in Just $ (,[]) $ r' & newUpdate . graph . vertices . ix toNode . ty . waitingResources <>~ map (Waiting $ now + val) (S.toList incoming)
     Queue{} ->
       case filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.oldUpdate) toNode of
         [outEdge] ->
-          let (r', val) = second (fromMaybe 0) $ resourceFormulaValue r (outEdge^._2.resourceFormula)
+          let (r', val) = second (fromMaybe 0) $ resourceFormulaValue r (fst outEdge) (snd outEdge)
           in Just $ (,[]) $ r' & newUpdate . graph . vertices . ix toNode . ty . waitingResources <>~ map (Waiting $ now + val) (S.toList incoming)
   where n' = r ^?! newUpdate . graph . vertices . ix toNode
         now = r^.oldUpdate.time
@@ -429,7 +431,7 @@ runResourceEdge debitFn creditFn maxNeeded _ r (l,e) =
   -- TODO this only applies to the latched nodes
     if | isLatched $ oldSource^.ty ->
          gateByInterval r l e $ \r -> do
-           let (r', amount) = resourceFormulaValue r (e^.resourceFormula)
+           let (r', amount) = resourceFormulaValue r l e
            -- TODO Check limits on the credited node so we don't ask for too much
            -- TODO Check limits on resource edge
            (r'',resources) <- debitFn r' l amount (e^.resourceFilter) (e^.from)
@@ -477,7 +479,7 @@ pushQueuedResources r (edgel,edge) l _ d dest =
         r
   where alive = filter (\x -> x^.startTime <= r^.oldUpdate.time) $ d^.waitingResources
         now = r^.oldUpdate.time
-        (r', val) = second (fromMaybe 0) $ resourceFormulaValue r (edge^.resourceFormula)
+        (r', val) = second (fromMaybe 0) $ resourceFormulaValue r edgel edge
 
 runNode :: Run -> (NodeLabel, Node) -> Run
 runNode r (l, n) | not $ isActiveNode r l = r
@@ -621,6 +623,13 @@ preUpdateStateEdge m sem (sel, se) =
                  val
               then activateEdge sem rlto
               else inactivateEdge sem rlto
+        Just (SFAdd (SFConstant val)) ->              sfuop sem nfrom rlto val SFAdd id
+        Just (SFAdd (SFInterval (SFConstant val))) -> sfuop sem nfrom rlto val SFAdd SFInterval
+        -- Bare constants are added
+        Just (SFConstant val) ->                      sfuop sem nfrom rlto val SFAdd id
+        Just (SFInterval (SFConstant val)) ->         sfuop sem nfrom rlto val SFAdd SFInterval
+        Just (SFSub (SFConstant val)) ->              sfuop sem nfrom rlto val SFSub id
+        Just (SFSub (SFInterval (SFConstant val))) -> sfuop sem nfrom rlto val SFSub SFInterval
         -- TODO
         _ -> sem
     -- TODO
@@ -630,9 +639,16 @@ preUpdateStateEdge m sem (sel, se) =
         inactivateNode :: StateEdgeModifiers -> NodeLabel -> StateEdgeModifiers
         inactivateNode sem nlabel = sem & disableNode <>~ [nlabel]
         activateEdge :: StateEdgeModifiers -> ResourceEdgeLabel -> StateEdgeModifiers
-        activateEdge sem nlabel = sem & enableResourceEdge <>~ [nlabel]
+        activateEdge sem rlabel = sem & enableResourceEdge <>~ [rlabel]
         inactivateEdge :: StateEdgeModifiers -> ResourceEdgeLabel -> StateEdgeModifiers
-        inactivateEdge sem nlabel = sem & disableResourceEdge <>~ [nlabel]
+        inactivateEdge sem rlabel = sem & disableResourceEdge <>~ [rlabel]
+        changeFormula :: StateEdgeModifiers -> ResourceEdgeLabel -> StateFormula -> StateEdgeModifiers
+        changeFormula sem rlabel sf = sem & modifyResourceFormula . at rlabel . non [] <>~ [sf]
+        sfuop sem nfrom rlto val uop mid =
+          if isPool $ nfrom^.ty then
+            changeFormula sem rlto (uop (mid (SFConstant (val * S.size (nfrom^.ty.resources)))))
+          else sem
+
 
 run :: Machination -> Set NodeLabel -> Run
 run m clicked =

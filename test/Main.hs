@@ -324,6 +324,32 @@ connections101Tests = testGroup "101-connections"
       , test' 2 "0040.json" [(312, []),(314, [])]
       , test' 3 "0040.json" [(312, [("Black",1)]),(314, [])]
       ]
+    , testGroup "modifiers"
+      [
+        test' 1 "0019.json" [(148, []),(150, [("Black",1)])]
+      , test' 2 "0019.json" [(148, [("Black",1)]),(150, [("Black",2)])]
+      , test' 3 "0019.json" [(148, [("Black",1)]),(150, [("Black",4)])]
+      , test' 1 "0020.json" [(154, []),(156, [])]
+      , test' 2 "0020.json" [(154, [("Black",1)]),(156, [])]
+      , test' 3 "0020.json" [(154, [("Black",1)]),(156, [("Black",5)])]
+      , test' 1 "0021.json" [(161, []),(163, [("Black",10)])]
+      , test' 2 "0021.json" [(161, [("Black",1)]),(163, [("Black",20)])]
+      , test' 3 "0021.json" [(161, [("Black",1)]),(163, [("Black",29)])]
+      , test' 1 "0022.json" [(168, []),(170, [("Black",1)])]
+      , test' 2 "0022.json" [(168, [("Black",1)]),(170, [("Black",2)])]
+      , test' 3 "0022.json" [(168, [("Black",1)]),(170, [("Black",2)])]
+      , test' 4 "0022.json" [(168, [("Black",2)]),(170, [("Black",3)])]
+      , test' 1 "0023.json" [(175, []),(177, [])]
+      , test' 2 "0023.json" [(175, [("Black",1)]),(177, [])]
+      , test' 4 "0023.json" [(175, [("Black",2)]),(177, [])]
+      , test' 6 "0023.json" [(175, [("Black",3)]),(177, [])]
+      , test' 7 "0023.json" [(175, [("Black",3)]),(177, [("Black",1)])]
+      , test' 1 "0041.json" [(319, []),(321, [("Black",1)]),(324, [])]
+      , test' 2 "0041.json" [(319, [("Black",1)]),(321, [("Black",2)]),(324, [])]
+      , test' 3 "0041.json" [(319, [("Black",1)]),(321, [("Black",4)]),(324, [("Black",1)])]
+      , test' 4 "0041.json" [(319, [("Black",2)]),(321, [("Black",4)]),(324, [("Black",1)])]
+      , test' 5 "0041.json" [(319, [("Black",2)]),(321, [("Black",7)]),(324, [("Black",1)])]
+      ]
     , testGroup "conditions"
       [
         test' 1 "0027.json" [(209, []),(211, [])]
@@ -415,6 +441,13 @@ connections101Tests = testGroup "101-connections"
       , test' 7 "0046.json" [(374, [("Black",2)]),(377, [("Black",1)]),(378, [])]
       , test' 9 "0046.json" [(374, [("Black",3)]),(377, [("Black",3)]),(378, [])]
       , test' 10 "0046.json" [(374, [("Black",3)]),(377, [("Black",1)]),(378, [("Black",3)])]
+      ]
+    , testGroup "modifiers and triggers"
+      [
+        test' 1 "0062.json" [(461, [("Black",1)])]
+      , test' 2 "0062.json" [(461, [("Black",4)])]
+      , test' 3 "0062.json" [(461, [("Black",13)])]
+      , test' 4 "0062.json" [(461, [("Black",40)])]
       ]
     , testGroup "end"
       [

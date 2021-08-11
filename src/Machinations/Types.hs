@@ -348,6 +348,10 @@ isLatched Drain{} = True
 isLatched Pool{} = True
 isLatched _ = False
 
+isEndCondition :: NodeType -> Bool
+isEndCondition EndCondition{} = True
+isEndCondition _ = False
+
 data Run = Run { runOldUpdate          :: Machination
                , runNewUpdate          :: Machination
                -- TODO Verify these
@@ -365,6 +369,7 @@ data Run = Run { runOldUpdate          :: Machination
                , runKilledResources    :: Set Resource
                , runStdGen             :: StdGen
                , runErrors             :: Map AnyLabel Text
+               , runEnded              :: Maybe NodeLabel
                }
   deriving (Show, Eq, Generic)
 makeFields ''Run
@@ -382,10 +387,11 @@ data RunResult = RunResult { runResultMachine            :: Machination
                            , runResultActivatedNodes     :: Set NodeLabel
                            , runResultFailedNodes        :: Set NodeLabel
                            , runResultTriggeredEdges     :: Set StateEdgeLabel
-                           , runResultEdgeflow          :: Map ResourceEdgeLabel (Set Resource)
+                           , runResultEdgeflow           :: Map ResourceEdgeLabel (Set Resource)
                            , runResultGeneratedResources :: Set Resource
                            , runResultKilledResources    :: Set Resource
                            , runResultErrors             :: Map Int Text
+                           , runResultEnded              :: Maybe NodeLabel
                            }
   deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "runResult") ''RunResult
@@ -395,13 +401,13 @@ mkStateEdgeModifiers :: StateEdgeModifiers
 mkStateEdgeModifiers = StateEdgeModifiers S.empty S.empty S.empty S.empty S.empty M.empty M.empty
 
 mkRun :: Machination -> Run
-mkRun m = Run m m S.empty S.empty S.empty S.empty S.empty M.empty M.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty
+mkRun m = Run m m S.empty S.empty S.empty S.empty S.empty M.empty M.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty Nothing
 
 runToResult :: Run -> RunResult
 runToResult Run{..} = RunResult runNewUpdate runActivatedEdges runFailedEdges runActivatedNodes
                                runFailedNodes runTriggeredEdges runEdgeflow
                                runGeneratedResources runKilledResources
-                               (M.mapKeys (\(AnyLabel l) -> l) runErrors)
+                               (M.mapKeys (\(AnyLabel l) -> l) runErrors) runEnded
 
 summarize :: Run -> String
 summarize r = P.render $

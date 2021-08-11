@@ -11,7 +11,7 @@ import Machinations.Misc
 import Machinations.Formulas
 import Control.Lens hiding (from,to)
 import Data.Maybe
-import Data.List (foldl', sortOn, mapAccumL, (\\), delete, nub)
+import Data.List (foldl', find, mapAccumL, (\\), delete, nub)
 import Data.Set(Set)
 import qualified Data.Set as S
 import Data.Map.Strict(Map)
@@ -20,7 +20,6 @@ import Control.Monad
 import System.Random(random)
 import Data.Bifunctor
 
--- TODO Implement edge inactivation
 -- TODO We don't yet handle resources edges with filters like >3
 -- TODO Maybe is not good with sampling. The samples will be correlated.
 -- TODO Gates are really complex in their deterministic behavior, we aren't there yet.
@@ -551,7 +550,7 @@ resolveAnyLabel m (AnyLabel l) =
 
 postUpdateStateEdge :: Run -> (StateEdgeLabel, StateEdge) -> Run
 postUpdateStateEdge r (sel, se) =
-  case (resolveAnyLabel (r^.oldUpdate) $ se^.from, resolveAnyLabel (r^.oldUpdate) $ se^.to) of
+  case (resolveAnyLabel (r^.newUpdate) $ se^.from, resolveAnyLabel (r^.newUpdate) $ se^.to) of
     (RNode nlfrom nfrom, RNode nlto nto) ->
       case se^.stateFormula of
         -- Triggers and reverse triggers are not symmetric
@@ -562,7 +561,7 @@ postUpdateStateEdge r (sel, se) =
         Just SFTrigger        -> if (nlfrom `S.member` (r^.activatedNodes))
                                    ||
                                    (all (\(e,_) -> maybe False ((>0) . S.size) $ r^?edgeflow.ix e)
-                                    (filter (isActiveResourceEdge r . fst) $ inResourceEdges (r^.oldUpdate) nlfrom))
+                                    (filter (isActiveResourceEdge r . fst) $ inResourceEdges (r^.newUpdate) nlfrom))
                                 then trigger r nlto else r
         Just SFReverseTrigger -> if nlfrom `S.member` (r^.failedNodes) then trigger r nlto else r
         _ -> r
@@ -638,7 +637,7 @@ preUpdateStateEdge m sem (sel, se) =
 run :: Machination -> Set NodeLabel -> Run
 run m clicked =
   withCheckingResourceBalance (mkRun m') $ \r0 ->
-      let r = loop r0
+      let r = go r0
                    (nub
                     $ automaticNodes m'
                     <> (if m^.time == 0 then startNodes m' else [])
@@ -646,13 +645,18 @@ run m clicked =
                     <> maybe [] (map (nodeLookup m) . S.toList) (m ^? stateEdgeModifiers._Just.triggerNode)
                    )
           r' = foldl' postUpdateStateEdge r $ M.toList $ r^.newUpdate. graph. stateEdges
-      in r' & newUpdate . seed .~ fst (random $ r^.stdGen)
-  where loop :: Run -> [(NodeLabel, Node)] -> Run
-        loop m active = foldl' runNode m active
+          r'' = r' & newUpdate . seed .~ fst (random $ r^.stdGen)
+      in maybe r'' (\l -> r'' { runEnded = Just l}) $ runEndState r''
+  where go :: Run -> [(NodeLabel, Node)] -> Run
+        go r active =
+          case find (isEndCondition . nodeTy . snd) active of
+            Nothing -> foldl' runNode r active
+            Just (l,_) -> r { runEnded = Just l }
         m' = m & time +~ 1
-               & stateEdgeModifiers ?~ accumOverStateEdges  mkStateEdgeModifiers (preUpdateStateEdge m) (M.toList $ m^.graph. stateEdges)
+               & stateEdgeModifiers ?~ preRunStateEdges m
+        preRunStateEdges m = accumOverStateEdges  mkStateEdgeModifiers (preUpdateStateEdge m) (M.toList $ m^.graph. stateEdges)
         accumOverStateEdges init f edges = foldl' f init edges
-          -- foldl' f init edges
+        runEndState r = find (isEndCondition . nodeTy . snd . nodeLookup (r^.newUpdate)) $ S.toList (preRunStateEdges (r^.newUpdate) ^. enableNode)
 
 exSourcePoolDrain :: NodeActivation -> NodeActivation -> PushPullAction -> NodeActivation -> Int -> Int -> Machination
 exSourcePoolDrain sa pa pt da rsp rpd =

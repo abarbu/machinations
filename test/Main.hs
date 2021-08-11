@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedLists, OverloadedStrings #-}
+{-# OPTIONS -Wall #-}
 import Test.Tasty
 import Test.Tasty.SmallCheck as SC
 import Test.Tasty.QuickCheck as QC
@@ -18,8 +19,9 @@ import qualified Data.Text as T
 import Data.Aeson
 import System.IO.Unsafe
 import System.FilePath
-import Debug.Trace
 import Data.Bifunctor
+import Data.List
+import Control.Lens hiding (from,to)
 
 main = defaultMain tests
 
@@ -32,11 +34,20 @@ noderes n g = resourceStatsByTag <$> nodeResources g (NodeLabel n)
 run' g = runNewUpdate $ run g []
 run2' = run' . run'
 runN' n x = iterate run' x !! n
+runN n m activate | n>0 = loop (n-1) (run m activate)
+                  | otherwise = error "At least one run is necessary"
+  where loop 0 r = r
+        loop n r = loop (n-1) (run (r^.newUpdate) activate)
 
+testOneNodeResourcesRaw :: Int -> Int -> String -> Maybe (Map ResourceTag Int) -> TestTree
 testOneNodeResourcesRaw node steps file right =
   testCase (show node <> " x" <> show steps <> " " <> file)
   $ noderes node (runN' steps $ readMachination' file) @?= right
+
+testOneNodeResources :: Int -> Int -> String -> Map ResourceTag Int -> TestTree
 testOneNodeResources node steps file right = testOneNodeResourcesRaw node steps file (Just right)
+
+testNodeResourcesRaw :: Int -> String -> [(Int, Maybe (Map ResourceTag Int))] -> TestTree
 testNodeResourcesRaw steps file noderights =
   let r = runN' steps $ readMachination' file
   in testGroup (show (map fst noderights) <> " x" <> show steps <> " " <> file)
@@ -44,7 +55,15 @@ testNodeResourcesRaw steps file noderights =
                testCase (show node <> " x" <> show steps)
                $ noderes node r @?= right)
      noderights
+
+testNodeResources :: Int -> String -> [(Int, Map ResourceTag Int)] -> TestTree
 testNodeResources steps file = testNodeResourcesRaw steps file . map (second Just)
+
+testEnded :: Int -> String -> Int -> Bool -> Set Int -> TestTree
+testEnded steps file node isEnded triggered =
+  let r = runN steps (readMachination' file) (S.map NodeLabel triggered)
+  in testCase ("end " <> show node <> " x" <> show steps <> " " <> file)
+     $ r^.ended @?= if isEnded then Just (NodeLabel node) else Nothing
 
 object101Tests = testGroup "101-objects"
   [
@@ -397,12 +416,29 @@ connections101Tests = testGroup "101-connections"
       , test' 9 "0046.json" [(374, [("Black",3)]),(377, [("Black",3)]),(378, [])]
       , test' 10 "0046.json" [(374, [("Black",3)]),(377, [("Black",1)]),(378, [("Black",3)])]
       ]
+    , testGroup "end"
+      [
+        testEnded' 1 "0006.json" 64 False []
+      , testEnded' 2 "0006.json" 64 False []
+      , testEnded' 1 "0006.json" 64 True [75]
+      , testEnded' 1 "0006.json" 64 True [75]
+      , testEnded' 2 "0006.json" 64 True [75]
+      , testEnded' 3 "0006.json" 64 True [75]
+      , testEnded' 1 "0007.json" 67 False [77]
+      , testEnded' 2 "0007.json" 67 True [77]
+      , testEnded' 1 "0008.json" 70 False [79]
+      , testEnded' 2 "0008.json" 70 True [79]
+      , testEnded' 3 "0008.json" 70 True [79]
+      , testEnded' 1 "0009.json" 73 True [81]
+      , testEnded' 1 "0009.json" 73 False []
+      ]
     ]
   ]
   where testRaw node steps file right = testOneNodeResourcesRaw node steps ("ours/101-connections/" </> file) right
         test node steps file right = testOneNodeResources node steps ("ours/101-connections/" </> file) right
         testRaw' steps file noderights = testNodeResourcesRaw steps ("ours/101-connections/" </> file) noderights
         test' steps file = testNodeResources steps ("ours/101-connections/" </> file)
+        testEnded' steps file node isEnded activated = testEnded steps ("ours/101-connections/" </> file) node isEnded activated
           
 spdTests = testGroup "SourcePoolDrain"
   [ testCase "static" $

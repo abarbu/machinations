@@ -23,11 +23,15 @@ import qualified Shelly as S
 import qualified Data.ByteString.Lazy as B
 import Data.Text(Text)
 import qualified Data.Text as T
+import qualified Data.Text.IO as T
 import Data.Aeson
 import Data.Aeson.Encode.Pretty
 import Dot hiding (Graph,Node)
 import Text.Printf
 import Machinations.Xml
+import System.IO.Temp
+import Text.XML.JSON.XmlToJson
+import GHC.IO.Handle
 
 -- | Full nodes don't count for some operations, like those affecting gates
 isNodeFull :: NodeType -> Bool
@@ -134,8 +138,12 @@ withCheckingResourceBalance r f =
         nr = machinationResources (r^.newUpdate)
         or' = machinationResources (r'^.oldUpdate)
         nr' = machinationResources (r'^.newUpdate)
-  
-  
+
+convertXml contents = do
+  withSystemTempFile "convert.xml" $ \fname handle -> do
+    T.hPutStr handle contents
+    hClose handle
+    readMachinationsXml fname
 
 splitMachinationsXml :: FilePath -> Maybe FilePath -> Maybe FilePath -> FilePath -> IO ()
 splitMachinationsXml filename convertedFile renderFile destDirectory = do

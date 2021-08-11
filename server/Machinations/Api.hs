@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings, DeriveGeneric, DeriveAnyClass, DerivingStrategies, GeneralizedNewtypeDeriving, QuasiQuotes, TemplateHaskell, TypeFamilies, GADTs, StandaloneDeriving, UndecidableInstances, MultiParamTypeClasses, FlexibleInstances, DisambiguateRecordFields, DuplicateRecordFields, TypeApplications, FlexibleContexts, DataKinds, TypeOperators #-}
+{-# LANGUAGE OverloadedStrings, TemplateHaskell, DeriveGeneric, DeriveAnyClass, DerivingStrategies, GeneralizedNewtypeDeriving, QuasiQuotes, TemplateHaskell, TypeFamilies, GADTs, StandaloneDeriving, UndecidableInstances, MultiParamTypeClasses, FlexibleInstances, DisambiguateRecordFields, DuplicateRecordFields, TypeApplications, FlexibleContexts, DataKinds, TypeOperators #-}
 
 module Machinations.Api where
 import Data.Text (Text)
@@ -13,6 +13,8 @@ import Servant.Swagger.UI
 import Servant.Swagger.UI.Core
 import Control.Lens
 import Machinations.Misc
+import Data.Aeson
+import Data.Aeson.TH
 
 instance ToSchema StateFormula where
   declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
@@ -68,9 +70,22 @@ instance ToSchema RunMachination where
 instance ToSchema RunResult where
   declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions (prefixOptions "runResult"))
 
+data XMLFile = XMLFile { xmlContents :: Text }
+  deriving (Generic)
+deriveJSON mjsonOptions ''XMLFile
+instance ToSchema XMLFile where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+
+data XMLConversionResult = XMLConversionResult { machine :: Maybe Machination }
+  deriving (Generic)
+deriveJSON mjsonOptions ''XMLConversionResult
+instance ToSchema XMLConversionResult where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+
 type RawAPI = "api" :> (("test"  :> Get '[JSON] Text)
                          :<|> ("render" :> ReqBody '[JSON] Machination :> Post '[JSON] Text )
-                         :<|> ("run" :> ReqBody '[JSON] RunMachination :> Post '[JSON] RunResult ))
+                         :<|> ("run" :> ReqBody '[JSON] RunMachination :> Post '[JSON] RunResult )
+                         :<|> ("convertxml" :> ReqBody '[JSON] XMLFile :> Post '[JSON] XMLConversionResult ))
 
 type API = SwaggerSchemaUI "swagger-ui" "swagger.json"
            :<|> RawAPI

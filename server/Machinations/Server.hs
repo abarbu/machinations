@@ -22,11 +22,17 @@ import qualified Data.UUID.V4 as U
 import Data.Maybe
 import qualified Machinations.Types as M
 import qualified Machinations.Rendering as M
+import qualified Machinations.Utils as M
 import qualified Machinations as M
 import Data.Set(Set)
 import qualified Data.Set as S
 import Servant.Swagger.UI
 import Data.OpenApi               hiding (Server)
+import System.IO.Temp
+import Text.XML.JSON.XmlToJson
+import Data.Text (Text)
+import qualified Data.Text.IO as T
+import qualified Data.Text as T
 
 jwtTokenValiditySeconds = 31556952 :: NominalDiffTime -- 1 year
 
@@ -58,5 +64,8 @@ serveRender = pure . T.pack . show . M.toGraph
 serveRun :: M.RunMachination -> App M.RunResult
 serveRun M.RunMachination{..} = pure $ M.runToResult $ M.run runMachinationMachine runMachinationActiveNodes
 
+serveConvertxml :: A.XMLFile -> App A.XMLConversionResult
+serveConvertxml A.XMLFile{..} = liftIO $ A.XMLConversionResult <$> M.convertXml xmlContents
+
 server :: ServerT A.API App
-server = swaggerSchemaUIServerT A.swaggerDoc :<|> (serveTest :<|> serveRender :<|> serveRun)
+server = swaggerSchemaUIServerT A.swaggerDoc :<|> (serveTest :<|> serveRender :<|> serveRun :<|> serveConvertxml)

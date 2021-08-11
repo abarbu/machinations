@@ -402,7 +402,6 @@ runToResult Run{..} = RunResult runNewUpdate runActivatedEdges runFailedEdges ru
                                runFailedNodes runTriggeredEdges runEdgeflow
                                runGeneratedResources runKilledResources
                                (M.mapKeys (\(AnyLabel l) -> l) runErrors)
-                              
 
 summarize :: Run -> String
 summarize r = P.render $

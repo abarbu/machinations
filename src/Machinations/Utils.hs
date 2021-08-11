@@ -67,8 +67,17 @@ automaticNodes = M.toList . M.filter (isJust . (^? (ty.activation._Automatic))) 
 startNodes :: Machination -> [(NodeLabel, Node)]
 startNodes = M.toList . M.filter (isJust . (^? (ty.activation._OnStart))) . graphVertices . machinationGraph
 
+-- | If anything activates the edge, it's active, even if something else inactivates it
 isActiveResourceEdge :: Run -> ResourceEdgeLabel -> Bool
-isActiveResourceEdge _ _ = True
+isActiveResourceEdge r l | isJust $ r^?newUpdate.stateEdgeModifiers._Just.enableResourceEdge.ix l = True
+                         | isJust $ r^?newUpdate.stateEdgeModifiers._Just.disableResourceEdge.ix l = False
+                         | otherwise = True
+
+-- | If anything activates the node, it's active, even if something else inactivates it
+isActiveNode :: Run -> NodeLabel -> Bool
+isActiveNode r l | isJust $ r^?newUpdate.stateEdgeModifiers._Just.enableNode.ix l = True
+                 | isJust $ r^?newUpdate.stateEdgeModifiers._Just.disableNode.ix l = False
+                 | otherwise = True
 
 -- TODO This is wonky, should separate out [all, int, percentage, and condition] but machinations doesn't!
 resourceFormulaValue :: Run -> ResourceFormula -> (Run, Maybe Int)

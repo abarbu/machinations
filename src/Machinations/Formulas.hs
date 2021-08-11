@@ -58,12 +58,12 @@ rOperatorTable =
   , [ binary "*" RFMultiply
     , binary "/" RFDivide
     ]
-  , [ prefix ">"  (RFCondition CGt)
-    , prefix "<"  (RFCondition CLt)
-    , prefix "==" (RFCondition CEqual)
+  , [ prefix "==" (RFCondition CEqual)
     , prefix "!=" (RFCondition CNotEqual)
     , prefix ">=" (RFCondition CGtEq)
     , prefix "<=" (RFCondition CLtEq)
+    , prefix ">"  (RFCondition CGt)
+    , prefix "<"  (RFCondition CLt)
     ]
   , [ binary "+" RFAdd
     , binary "-" RFSubtract
@@ -111,12 +111,12 @@ sOperatorTable =
     , prefix "/" SFAdd
     , prefix "=" SFOverwrite
     ]
-  , [ prefix ">"  (SFCondition CGt)
-    , prefix "<"  (SFCondition CLt)
+  , [ prefix ">=" (SFCondition CGtEq)
+    , prefix "<=" (SFCondition CLtEq)
     , prefix "==" (SFCondition CEqual)
     , prefix "!=" (SFCondition CNotEqual)
-    , prefix ">=" (SFCondition CGtEq)
-    , prefix "<=" (SFCondition CLtEq)
+    , prefix ">"  (SFCondition CGt)
+    , prefix "<"  (SFCondition CLt)
     ]
   , [ binary ".." SFRange
     ]
@@ -171,4 +171,4 @@ fOperatorTable =
 parseF "" = pure $ FConstant 0 -- these can happen in registers
 parseF s = parseMaybe (fExpr <* eof) s
 
-debugParser = parseTest (fExpr <* eof) "3+woof(woof+2,2)"
+debugParser = parseTest (sExpr <* eof) ">=2"

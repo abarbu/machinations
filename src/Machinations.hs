@@ -257,8 +257,7 @@ distributeRandomGatedResources r nodeLabel resources = do
                   (Nothing, 100-sum (map snd tempWeights)) : tempWeights
                   else
                   tempWeights
-  r'' <- distributeByWeights creditNode' weights resources r'
-  pure $ r'' & activatedNodes <>~ [nodeLabel]
+  distributeByWeights creditNode' weights resources r'
   where es = filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.newUpdate) nodeLabel
         allPercentage = all (isRFPercentage . (^._2.resourceFormula)) es
         mixedPercentage = not allPercentage && any (isRFPercentage . (^._2.resourceFormula)) es
@@ -286,7 +285,7 @@ traderInputsOutputs r l _ =
             _ -> Nothing
         _ -> Nothing
   where allInboundOld = filter (isActiveResourceEdge r . fst) $ inResourceEdges (r^.oldUpdate) l
-        allOutboundOld = filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.newUpdate) l
+        allOutboundOld = filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.oldUpdate) l
 
 generateResources :: Run -> ResourceTag -> Int -> (Run, Set Resource)
 generateResources r tag nr = 
@@ -330,7 +329,8 @@ fireConverterIfPossible r l =
                            & killedResources <>~ (S.unions $ M.elems $ r ^. oldUpdate . graph . vertices . ix l . ty . storage)
 
 debitNode :: Run -> ResourceEdgeLabel -> Maybe Int -> Maybe ResourceTag -> NodeLabel -> Maybe (Run, Set Resource)
-debitNode r destEdge amount resourceTag from = updateNodeStats $
+debitNode r destEdge amount resourceTag from | not $ isActiveNode r from = Nothing
+                                             | otherwise = updateNodeStats $
   case n^.ty of
     Drain{} -> Nothing
     Source{} -> do
@@ -345,9 +345,7 @@ debitNode r destEdge amount resourceTag from = updateNodeStats $
                                        Nothing
       -- TODO 10k is an odd default in machinations.io
       --      I set it to 100 here
-      let (r', createdResources) = generateResources r resourceTagToGenerate $ fromMaybe 100 amount
-      pure (r' & activatedNodes <>~ [from]
-           , createdResources)
+      pure $ generateResources r resourceTagToGenerate $ fromMaybe 100 amount
     Pool{} -> do
       let filteredResources =
             case resourceTag of
@@ -358,7 +356,6 @@ debitNode r destEdge amount resourceTag from = updateNodeStats $
             Just amount -> S.splitAt (amount `min` S.size filteredResources) filteredResources
       pure (r & oldUpdate . graph . vertices . ix from . ty . resources %~ (S.\\ out) -- .~ remaining
               & newUpdate . graph . vertices . ix from . ty . resources %~ (S.\\ out)
-              & activatedNodes <>~ [from]
            ,out)
     Converter{} ->
       (,[]) <$> fireConverterIfPossible r from
@@ -370,12 +367,12 @@ debitNode r destEdge amount resourceTag from = updateNodeStats $
                , debited)
 
 creditNode :: Run -> ResourceEdgeLabel -> Set Resource -> NodeLabel -> Maybe (Run, Set Resource)
-creditNode r sourceEdge incoming toNode = updateNodeStats $
+creditNode r sourceEdge incoming toNode | not $ isActiveNode r toNode = Nothing
+                                        | otherwise = updateNodeStats $
   -- TODO Check limits on the credited node and fail or overflow
   case n'^.ty of
     Source{} -> Nothing
-    Drain{} -> pure (r & activatedNodes <>~ [toNode]
-                      & killedResources <>~ incoming
+    Drain{} -> pure (r & killedResources <>~ incoming
                    , [])
     p@Pool{} -> do
       let overCapacity = maybe False (< S.size ((r ^. newUpdate . graph . vertices . ix toNode . ty . resources) <> incoming))
@@ -383,11 +380,9 @@ creditNode r sourceEdge incoming toNode = updateNodeStats $
       if overCapacity then
         case p^?!overflow of
           OverflowBlock -> mzero
-          OverflowDrain -> pure (r & activatedNodes <>~ [toNode]
-                                  & killedResources <>~ incoming -- TODO Update for partial pushes
+          OverflowDrain -> pure (r & killedResources <>~ incoming -- TODO Update for partial pushes
                                , [])
         else pure (r & newUpdate . graph . vertices . ix toNode . ty . resources <>~ incoming
-                    & activatedNodes <>~ [toNode]
                   ,[])
     Gate{} ->
       -- TOOD This doesn't allow for partial pushes
@@ -486,7 +481,8 @@ pushQueuedResources r (edgel,edge) l _ d dest =
         (r', val) = second (fromMaybe 0) $ resourceFormulaValue r (edge^.resourceFormula)
 
 runNode :: Run -> (NodeLabel, Node) -> Run
-runNode r (l, n) =
+runNode r (l, n) | not $ isActiveNode r l = r
+                 | otherwise =
   case n^.ty of
     p@Pool{} ->
       case _pushPullAction p of
@@ -553,21 +549,91 @@ resolveAnyLabel m (AnyLabel l) =
     (_, _, Just s) -> RState (StateEdgeLabel l) s
     _ -> error "Unknown node"
 
-updateStateEdge :: Run -> (StateEdgeLabel, StateEdge) -> Run
-updateStateEdge r (sel, se) =
+postUpdateStateEdge :: Run -> (StateEdgeLabel, StateEdge) -> Run
+postUpdateStateEdge r (sel, se) =
   case (resolveAnyLabel (r^.oldUpdate) $ se^.from, resolveAnyLabel (r^.oldUpdate) $ se^.to) of
     (RNode nlfrom nfrom, RNode nlto nto) ->
       case se^.stateFormula of
-        Just SFTrigger        -> if maybe False ((>0) . S.size) $ r^?nodeInflow.ix nlfrom then trigger r nlto else r
-        Just SFReverseTrigger -> if maybe True          S.null  $ r^?nodeInflow.ix nlfrom then trigger r nlto else r
-        -- TODO
-        _ -> undefined
+        -- Triggers and reverse triggers are not symmetric
+        -- A trigger fires when a node is activated or when all of its active inputs are satisfied
+        --  If it has any active inputs (zero input nodes can't meet this second condition)
+        -- A reverse trigger fires when a node is activated but fails
+        --  A node that doesn't receive all of its inputs does not trigger this condition
+        Just SFTrigger        -> if (nlfrom `S.member` (r^.activatedNodes))
+                                   ||
+                                   (all (\(e,_) -> maybe False ((>0) . S.size) $ r^?edgeflow.ix e)
+                                    (filter (isActiveResourceEdge r . fst) $ inResourceEdges (r^.oldUpdate) nlfrom))
+                                then trigger r nlto else r
+        Just SFReverseTrigger -> if nlfrom `S.member` (r^.failedNodes) then trigger r nlto else r
+        _ -> r
     -- TODO
-    -- RResource rl r -> undefined
-    -- RState{} -> error "State edges can't be connected to other state edges"
-    _ -> undefined
+    _ -> r
   where trigger :: Run -> NodeLabel -> Run
         trigger r nlabel = r & newUpdate . stateEdgeModifiers . non mkStateEdgeModifiers . triggerNode <>~ [nlabel]
+
+preUpdateStateEdge :: Machination -> StateEdgeModifiers -> (StateEdgeLabel, StateEdge) -> StateEdgeModifiers
+preUpdateStateEdge m sem (sel, se) =
+  case (resolveAnyLabel m $ se^.from, resolveAnyLabel m $ se^.to) of
+    (RNode nlfrom nfrom, RNode nlto nto) ->
+      case se^.stateFormula of
+        Just (SFRange (SFConstant low) (SFConstant high)) ->
+          case nfrom of
+            Node Pool{..} _ _ ->
+              if S.size _resources >= low && S.size _resources <= high then
+                activateNode sem nlto
+              else
+                inactivateNode sem nlto
+        Just (SFCondition c (SFConstant val)) ->
+          case nfrom of
+            Node Pool{..} _ _ ->
+              if (case c of
+                    CEqual -> (==)
+                    CNotEqual -> (/=)
+                    CGt -> (>)
+                    CLt -> (<)
+                    CGtEq -> (>=)
+                    CLtEq -> (<=))
+                 (S.size _resources)
+                 val
+              then activateNode sem nlto
+              else inactivateNode sem nlto
+        -- TODO
+        _ -> sem
+    (RNode nlfrom nfrom, RResource rlto rto) ->
+      case se^.stateFormula of
+        Just (SFRange (SFConstant low) (SFConstant high)) ->
+          case nfrom of
+            Node Pool{..} _ _ ->
+              if S.size _resources >= low && S.size _resources <= high then
+                activateEdge sem rlto
+              else
+                inactivateEdge sem rlto
+        Just (SFCondition c (SFConstant val)) ->
+          case nfrom of
+            Node Pool{..} _ _ ->
+              if (case c of
+                    CEqual -> (==)
+                    CNotEqual -> (/=)
+                    CGt -> (>)
+                    CLt -> (<)
+                    CGtEq -> (>=)
+                    CLtEq -> (<=))
+                 (S.size _resources)
+                 val
+              then activateEdge sem rlto
+              else inactivateEdge sem rlto
+        -- TODO
+        _ -> sem
+    -- TODO
+    _ -> sem
+  where activateNode :: StateEdgeModifiers -> NodeLabel -> StateEdgeModifiers
+        activateNode sem nlabel = sem & enableNode <>~ [nlabel]
+        inactivateNode :: StateEdgeModifiers -> NodeLabel -> StateEdgeModifiers
+        inactivateNode sem nlabel = sem & disableNode <>~ [nlabel]
+        activateEdge :: StateEdgeModifiers -> ResourceEdgeLabel -> StateEdgeModifiers
+        activateEdge sem nlabel = sem & enableResourceEdge <>~ [nlabel]
+        inactivateEdge :: StateEdgeModifiers -> ResourceEdgeLabel -> StateEdgeModifiers
+        inactivateEdge sem nlabel = sem & disableResourceEdge <>~ [nlabel]
 
 run :: Machination -> Set NodeLabel -> Run
 run m clicked =
@@ -579,12 +645,14 @@ run m clicked =
                     <> map (nodeLookup m') (S.toList clicked)
                     <> maybe [] (map (nodeLookup m) . S.toList) (m ^? stateEdgeModifiers._Just.triggerNode)
                    )
-          r' = foldl' updateStateEdge r $ M.toList $ r^.newUpdate. graph. stateEdges
+          r' = foldl' postUpdateStateEdge r $ M.toList $ r^.newUpdate. graph. stateEdges
       in r' & newUpdate . seed .~ fst (random $ r^.stdGen)
   where loop :: Run -> [(NodeLabel, Node)] -> Run
         loop m active = foldl' runNode m active
         m' = m & time +~ 1
-               & stateEdgeModifiers .~ Nothing
+               & stateEdgeModifiers ?~ accumOverStateEdges  mkStateEdgeModifiers (preUpdateStateEdge m) (M.toList $ m^.graph. stateEdges)
+        accumOverStateEdges init f edges = foldl' f init edges
+          -- foldl' f init edges
 
 exSourcePoolDrain :: NodeActivation -> NodeActivation -> PushPullAction -> NodeActivation -> Int -> Int -> Machination
 exSourcePoolDrain sa pa pt da rsp rpd =

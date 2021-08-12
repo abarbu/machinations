@@ -26,7 +26,7 @@ import Control.Lens hiding (from,to)
 main = defaultMain tests
 
 tests :: TestTree
-tests = testGroup "Tests" [object101Tests,connections101Tests,rfTests,sfTests,spdTests,miscTests]
+tests = testGroup "Tests" [object101Tests,connections101Tests,rfTests,sfTests,spdTests,miscTests,tutorials]
 
 readMachination' :: FilePath -> Machination
 readMachination' = fromJust . unsafePerformIO . decodeFileStrict'
@@ -499,7 +499,21 @@ connections101Tests = testGroup "101-connections"
         testRaw'' steps file = testNodeResourcesAndRegistersRaw steps ("ours/101-connections/" </> file)
         test'' steps file = testNodeResourcesAndRegisters steps ("ours/101-connections/" </> file)
         
-          
+tutorials = testGroup "tutorials"
+  [
+    test'' 1 "basic-casual-game-system.json" [(5,[]),(10,[]),(11,[("Black",1)]),(18,[]),(15,[])] [(22,0)]
+  , test'' 2 "basic-casual-game-system.json" [(5,[]),(10,[]),(11,[("Black",2)]),(18,[]),(15,[("Black",2)])] [(22,2)]
+  , test'' 3 "basic-casual-game-system.json" [(5,[]),(10,[("Black",1)]),(11,[("Black",2)]),(18,[]),(15,[("Black",4)])] [(22,4)]
+  , test'' 4 "basic-casual-game-system.json" [(5,[("Black",1)]),(10,[("Black",1)]),(11,[("Black",2)]),(18,[("Black",1)]),(15,[("Black",4)])] [(22,5)]
+  ]
+  where testRaw node steps file right = testOneNodeResourcesRaw node steps ("xmls/tutorials/" </> file) right
+        test node steps file right = testOneNodeResources node steps ("xmls/tutorials/" </> file) right
+        testRaw' steps file noderights = testNodeResourcesAndRegistersRaw steps ("xmls/tutorials/" </> file) noderights []
+        test' steps file = testNodeResources steps ("xmls/tutorials/" </> file)
+        testEnded' steps file node isEnded activated = testEnded steps ("xmls/tutorials/" </> file) node isEnded activated
+        testRaw'' steps file = testNodeResourcesAndRegistersRaw steps ("xmls/tutorials/" </> file)
+        test'' steps file = testNodeResourcesAndRegisters steps ("xmls/tutorials/" </> file)
+
 spdTests = testGroup "SourcePoolDrain"
   [ testCase "static" $
     noderes 1       (exSourcePoolDrain Passive   Passive   (Pushing PushAny) Passive   3 7) @?= Just [("life",1)]

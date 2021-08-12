@@ -185,7 +185,7 @@ convertXml contents = do
 convertXmlFile fname = do
   contents <- T.readFile fname
   m <- convertXml contents
-  encodeFile (dropExtension fname <> ".json") m
+  B.writeFile (dropExtension fname <> ".json") (encodePretty m)
 
 splitMachinationsXml :: FilePath -> Maybe FilePath -> Maybe FilePath -> FilePath -> IO ()
 splitMachinationsXml filename convertedFile renderFile destDirectory = do
@@ -211,13 +211,16 @@ renderAllInDirectory directory = do
                   , "-o"
                   , T.pack $ dropExtension f <> ".pdf"]) fms
 
-resolveAnyLabel :: Machination -> AnyLabel -> ResolvedLabel
-resolveAnyLabel m (AnyLabel l) =
+resolveAnyLabel' :: Machination -> AnyLabel -> Maybe ResolvedLabel
+resolveAnyLabel' m (AnyLabel l) =
   case (m^?graph.vertices.ix (NodeLabel l), m^?graph.resourceEdges.ix (ResourceEdgeLabel l), m^?graph.stateEdges.ix (StateEdgeLabel l)) of
-    (Just n, _, _) -> RNode (NodeLabel l) n
-    (_, Just r, _) -> RResource (ResourceEdgeLabel l) r
-    (_, _, Just s) -> RState (StateEdgeLabel l) s
-    _ -> error "Unknown node"
+    (Just n, _, _) -> Just $ RNode (NodeLabel l) n
+    (_, Just r, _) -> Just $ RResource (ResourceEdgeLabel l) r
+    (_, _, Just s) -> Just $ RState (StateEdgeLabel l) s
+    _ -> Nothing
+
+resolveAnyLabel :: Machination -> AnyLabel -> ResolvedLabel
+resolveAnyLabel m l = fromMaybe (error $ "Unknown node: " <> show l) $ resolveAnyLabel' m l
 
 topologicalSortStateAndRegisters :: Machination -> [Either (NodeLabel, Node) (StateEdgeLabel, StateEdge)]
 topologicalSortStateAndRegisters m = map (\v ->

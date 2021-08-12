@@ -722,8 +722,15 @@ updateStateEdge m regmap sem (sel, se) =
           then fgood
           else fbad
 
+filterBadEdges :: Machination -> Machination
+filterBadEdges m = m & graph.resourceEdges %~ M.filter filterR
+                     & graph.stateEdges %~ M.filter filterS
+  where allNodes = m^.graph.vertices
+        filterR e =  (e^.from) `M.member` allNodes && (e^.to) `M.member` allNodes
+        filterS e =  isJust (resolveAnyLabel' m (e^.from)) && isJust (resolveAnyLabel' m (e^.to))
+
 run :: Machination -> Set NodeLabel -> Run
-run m clicked =
+run mraw clicked =
   withCheckingResourceBalance r0 $ \rstart ->
       let r = go rstart
                    (nub
@@ -736,7 +743,8 @@ run m clicked =
                       $ M.toList $ r^. newUpdate . graph . stateEdges
           r'' = r' & newUpdate . seed .~ fst (random $ r^.stdGen)
       in maybe r'' (\l -> r'' { runEnded = Just l}) $ runEndState r''
-  where go :: Run -> [(NodeLabel, Node)] -> Run
+  where m = filterBadEdges mraw
+        go :: Run -> [(NodeLabel, Node)] -> Run
         go r active =
           case find (isEndCondition . snd) active of
             Nothing -> foldl' runNode r active

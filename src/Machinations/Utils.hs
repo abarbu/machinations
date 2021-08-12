@@ -32,6 +32,7 @@ import Machinations.Xml
 import System.IO.Temp
 import Text.XML.JSON.XmlToJson
 import GHC.IO.Handle
+import qualified Data.Graph as G
 
 -- | Full nodes don't count for some operations, like those affecting gates
 isNodeFull :: NodeType -> Bool
@@ -62,8 +63,14 @@ nodeResources m l = m^?graph.vertices.ix l.ty.resources
 outResourceEdges :: Machination -> NodeLabel -> [(ResourceEdgeLabel, ResourceEdge)]
 outResourceEdges m l = M.toList $ M.filter (\e -> e^.from == l) (m^.graph.resourceEdges)
 
+outStateEdges :: Machination -> NodeLabel -> [(StateEdgeLabel, StateEdge)]
+outStateEdges m l = M.toList $ M.filter (\e -> e^.from == toAnyLabel l) (m^.graph.stateEdges)
+
 inResourceEdges :: Machination -> NodeLabel -> [(ResourceEdgeLabel, ResourceEdge)]
 inResourceEdges m l = M.toList $ M.filter (\e -> e^.to == l) (m^.graph.resourceEdges)
+
+inStateEdges :: Machination -> NodeLabel -> [(StateEdgeLabel, StateEdge)]
+inStateEdges m l = M.toList $ M.filter (\e -> e^.to == toAnyLabel l) (m^.graph.stateEdges)
 
 automaticNodes :: Machination -> [(NodeLabel, Node)]
 automaticNodes = M.toList . M.filter (isJust . (^? (ty.activation._Automatic))) . graphVertices . machinationGraph
@@ -73,14 +80,14 @@ startNodes = M.toList . M.filter (isJust . (^? (ty.activation._OnStart))) . grap
 
 -- | If anything activates the edge, it's active, even if something else inactivates it
 isActiveResourceEdge :: Run -> ResourceEdgeLabel -> Bool
-isActiveResourceEdge r l | isJust $ r^?newUpdate.stateEdgeModifiers._Just.enableResourceEdge.ix l = True
-                         | isJust $ r^?newUpdate.stateEdgeModifiers._Just.disableResourceEdge.ix l = False
+isActiveResourceEdge r l | isJust $ r^?stateEdgeModifiers.enableResourceEdge.ix l = True
+                         | isJust $ r^?stateEdgeModifiers.disableResourceEdge.ix l = False
                          | otherwise = True
 
 -- | If anything activates the node, it's active, even if something else inactivates it
 isActiveNode :: Run -> NodeLabel -> Bool
-isActiveNode r l | isJust $ r^?newUpdate.stateEdgeModifiers._Just.enableNode.ix l = True
-                 | isJust $ r^?newUpdate.stateEdgeModifiers._Just.disableNode.ix l = False
+isActiveNode r l | isJust $ r^?stateEdgeModifiers.enableNode.ix l = True
+                 | isJust $ r^?stateEdgeModifiers.disableNode.ix l = False
                  | otherwise = True
 
 -- | Compute the actual value of a resource formula, this doesn't apply any state edge modifiers
@@ -107,7 +114,7 @@ resourceFormulaValueF :: (StateFormula -> Int -> Int) -> Run -> ResourceEdgeLabe
 resourceFormulaValueF evalSF r el rf =
   case rawResourceFormulaValue r rf of
     out@(_, Nothing) -> out
-    orig@(r', Just val) -> case r^?newUpdate.stateEdgeModifiers._Just.modifyResourceFormula.at el.non [] of
+    orig@(r', Just val) -> case r^?stateEdgeModifiers.modifyResourceFormula.at el.non [] of
       Nothing -> orig
       -- We don't allow negative values
       Just sf -> (r', Just $ 0 `max` S.foldl' (flip evalSF) val sf)
@@ -203,3 +210,28 @@ renderAllInDirectory directory = do
                   , T.pack $ dropExtension f <> ".dot"
                   , "-o"
                   , T.pack $ dropExtension f <> ".pdf"]) fms
+
+resolveAnyLabel :: Machination -> AnyLabel -> ResolvedLabel
+resolveAnyLabel m (AnyLabel l) =
+  case (m^?graph.vertices.ix (NodeLabel l), m^?graph.resourceEdges.ix (ResourceEdgeLabel l), m^?graph.stateEdges.ix (StateEdgeLabel l)) of
+    (Just n, _, _) -> RNode (NodeLabel l) n
+    (_, Just r, _) -> RResource (ResourceEdgeLabel l) r
+    (_, _, Just s) -> RState (StateEdgeLabel l) s
+    _ -> error "Unknown node"
+
+topologicalSortStateAndRegisters :: Machination -> [Either (NodeLabel, Node) (StateEdgeLabel, StateEdge)]
+topologicalSortStateAndRegisters m = map (\v ->
+                                            case nodeFromVertex v of
+                                              (Left n, Left l, _) -> Left (l,n)
+                                              (Right n, Right l, _) -> Right (l,n)
+                                              _ -> error "This shouldn't be possible, a bug in our topsort graph")
+                                     $ G.topSort g
+  where (g, nodeFromVertex, vertexFromKey) = G.graphFromEdges subgraph
+        subgraph :: [(Either Node StateEdge, Either NodeLabel StateEdgeLabel, [Either NodeLabel StateEdgeLabel])]
+        subgraph = (map (\(l,n) -> (Left n,Left l,map (Right . fst) $ outStateEdges m l)) $ M.toList
+                    $ M.filter isAnyRegister (m^.graph.vertices))
+                   <>
+                   (map (\(l,e) -> (Right e,Right l,case resolveAnyLabel m $ e^.to of
+                                                     RNode nl n -> if isAnyRegister n then [Left nl] else []
+                                                     _ -> [])) $ M.toList
+                    $ m^.graph.stateEdges)

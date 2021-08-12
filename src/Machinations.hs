@@ -87,9 +87,16 @@ import Data.Bifunctor
     the source and the pool are activated with an edge that has a D5 on it, will
     draw different values for every activation of the resource edge.
 
- NB State edges resolve at the end of execution
-
  NB Negative values in Machinations are a mess. They also make no sense for us (a negative sprite?). We forbid them.
+
+ NB There are two basic flavors of state edges that behave totally differently from one another.
+    Trigger state edges (* and !) are part of the machine state.
+     They are computed by the previous time step and resolve in the next time step.
+     They must be computed at the end of a time step in order to observe all edge flow.
+    All other state edges and registers must be computed at the beginning of a time step.
+      They are not part of the machine state, they can be recomputed from scratch.
+      We recompute them at the end of a time step as well to make the state more observable to users.
+       But this has no effect.
 -}
 
 gateByInterval :: Run -> ResourceEdgeLabel -> ResourceEdge -> (Run -> Maybe (Run, Set Resource)) -> Maybe (Run, Set Resource)
@@ -429,7 +436,7 @@ runResourceEdge :: DebitNodeFn -> CreditNodeFn
 -- TODO Resources edges propagate activation to non-latched nodes
 runResourceEdge debitFn creditFn maxNeeded _ r (l,e) =
   -- TODO this only applies to the latched nodes
-    if | isLatched $ oldSource^.ty ->
+    if | isLatched $ oldSource ->
          gateByInterval r l e $ \r -> do
            let (r', amount) = resourceFormulaValue r l e
            -- TODO Check limits on the credited node so we don't ask for too much
@@ -440,9 +447,9 @@ runResourceEdge debitFn creditFn maxNeeded _ r (l,e) =
            pure (r''' & activatedEdges <>~ [l]
                       & edgeflow . at l . non S.empty <>~ resources
                 , remainingResources)
-       | isGate $ oldSource^.ty -> mzero -- TODO?
-       | isConverter $ oldSource^.ty -> mzero -- TODO?
-       | isTrader $ oldSource^.ty -> mzero -- TODO?
+       | isGate $ oldSource -> mzero -- TODO?
+       | isConverter $ oldSource -> mzero -- TODO?
+       | isTrader $ oldSource -> mzero -- TODO?
   where oldSource = r ^?! oldUpdate . graph . vertices . ix (e^.from)
         oldTarget = r ^?! oldUpdate . graph . vertices . ix (e^.from)
 
@@ -542,16 +549,9 @@ runNode r (l, n) | not $ isActiveNode r l = r
               Just (r, s) -> (r & activatedNodes <>~ [l], s)
         pushPullAll edges = fst $ pushPullAll' edges creditNode
 
-resolveAnyLabel :: Machination -> AnyLabel -> ResolvedLabel
-resolveAnyLabel m (AnyLabel l) =
-  case (m^?graph.vertices.ix (NodeLabel l), m^?graph.resourceEdges.ix (ResourceEdgeLabel l), m^?graph.stateEdges.ix (StateEdgeLabel l)) of
-    (Just n, _, _) -> RNode (NodeLabel l) n
-    (_, Just r, _) -> RResource (ResourceEdgeLabel l) r
-    (_, _, Just s) -> RState (StateEdgeLabel l) s
-    _ -> error "Unknown node"
-
-postUpdateStateEdge :: Run -> (StateEdgeLabel, StateEdge) -> Run
-postUpdateStateEdge r (sel, se) =
+-- | This must happen after the run!
+postUpdateStateEdgeTriggers :: Run -> (StateEdgeLabel, StateEdge) -> Run
+postUpdateStateEdgeTriggers r (sel, se) =
   case (resolveAnyLabel (r^.newUpdate) $ se^.from, resolveAnyLabel (r^.newUpdate) $ se^.to) of
     (RNode nlfrom nfrom, RNode nlto nto) ->
       case se^.stateFormula of
@@ -570,34 +570,86 @@ postUpdateStateEdge r (sel, se) =
     -- TODO
     _ -> r
   where trigger :: Run -> NodeLabel -> Run
-        trigger r nlabel = r & newUpdate . stateEdgeModifiers . non mkStateEdgeModifiers . triggerNode <>~ [nlabel]
+        trigger r nlabel = r & newUpdate . pendingTriggers <>~ [nlabel]
 
-preUpdateStateEdge :: Machination -> StateEdgeModifiers -> (StateEdgeLabel, StateEdge) -> StateEdgeModifiers
-preUpdateStateEdge m sem (sel, se) =
+evaluateRegisterFormula :: Machination -> StateEdgeModifiers -> NodeLabel -> Node -> Double
+evaluateRegisterFormula m sem rlabel rnode = evalF (rnode^?!ty.registerFormula)
+  where allInbound = inStateEdges m rlabel
+        evalMaybePair (FPair a b) = evalMaybePair a <> evalMaybePair b
+        evalMaybePair e = [e] :: [Formula]
+        evalArgs f = map evalF (evalMaybePair f)
+        unaryOp name fn args = case evalArgs args of
+                                 [a] -> fn a
+                                 _ -> error $ name <> " takes only one argument instead of " <> show args
+        binaryOp name fn args = case evalArgs args of
+                                  [a,b] -> fn a b
+                                  _ -> error $ name <> " takes only two argument instead of " <> show args
+        evalF (FConstant i) = i
+        evalF (FNeg a) = - evalF a
+        evalF (FAdd a b) = evalF a + evalF b
+        evalF (FSub a b) = evalF a - evalF b
+        evalF (FMul a b) = evalF a * evalF b
+        evalF (FDiv a b) = evalF a / evalF b
+        evalF (FApply (FVar "sum") f) = sum $ evalArgs f
+        evalF (FApply (FVar "sub") f) = case evalArgs f of
+                                        (h:t) -> h + (sum $ map (0-) t)
+                                        [] -> 0
+        evalF (FApply (FVar "mul") f) = product $ evalArgs f
+        evalF (FApply (FVar "div") f) = binaryOp "/" (/) f
+        evalF (FApply (FVar "pow") f) = binaryOp "pow" (**) f
+        evalF (FApply (FVar "sin") f) = unaryOp "sin" sin f
+        evalF (FApply (FVar "cos") f) = unaryOp "cos" cos f
+        evalF (FApply (FVar "tan") f) = unaryOp "tan" tan f
+        evalF (FApply (FVar "sqrt") f) = unaryOp "sqrt" sqrt f
+        evalF (FApply (FVar "abs") f) = unaryOp "abs" sqrt f
+        evalF (FApply (FVar "min") f) = binaryOp "min" min f
+        evalF (FApply (FVar "max") f) = binaryOp "max" max f
+        evalF (FApply (FVar "logBase") f) = binaryOp "logBase" logBase f
+        evalF (FApply (FVar "log") f) = unaryOp "log" log f
+        evalF (FApply (FVar "larger") f) = binaryOp "larger" (\a b -> if a > b then 1 else 0) f
+        evalF (FApply (FVar "smaller") f) = binaryOp "smaller" (\a b -> if a > b then 1 else 0) f
+        evalF (FApply (FVar "and") f) = binaryOp "and" (\a b -> if a > 0 && b > 0 then 1 else 0) f
+        evalF (FApply (FVar "or") f) = binaryOp "or" (\a b -> if a > 0 || b > 0 then 1 else 0) f
+        evalF (FApply (FVar "not") f) = unaryOp "not" (\a -> if a > 0 then 0 else 1) f
+        evalF (FApply (FVar "xor") f) = binaryOp "xor" (\a b -> if a > 0 || b > 0 && a /= b then 1 else 0) f
+        evalF (FApply (FVar op) _) = error $ "Register operation " <> show op <> " not implemented, this is easy to do"
+        evalF (FVar v) =
+          case find (\(_,sen) -> case sen^.stateFormula of
+                                    (Just (SFVariable v')) -> v' == v
+                                    _ -> False) allInbound of
+            Nothing -> 0
+            Just (sel,sen) ->
+              case m ^? graph . vertices . ix (toNodeLabel $ sen^.from) . ty of
+                Just Pool{..} -> fromIntegral $ S.size _resources
+                _ -> 0
+
+updateStateEdge :: Machination -> Map NodeLabel Double -> StateEdgeModifiers -> (StateEdgeLabel, StateEdge) -> StateEdgeModifiers
+updateStateEdge m regmap sem (sel, se) =
   case (resolveAnyLabel m $ se^.from, resolveAnyLabel m $ se^.to) of
     (RNode nlfrom nfrom, RNode nlto nto) ->
       case se^.stateFormula of
         Just (SFRange (SFConstant low) (SFConstant high)) ->
           case nfrom of
             Node Pool{..} _ _ ->
-              if S.size _resources >= low && S.size _resources <= high then
-                activateNode sem nlto
-              else
-                inactivateNode sem nlto
+              handleRange (activateNode sem nlto) (inactivateNode sem nlto)
+                          (S.size _resources) low high
+            Node RegisterFn{..} _ _ ->
+              handleRange (activateNode sem nlto) (inactivateNode sem nlto)
+                          (round $ regmap^?!ix nlfrom) low high
+            Node RegisterInteractive{..} _ _ ->
+              handleRange (activateNode sem nlto) (inactivateNode sem nlto)
+                          _currentValue low high
         Just (SFCondition c (SFConstant val)) ->
           case nfrom of
             Node Pool{..} _ _ ->
-              if (case c of
-                    CEqual -> (==)
-                    CNotEqual -> (/=)
-                    CGt -> (>)
-                    CLt -> (<)
-                    CGtEq -> (>=)
-                    CLtEq -> (<=))
-                 (S.size _resources)
-                 val
-              then activateNode sem nlto
-              else inactivateNode sem nlto
+              handleCondition (activateNode sem nlto) (inactivateNode sem nlto)
+                              c (S.size _resources) val
+            Node RegisterFn{..} _ _ ->
+              handleCondition (activateNode sem nlto) (inactivateNode sem nlto)
+                              c (round $ regmap^?!ix nlfrom) val
+            Node RegisterInteractive{..} _ _ ->
+              handleCondition (activateNode sem nlto) (inactivateNode sem nlto)
+                              c _currentValue val
         -- TODO
         _ -> sem
     (RNode nlfrom nfrom, RResource rlto rto) ->
@@ -605,31 +657,32 @@ preUpdateStateEdge m sem (sel, se) =
         Just (SFRange (SFConstant low) (SFConstant high)) ->
           case nfrom of
             Node Pool{..} _ _ ->
-              if S.size _resources >= low && S.size _resources <= high then
-                activateEdge sem rlto
-              else
-                inactivateEdge sem rlto
+              handleRange (activateEdge sem rlto) (inactivateEdge sem rlto)
+                          (S.size _resources) low high
+            Node RegisterFn{..} _ _ ->
+              handleRange (activateEdge sem rlto) (inactivateEdge sem rlto)
+                          (round $ regmap^?!ix nlfrom) low high
+            Node RegisterInteractive{..} _ _ ->
+              handleRange (activateEdge sem rlto) (inactivateEdge sem rlto)
+                          _currentValue low high
         Just (SFCondition c (SFConstant val)) ->
           case nfrom of
             Node Pool{..} _ _ ->
-              if (case c of
-                    CEqual -> (==)
-                    CNotEqual -> (/=)
-                    CGt -> (>)
-                    CLt -> (<)
-                    CGtEq -> (>=)
-                    CLtEq -> (<=))
-                 (S.size _resources)
-                 val
-              then activateEdge sem rlto
-              else inactivateEdge sem rlto
-        Just (SFAdd (SFConstant val)) ->              sfuop sem nfrom rlto val SFAdd id
-        Just (SFAdd (SFInterval (SFConstant val))) -> sfuop sem nfrom rlto val SFAdd SFInterval
+              handleCondition (activateEdge sem rlto) (inactivateEdge sem rlto)
+                              c (S.size _resources) val
+            Node RegisterFn{..} _ _ ->
+              handleCondition (activateEdge sem rlto) (inactivateEdge sem rlto)
+                              c (round $ regmap^?!ix nlfrom) val
+            Node RegisterInteractive{..} _ _ ->
+              handleCondition (activateEdge sem rlto) (inactivateEdge sem rlto)
+                              c _currentValue val
+        Just (SFAdd (SFConstant val)) -> sfuop sem nlfrom nfrom rlto val SFAdd id
+        Just (SFAdd (SFInterval (SFConstant val))) -> sfuop sem nlfrom nfrom rlto val SFAdd SFInterval
         -- Bare constants are added
-        Just (SFConstant val) ->                      sfuop sem nfrom rlto val SFAdd id
-        Just (SFInterval (SFConstant val)) ->         sfuop sem nfrom rlto val SFAdd SFInterval
-        Just (SFSub (SFConstant val)) ->              sfuop sem nfrom rlto val SFSub id
-        Just (SFSub (SFInterval (SFConstant val))) -> sfuop sem nfrom rlto val SFSub SFInterval
+        Just (SFConstant val) ->                      sfuop sem nlfrom nfrom rlto val SFAdd id
+        Just (SFInterval (SFConstant val)) ->         sfuop sem nlfrom nfrom rlto val SFAdd SFInterval
+        Just (SFSub (SFConstant val)) ->              sfuop sem nlfrom nfrom rlto val SFSub id
+        Just (SFSub (SFInterval (SFConstant val))) -> sfuop sem nlfrom nfrom rlto val SFSub SFInterval
         -- TODO
         _ -> sem
     -- TODO
@@ -644,35 +697,67 @@ preUpdateStateEdge m sem (sel, se) =
         inactivateEdge sem rlabel = sem & disableResourceEdge <>~ [rlabel]
         changeFormula :: StateEdgeModifiers -> ResourceEdgeLabel -> StateFormula -> StateEdgeModifiers
         changeFormula sem rlabel sf = sem & modifyResourceFormula . at rlabel . non [] <>~ [sf]
-        sfuop sem nfrom rlto val uop mid =
-          if isPool $ nfrom^.ty then
-            changeFormula sem rlto (uop (mid (SFConstant (val * S.size (nfrom^.ty.resources)))))
-          else sem
-
+        sfuop sem nlfrom nfrom rlto val uop mid =
+          case nfrom of
+            Node {nodeTy = Pool{..}} -> changeFormula sem rlto (uop (mid (SFConstant (val * S.size _resources))))
+            Node {nodeTy = RegisterFn{}} -> changeFormula sem rlto (uop (mid (SFConstant (val * round (regmap^?!ix nlfrom)))))
+            Node {nodeTy = RegisterInteractive{..}} -> changeFormula sem rlto (uop (mid (SFConstant (val * _currentValue))))
+          -- if | isPool nfrom -> 
+          --    | isRegisterFn nfrom -> changeFormula sem rlto (uop (mid (SFConstant (val * (round $ regmap^?!ix nlfrom)))))
+          --    | isRegisterInteractive nfrom -> changeFormula sem rlto (uop (mid (SFConstant (val * _currentValue (nfrom^.ty)))))
+          --    | otherwise -> sem
+        handleRange fgood fbad amount low high
+          | amount >= low && amount <= high = fgood
+          | otherwise = fbad
+        handleCondition fgood fbad c amount value =
+          if (case c of
+                 CEqual -> (==)
+                 CNotEqual -> (/=)
+                 CGt -> (>)
+                 CLt -> (<)
+                 CGtEq -> (>=)
+                 CLtEq -> (<=))
+             amount
+             value
+          then fgood
+          else fbad
 
 run :: Machination -> Set NodeLabel -> Run
 run m clicked =
-  withCheckingResourceBalance (mkRun m') $ \r0 ->
-      let r = go r0
+  withCheckingResourceBalance r0 $ \rstart ->
+      let r = go rstart
                    (nub
-                    $ automaticNodes m'
-                    <> (if m^.time == 0 then startNodes m' else [])
-                    <> map (nodeLookup m') (S.toList clicked)
-                    <> maybe [] (map (nodeLookup m) . S.toList) (m ^? stateEdgeModifiers._Just.triggerNode)
-                   )
-          r' = foldl' postUpdateStateEdge r $ M.toList $ r^.newUpdate. graph. stateEdges
+                    $ automaticNodes m
+                    <> (if m^.time == 0 then startNodes m else [])
+                    <> map (nodeLookup m) (S.toList clicked)
+                    <> map (nodeLookup m) (S.toList $ m ^. pendingTriggers))
+          r' = foldl' postUpdateStateEdgeTriggers
+                      (updateStateAndRegisters r)
+                      $ M.toList $ r^. newUpdate . graph . stateEdges
           r'' = r' & newUpdate . seed .~ fst (random $ r^.stdGen)
       in maybe r'' (\l -> r'' { runEnded = Just l}) $ runEndState r''
   where go :: Run -> [(NodeLabel, Node)] -> Run
         go r active =
-          case find (isEndCondition . nodeTy . snd) active of
+          case find (isEndCondition . snd) active of
             Nothing -> foldl' runNode r active
             Just (l,_) -> r { runEnded = Just l }
-        m' = m & time +~ 1
-               & stateEdgeModifiers ?~ preRunStateEdges m
-        preRunStateEdges m = accumOverStateEdges  mkStateEdgeModifiers (preUpdateStateEdge m) (M.toList $ m^.graph. stateEdges)
-        accumOverStateEdges init f edges = foldl' f init edges
-        runEndState r = find (isEndCondition . nodeTy . snd . nodeLookup (r^.newUpdate)) $ S.toList (preRunStateEdges (r^.newUpdate) ^. enableNode)
+        r0 = updateStateAndRegisters $ mkRun $ m & time +~ 1
+                                                 & pendingTriggers .~ []
+        -- This assumes that the run happened and states & edges were updated post-run
+        runEndState r = find (isEndCondition . snd . nodeLookup (r^.newUpdate))
+                      $ S.toList (r^. stateEdgeModifiers . enableNode)
+        updateStateAndRegisters r = r { runRegisterValues = regmap
+                                      , runStateEdgeModifiers = sem
+                                      }
+          where (sem,regmap) = computeStateAndRegisters (r^.newUpdate)
+        computeStateAndRegisters m =
+          foldl' (\(sem,regmap) v ->
+                     case v of
+                       Left (rlabel,reg) ->
+                         if | isRegisterFn reg -> (sem, M.insert rlabel (evaluateRegisterFormula m sem rlabel reg) regmap)
+                            | isRegisterInteractive reg -> (sem, M.insert rlabel (maybe 0 fromIntegral $ reg^?ty.currentValue) regmap)
+                       Right s -> (updateStateEdge m regmap sem s, regmap))
+          (mkStateEdgeModifiers, M.empty :: Map NodeLabel Double) (topologicalSortStateAndRegisters m)
 
 exSourcePoolDrain :: NodeActivation -> NodeActivation -> PushPullAction -> NodeActivation -> Int -> Int -> Machination
 exSourcePoolDrain sa pa pt da rsp rpd =
@@ -684,7 +769,7 @@ exSourcePoolDrain sa pa pt da rsp rpd =
                 [(ResourceEdgeLabel 100, ResourceEdge (NodeLabel 0) (NodeLabel 1) (RFConstant rsp) (Interval (RFConstant 1) 0) IntervalTransfer Nothing False (Limits Nothing Nothing))
                 ,(ResourceEdgeLabel 101, ResourceEdge (NodeLabel 1) (NodeLabel 2) (RFConstant rpd) (Interval (RFConstant 1) 0) IntervalTransfer Nothing False (Limits Nothing Nothing))]
                 [])
-            [("life", "red")] 0 0 Nothing
+            [("life", "red")] 0 0 S.empty
 
 startHere :: Machination
 startHere = exSourcePoolDrain Automatic Passive (Pushing PushAny) Passive 3 0

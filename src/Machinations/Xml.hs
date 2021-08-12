@@ -350,5 +350,5 @@ readMachinationsXml fname = do
       , machinationResourceTagColor = M.empty
       , machinationTime = 0
       , machinationSeed = 0
-      , machinationStateEdgeModifiers = Nothing
+      , machinationPendingTriggers = S.empty
       }

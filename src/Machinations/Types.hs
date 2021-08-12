@@ -151,7 +151,7 @@ makePrisms ''TransferType
 
 -- https://machinations.io/docs/registers/math-js-functions/
 data Formula = FVar Variable
-             | FConstant Int
+             | FConstant Double
              | FApply Formula Formula
              | FPair Formula Formula
              -- Math
@@ -292,6 +292,58 @@ data Graph = Graph { graphVertices :: Map NodeLabel Node
 deriveJSON (prefixOptions "graph") ''Graph
 makeFields ''Graph
 
+data Machination = Machination { machinationGraph :: Graph
+                               , machinationResourceTagColor :: Map ResourceTag Text
+                               , machinationTime :: Int
+                               , machinationSeed :: Int
+                               , machinationPendingTriggers :: Set NodeLabel
+                               }
+  deriving (Show, Eq, Generic)
+deriveJSON (prefixOptions "Machination") ''Machination
+makeFields ''Machination
+
+data ResolvedLabel = RNode NodeLabel Node
+                   | RResource ResourceEdgeLabel ResourceEdge
+                   | RState StateEdgeLabel StateEdge
+                   deriving (Show, Eq)
+ 
+isPool :: Node -> Bool
+isPool Node {nodeTy = Pool{}} = True
+isPool _ = False
+
+isGate :: Node -> Bool
+isGate Node {nodeTy = Gate{}} = True
+isGate _ = False
+
+isTrader :: Node -> Bool
+isTrader Node {nodeTy = Trader{}} = True
+isTrader _ = False
+
+isConverter :: Node -> Bool
+isConverter Node {nodeTy = Converter{}} = True
+isConverter _ = False
+
+isLatched :: Node -> Bool
+isLatched Node {nodeTy = Source{}} = True
+isLatched Node {nodeTy = Drain{}} = True
+isLatched Node {nodeTy = Pool{}} = True
+isLatched _ = False
+
+isEndCondition :: Node -> Bool
+isEndCondition Node {nodeTy = EndCondition{}} = True
+isEndCondition _ = False
+
+isRegisterFn :: Node -> Bool
+isRegisterFn Node {nodeTy = RegisterFn{}} = True
+isRegisterFn _ = False
+
+isRegisterInteractive :: Node -> Bool
+isRegisterInteractive Node {nodeTy = RegisterInteractive{}} = True
+isRegisterInteractive _ = False
+
+isAnyRegister :: Node -> Bool
+isAnyRegister r = isRegisterInteractive r || isRegisterFn r
+
 data StateEdgeModifiers =
   StateEdgeModifiers { _triggerNode :: Set NodeLabel
                      , _enableNode :: Set NodeLabel
@@ -304,49 +356,10 @@ data StateEdgeModifiers =
 deriveJSON mjsonOptions ''StateEdgeModifiers
 makeFieldsNoPrefix ''StateEdgeModifiers
 
-data Machination = Machination { machinationGraph :: Graph
-                               , machinationResourceTagColor :: Map ResourceTag Text
-                               , machinationTime :: Int
-                               , machinationSeed :: Int
-                               , machinationStateEdgeModifiers :: Maybe StateEdgeModifiers
-                               }
-  deriving (Show, Eq, Generic)
-deriveJSON (prefixOptions "Machination") ''Machination
-makeFields ''Machination
-
-data ResolvedLabel = RNode NodeLabel Node
-                   | RResource ResourceEdgeLabel ResourceEdge
-                   | RState StateEdgeLabel StateEdge
-                   deriving (Show, Eq)
- 
-isPool :: NodeType -> Bool
-isPool Pool{} = True
-isPool _ = False
-
-isGate :: NodeType -> Bool
-isGate Gate{} = True
-isGate _ = False
-
-isTrader :: NodeType -> Bool
-isTrader Trader{} = True
-isTrader _ = False
-
-isConverter :: NodeType -> Bool
-isConverter Converter{} = True
-isConverter _ = False
-
-isLatched :: NodeType -> Bool
-isLatched Source{} = True
-isLatched Drain{} = True
-isLatched Pool{} = True
-isLatched _ = False
-
-isEndCondition :: NodeType -> Bool
-isEndCondition EndCondition{} = True
-isEndCondition _ = False
-
 data Run = Run { runOldUpdate          :: Machination
                , runNewUpdate          :: Machination
+               , runRegisterValues     :: Map NodeLabel Double
+               , runStateEdgeModifiers :: StateEdgeModifiers
                -- TODO Verify these
                , runActivatedEdges     :: Set ResourceEdgeLabel
                , runFailedEdges        :: Set ResourceEdgeLabel
@@ -375,6 +388,8 @@ deriveJSON (prefixOptions "runMachination") ''RunMachination
 makeFields ''RunMachination
 
 data RunResult = RunResult { runResultMachine            :: Machination
+                           , runResultRegisterValues     :: Map NodeLabel Double
+                           , runResultStateEdgeModifiers :: StateEdgeModifiers
                            , runResultActivatedEdges     :: Set ResourceEdgeLabel
                            , runResultFailedEdges        :: Set ResourceEdgeLabel
                            , runResultActivatedNodes     :: Set NodeLabel
@@ -394,11 +409,12 @@ mkStateEdgeModifiers :: StateEdgeModifiers
 mkStateEdgeModifiers = StateEdgeModifiers S.empty S.empty S.empty S.empty S.empty M.empty M.empty
 
 mkRun :: Machination -> Run
-mkRun m = Run m m S.empty S.empty S.empty S.empty S.empty M.empty M.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty Nothing
+mkRun m = Run m m M.empty mkStateEdgeModifiers S.empty S.empty S.empty S.empty S.empty M.empty M.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty Nothing
 
 runToResult :: Run -> RunResult
-runToResult Run{..} = RunResult runNewUpdate runActivatedEdges runFailedEdges runActivatedNodes
-                               runFailedNodes runTriggeredEdges runEdgeflow
+runToResult Run{..} = RunResult runNewUpdate runRegisterValues runStateEdgeModifiers
+                               runActivatedEdges runFailedEdges runActivatedNodes runFailedNodes
+                               runTriggeredEdges runEdgeflow
                                runGeneratedResources runKilledResources
                                (M.mapKeys (\(AnyLabel l) -> l) runErrors) runEnded
 
@@ -410,6 +426,6 @@ summarize r = P.render $
    P.text "New:" P.$$ (sm $ r^.newUpdate)
    P.$$ P.text "Generated" P.<+> P.int (S.size (r^.generatedResources))
    P.$$ P.text "Killed" P.<+> P.int (S.size (r^.killedResources)))
-  where sm m = P.nest 2 $ P.vcat $ map sp $ M.toList $ M.filter (\n -> isPool $ n^.ty) $ m^.graph . vertices
+  where sm m = P.nest 2 $ P.vcat $ map sp $ M.toList $ M.filter (\n -> isPool n) $ m^.graph . vertices
         sp (l,Node p@Pool{} _ _) = P.sizedText 6 (show l) P.<+> P.sizedText 6 "Pool" P.<+> P.sizedText 6 (show $ S.size $ _resources p)
         sp _ = ""

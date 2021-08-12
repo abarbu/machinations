@@ -47,17 +47,28 @@ testOneNodeResourcesRaw node steps file right =
 testOneNodeResources :: Int -> Int -> String -> Map ResourceTag Int -> TestTree
 testOneNodeResources node steps file right = testOneNodeResourcesRaw node steps file (Just right)
 
-testNodeResourcesRaw :: Int -> String -> [(Int, Maybe (Map ResourceTag Int))] -> TestTree
-testNodeResourcesRaw steps file noderights =
-  let r = runN' steps $ readMachination' file
+testNodeResourcesAndRegistersRaw :: Int -> String -> [(Int, Maybe (Map ResourceTag Int))] -> [(Int, Maybe Double)] -> TestTree
+testNodeResourcesAndRegistersRaw steps file noderights registerrights =
+  let r = runN steps (readMachination' file) []
+      m = r^.newUpdate
   in testGroup (show (map fst noderights) <> " x" <> show steps <> " " <> file)
      $ map (\(node,right) ->
                testCase (show node <> " x" <> show steps)
-               $ noderes node r @?= right)
-     noderights
+               $ noderes node m @?= right)
+       noderights
+       <>
+       map (\(register,right) ->
+              testCase (show register <> " x" <> show steps)
+              $ M.lookup (NodeLabel register) (r^.registerValues) @?= right)
+       registerrights
 
 testNodeResources :: Int -> String -> [(Int, Map ResourceTag Int)] -> TestTree
-testNodeResources steps file = testNodeResourcesRaw steps file . map (second Just)
+testNodeResources steps file regs =
+  testNodeResourcesAndRegistersRaw steps file (map (second Just) regs) []
+
+testNodeResourcesAndRegisters :: Int -> String -> [(Int, Map ResourceTag Int)] -> [(Int, Double)] -> TestTree
+testNodeResourcesAndRegisters steps file nodes regs =
+  testNodeResourcesAndRegistersRaw steps file (map (second Just) nodes) (map (second Just) regs)
 
 testEnded :: Int -> String -> Int -> Bool -> Set Int -> TestTree
 testEnded steps file node isEnded triggered =
@@ -311,7 +322,7 @@ object101Tests = testGroup "101-objects"
   ]
   where testRaw node steps file right = testOneNodeResourcesRaw node steps ("ours/101-objects/" </> file) right
         test node steps file right = testOneNodeResources node steps ("ours/101-objects/" </> file) right
-        testRaw' steps file noderights = testNodeResourcesRaw steps ("ours/101-objects/" </> file) noderights
+        testRaw' steps file noderights = testNodeResourcesAndRegistersRaw steps ("ours/101-objects/" </> file) noderights []
         test' steps file = testNodeResources steps ("ours/101-objects/" </> file)
 
 connections101Tests = testGroup "101-connections"
@@ -465,13 +476,29 @@ connections101Tests = testGroup "101-connections"
       , testEnded' 1 "0009.json" 73 True [81]
       , testEnded' 1 "0009.json" 73 False []
       ]
+    , testGroup "registers"
+      [
+        test'' 1 "0000.json" [(7,[("Black",1)]),(9,[("Black",1)]),(11,[("Black",1)])] [(13,3)]
+      , test'' 2 "0000.json" [(7,[("Black",2)]),(9,[("Black",2)]),(11,[("Black",2)])] [(13,6)]
+      , test'' 1 "0002.json" [(23,[("Black",1)]),(28,[("Black",4)]),(36,[])] [(32,1)]
+      , test'' 2 "0002.json" [(23,[("Black",4)]),(28,[("Black",6)]),(36,[("Black",1)])] [(32,2)]
+      , test'' 3 "0002.json" [(23,[("Black",5)]),(28,[("Black",2)]),(36,[("Black",2)])] [(32,1)]
+      , test'' 1 "0003.json" [(40,[("Black",1)]),(45,[("Black",4)]),(53,[])] [(49,0)]
+      , test'' 2 "0003.json" [(40,[("Black",4)]),(45,[("Black",6)]),(53,[])] [(49,1)]
+      , test'' 3 "0003.json" [(40,[("Black",4)]),(45,[("Black",4)]),(53,[("Black",1)])] [(49,1)]
+      , test' 1 "0001.json" [(18,[("Black",2)])]
+      , test' 2 "0001.json" [(18,[("Black",4)])]
+      ]
     ]
   ]
   where testRaw node steps file right = testOneNodeResourcesRaw node steps ("ours/101-connections/" </> file) right
         test node steps file right = testOneNodeResources node steps ("ours/101-connections/" </> file) right
-        testRaw' steps file noderights = testNodeResourcesRaw steps ("ours/101-connections/" </> file) noderights
+        testRaw' steps file noderights = testNodeResourcesAndRegistersRaw steps ("ours/101-connections/" </> file) noderights []
         test' steps file = testNodeResources steps ("ours/101-connections/" </> file)
         testEnded' steps file node isEnded activated = testEnded steps ("ours/101-connections/" </> file) node isEnded activated
+        testRaw'' steps file = testNodeResourcesAndRegistersRaw steps ("ours/101-connections/" </> file)
+        test'' steps file = testNodeResourcesAndRegisters steps ("ours/101-connections/" </> file)
+        
           
 spdTests = testGroup "SourcePoolDrain"
   [ testCase "static" $

@@ -572,8 +572,8 @@ postUpdateStateEdgeTriggers r (sel, se) =
   where trigger :: Run -> NodeLabel -> Run
         trigger r nlabel = r & newUpdate . pendingTriggers <>~ [nlabel]
 
-evaluateRegisterFormula :: Machination -> StateEdgeModifiers -> NodeLabel -> Node -> Double
-evaluateRegisterFormula m sem rlabel rnode = evalF (rnode^?!ty.registerFormula)
+evaluateRegisterFormula :: Machination -> StateEdgeModifiers -> Map NodeLabel Double -> NodeLabel -> Node -> Double
+evaluateRegisterFormula m sem regmap rlabel rnode = evalF (rnode^?!ty.registerFormula)
   where allInbound = inStateEdges m rlabel
         evalMaybePair (FPair a b) = evalMaybePair a <> evalMaybePair b
         evalMaybePair e = [e] :: [Formula]
@@ -606,8 +606,12 @@ evaluateRegisterFormula m sem rlabel rnode = evalF (rnode^?!ty.registerFormula)
         evalF (FApply (FVar "max") f) = binaryOp "max" max f
         evalF (FApply (FVar "logBase") f) = binaryOp "logBase" logBase f
         evalF (FApply (FVar "log") f) = unaryOp "log" log f
+        evalF (FApply (FVar "floor") f) = unaryOp "floor" (fromIntegral . floor) f
+        evalF (FApply (FVar "ceiling") f) = unaryOp "floor" (fromIntegral . ceiling) f
         evalF (FApply (FVar "larger") f) = binaryOp "larger" (\a b -> if a > b then 1 else 0) f
-        evalF (FApply (FVar "smaller") f) = binaryOp "smaller" (\a b -> if a > b then 1 else 0) f
+        evalF (FApply (FVar "largerEq") f) = binaryOp "largerEq" (\a b -> if a >= b then 1 else 0) f
+        evalF (FApply (FVar "smaller") f) = binaryOp "smaller" (\a b -> if a < b then 1 else 0) f
+        evalF (FApply (FVar "smallerEq") f) = binaryOp "smallerEq" (\a b -> if a <= b then 1 else 0) f
         evalF (FApply (FVar "and") f) = binaryOp "and" (\a b -> if a > 0 && b > 0 then 1 else 0) f
         evalF (FApply (FVar "or") f) = binaryOp "or" (\a b -> if a > 0 || b > 0 then 1 else 0) f
         evalF (FApply (FVar "not") f) = unaryOp "not" (\a -> if a > 0 then 0 else 1) f
@@ -621,6 +625,10 @@ evaluateRegisterFormula m sem rlabel rnode = evalF (rnode^?!ty.registerFormula)
             Just (sel,sen) ->
               case m ^? graph . vertices . ix (toNodeLabel $ sen^.from) . ty of
                 Just Pool{..} -> fromIntegral $ S.size _resources
+                Just RegisterInteractive{..} -> fromIntegral _currentValue
+                Just RegisterFn{..} -> case regmap ^? ix rlabel of
+                                       Nothing -> 0
+                                       Just d -> d
                 _ -> 0
 
 updateStateEdge :: Machination -> Map NodeLabel Double -> StateEdgeModifiers -> (StateEdgeLabel, StateEdge) -> StateEdgeModifiers
@@ -651,7 +659,9 @@ updateStateEdge m regmap sem (sel, se) =
               handleCondition (activateNode sem nlto) (inactivateNode sem nlto)
                               c _currentValue val
         -- TODO
-        _ -> sem
+        -- x -> error $ show x
+        Just (SFVariable a) -> snuop sem nlfrom nfrom nlto 1 id id
+        x -> sem
     (RNode nlfrom nfrom, RResource rlto rto) ->
       case se^.stateFormula of
         Just (SFRange (SFConstant low) (SFConstant high)) ->
@@ -684,7 +694,8 @@ updateStateEdge m regmap sem (sel, se) =
         Just (SFSub (SFConstant val)) ->              sfuop sem nlfrom nfrom rlto val SFSub id
         Just (SFSub (SFInterval (SFConstant val))) -> sfuop sem nlfrom nfrom rlto val SFSub SFInterval
         -- TODO
-        _ -> sem
+        x -> error $ show x
+        -- _ -> sem
     -- TODO
     _ -> sem
   where activateNode :: StateEdgeModifiers -> NodeLabel -> StateEdgeModifiers
@@ -697,11 +708,19 @@ updateStateEdge m regmap sem (sel, se) =
         inactivateEdge sem rlabel = sem & disableResourceEdge <>~ [rlabel]
         changeFormula :: StateEdgeModifiers -> ResourceEdgeLabel -> StateFormula -> StateEdgeModifiers
         changeFormula sem rlabel sf = sem & modifyResourceFormula . at rlabel . non [] <>~ [sf]
+        changeNode :: StateEdgeModifiers -> NodeLabel -> StateFormula -> StateEdgeModifiers
+        changeNode sem rlabel sf = sem & modifyNode . at rlabel . non [] <>~ [sf]
         sfuop sem nlfrom nfrom rlto val uop mid =
           case nfrom of
             Node {nodeTy = Pool{..}} -> changeFormula sem rlto (uop (mid (SFConstant (val * S.size _resources))))
             Node {nodeTy = RegisterFn{}} -> changeFormula sem rlto (uop (mid (SFConstant (val * round (regmap^?!ix nlfrom)))))
             Node {nodeTy = RegisterInteractive{..}} -> changeFormula sem rlto (uop (mid (SFConstant (val * _currentValue))))
+        snuop sem nlfrom nfrom rlto val uop mid =
+          case nfrom of
+            Node {nodeTy = Pool{..}} -> changeNode sem rlto (uop (mid (SFConstant (val * S.size _resources))))
+            Node {nodeTy = RegisterFn{}} -> changeNode sem rlto (uop (mid (SFConstant (val * round (regmap^?!ix nlfrom)))))
+            Node {nodeTy = RegisterInteractive{..}} -> changeNode sem rlto (uop (mid (SFConstant (val * _currentValue))))
+        -- Just (SFVariable a) -> sem & modifyNode <> SFAdd (SFConstant val)
           -- if | isPool nfrom -> 
           --    | isRegisterFn nfrom -> changeFormula sem rlto (uop (mid (SFConstant (val * (round $ regmap^?!ix nlfrom)))))
           --    | isRegisterInteractive nfrom -> changeFormula sem rlto (uop (mid (SFConstant (val * _currentValue (nfrom^.ty)))))
@@ -762,7 +781,7 @@ run mraw clicked =
           foldl' (\(sem,regmap) v ->
                      case v of
                        Left (rlabel,reg) ->
-                         if | isRegisterFn reg -> (sem, M.insert rlabel (evaluateRegisterFormula m sem rlabel reg) regmap)
+                         if | isRegisterFn reg -> (sem, M.insert rlabel (evaluateRegisterFormula m sem regmap rlabel reg) regmap)
                             | isRegisterInteractive reg -> (sem, M.insert rlabel (maybe 0 fromIntegral $ reg^?ty.currentValue) regmap)
                        Right s -> (updateStateEdge m regmap sem s, regmap))
           (mkStateEdgeModifiers, M.empty :: Map NodeLabel Double) (topologicalSortStateAndRegisters m)

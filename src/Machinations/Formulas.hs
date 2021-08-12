@@ -138,7 +138,7 @@ fVariable = FVar . T.pack <$> lexeme
   ((:) <$> letterChar <*> many alphaNumChar <?> "variable")
 
 fInteger :: Parser Formula
-fInteger = FConstant <$> lexeme L.decimal
+fInteger = FConstant <$> (try (lexeme L.float) <|> lexeme L.decimal)
 
 fExpr :: Parser Formula
 fExpr = makeExprParser fTerm fOperatorTable
@@ -171,4 +171,4 @@ fOperatorTable =
 parseF "" = pure $ FConstant 0 -- these can happen in registers
 parseF s = parseMaybe (fExpr <* eof) s
 
-debugParser = parseTest (sExpr <* eof) "+2i"
+debugParser = parseTest (fExpr <* eof) "b*pow(1.5,a)"

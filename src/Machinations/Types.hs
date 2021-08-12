@@ -351,7 +351,8 @@ data StateEdgeModifiers =
                      , _enableResourceEdge :: Set ResourceEdgeLabel
                      , _disableResourceEdge :: Set ResourceEdgeLabel
                      , _modifyResourceFormula :: Map ResourceEdgeLabel (Set StateFormula)
-                     , _modifyNode :: Map NodeLabel (Set StateFormula) }
+                     , _modifyNode :: Map NodeLabel (Set StateFormula)
+                     }
   deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''StateEdgeModifiers
 makeFieldsNoPrefix ''StateEdgeModifiers

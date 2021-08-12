@@ -505,6 +505,7 @@ tutorials = testGroup "tutorials"
   , test'' 2 "basic-casual-game-system.json" [(5,[]),(10,[]),(11,[("Black",2)]),(18,[]),(15,[("Black",2)])] [(22,2)]
   , test'' 3 "basic-casual-game-system.json" [(5,[]),(10,[("Black",1)]),(11,[("Black",2)]),(18,[]),(15,[("Black",4)])] [(22,4)]
   , test'' 4 "basic-casual-game-system.json" [(5,[("Black",1)]),(10,[("Black",1)]),(11,[("Black",2)]),(18,[("Black",1)]),(15,[("Black",4)])] [(22,5)]
+  , test'' 1 "basic-game-idle-system.json" [(3,[("Black",5)]),(6,[]),(7,[])] [(16,0),(13,5)]
   ]
   where testRaw node steps file right = testOneNodeResourcesRaw node steps ("xmls/tutorials/" </> file) right
         test node steps file right = testOneNodeResources node steps ("xmls/tutorials/" </> file) right

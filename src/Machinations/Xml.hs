@@ -29,7 +29,6 @@ import System.IO.Unsafe
 import Control.Applicative
 import Text.Read(readMaybe)
 import GHC.Stack(HasCallStack)
-import Debug.Trace
 
 conv = do
   f <- capture_ (xmlToJson [] ["/tmp/a.xml"])
@@ -220,7 +219,7 @@ convertLimits min max = Limits (oneLimit min) (oneLimit max)
         oneLimit "-1" = Nothing
         oneLimit n = Just $ read' "" n
 
--- TODO
+-- todo
 parseFormula = maybe (FConstant 0) (fromJust . parseF)
 
 parseRegister :: HasCallStack => Object -> Parser (NodeLabel, Node)
@@ -270,7 +269,10 @@ parseResource obj = do
          { _from = NodeLabel $ maybe 0 (read' "") s
          , _to = NodeLabel $ maybe 0 (read' "") t
          , _resourceFormula = parseResourceFormula (T.takeWhile (/='|') <$> (formula <|> value))
-         , _interval = Interval (RFConstant $ maybe 1 (read' "") interval) 0
+         , _interval = Interval (parseResourceFormula (case T.dropWhile (/='|') <$> interval of
+                                                          Just "" -> interval
+                                                          x -> x)) 0
+           -- Interval (RFConstant $ maybe 1 (read' "") interval) 0
          , _transfer = case transfer :: Text of
                          "interval-based" -> IntervalTransfer
                          _ -> InstantTransfer
@@ -348,5 +350,5 @@ readMachinationsXml fname = do
       , machinationResourceTagColor = M.empty
       , machinationTime = 0
       , machinationSeed = 0
-      , machinationModifiers = Nothing
+      , machinationPendingTriggers = S.empty
       }

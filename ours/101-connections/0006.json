@@ -1,21 +1,27 @@
 {
     "seed": 0,
     "resourceTagColor": {},
+    "pendingTriggers": [],
     "graph": {
-        "stateEdges": {},
-        "vertices": {
-            "2017": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
+        "stateEdges": {
+            "65": {
+                "stateFormula": {
+                    "contents": [
+                        "CGt",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
                     ],
-                    "activation": "Automatic",
-                    "tag": "Source"
-                }
-            },
-            "2016": {
+                    "tag": "SFCondition"
+                },
+                "to": 64,
+                "active": false,
+                "from": 63
+            }
+        },
+        "vertices": {
+            "63": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -28,11 +34,29 @@
                     },
                     "tag": "Pool"
                 }
+            },
+            "75": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Interactive",
+                    "tag": "Source"
+                }
+            },
+            "64": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "tag": "EndCondition"
+                }
             }
         },
         "resourceEdges": {
-            "13024": {
-                "to": 2016,
+            "76": {
+                "to": 63,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -41,28 +65,10 @@
                     }
                 },
                 "resourceFormula": {
-                    "contents": [
-                        {
-                            "contents": 3,
-                            "tag": "RFConstant"
-                        },
-                        {
-                            "contents": [
-                                {
-                                    "contents": 1,
-                                    "tag": "RFConstant"
-                                },
-                                {
-                                    "contents": 5,
-                                    "tag": "RFConstant"
-                                }
-                            ],
-                            "tag": "RFDice"
-                        }
-                    ],
-                    "tag": "RFMultiply"
+                    "contents": 1,
+                    "tag": "RFConstant"
                 },
-                "from": 2017,
+                "from": 75,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

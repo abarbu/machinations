@@ -42,7 +42,7 @@ newtype StateEdgeLabel = StateEdgeLabel { unStateEdgeLabel :: Int }
   deriving newtype (ToJSON, FromJSON, ToJSONKey, FromJSONKey)
 makePrisms ''StateEdgeLabel
 
-newtype AnyLabel = AnyLabel Int
+newtype AnyLabel = AnyLabel { unAnyLabel :: Int }
   deriving (Show, Eq, Generic, Ord)
 deriveJSON mjsonOptionsSingle ''AnyLabel
 makePrisms ''AnyLabel
@@ -89,7 +89,7 @@ data ResourceFormula = RFAll
                      | RFDice ResourceFormula ResourceFormula
                      | RFConstant Int
                      | RFCondition Condition ResourceFormula
-  deriving (Show, Eq, Generic)
+  deriving (Show, Eq, Generic, Ord)
 deriveJSON mjsonOptions ''ResourceFormula
 makePrisms ''ResourceFormula
 
@@ -151,7 +151,7 @@ makePrisms ''TransferType
 
 -- https://machinations.io/docs/registers/math-js-functions/
 data Formula = FVar Variable
-             | FConstant Int
+             | FConstant Double
              | FApply Formula Formula
              | FPair Formula Formula
              -- Math
@@ -182,13 +182,6 @@ data Range = Range { rangeLower :: Int
   deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''Range
 makeFields ''Range
-
--- data Modifier = Plus Int
---               | PlusProbability Probability
---               | PlusInterval Int
---   deriving (Show, Eq, Generic)
--- deriveJSON mjsonOptions ''Modifier
--- makePrisms ''Modifier
 
 data StateFormula = SFAdd StateFormula
                   | SFSub StateFormula
@@ -299,6 +292,58 @@ data Graph = Graph { graphVertices :: Map NodeLabel Node
 deriveJSON (prefixOptions "graph") ''Graph
 makeFields ''Graph
 
+data Machination = Machination { machinationGraph :: Graph
+                               , machinationResourceTagColor :: Map ResourceTag Text
+                               , machinationTime :: Int
+                               , machinationSeed :: Int
+                               , machinationPendingTriggers :: Set NodeLabel
+                               }
+  deriving (Show, Eq, Generic)
+deriveJSON (prefixOptions "Machination") ''Machination
+makeFields ''Machination
+
+data ResolvedLabel = RNode NodeLabel Node
+                   | RResource ResourceEdgeLabel ResourceEdge
+                   | RState StateEdgeLabel StateEdge
+                   deriving (Show, Eq)
+ 
+isPool :: Node -> Bool
+isPool Node {nodeTy = Pool{}} = True
+isPool _ = False
+
+isGate :: Node -> Bool
+isGate Node {nodeTy = Gate{}} = True
+isGate _ = False
+
+isTrader :: Node -> Bool
+isTrader Node {nodeTy = Trader{}} = True
+isTrader _ = False
+
+isConverter :: Node -> Bool
+isConverter Node {nodeTy = Converter{}} = True
+isConverter _ = False
+
+isLatched :: Node -> Bool
+isLatched Node {nodeTy = Source{}} = True
+isLatched Node {nodeTy = Drain{}} = True
+isLatched Node {nodeTy = Pool{}} = True
+isLatched _ = False
+
+isEndCondition :: Node -> Bool
+isEndCondition Node {nodeTy = EndCondition{}} = True
+isEndCondition _ = False
+
+isRegisterFn :: Node -> Bool
+isRegisterFn Node {nodeTy = RegisterFn{}} = True
+isRegisterFn _ = False
+
+isRegisterInteractive :: Node -> Bool
+isRegisterInteractive Node {nodeTy = RegisterInteractive{}} = True
+isRegisterInteractive _ = False
+
+isAnyRegister :: Node -> Bool
+isAnyRegister r = isRegisterInteractive r || isRegisterFn r
+
 data StateEdgeModifiers =
   StateEdgeModifiers { _triggerNode :: Set NodeLabel
                      , _enableNode :: Set NodeLabel
@@ -306,57 +351,32 @@ data StateEdgeModifiers =
                      , _enableResourceEdge :: Set ResourceEdgeLabel
                      , _disableResourceEdge :: Set ResourceEdgeLabel
                      , _modifyResourceFormula :: Map ResourceEdgeLabel (Set StateFormula)
-                     , _modifyNode :: Map NodeLabel (Set StateFormula) }
+                     , _modifyNode :: Map NodeLabel (Set StateFormula)
+                     }
   deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''StateEdgeModifiers
 makeFieldsNoPrefix ''StateEdgeModifiers
 
-data Machination = Machination { machinationGraph :: Graph
-                               , machinationResourceTagColor :: Map ResourceTag Text
-                               , machinationTime :: Int
-                               , machinationSeed :: Int
-                               , machinationModifiers :: Maybe StateEdgeModifiers
-                               }
-  deriving (Show, Eq, Generic)
-deriveJSON (prefixOptions "Machination") ''Machination
-makeFields ''Machination
- 
-isPool :: NodeType -> Bool
-isPool Pool{} = True
-isPool _ = False
-
-isGate :: NodeType -> Bool
-isGate Gate{} = True
-isGate _ = False
-
-isTrader :: NodeType -> Bool
-isTrader Trader{} = True
-isTrader _ = False
-
-isConverter :: NodeType -> Bool
-isConverter Converter{} = True
-isConverter _ = False
-
-isLatched :: NodeType -> Bool
-isLatched Source{} = True
-isLatched Drain{} = True
-isLatched Pool{} = True
-isLatched _ = False
-
 data Run = Run { runOldUpdate          :: Machination
                , runNewUpdate          :: Machination
+               , runRegisterValues     :: Map NodeLabel Double
                , runStateEdgeModifiers :: StateEdgeModifiers
+               -- TODO Verify these
                , runActivatedEdges     :: Set ResourceEdgeLabel
                , runFailedEdges        :: Set ResourceEdgeLabel
                , runActivatedNodes     :: Set NodeLabel
                , runFailedNodes        :: Set NodeLabel
                , runTriggeredEdges     :: Set StateEdgeLabel
-               , runEdgeFlows          :: Map ResourceEdgeLabel (Set Resource)
+               , runEdgeflow           :: Map ResourceEdgeLabel (Set Resource)
+               , runNodeInflow         :: Map NodeLabel (Set Resource)
+               , runNodeOutflow        :: Map NodeLabel (Set Resource)
+               -- NB Checked against the model
                , runGeneratedResources :: Set Resource
-               -- TODO Retrofit this everywhere
+               -- NB Checked against the model
                , runKilledResources    :: Set Resource
                , runStdGen             :: StdGen
                , runErrors             :: Map AnyLabel Text
+               , runEnded              :: Maybe NodeLabel
                }
   deriving (Show, Eq, Generic)
 makeFields ''Run
@@ -369,30 +389,35 @@ deriveJSON (prefixOptions "runMachination") ''RunMachination
 makeFields ''RunMachination
 
 data RunResult = RunResult { runResultMachine            :: Machination
+                           , runResultRegisterValues     :: Map NodeLabel Double
+                           , runResultStateEdgeModifiers :: StateEdgeModifiers
                            , runResultActivatedEdges     :: Set ResourceEdgeLabel
                            , runResultFailedEdges        :: Set ResourceEdgeLabel
                            , runResultActivatedNodes     :: Set NodeLabel
                            , runResultFailedNodes        :: Set NodeLabel
                            , runResultTriggeredEdges     :: Set StateEdgeLabel
-                           , runResultEdgeFlows          :: Map ResourceEdgeLabel (Set Resource)
+                           , runResultEdgeflow           :: Map ResourceEdgeLabel (Set Resource)
                            , runResultGeneratedResources :: Set Resource
-                           -- TODO Retrofit this everywhere
                            , runResultKilledResources    :: Set Resource
                            , runResultErrors             :: Map Int Text
+                           , runResultEnded              :: Maybe NodeLabel
                            }
   deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "runResult") ''RunResult
 makeFields ''RunResult
 
+mkStateEdgeModifiers :: StateEdgeModifiers
+mkStateEdgeModifiers = StateEdgeModifiers S.empty S.empty S.empty S.empty S.empty M.empty M.empty
+
 mkRun :: Machination -> Run
-mkRun m = Run m m (StateEdgeModifiers S.empty S.empty S.empty S.empty S.empty M.empty M.empty) S.empty S.empty S.empty S.empty S.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty
+mkRun m = Run m m M.empty mkStateEdgeModifiers S.empty S.empty S.empty S.empty S.empty M.empty M.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty Nothing
 
 runToResult :: Run -> RunResult
-runToResult Run{..} = RunResult runNewUpdate runActivatedEdges runFailedEdges runActivatedNodes
-                               runFailedNodes runTriggeredEdges runEdgeFlows
+runToResult Run{..} = RunResult runNewUpdate runRegisterValues runStateEdgeModifiers
+                               runActivatedEdges runFailedEdges runActivatedNodes runFailedNodes
+                               runTriggeredEdges runEdgeflow
                                runGeneratedResources runKilledResources
-                               (M.mapKeys (\(AnyLabel l) -> l) runErrors)
-                              
+                               (M.mapKeys (\(AnyLabel l) -> l) runErrors) runEnded
 
 summarize :: Run -> String
 summarize r = P.render $
@@ -402,6 +427,6 @@ summarize r = P.render $
    P.text "New:" P.$$ (sm $ r^.newUpdate)
    P.$$ P.text "Generated" P.<+> P.int (S.size (r^.generatedResources))
    P.$$ P.text "Killed" P.<+> P.int (S.size (r^.killedResources)))
-  where sm m = P.nest 2 $ P.vcat $ map sp $ M.toList $ M.filter (\n -> isPool $ n^.ty) $ m^.graph . vertices
+  where sm m = P.nest 2 $ P.vcat $ map sp $ M.toList $ M.filter (\n -> isPool n) $ m^.graph . vertices
         sp (l,Node p@Pool{} _ _) = P.sizedText 6 (show l) P.<+> P.sizedText 6 "Pool" P.<+> P.sizedText 6 (show $ S.size $ _resources p)
         sp _ = ""

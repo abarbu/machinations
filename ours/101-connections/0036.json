@@ -1,23 +1,30 @@
 {
     "seed": 0,
     "resourceTagColor": {},
+    "pendingTriggers": [],
     "graph": {
         "stateEdges": {
-            "18004": {
+            "276": {
                 "stateFormula": {
-                    "contents": {
-                        "contents": 5,
-                        "tag": "SFConstant"
-                    },
-                    "tag": "SFAdd"
+                    "contents": [
+                        {
+                            "contents": 3,
+                            "tag": "SFConstant"
+                        },
+                        {
+                            "contents": 5,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFRange"
                 },
-                "to": 22071,
+                "to": 270,
                 "active": false,
-                "from": 22069
+                "from": 272
             }
         },
         "vertices": {
-            "22069": {
+            "272": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -31,7 +38,7 @@
                     "tag": "Pool"
                 }
             },
-            "22071": {
+            "274": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -45,7 +52,7 @@
                     "tag": "Pool"
                 }
             },
-            "22068": {
+            "270": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -56,28 +63,21 @@
                     "tag": "Source"
                 }
             },
-            "22085": {
+            "271": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
-                    "pullAction": "PullAny",
+                    "resourceTypes": [
+                        "Black"
+                    ],
                     "activation": "Automatic",
-                    "tag": "Drain"
-                }
-            },
-            "22073": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "pullAction": "PullAny",
-                    "activation": "Automatic",
-                    "tag": "Drain"
+                    "tag": "Source"
                 }
             }
         },
         "resourceEdges": {
-            "18006": {
-                "to": 22073,
+            "273": {
+                "to": 272,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -89,13 +89,13 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 22071,
+                "from": 271,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"
             },
-            "18005": {
-                "to": 22085,
+            "275": {
+                "to": 274,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -107,25 +107,7 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 22069,
-                "limits": {},
-                "shuffleOrigin": false,
-                "transfer": "IntervalTransfer"
-            },
-            "18003": {
-                "to": 22069,
-                "interval": {
-                    "counter": 0,
-                    "formula": {
-                        "contents": 1,
-                        "tag": "RFConstant"
-                    }
-                },
-                "resourceFormula": {
-                    "contents": 1,
-                    "tag": "RFConstant"
-                },
-                "from": 22068,
+                "from": 270,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

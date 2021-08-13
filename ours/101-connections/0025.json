@@ -1,78 +1,39 @@
 {
     "seed": 0,
     "resourceTagColor": {},
+    "pendingTriggers": [],
     "graph": {
         "stateEdges": {
-            "6065": {
+            "197": {
                 "stateFormula": {
-                    "contents": "b",
-                    "tag": "SFVariable"
-                },
-                "to": 6063,
-                "active": false,
-                "from": 6059
-            },
-            "6064": {
-                "stateFormula": {
-                    "contents": "a",
-                    "tag": "SFVariable"
-                },
-                "to": 6063,
-                "active": false,
-                "from": 6054
-            },
-            "6069": {
-                "stateFormula": {
-                    "contents": [
-                        "CGt",
-                        {
-                            "contents": 0,
+                    "contents": {
+                        "contents": {
+                            "contents": 5,
                             "tag": "SFConstant"
-                        }
-                    ],
-                    "tag": "SFCondition"
+                        },
+                        "tag": "SFPercentage"
+                    },
+                    "tag": "SFAdd"
                 },
-                "to": 6066,
+                "to": 196,
                 "active": false,
-                "from": 6063
+                "from": 191
             }
         },
         "vertices": {
-            "6067": {
-                "nodeColor": "black",
-                "nodeLabel": "Or Register",
-                "nodeTy": {
-                    "activation": "Passive",
-                    "overflow": "OverflowBlock",
-                    "resources": [],
-                    "pushPullAction": {
-                        "contents": "PullAny",
-                        "tag": "Pulling"
-                    },
-                    "tag": "Pool"
-                }
-            },
-            "6061": {
+            "194": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
                     "pullAction": "PullAny",
-                    "activation": "Automatic",
-                    "tag": "Drain"
+                    "distribution": {
+                        "tag": "Random"
+                    },
+                    "activation": "Passive",
+                    "tag": "Gate"
                 }
             },
-            "6066": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
-                }
-            },
-            "6054": {
+            "193": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -86,95 +47,7 @@
                     "tag": "Pool"
                 }
             },
-            "6052": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
-                }
-            },
-            "6063": {
-                "nodeColor": "black",
-                "nodeLabel": "larger(a,2)+larger(b,2)",
-                "nodeTy": {
-                    "registerFormula": {
-                        "contents": [
-                            {
-                                "contents": [
-                                    {
-                                        "contents": "larger",
-                                        "tag": "FVar"
-                                    },
-                                    {
-                                        "contents": [
-                                            {
-                                                "contents": "a",
-                                                "tag": "FVar"
-                                            },
-                                            {
-                                                "contents": 2,
-                                                "tag": "FConstant"
-                                            }
-                                        ],
-                                        "tag": "FPair"
-                                    }
-                                ],
-                                "tag": "FApply"
-                            },
-                            {
-                                "contents": [
-                                    {
-                                        "contents": "larger",
-                                        "tag": "FVar"
-                                    },
-                                    {
-                                        "contents": [
-                                            {
-                                                "contents": "b",
-                                                "tag": "FVar"
-                                            },
-                                            {
-                                                "contents": 2,
-                                                "tag": "FConstant"
-                                            }
-                                        ],
-                                        "tag": "FPair"
-                                    }
-                                ],
-                                "tag": "FApply"
-                            }
-                        ],
-                        "tag": "FAdd"
-                    },
-                    "limits": {},
-                    "tag": "RegisterFn"
-                }
-            },
-            "6058": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
-                }
-            },
-            "6056": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "pullAction": "PullAny",
-                    "activation": "Automatic",
-                    "tag": "Drain"
-                }
-            },
-            "6059": {
+            "191": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -186,83 +59,34 @@
                         "tag": "Pulling"
                     },
                     "tag": "Pool"
+                }
+            },
+            "190": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Automatic",
+                    "tag": "Source"
+                }
+            },
+            "189": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Automatic",
+                    "tag": "Source"
                 }
             }
         },
         "resourceEdges": {
-            "6057": {
-                "to": 6056,
-                "interval": {
-                    "counter": 0,
-                    "formula": {
-                        "contents": 1,
-                        "tag": "RFConstant"
-                    }
-                },
-                "resourceFormula": {
-                    "tag": "RFAll"
-                },
-                "from": 6054,
-                "limits": {},
-                "shuffleOrigin": false,
-                "transfer": "IntervalTransfer"
-            },
-            "6060": {
-                "to": 6059,
-                "interval": {
-                    "counter": 0,
-                    "formula": {
-                        "contents": 1,
-                        "tag": "RFConstant"
-                    }
-                },
-                "resourceFormula": {
-                    "contents": [
-                        {
-                            "contents": 1,
-                            "tag": "RFConstant"
-                        },
-                        {
-                            "contents": 6,
-                            "tag": "RFConstant"
-                        }
-                    ],
-                    "tag": "RFDice"
-                },
-                "from": 6058,
-                "limits": {},
-                "shuffleOrigin": false,
-                "transfer": "IntervalTransfer"
-            },
-            "6055": {
-                "to": 6054,
-                "interval": {
-                    "counter": 0,
-                    "formula": {
-                        "contents": 1,
-                        "tag": "RFConstant"
-                    }
-                },
-                "resourceFormula": {
-                    "contents": [
-                        {
-                            "contents": 1,
-                            "tag": "RFConstant"
-                        },
-                        {
-                            "contents": 6,
-                            "tag": "RFConstant"
-                        }
-                    ],
-                    "tag": "RFDice"
-                },
-                "from": 6052,
-                "limits": {},
-                "shuffleOrigin": false,
-                "transfer": "IntervalTransfer"
-            },
-            "6068": {
-                "to": 6067,
+            "192": {
+                "to": 191,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -274,13 +98,13 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 6066,
+                "from": 190,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"
             },
-            "6062": {
-                "to": 6061,
+            "196": {
+                "to": 193,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -289,9 +113,31 @@
                     }
                 },
                 "resourceFormula": {
-                    "tag": "RFAll"
+                    "contents": {
+                        "contents": 10,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
                 },
-                "from": 6059,
+                "from": 194,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "195": {
+                "to": 194,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 189,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

@@ -1,10 +1,24 @@
 {
     "seed": 0,
     "resourceTagColor": {},
+    "pendingTriggers": [],
     "graph": {
-        "stateEdges": {},
+        "stateEdges": {
+            "21": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 1,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 19,
+                "active": false,
+                "from": 20
+            }
+        },
         "vertices": {
-            "2002": {
+            "18": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -18,7 +32,7 @@
                     "tag": "Pool"
                 }
             },
-            "2001": {
+            "17": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -28,11 +42,22 @@
                     "activation": "Automatic",
                     "tag": "Source"
                 }
+            },
+            "20": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "limits": {},
+                    "initial": 1,
+                    "tag": "RegisterInteractive",
+                    "currentValue": 1,
+                    "step": 20
+                }
             }
         },
         "resourceEdges": {
-            "2003": {
-                "to": 2002,
+            "19": {
+                "to": 18,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -44,7 +69,7 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 2001,
+                "from": 17,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

@@ -1,118 +1,27 @@
 {
     "seed": 0,
     "resourceTagColor": {},
+    "pendingTriggers": [],
     "graph": {
         "stateEdges": {
-            "22022": {
+            "248": {
                 "stateFormula": {
-                    "contents": {
-                        "contents": 1,
-                        "tag": "SFConstant"
-                    },
-                    "tag": "SFSub"
+                    "contents": [
+                        "CGt",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
                 },
-                "to": 22021,
+                "to": 242,
                 "active": false,
-                "from": 22019
+                "from": 244
             }
         },
         "vertices": {
-            "22021": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "activation": "Passive",
-                    "overflow": "OverflowBlock",
-                    "resources": [
-                        {
-                            "uUID": "043ed2bd-8398-4990-86ab-04cb9ff1af68",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "1d1a3efd-9947-4d91-b376-9061f428fb45",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "445e5e3e-358b-4943-8dc4-0c862a1a2e5d",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "4bf4b65b-c448-4be2-8dbd-b2b97f40683e",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "4f17dbd3-f593-4287-99c1-e3906ef12aa1",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "5b8d41c0-49a8-43e1-a2e1-03625b39e1fe",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "744c7ac2-a4c8-48eb-9e03-4423a38faa3c",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "7e62301f-394c-41da-9101-847ef86ae0d8",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "86e750a6-966d-4790-9466-ee28618d0d36",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "88c8a405-27b8-4a5a-a40a-330cdcb21773",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "8a54fb3a-6aa0-4e1e-986b-f3eafe1ceef8",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "9566fee7-9d05-4580-b192-f14cb86fb395",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "9b512c20-e623-4b00-a69f-105d7c55c4db",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "bd768ece-8b5a-4625-b44d-43eb5d487d54",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "bf91675d-f4b3-4efd-bae2-3b95bff0e5ab",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "c6ace76f-1112-4ca3-bf41-cc8a793e1dc7",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "db5e6699-7d2c-4571-a5d9-b4967339dec6",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "e53a068c-1570-48ac-b993-7424f816b805",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "ed95c3a4-17f8-41ea-b903-dc52e1b0ee08",
-                            "tag": "Black"
-                        },
-                        {
-                            "uUID": "f3b85d8f-bbd4-41cb-85cf-b1ff79288fa9",
-                            "tag": "Black"
-                        }
-                    ],
-                    "pushPullAction": {
-                        "contents": "PullAny",
-                        "tag": "Pulling"
-                    },
-                    "tag": "Pool"
-                }
-            },
-            "22018": {
+            "242": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -123,7 +32,7 @@
                     "tag": "Source"
                 }
             },
-            "22019": {
+            "244": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -136,11 +45,54 @@
                     },
                     "tag": "Pool"
                 }
+            },
+            "246": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "243": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Automatic",
+                    "tag": "Source"
+                }
             }
         },
         "resourceEdges": {
-            "22020": {
-                "to": 22019,
+            "245": {
+                "to": 244,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 3,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 243,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "247": {
+                "to": 246,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -152,7 +104,7 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 22018,
+                "from": 242,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

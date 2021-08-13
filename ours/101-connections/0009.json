@@ -1,27 +1,54 @@
 {
     "seed": 0,
     "resourceTagColor": {},
+    "pendingTriggers": [],
     "graph": {
-        "stateEdges": {},
+        "stateEdges": {
+            "74": {
+                "stateFormula": {
+                    "contents": [
+                        "CLt",
+                        {
+                            "contents": 1,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 73,
+                "active": false,
+                "from": 72
+            }
+        },
         "vertices": {
-            "2026": {
+            "73": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
+                    "tag": "EndCondition"
                 }
             },
-            "2025": {
+            "81": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": "Interactive",
+                    "tag": "Drain"
+                }
+            },
+            "72": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
                     "activation": "Passive",
                     "overflow": "OverflowBlock",
-                    "resources": [],
+                    "resources": [
+                        {
+                            "uUID": "cbc39188-ac93-4a64-9b5b-18d4c03fb433",
+                            "tag": "Black"
+                        }
+                    ],
                     "pushPullAction": {
                         "contents": "PullAny",
                         "tag": "Pulling"
@@ -31,8 +58,8 @@
             }
         },
         "resourceEdges": {
-            "2027": {
-                "to": 2025,
+            "82": {
+                "to": 81,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -44,7 +71,7 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 2026,
+                "from": 72,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

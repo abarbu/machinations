@@ -1,12 +1,20 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "6046" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "6048" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "6050" [shape=box3d,peripheries="1",label=<Interactive<BR />>,labelfontcolor=black,color=black];
-  "6049" [label=<0>,peripheries="1",color=black,shape=septagon];
-  "6046" -> "6049" [color=black];
-  "6049" -> "6048" [color=black];
-  "6051" [label=<+1>,peripheries="1",color=black,style=dashed,shape=septagon];
-  "6050" -> "6051" [style=dashed,color=black];
-  "6051" -> "6049" [style=dashed,color=black];
+  "180" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "181" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "182" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "184" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "185" [shape=diamond,peripheries="1",label="",labelfontcolor=black,color=black];
+  "183" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "181" -> "183" [color=black];
+  "183" -> "182" [color=black];
+  "186" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "180" -> "186" [color=black];
+  "186" -> "185" [color=black];
+  "187" [label=<10%>,peripheries="1",color=black,shape=septagon];
+  "185" -> "187" [color=black];
+  "187" -> "184" [color=black];
+  "188" [label=<+1%>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "182" -> "188" [style=dashed,color=black];
+  "188" -> "187" [style=dashed,color=black];
 }

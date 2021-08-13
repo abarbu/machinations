@@ -1,35 +1,27 @@
 {
     "seed": 0,
     "resourceTagColor": {},
+    "pendingTriggers": [],
     "graph": {
         "stateEdges": {
-            "22067": {
+            "255": {
                 "stateFormula": {
-                    "contents": {
-                        "contents": 2,
-                        "tag": "SFConstant"
-                    },
-                    "tag": "SFAdd"
+                    "contents": [
+                        "CLt",
+                        {
+                            "contents": 5,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
                 },
-                "to": 22065,
+                "to": 249,
                 "active": false,
-                "from": 22029
-            },
-            "22030": {
-                "stateFormula": {
-                    "contents": {
-                        "contents": 5,
-                        "tag": "SFConstant"
-                    },
-                    "tag": "SFAdd"
-                },
-                "to": 22029,
-                "active": false,
-                "from": 22027
+                "from": 251
             }
         },
         "vertices": {
-            "22026": {
+            "249": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -40,7 +32,18 @@
                     "tag": "Source"
                 }
             },
-            "22065": {
+            "250": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Automatic",
+                    "tag": "Source"
+                }
+            },
+            "251": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -54,21 +57,7 @@
                     "tag": "Pool"
                 }
             },
-            "22029": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "activation": "Passive",
-                    "overflow": "OverflowBlock",
-                    "resources": [],
-                    "pushPullAction": {
-                        "contents": "PullAny",
-                        "tag": "Pulling"
-                    },
-                    "tag": "Pool"
-                }
-            },
-            "22027": {
+            "253": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -84,8 +73,8 @@
             }
         },
         "resourceEdges": {
-            "22028": {
-                "to": 22027,
+            "252": {
+                "to": 251,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -97,7 +86,25 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 22026,
+                "from": 250,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "254": {
+                "to": 253,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 249,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

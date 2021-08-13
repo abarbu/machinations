@@ -1,45 +1,33 @@
 {
     "seed": 0,
     "resourceTagColor": {},
+    "pendingTriggers": [],
     "graph": {
         "stateEdges": {
-            "5045": {
+            "404": {
                 "stateFormula": {
-                    "tag": "SFTrigger"
+                    "contents": {
+                        "contents": 5,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
                 },
-                "to": 5041,
+                "to": 132,
                 "active": false,
-                "from": 5038
-            },
-            "5046": {
-                "stateFormula": {
-                    "contents": [
-                        "CGt",
-                        {
-                            "contents": 1,
-                            "tag": "SFConstant"
-                        }
-                    ],
-                    "tag": "SFCondition"
-                },
-                "to": 5041,
-                "active": false,
-                "from": 5038
+                "from": 131
             }
         },
         "vertices": {
-            "5037": {
+            "133": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
+                    "pullAction": "PullAny",
                     "activation": "Automatic",
-                    "tag": "Source"
+                    "tag": "Drain"
                 }
             },
-            "5042": {
+            "132": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -53,18 +41,16 @@
                     "tag": "Pool"
                 }
             },
-            "5040": {
+            "144": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
+                    "pullAction": "PullAny",
                     "activation": "Automatic",
-                    "tag": "Source"
+                    "tag": "Drain"
                 }
             },
-            "5038": {
+            "131": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -78,24 +64,21 @@
                     "tag": "Pool"
                 }
             },
-            "5041": {
+            "130": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
-                    "activation": "Passive",
-                    "overflow": "OverflowBlock",
-                    "resources": [],
-                    "pushPullAction": {
-                        "contents": "PushAny",
-                        "tag": "Pushing"
-                    },
-                    "tag": "Pool"
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Automatic",
+                    "tag": "Source"
                 }
             }
         },
         "resourceEdges": {
-            "5043": {
-                "to": 5041,
+            "406": {
+                "to": 133,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -107,13 +90,13 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 5040,
+                "from": 132,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"
             },
-            "5039": {
-                "to": 5038,
+            "403": {
+                "to": 131,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -125,13 +108,13 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 5037,
+                "from": 130,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"
             },
-            "5044": {
-                "to": 5042,
+            "405": {
+                "to": 144,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -140,9 +123,10 @@
                     }
                 },
                 "resourceFormula": {
-                    "tag": "RFAll"
+                    "contents": 1,
+                    "tag": "RFConstant"
                 },
-                "from": 5041,
+                "from": 131,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

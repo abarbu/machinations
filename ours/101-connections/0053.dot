@@ -1,16 +1,8 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "22260" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "22261" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "22262" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "22264" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "22263" [label=<1>,peripheries="1",color=black,shape=septagon];
-  "22261" -> "22263" [color=black];
-  "22263" -> "22262" [color=black];
-  "22265" [label=<1>,peripheries="1",color=black,shape=septagon];
-  "22260" -> "22265" [color=black];
-  "22265" -> "22264" [color=black];
-  "22266" [label=<==2>,peripheries="1",color=black,style=dashed,shape=septagon];
-  "22262" -> "22266" [style=dashed,color=black];
-  "22266" -> "22260" [style=dashed,color=black];
+  "424" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
+  "425" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
+  "455" [label=<3*D5>,peripheries="1",color=black,shape=septagon];
+  "425" -> "455" [color=black];
+  "455" -> "424" [color=black];
 }

@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedLists, OverloadedStrings #-}
+{-# OPTIONS -Wall #-}
 import Test.Tasty
 import Test.Tasty.SmallCheck as SC
 import Test.Tasty.QuickCheck as QC
@@ -7,6 +8,7 @@ import Machinations
 import Machinations.Types
 import Machinations.Misc
 import Machinations.Formulas
+import Machinations.Utils
 import Data.Set(Set)
 import qualified Data.Set as S
 import Data.Map(Map)
@@ -17,20 +19,62 @@ import qualified Data.Text as T
 import Data.Aeson
 import System.IO.Unsafe
 import System.FilePath
-import Debug.Trace
 import Data.Bifunctor
+import Data.List
+import Control.Lens hiding (from,to)
 
 main = defaultMain tests
 
 tests :: TestTree
-tests = testGroup "Tests" [object101Tests,rfTests,sfTests,spdTests]
+tests = testGroup "Tests" [object101Tests,connections101Tests,rfTests,sfTests,spdTests,miscTests,tutorials]
 
 readMachination' :: FilePath -> Machination
 readMachination' = fromJust . unsafePerformIO . decodeFileStrict'
 noderes n g = resourceStatsByTag <$> nodeResources g (NodeLabel n)
-run' g = runNewUpdate $ run g []
+run' g = runNewUpdate $ run g False []
 run2' = run' . run'
 runN' n x = iterate run' x !! n
+runN n m activate | n>0 = loop (n-1) (run m False activate)
+                  | otherwise = error "At least one run is necessary"
+  where loop 0 r = r
+        loop n r = loop (n-1) (run (r^.newUpdate) False activate)
+
+testOneNodeResourcesRaw :: Int -> Int -> String -> Maybe (Map ResourceTag Int) -> TestTree
+testOneNodeResourcesRaw node steps file right =
+  testCase (show node <> " x" <> show steps <> " " <> file)
+  $ noderes node (runN' steps $ readMachination' file) @?= right
+
+testOneNodeResources :: Int -> Int -> String -> Map ResourceTag Int -> TestTree
+testOneNodeResources node steps file right = testOneNodeResourcesRaw node steps file (Just right)
+
+testNodeResourcesAndRegistersRaw :: Int -> String -> [(Int, Maybe (Map ResourceTag Int))] -> [(Int, Maybe Double)] -> TestTree
+testNodeResourcesAndRegistersRaw steps file noderights registerrights =
+  let r = runN steps (readMachination' file) []
+      m = r^.newUpdate
+  in testGroup (show (map fst noderights) <> " x" <> show steps <> " " <> file)
+     $ map (\(node,right) ->
+               testCase (show node <> " x" <> show steps)
+               $ noderes node m @?= right)
+       noderights
+       <>
+       map (\(register,right) ->
+              testCase (show register <> " x" <> show steps)
+              $ M.lookup (NodeLabel register) (r^.registerValues) @?= right)
+       registerrights
+
+testNodeResources :: Int -> String -> [(Int, Map ResourceTag Int)] -> TestTree
+testNodeResources steps file regs =
+  testNodeResourcesAndRegistersRaw steps file (map (second Just) regs) []
+
+testNodeResourcesAndRegisters :: Int -> String -> [(Int, Map ResourceTag Int)] -> [(Int, Double)] -> TestTree
+testNodeResourcesAndRegisters steps file nodes regs =
+  testNodeResourcesAndRegistersRaw steps file (map (second Just) nodes) (map (second Just) regs)
+
+testEnded :: Int -> String -> Int -> Bool -> Set Int -> TestTree
+testEnded steps file node isEnded triggered =
+  let r = runN steps (readMachination' file) (S.map NodeLabel triggered)
+  in testCase ("end " <> show node <> " x" <> show steps <> " " <> file)
+     $ r^.ended @?= if isEnded then Just (NodeLabel node) else Nothing
 
 object101Tests = testGroup "101-objects"
   [
@@ -276,21 +320,201 @@ object101Tests = testGroup "101-objects"
     , test' 4 "0007.json" [(42, [("Black",9)]),(45, [])]
     ]
   ]
-  where read' x = readMachination' ("ours/101-objects/" </> x)
-        testRaw node steps file right =
-          testCase (show node <> " x" <> show steps <> " " <> file)
-          $ noderes node (runN' steps $ read' file) @?= right
-        test node steps file right = testRaw node steps file (Just right)
-        testRaw' steps file noderights =
-          let r = runN' steps $ read' file
-          in testGroup (show (map fst noderights) <> " x" <> show steps <> " " <> file)
-             $ map (\(node,right) ->
-                      testCase (show node <> " x" <> show steps)
-                     $ noderes node r @?= right)
-             noderights
-        test' steps file =
-          testRaw' steps file . map (second Just)
-          
+  where testRaw node steps file right = testOneNodeResourcesRaw node steps ("ours/101-objects/" </> file) right
+        test node steps file right = testOneNodeResources node steps ("ours/101-objects/" </> file) right
+        testRaw' steps file noderights = testNodeResourcesAndRegistersRaw steps ("ours/101-objects/" </> file) noderights []
+        test' steps file = testNodeResources steps ("ours/101-objects/" </> file)
+
+connections101Tests = testGroup "101-connections"
+  [
+    testGroup "state"
+    [
+      testGroup "intervals"
+      [
+        test' 1 "0040.json" [(312, []),(314, [])]
+      , test' 2 "0040.json" [(312, []),(314, [])]
+      , test' 3 "0040.json" [(312, [("Black",1)]),(314, [])]
+      ]
+    , testGroup "modifiers"
+      [
+        test' 1 "0019.json" [(148, []),(150, [("Black",1)])]
+      , test' 2 "0019.json" [(148, [("Black",1)]),(150, [("Black",2)])]
+      , test' 3 "0019.json" [(148, [("Black",1)]),(150, [("Black",4)])]
+      , test' 1 "0020.json" [(154, []),(156, [])]
+      , test' 2 "0020.json" [(154, [("Black",1)]),(156, [])]
+      , test' 3 "0020.json" [(154, [("Black",1)]),(156, [("Black",5)])]
+      , test' 1 "0021.json" [(161, []),(163, [("Black",10)])]
+      , test' 2 "0021.json" [(161, [("Black",1)]),(163, [("Black",20)])]
+      , test' 3 "0021.json" [(161, [("Black",1)]),(163, [("Black",29)])]
+      , test' 1 "0022.json" [(168, []),(170, [("Black",1)])]
+      , test' 2 "0022.json" [(168, [("Black",1)]),(170, [("Black",2)])]
+      , test' 3 "0022.json" [(168, [("Black",1)]),(170, [("Black",2)])]
+      , test' 4 "0022.json" [(168, [("Black",2)]),(170, [("Black",3)])]
+      , test' 1 "0023.json" [(175, []),(177, [])]
+      , test' 2 "0023.json" [(175, [("Black",1)]),(177, [])]
+      , test' 4 "0023.json" [(175, [("Black",2)]),(177, [])]
+      , test' 6 "0023.json" [(175, [("Black",3)]),(177, [])]
+      , test' 7 "0023.json" [(175, [("Black",3)]),(177, [("Black",1)])]
+      , test' 1 "0041.json" [(319, []),(321, [("Black",1)]),(324, [])]
+      , test' 2 "0041.json" [(319, [("Black",1)]),(321, [("Black",2)]),(324, [])]
+      , test' 3 "0041.json" [(319, [("Black",1)]),(321, [("Black",4)]),(324, [("Black",1)])]
+      , test' 4 "0041.json" [(319, [("Black",2)]),(321, [("Black",4)]),(324, [("Black",1)])]
+      , test' 5 "0041.json" [(319, [("Black",2)]),(321, [("Black",7)]),(324, [("Black",1)])]
+      ]
+    , testGroup "conditions"
+      [
+        test' 1 "0027.json" [(209, []),(211, [])]
+      , test' 2 "0027.json" [(209, []),(211, [])]
+      , test' 3 "0027.json" [(209, [("Black",1)]),(211, [])]
+      , test' 4 "0027.json" [(209, [("Black",1)]),(211, [("Black",1)])]
+      , test' 5 "0027.json" [(209, [("Black",1)]),(211, [("Black",2)])]
+      , test' 1 "0028.json" [(216, [("Black",1)]),(218, [("Black",1)])]
+      , test' 2 "0028.json" [(216, [("Black",2)]),(218, [("Black",2)])]
+      , test' 4 "0028.json" [(216, [("Black",4)]),(218, [("Black",4)])]
+      , test' 5 "0028.json" [(216, [("Black",5)]),(218, [("Black",5)])]
+      , test' 6 "0028.json" [(216, [("Black",6)]),(218, [("Black",5)])]
+      , test' 1 "0032.json" [(244, []),(246, [])]
+      , test' 2 "0032.json" [(244, []),(246, [])]
+      , test' 3 "0032.json" [(244, [("Black",1)]),(246, [])]
+      , test' 4 "0032.json" [(244, [("Black",1)]),(246, [("Black",1)])]
+      , test' 5 "0032.json" [(244, [("Black",1)]),(246, [("Black",2)])]
+      , test' 6 "0032.json" [(244, [("Black",2)]),(246, [("Black",3)])]
+      , test' 1 "0033.json" [(251, [("Black",1)]),(253, [("Black",1)])]
+      , test' 2 "0033.json" [(251, [("Black",2)]),(253, [("Black",2)])]
+      , test' 5 "0033.json" [(251, [("Black",5)]),(253, [("Black",5)])]
+      , test' 6 "0033.json" [(251, [("Black",6)]),(253, [("Black",5)])]
+      , test' 1 "0029.json" [(223, [("Black",1)]),(225, [])]
+      , test' 2 "0029.json" [(223, [("Black",2)]),(225, [])]
+      , test' 3 "0029.json" [(223, [("Black",3)]),(225, [("Black",1)])]
+      , test' 4 "0029.json" [(223, [("Black",4)]),(225, [("Black",1)])]
+      , test' 1 "0034.json" [(258, [("Black",1)]),(260, [])]
+      , test' 2 "0034.json" [(258, [("Black",2)]),(260, [])]
+      , test' 3 "0034.json" [(258, [("Black",3)]),(260, [("Black",1)])]
+      , test' 4 "0034.json" [(258, [("Black",4)]),(260, [("Black",1)])]
+      , test' 1 "0030.json" [(230, [("Black",1)]),(232, [])]
+      , test' 3 "0030.json" [(230, [("Black",3)]),(232, [])]
+      , test' 4 "0030.json" [(230, [("Black",4)]),(232, [("Black",1)])]
+      , test' 1 "0035.json" [(265, [("Black",1)]),(267, [])]         
+      , test' 3 "0035.json" [(265, [("Black",3)]),(267, [])]         
+      , test' 4 "0035.json" [(265, [("Black",4)]),(267, [("Black",1)])]         
+      , test' 1 "0031.json" [(237, [("Black",1)]),(239, [])]
+      , test' 3 "0031.json" [(237, [("Black",3)]),(239, [])]
+      , test' 4 "0031.json" [(237, [("Black",4)]),(239, [("Black",1)])]
+      , test' 6 "0031.json" [(237, [("Black",6)]),(239, [("Black",3)])]
+      , test' 7 "0031.json" [(237, [("Black",7)]),(239, [("Black",3)])]
+      , test' 1 "0036.json" [(272, [("Black",1)]),(274, [])]
+      , test' 3 "0036.json" [(272, [("Black",3)]),(274, [])]
+      , test' 4 "0036.json" [(272, [("Black",4)]),(274, [("Black",1)])]
+      , test' 6 "0036.json" [(272, [("Black",6)]),(274, [("Black",3)])]
+      , test' 7 "0036.json" [(272, [("Black",7)]),(274, [("Black",3)])]
+      , test' 1 "0037.json" [(279, [("Black",1)]),(281, [])]
+      , test' 2 "0037.json" [(279, [("Black",2)]),(281, [])]
+      , test' 6 "0037.json" [(279, [("Black",6)]),(281, [])]
+      , test' 7 "0037.json" [(279, [("Black",7)]),(281, [])]
+      , test' 1 "0039.json" [(305, [("Black",1)]),(307, [])]
+      , test' 2 "0039.json" [(305, [("Black",2)]),(307, [])]
+      , test' 6 "0039.json" [(305, [("Black",6)]),(307, [])]
+      , test' 7 "0039.json" [(305, [("Black",7)]),(307, [("Black",1)])]
+      ]
+    , testGroup "triggers"
+      [
+        test' 4 "0040.json" [(312, [("Black",1)]),(314, [("Black",1)])]
+      , test' 5 "0040.json" [(312, [("Black",1)]),(314, [("Black",1)])]
+      , test' 6 "0040.json" [(312, [("Black",2)]),(314, [("Black",1)])]
+      , test' 7 "0040.json" [(312, [("Black",2)]),(314, [("Black",2)])]
+      , test' 1 "0042.json" [(330, []),(332, [])]
+      , test' 2 "0042.json" [(330, []),(332, [])]
+      , test' 3 "0042.json" [(330, [("Black",1)]),(332, [])]
+      , test' 4 "0042.json" [(330, [("Black",1)]),(332, [("Black",5)])]
+      , test' 1 "0043.json" [(337, []),(339, [("Black",1)])]
+      , test' 2 "0043.json" [(337, []),(339, [("Black",2)])]
+      , test' 3 "0043.json" [(337, [("Black",1)]),(339, [("Black",3)])]
+      , test' 4 "0043.json" [(337, [("Black",1)]),(339, [("Black",4)])]
+      , test' 1 "0044.json" [(346, [("Black",9)]),(348, []),(350, [("Black",1)])]
+      , test' 2 "0044.json" [(346, [("Black",8)]),(348, []),(350, [("Black",2)])]
+      , test' 3 "0044.json" [(346, [("Black",8)]),(348, []),(350, [("Black",3)])]
+      , test' 4 "0044.json" [(346, [("Black",7)]),(348, [("Black",3)]),(350, [("Black",1)])]
+      , test' 1 "0045.json" [(358, []),(356, []),(362, []),(366, [])]
+      , test' 2 "0045.json" [(358, []),(356, []),(362, []),(366, [])]
+      , test' 3 "0045.json" [(358, []),(356, [("Black",1)]),(362, []),(366, [])]
+      , test' 4 "0045.json" [(358, [("Black",1)]),(356, [("Black",1)]),(362, [("Black",1)]),(366, [("Black",1)])]
+      , test' 5 "0045.json" [(358, [("Black",1)]),(356, [("Black",1)]),(362, [("Black",1)]),(366, [("Black",1)])]
+      , test' 1 "0047.json" [(386, [("Black",1)]),(390, []),(392, [])]
+      , test' 2 "0047.json" [(386, [("Black",5)]),(390, []),(392, [("Black",1)])]
+      , test' 6 "0047.json" [(386, [("Black",19)]),(390, []),(392, [("Black",5)])]
+      , test' 7 "0047.json" [(386, [("Black",21)]),(390, []),(392, [("Black",6)])]
+      , test' 8 "0047.json" [(386, [("Black",4)]),(390, [("Black",1)]),(392, [("Black",7)])]
+      , test' 9 "0047.json" [(386, [("Black",7)]),(390, [("Black",1)]),(392, [])]
+      , test' 1 "0046.json" [(374, []),(377, []),(378, [])]
+      , test' 3 "0046.json" [(374, [("Black",1)]),(377, []),(378, [])]
+      , test' 4 "0046.json" [(374, [("Black",1)]),(377, []),(378, [])]
+      , test' 6 "0046.json" [(374, [("Black",2)]),(377, []),(378, [])]
+      , test' 7 "0046.json" [(374, [("Black",2)]),(377, [("Black",1)]),(378, [])]
+      , test' 9 "0046.json" [(374, [("Black",3)]),(377, [("Black",3)]),(378, [])]
+      , test' 10 "0046.json" [(374, [("Black",3)]),(377, [("Black",1)]),(378, [("Black",3)])]
+      ]
+    , testGroup "modifiers and triggers"
+      [
+        test' 1 "0062.json" [(461, [("Black",1)])]
+      , test' 2 "0062.json" [(461, [("Black",4)])]
+      , test' 3 "0062.json" [(461, [("Black",13)])]
+      , test' 4 "0062.json" [(461, [("Black",40)])]
+      ]
+    , testGroup "end"
+      [
+        testEnded' 1 "0006.json" 64 False []
+      , testEnded' 2 "0006.json" 64 False []
+      , testEnded' 1 "0006.json" 64 True [75]
+      , testEnded' 1 "0006.json" 64 True [75]
+      , testEnded' 2 "0006.json" 64 True [75]
+      , testEnded' 3 "0006.json" 64 True [75]
+      , testEnded' 1 "0007.json" 67 False [77]
+      , testEnded' 2 "0007.json" 67 True [77]
+      , testEnded' 1 "0008.json" 70 False [79]
+      , testEnded' 2 "0008.json" 70 True [79]
+      , testEnded' 3 "0008.json" 70 True [79]
+      , testEnded' 1 "0009.json" 73 True [81]
+      , testEnded' 1 "0009.json" 73 False []
+      ]
+    , testGroup "registers"
+      [
+        test'' 1 "0000.json" [(7,[("Black",1)]),(9,[("Black",1)]),(11,[("Black",1)])] [(13,3)]
+      , test'' 2 "0000.json" [(7,[("Black",2)]),(9,[("Black",2)]),(11,[("Black",2)])] [(13,6)]
+      , test'' 1 "0002.json" [(23,[("Black",1)]),(28,[("Black",4)]),(36,[])] [(32,1)]
+      , test'' 2 "0002.json" [(23,[("Black",4)]),(28,[("Black",6)]),(36,[("Black",1)])] [(32,2)]
+      , test'' 3 "0002.json" [(23,[("Black",5)]),(28,[("Black",2)]),(36,[("Black",2)])] [(32,1)]
+      , test'' 1 "0003.json" [(40,[("Black",1)]),(45,[("Black",4)]),(53,[])] [(49,0)]
+      , test'' 2 "0003.json" [(40,[("Black",4)]),(45,[("Black",6)]),(53,[])] [(49,1)]
+      , test'' 3 "0003.json" [(40,[("Black",4)]),(45,[("Black",4)]),(53,[("Black",1)])] [(49,1)]
+      , test' 1 "0001.json" [(18,[("Black",2)])]
+      , test' 2 "0001.json" [(18,[("Black",4)])]
+      ]
+    ]
+  ]
+  where testRaw node steps file right = testOneNodeResourcesRaw node steps ("ours/101-connections/" </> file) right
+        test node steps file right = testOneNodeResources node steps ("ours/101-connections/" </> file) right
+        testRaw' steps file noderights = testNodeResourcesAndRegistersRaw steps ("ours/101-connections/" </> file) noderights []
+        test' steps file = testNodeResources steps ("ours/101-connections/" </> file)
+        testEnded' steps file node isEnded activated = testEnded steps ("ours/101-connections/" </> file) node isEnded activated
+        testRaw'' steps file = testNodeResourcesAndRegistersRaw steps ("ours/101-connections/" </> file)
+        test'' steps file = testNodeResourcesAndRegisters steps ("ours/101-connections/" </> file)
+        
+tutorials = testGroup "tutorials"
+  [
+    test'' 1 "basic-casual-game-system.json" [(5,[]),(10,[]),(11,[("Black",1)]),(18,[]),(15,[])] [(22,0)]
+  , test'' 2 "basic-casual-game-system.json" [(5,[]),(10,[]),(11,[("Black",2)]),(18,[]),(15,[("Black",2)])] [(22,2)]
+  , test'' 3 "basic-casual-game-system.json" [(5,[]),(10,[("Black",1)]),(11,[("Black",2)]),(18,[]),(15,[("Black",4)])] [(22,4)]
+  , test'' 4 "basic-casual-game-system.json" [(5,[("Black",1)]),(10,[("Black",1)]),(11,[("Black",2)]),(18,[("Black",1)]),(15,[("Black",4)])] [(22,5)]
+  , test'' 1 "basic-game-idle-system.json" [(3,[("Black",5)]),(6,[]),(7,[])] [(16,0),(13,5)]
+  ]
+  where testRaw node steps file right = testOneNodeResourcesRaw node steps ("xmls/tutorials/" </> file) right
+        test node steps file right = testOneNodeResources node steps ("xmls/tutorials/" </> file) right
+        testRaw' steps file noderights = testNodeResourcesAndRegistersRaw steps ("xmls/tutorials/" </> file) noderights []
+        test' steps file = testNodeResources steps ("xmls/tutorials/" </> file)
+        testEnded' steps file node isEnded activated = testEnded steps ("xmls/tutorials/" </> file) node isEnded activated
+        testRaw'' steps file = testNodeResourcesAndRegistersRaw steps ("xmls/tutorials/" </> file)
+        test'' steps file = testNodeResourcesAndRegisters steps ("xmls/tutorials/" </> file)
+
 spdTests = testGroup "SourcePoolDrain"
   [ testCase "static" $
     noderes 1       (exSourcePoolDrain Passive   Passive   (Pushing PushAny) Passive   3 7) @?= Just [("life",1)]
@@ -304,6 +528,16 @@ spdTests = testGroup "SourcePoolDrain"
     noderes 1 (run' (exSourcePoolDrain Passive   Automatic (Pushing PushAny) Passive   3 7)) @?= Just []
   ,testCase "pool run" $
     noderes 1 (run' (exSourcePoolDrain Passive   Automatic (Pulling PullAny) Passive   3 7)) @?= Just [("life",4)]
+  ]
+
+miscTests = testGroup "discord-delay-bug" [
+    testNodeResources 1 "xmls/strange-loop-bug-delay.json" [(115,[]),(120,[])]
+  , testNodeResources 2 "xmls/strange-loop-bug-delay.json" [(115,[("Black",1)]),(120,[])]
+  , testNodeResources 3 "xmls/strange-loop-bug-delay.json" [(115,[]),(120,[("Black",1)])]
+  , testNodeResources 1 "xmls/strange-loop-bug-delay-2.json" [(115,[]),(120,[])]
+  , testNodeResources 2 "xmls/strange-loop-bug-delay-2.json" [(115,[]),(120,[])]
+  , testNodeResources 3 "xmls/strange-loop-bug-delay-2.json" [(115,[("Black",1)]),(120,[])]
+  , testNodeResources 4 "xmls/strange-loop-bug-delay-2.json" [(115,[]),(120,[("Black",1)])]
   ]
 
 testRF s = isJust (parseRF s) @? T.unpack s

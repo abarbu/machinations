@@ -58,12 +58,12 @@ rOperatorTable =
   , [ binary "*" RFMultiply
     , binary "/" RFDivide
     ]
-  , [ prefix ">"  (RFCondition CGt)
-    , prefix "<"  (RFCondition CLt)
-    , prefix "==" (RFCondition CEqual)
+  , [ prefix "==" (RFCondition CEqual)
     , prefix "!=" (RFCondition CNotEqual)
     , prefix ">=" (RFCondition CGtEq)
     , prefix "<=" (RFCondition CLtEq)
+    , prefix ">"  (RFCondition CGt)
+    , prefix "<"  (RFCondition CLt)
     ]
   , [ binary "+" RFAdd
     , binary "-" RFSubtract
@@ -75,6 +75,7 @@ rOperatorTable =
         prefix  name f = Prefix  (f <$ symbol name)
         postfix name f = Postfix (f <$ symbol name)
 
+parseRF "" = pure $ RFConstant 0 -- Machinations allows empty edges :(
 parseRF "all" = Just RFAll
 parseRF s = parseMaybe (rExpr <* eof) s
 
@@ -110,12 +111,12 @@ sOperatorTable =
     , prefix "/" SFAdd
     , prefix "=" SFOverwrite
     ]
-  , [ prefix ">"  (SFCondition CGt)
-    , prefix "<"  (SFCondition CLt)
+  , [ prefix ">=" (SFCondition CGtEq)
+    , prefix "<=" (SFCondition CLtEq)
     , prefix "==" (SFCondition CEqual)
     , prefix "!=" (SFCondition CNotEqual)
-    , prefix ">=" (SFCondition CGtEq)
-    , prefix "<=" (SFCondition CLtEq)
+    , prefix ">"  (SFCondition CGt)
+    , prefix "<"  (SFCondition CLt)
     ]
   , [ binary ".." SFRange
     ]
@@ -137,7 +138,7 @@ fVariable = FVar . T.pack <$> lexeme
   ((:) <$> letterChar <*> many alphaNumChar <?> "variable")
 
 fInteger :: Parser Formula
-fInteger = FConstant <$> lexeme L.decimal
+fInteger = FConstant <$> (try (lexeme L.float) <|> lexeme L.decimal)
 
 fExpr :: Parser Formula
 fExpr = makeExprParser fTerm fOperatorTable
@@ -167,6 +168,7 @@ fOperatorTable =
         prefix  name f = Prefix  (f <$ symbol name)
         postfix name f = Postfix (f <$ symbol name)
 
+parseF "" = pure $ FConstant 0 -- these can happen in registers
 parseF s = parseMaybe (fExpr <* eof) s
 
-debugParser = parseTest (fExpr <* eof) "3+woof(woof+2,2)"
+debugParser = parseTest (fExpr <* eof) "b*pow(1.5,a)"

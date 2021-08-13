@@ -1,30 +1,15 @@
 {
     "seed": 0,
     "resourceTagColor": {},
+    "pendingTriggers": [],
     "graph": {
-        "stateEdges": {
-            "22259": {
-                "stateFormula": {
-                    "contents": [
-                        "CLt",
-                        {
-                            "contents": 5,
-                            "tag": "SFConstant"
-                        }
-                    ],
-                    "tag": "SFCondition"
-                },
-                "to": 22253,
-                "active": false,
-                "from": 22255
-            }
-        },
+        "stateEdges": {},
         "vertices": {
-            "22257": {
+            "422": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
-                    "activation": "Passive",
+                    "activation": "Automatic",
                     "overflow": "OverflowBlock",
                     "resources": [],
                     "pushPullAction": {
@@ -34,35 +19,74 @@
                     "tag": "Pool"
                 }
             },
-            "22253": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
-                }
-            },
-            "22254": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Automatic",
-                    "tag": "Source"
-                }
-            },
-            "22255": {
+            "421": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
                     "activation": "Passive",
                     "overflow": "OverflowBlock",
-                    "resources": [],
+                    "resources": [
+                        {
+                            "uUID": "051ab345-b581-4228-aade-a1f91836a963",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "0eebeb4f-dab4-468a-b8c8-e0dccfa0e981",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "12b3fb6a-b04c-4843-b102-e3229960dd96",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "2204789c-382c-4be6-8b7e-5bab1aa5e702",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "349886e3-2ba5-4bcb-8001-e9a1b597b83e",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "4331a3a4-c241-4c11-85bf-08afd048495c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "5f68eea4-c88b-4c40-8067-f45a6a52643a",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "69305183-575b-43a4-938c-929f98bcf3e8",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "6ad314ab-a0ce-4a62-b02f-22a66589b40c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "785f39d8-9e6f-47f5-9a76-c535f3b56e3e",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "8bf41da3-6de6-4112-8da1-43c649124b80",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "a40592ea-d6e4-45ca-9fd3-70e50222db1e",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "afd5bb7e-eaaf-44b4-946c-f750be164bde",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "cc35b33f-58da-4a1a-bfaa-0e78cedc1e0e",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "f152885c-f47a-45ec-b16b-423549bb6e45",
+                            "tag": "Black"
+                        }
+                    ],
                     "pushPullAction": {
                         "contents": "PullAny",
                         "tag": "Pulling"
@@ -72,8 +96,8 @@
             }
         },
         "resourceEdges": {
-            "22256": {
-                "to": 22255,
+            "423": {
+                "to": 422,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -82,28 +106,9 @@
                     }
                 },
                 "resourceFormula": {
-                    "contents": 1,
-                    "tag": "RFConstant"
+                    "tag": "RFAll"
                 },
-                "from": 22254,
-                "limits": {},
-                "shuffleOrigin": false,
-                "transfer": "IntervalTransfer"
-            },
-            "22258": {
-                "to": 22257,
-                "interval": {
-                    "counter": 0,
-                    "formula": {
-                        "contents": 1,
-                        "tag": "RFConstant"
-                    }
-                },
-                "resourceFormula": {
-                    "contents": 1,
-                    "tag": "RFConstant"
-                },
-                "from": 22253,
+                "from": 421,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

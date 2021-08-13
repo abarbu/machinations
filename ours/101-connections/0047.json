@@ -1,26 +1,28 @@
 {
     "seed": 0,
     "resourceTagColor": {},
+    "pendingTriggers": [],
     "graph": {
         "stateEdges": {
-            "22217": {
+            "396": {
                 "stateFormula": {
-                    "contents": [
-                        "CLt",
-                        {
-                            "contents": 5,
-                            "tag": "SFConstant"
-                        }
-                    ],
-                    "tag": "SFCondition"
+                    "tag": "SFReverseTrigger"
                 },
-                "to": 22216,
+                "to": 395,
                 "active": false,
-                "from": 22213
+                "from": 388
+            },
+            "398": {
+                "stateFormula": {
+                    "tag": "SFTrigger"
+                },
+                "to": 393,
+                "active": false,
+                "from": 388
             }
         },
         "vertices": {
-            "22212": {
+            "385": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -31,7 +33,20 @@
                     "tag": "Source"
                 }
             },
-            "22215": {
+            "388": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAll",
+                    "activation": "Automatic",
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "386": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -45,7 +60,7 @@
                     "tag": "Pool"
                 }
             },
-            "22213": {
+            "390": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -59,21 +74,44 @@
                     "tag": "Pool"
                 }
             },
-            "22211": {
+            "395": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
                     "resourceTypes": [
                         "Black"
                     ],
-                    "activation": "Automatic",
+                    "activation": "Passive",
                     "tag": "Source"
+                }
+            },
+            "393": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": "Passive",
+                    "tag": "Drain"
+                }
+            },
+            "392": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
                 }
             }
         },
         "resourceEdges": {
-            "22214": {
-                "to": 22213,
+            "391": {
+                "to": 390,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -85,13 +123,75 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 22212,
+                "from": 388,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"
             },
-            "22216": {
-                "to": 22215,
+            "389": {
+                "to": 388,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 20,
+                    "tag": "RFConstant"
+                },
+                "from": 386,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "387": {
+                "to": 386,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": [
+                        {
+                            "contents": 1,
+                            "tag": "RFConstant"
+                        },
+                        {
+                            "contents": 5,
+                            "tag": "RFConstant"
+                        }
+                    ],
+                    "tag": "RFDice"
+                },
+                "from": 385,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "394": {
+                "to": 393,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "tag": "RFAll"
+                },
+                "from": 392,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "397": {
+                "to": 392,
                 "interval": {
                     "counter": 0,
                     "formula": {
@@ -103,7 +203,7 @@
                     "contents": 1,
                     "tag": "RFConstant"
                 },
-                "from": 22211,
+                "from": 395,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

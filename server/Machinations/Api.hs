@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings, DeriveGeneric, DeriveAnyClass, DerivingStrategies, GeneralizedNewtypeDeriving, QuasiQuotes, TemplateHaskell, TypeFamilies, GADTs, StandaloneDeriving, UndecidableInstances, MultiParamTypeClasses, FlexibleInstances, DisambiguateRecordFields, DuplicateRecordFields, TypeApplications, FlexibleContexts, DataKinds, TypeOperators #-}
+{-# LANGUAGE OverloadedStrings, TemplateHaskell, DeriveGeneric, DeriveAnyClass, DerivingStrategies, GeneralizedNewtypeDeriving, QuasiQuotes, TemplateHaskell, TypeFamilies, GADTs, StandaloneDeriving, UndecidableInstances, MultiParamTypeClasses, FlexibleInstances, DisambiguateRecordFields, DuplicateRecordFields, TypeApplications, FlexibleContexts, DataKinds, TypeOperators #-}
 
 module Machinations.Api where
 import Data.Text (Text)
@@ -12,39 +12,80 @@ import Servant.OpenApi
 import Servant.Swagger.UI
 import Servant.Swagger.UI.Core
 import Control.Lens
+import Machinations.Misc
+import Data.Aeson
+import Data.Aeson.TH
 
-instance ToSchema StateEdgeModifiers
-instance ToSchema StateFormula
-instance ToSchema Limits
-instance ToSchema Formula
-instance ToSchema Waiting
-instance ToSchema AnyLabel
-instance ToSchema TransferType
-instance ToSchema DistributionType
-instance ToSchema PushAction
-instance ToSchema Interval
-instance ToSchema Overflow
-instance ToSchema ResourceFormula
-instance ToSchema PushPullAction
-instance ToSchema StateEdge
-instance ToSchema PullAction
-instance ToSchema ResourceEdge
-instance ToSchema NodeActivation
-instance ToSchema NodeType
-instance ToSchema Resource
-instance ToSchema Node
-instance ToSchema Graph
+instance ToSchema StateFormula where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+instance ToSchema Limits where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions (prefixOptions "limits"))
+instance ToSchema Formula where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+instance ToSchema Waiting where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions (prefixOptions "_waiting"))
+instance ToSchema AnyLabel where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptionsSingle)
+instance ToSchema TransferType where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+instance ToSchema DistributionType where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions (prefixOptions "deterministic"))
+instance ToSchema PushAction where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+instance ToSchema Interval where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+instance ToSchema Overflow where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+instance ToSchema ResourceFormula where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+instance ToSchema PushPullAction where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+instance ToSchema StateEdge where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+instance ToSchema PullAction where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+instance ToSchema ResourceEdge where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+instance ToSchema NodeActivation where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+instance ToSchema NodeType where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+instance ToSchema Resource where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions (prefixOptions "resource"))
+instance ToSchema Node where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+instance ToSchema Graph where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions (prefixOptions "graph"))
+instance ToSchema StateEdgeModifiers where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
 deriving newtype instance ToSchema NodeLabel
 deriving newtype instance ToSchema ResourceEdgeLabel
 deriving newtype instance ToSchema StateEdgeLabel
-instance ToSchema Condition
-instance ToSchema Machination
-instance ToSchema RunMachination
-instance ToSchema RunResult
+instance ToSchema Condition where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+instance ToSchema Machination where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions (prefixOptions "Machination"))
+instance ToSchema RunMachination where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions (prefixOptions "runMachination"))
+instance ToSchema RunResult where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions (prefixOptions "runResult"))
+
+data XMLFile = XMLFile { xmlContents :: Text }
+  deriving (Generic)
+deriveJSON mjsonOptions ''XMLFile
+instance ToSchema XMLFile where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+
+data XMLConversionResult = XMLConversionResult { machine :: Maybe Machination }
+  deriving (Generic)
+deriveJSON mjsonOptions ''XMLConversionResult
+instance ToSchema XMLConversionResult where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
 
 type RawAPI = "api" :> (("test"  :> Get '[JSON] Text)
                          :<|> ("render" :> ReqBody '[JSON] Machination :> Post '[JSON] Text )
-                         :<|> ("run" :> ReqBody '[JSON] RunMachination :> Post '[JSON] RunResult ))
+                         :<|> ("run" :> ReqBody '[JSON] RunMachination :> Post '[JSON] RunResult )
+                         :<|> ("convertxml" :> ReqBody '[JSON] XMLFile :> Post '[JSON] XMLConversionResult ))
 
 type API = SwaggerSchemaUI "swagger-ui" "swagger.json"
            :<|> RawAPI

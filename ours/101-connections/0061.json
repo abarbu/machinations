@@ -1,19 +1,11 @@
 {
     "seed": 0,
     "resourceTagColor": {},
+    "pendingTriggers": [],
     "graph": {
-        "stateEdges": {
-            "64031": {
-                "stateFormula": {
-                    "tag": "SFTrigger"
-                },
-                "to": 64025,
-                "active": false,
-                "from": 64027
-            }
-        },
+        "stateEdges": {},
         "vertices": {
-            "64029": {
+            "450": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -27,21 +19,7 @@
                     "tag": "Pool"
                 }
             },
-            "64027": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "activation": "Passive",
-                    "overflow": "OverflowBlock",
-                    "resources": [],
-                    "pushPullAction": {
-                        "contents": "PullAny",
-                        "tag": "Pulling"
-                    },
-                    "tag": "Pool"
-                }
-            },
-            "64026": {
+            "451": {
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
@@ -51,52 +29,62 @@
                     "activation": "Automatic",
                     "tag": "Source"
                 }
-            },
-            "64025": {
-                "nodeColor": "black",
-                "nodeLabel": "",
-                "nodeTy": {
-                    "resourceTypes": [
-                        "Black"
-                    ],
-                    "activation": "Passive",
-                    "tag": "Source"
-                }
             }
         },
         "resourceEdges": {
-            "64030": {
-                "to": 64029,
+            "452": {
+                "to": 450,
                 "interval": {
                     "counter": 0,
                     "formula": {
-                        "contents": 1,
-                        "tag": "RFConstant"
+                        "contents": [
+                            {
+                                "contents": 1,
+                                "tag": "RFConstant"
+                            },
+                            {
+                                "contents": 6,
+                                "tag": "RFConstant"
+                            }
+                        ],
+                        "tag": "RFDice"
                     }
                 },
                 "resourceFormula": {
-                    "contents": 5,
-                    "tag": "RFConstant"
+                    "contents": [
+                        {
+                            "contents": 1,
+                            "tag": "RFConstant"
+                        },
+                        {
+                            "contents": [
+                                {
+                                    "contents": [
+                                        {
+                                            "contents": 1,
+                                            "tag": "RFConstant"
+                                        },
+                                        {
+                                            "contents": 5,
+                                            "tag": "RFConstant"
+                                        }
+                                    ],
+                                    "tag": "RFDice"
+                                },
+                                {
+                                    "contents": {
+                                        "contents": 10,
+                                        "tag": "RFConstant"
+                                    },
+                                    "tag": "RFPercentage"
+                                }
+                            ],
+                            "tag": "RFMultiply"
+                        }
+                    ],
+                    "tag": "RFAdd"
                 },
-                "from": 64025,
-                "limits": {},
-                "shuffleOrigin": false,
-                "transfer": "IntervalTransfer"
-            },
-            "64028": {
-                "to": 64027,
-                "interval": {
-                    "counter": 0,
-                    "formula": {
-                        "contents": 1,
-                        "tag": "RFConstant"
-                    }
-                },
-                "resourceFormula": {
-                    "contents": 1,
-                    "tag": "RFConstant"
-                },
-                "from": 64026,
+                "from": 451,
                 "limits": {},
                 "shuffleOrigin": false,
                 "transfer": "IntervalTransfer"

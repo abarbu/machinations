@@ -1,0 +1,346 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "pendingTriggers": [],
+    "graph": {
+        "stateEdges": {
+            "37": {
+                "to": 0,
+                "active": false,
+                "from": 21
+            },
+            "15": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 1,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 5,
+                "active": false,
+                "from": 7
+            },
+            "18": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 1,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 7,
+                "active": false,
+                "from": 16
+            },
+            "30": {
+                "stateFormula": {
+                    "contents": "b",
+                    "tag": "SFVariable"
+                },
+                "to": 13,
+                "active": false,
+                "from": 28
+            },
+            "31": {
+                "stateFormula": {
+                    "contents": "a",
+                    "tag": "SFVariable"
+                },
+                "to": 13,
+                "active": false,
+                "from": 6
+            },
+            "34": {
+                "to": 0,
+                "active": false,
+                "from": 23
+            },
+            "40": {
+                "to": 0,
+                "active": false,
+                "from": 27
+            },
+            "32": {
+                "to": 0,
+                "active": false,
+                "from": 19
+            },
+            "10": {
+                "stateFormula": {
+                    "tag": "SFTrigger"
+                },
+                "to": 9,
+                "active": false,
+                "from": 8
+            },
+            "35": {
+                "to": 0,
+                "active": false,
+                "from": 24
+            },
+            "17": {
+                "stateFormula": {
+                    "contents": "a",
+                    "tag": "SFVariable"
+                },
+                "to": 16,
+                "active": false,
+                "from": 6
+            },
+            "38": {
+                "to": 0,
+                "active": false,
+                "from": 22
+            },
+            "33": {
+                "to": 0,
+                "active": false,
+                "from": 20
+            },
+            "36": {
+                "to": 0,
+                "active": false,
+                "from": 25
+            },
+            "14": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 1,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 12,
+                "active": false,
+                "from": 13
+            },
+            "39": {
+                "to": 0,
+                "active": false,
+                "from": 26
+            }
+        },
+        "vertices": {
+            "4": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Automatic",
+                    "tag": "Source"
+                }
+            },
+            "9": {
+                "nodeColor": "black",
+                "nodeLabel": "Create Building",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": "Passive",
+                    "tag": "Source"
+                }
+            },
+            "3": {
+                "nodeColor": "black",
+                "nodeLabel": "Coins",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "8": {
+                "nodeColor": "black",
+                "nodeLabel": "Buy Building",
+                "nodeTy": {
+                    "pullAction": "PullAll",
+                    "activation": "Automatic",
+                    "tag": "Drain"
+                }
+            },
+            "28": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "limits": {},
+                    "initial": 5,
+                    "tag": "RegisterInteractive",
+                    "currentValue": 5,
+                    "step": 1
+                }
+            },
+            "13": {
+                "nodeColor": "black",
+                "nodeLabel": "Cost formula",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": [
+                            {
+                                "contents": "b",
+                                "tag": "FVar"
+                            },
+                            {
+                                "contents": [
+                                    {
+                                        "contents": "pow",
+                                        "tag": "FVar"
+                                    },
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": 1.5,
+                                                "tag": "FConstant"
+                                            },
+                                            {
+                                                "contents": "a",
+                                                "tag": "FVar"
+                                            }
+                                        ],
+                                        "tag": "FPair"
+                                    }
+                                ],
+                                "tag": "FApply"
+                            }
+                        ],
+                        "tag": "FMul"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "16": {
+                "nodeColor": "black",
+                "nodeLabel": "Building Production",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": [
+                            {
+                                "contents": "a",
+                                "tag": "FVar"
+                            },
+                            {
+                                "contents": 5,
+                                "tag": "FConstant"
+                            }
+                        ],
+                        "tag": "FMul"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "7": {
+                "nodeColor": "black",
+                "nodeLabel": "Coins per second",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "6": {
+                "nodeColor": "black",
+                "nodeLabel": "Nr. of Buildings",
+                "nodeTy": {
+                    "activation": "Passive",
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            }
+        },
+        "resourceEdges": {
+            "29": {
+                "to": 0,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 0,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "12": {
+                "to": 8,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 0,
+                    "tag": "RFConstant"
+                },
+                "from": 3,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "11": {
+                "to": 6,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 9,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "5": {
+                "to": 3,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 5,
+                    "tag": "RFConstant"
+                },
+                "from": 4,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

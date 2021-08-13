@@ -8,7 +8,7 @@ copyright:           "2020 Andrei Barbu"
 homepage:            https://github.com/abarbu/machinations
 bug-reports:         https://github.com/abarbu/machinations/issues
 category:            AI
-synopsis:            Category theory for AI
+synopsis:            An implementation of the Machinations game mechanics specification language
 
 extra-source-files:
 - README.md
@@ -17,6 +17,9 @@ extra-source-files:
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
 description:         Please see the README on Github at <https://github.com/abarbu/machinations#readme>
+
+ghc-options:
+  -fplugin=StackTrace.Plugin
 
 dependencies:
 - base >= 4.7 && < 5
@@ -66,6 +69,7 @@ dependencies:
 - bifunctors
 - either
 - time
+- temporary
 #
 - servant
 - servant-server
@@ -85,6 +89,7 @@ dependencies:
 - servant-openapi3
 - servant-swagger-ui
 - servant-swagger-ui-core
+- haskell-stack-trace-plugin
 
 executables:
   machinations-server:

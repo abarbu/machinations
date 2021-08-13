@@ -31,13 +31,13 @@ tests = testGroup "Tests" [object101Tests,connections101Tests,rfTests,sfTests,sp
 readMachination' :: FilePath -> Machination
 readMachination' = fromJust . unsafePerformIO . decodeFileStrict'
 noderes n g = resourceStatsByTag <$> nodeResources g (NodeLabel n)
-run' g = runNewUpdate $ run g []
+run' g = runNewUpdate $ run g False []
 run2' = run' . run'
 runN' n x = iterate run' x !! n
-runN n m activate | n>0 = loop (n-1) (run m activate)
+runN n m activate | n>0 = loop (n-1) (run m False activate)
                   | otherwise = error "At least one run is necessary"
   where loop 0 r = r
-        loop n r = loop (n-1) (run (r^.newUpdate) activate)
+        loop n r = loop (n-1) (run (r^.newUpdate) False activate)
 
 testOneNodeResourcesRaw :: Int -> Int -> String -> Maybe (Map ResourceTag Int) -> TestTree
 testOneNodeResourcesRaw node steps file right =

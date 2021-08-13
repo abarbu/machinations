@@ -62,7 +62,7 @@ serveRender :: M.Machination -> App T.Text
 serveRender = pure . T.pack . show . M.toGraph
 
 serveRun :: M.RunMachination -> App M.RunResult
-serveRun M.RunMachination{..} = pure $ M.runToResult $ M.run runMachinationMachine runMachinationActiveNodes
+serveRun M.RunMachination{..} = pure $ M.runToResult $ M.run runMachinationMachine False runMachinationActiveNodes
 
 serveConvertxml :: A.XMLFile -> App A.XMLConversionResult
 serveConvertxml A.XMLFile{..} = liftIO $ A.XMLConversionResult <$> M.convertXml xmlContents

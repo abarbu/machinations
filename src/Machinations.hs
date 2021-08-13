@@ -748,9 +748,11 @@ filterBadEdges m = m & graph.resourceEdges %~ M.filter filterR
         filterR e =  (e^.from) `M.member` allNodes && (e^.to) `M.member` allNodes
         filterS e =  isJust (resolveAnyLabel' m (e^.from)) && isJust (resolveAnyLabel' m (e^.to))
 
-run :: Machination -> Set NodeLabel -> Run
-run mraw clicked =
-  withCheckingResourceBalance r0 $ \rstart ->
+run :: Machination -> Bool -> Set NodeLabel -> Run
+run mraw debugMode clicked =
+  (if debugMode then
+     withCheckingResourceBalance else
+     \r f -> f r) r0 $ \rstart ->
       let r = go rstart
                    (nub
                     $ automaticNodes m

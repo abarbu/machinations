@@ -58,9 +58,12 @@ instance ToSchema Graph where
   declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions (prefixOptions "graph"))
 instance ToSchema StateEdgeModifiers where
   declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
+deriving newtype instance ToSchema Event
 deriving newtype instance ToSchema NodeLabel
 deriving newtype instance ToSchema ResourceEdgeLabel
 deriving newtype instance ToSchema StateEdgeLabel
+instance ToSchema ResourceConstraint where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions (prefixOptions "RC"))
 instance ToSchema Condition where
   declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
 instance ToSchema Machination where

@@ -27,6 +27,11 @@ type Filter = ResourceTag
 type Probability = Float
 type Percentage = Float
 
+newtype Event = Event { unEvent :: Text }
+  deriving (Show, Eq, Ord)
+  deriving newtype (ToJSON, FromJSON, ToJSONKey, FromJSONKey)
+makePrisms ''Event
+
 newtype NodeLabel = NodeLabel { unNodeLabel :: Int }
   deriving (Show, Eq, Ord)
   deriving newtype (ToJSON, FromJSON, ToJSONKey, FromJSONKey)
@@ -60,6 +65,17 @@ toNodeLabel (AnyLabel l) = NodeLabel l
 toResourceEdgeLabel (AnyLabel l) = ResourceEdgeLabel l
 toStateEdgeLabel (AnyLabel l) = StateEdgeLabel l
 
+data ResourceConstraint = RCCollisionThis
+                        | RCCollisionThat
+                        | RCVar Text
+                        | RCApply ResourceConstraint ResourceConstraint
+                        | RCEq ResourceConstraint ResourceConstraint
+                        | RCAnd ResourceConstraint ResourceConstraint
+                        | RCTag Text
+  deriving (Show, Eq, Generic)
+deriveJSON (prefixOptions "RC") ''ResourceConstraint
+makeFields ''ResourceConstraint
+
 data Resource = Resource { resourceTag :: ResourceTag,
                            resourceUUID :: Text }
   deriving (Show, Eq, Generic)
@@ -89,6 +105,11 @@ data ResourceFormula = RFAll
                      | RFDice ResourceFormula ResourceFormula
                      | RFConstant Int
                      | RFCondition Condition ResourceFormula
+                     -- NB These don't exist in Machinations
+                     | RFThisType Text
+                     | RFOtherType Text
+                     | RFAnd ResourceFormula ResourceFormula
+                     | RFOr ResourceFormula ResourceFormula
   deriving (Show, Eq, Generic, Ord)
 deriveJSON mjsonOptions ''ResourceFormula
 makePrisms ''ResourceFormula
@@ -138,6 +159,8 @@ data NodeActivation = Passive
                     | Interactive
                     | Automatic
                     | OnStart
+                    -- NB These don't exist in Machinations
+                    | TriggeredByEvent (Set Event)
   deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''NodeActivation
 makePrisms ''NodeActivation
@@ -262,6 +285,7 @@ data ResourceEdge = ResourceEdge { _from :: NodeLabel
                                  , _resourceFilter :: Maybe Filter
                                  , _shuffleOrigin :: Bool
                                  , _limits :: Limits
+                                 , _constraints :: Maybe ResourceConstraint
                                  }
   deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''ResourceEdge
@@ -383,6 +407,8 @@ makeFields ''Run
 
 data RunMachination = RunMachination { runMachinationMachine         :: Machination
                                      , runMachinationActiveNodes     :: Set NodeLabel
+                                     , runMachinationCollisions      :: Set (Resource, Resource)
+                                     , runMachinationEvents          :: Set Event
                                      }
   deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "runMachination") ''RunMachination

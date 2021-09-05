@@ -1,1 +1,132 @@
-{"graph":{"vertices":{"103":{"nodeTy":{"tag":"Source","activation":"Automatic","resourceTypes":["Black"]},"nodeLabel":"","nodeColor":"black"},"104":{"nodeTy":{"tag":"Gate","activation":"Passive","pullAction":"PullAny","distribution":{"tag":"Deterministic"}},"nodeLabel":"","nodeColor":"black"},"106":{"nodeTy":{"tag":"Pool","activation":"Passive","pushPullAction":{"tag":"Pulling","contents":"PullAny"},"resources":[],"overflow":"OverflowBlock"},"nodeLabel":"","nodeColor":"black"},"107":{"nodeTy":{"tag":"Pool","activation":"Passive","pushPullAction":{"tag":"Pulling","contents":"PullAny"},"resources":[],"overflow":"OverflowBlock"},"nodeLabel":"","nodeColor":"black"}},"resourceEdges":{"105":{"from":103,"to":104,"resourceFormula":{"tag":"RFConstant","contents":1},"interval":{"formula":{"tag":"RFConstant","contents":1},"counter":0},"transfer":"IntervalTransfer","shuffleOrigin":false,"limits":{}},"108":{"from":104,"to":106,"resourceFormula":{"tag":"RFPercentage","contents":{"tag":"RFConstant","contents":33}},"interval":{"formula":{"tag":"RFConstant","contents":1},"counter":0},"transfer":"IntervalTransfer","shuffleOrigin":false,"limits":{}},"109":{"from":104,"to":107,"resourceFormula":{"tag":"RFPercentage","contents":{"tag":"RFConstant","contents":66}},"interval":{"formula":{"tag":"RFConstant","contents":1},"counter":0},"transfer":"IntervalTransfer","shuffleOrigin":false,"limits":{}}},"stateEdges":{}},"resourceTagColor":{},"time":0,"seed":0,"pendingTriggers":[]}
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "pendingTriggers": [],
+    "graph": {
+        "stateEdges": {},
+        "vertices": {
+            "103": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "106": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "107": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "104": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            }
+        },
+        "resourceEdges": {
+            "105": {
+                "to": 104,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 103,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "108": {
+                "to": 106,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 33,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 104,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "109": {
+                "to": 107,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 66,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 104,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

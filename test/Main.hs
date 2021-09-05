@@ -1,12 +1,9 @@
 {-# LANGUAGE OverloadedLists, OverloadedStrings #-}
 {-# OPTIONS -Wall #-}
 import Test.Tasty
-import Test.Tasty.SmallCheck as SC
-import Test.Tasty.QuickCheck as QC
 import Test.Tasty.HUnit
 import Machinations
 import Machinations.Types
-import Machinations.Misc
 import Machinations.Formulas
 import Machinations.Utils
 import Data.Set(Set)
@@ -14,13 +11,11 @@ import qualified Data.Set as S
 import Data.Map(Map)
 import qualified Data.Map as M
 import Data.Maybe
-import Data.Text (Text)
 import qualified Data.Text as T
 import Data.Aeson
 import System.IO.Unsafe
 import System.FilePath
 import Data.Bifunctor
-import Data.List
 import Control.Lens hiding (from,to)
 
 main = defaultMain tests
@@ -31,13 +26,13 @@ tests = testGroup "Tests" [object101Tests,connections101Tests,rfTests,sfTests,sp
 readMachination' :: FilePath -> Machination
 readMachination' = fromJust . unsafePerformIO . decodeFileStrict'
 noderes n g = resourceStatsByTag <$> nodeResources g (NodeLabel n)
-run' g = runNewUpdate $ run g False []
+run' g = runNewUpdate $ run g False [] [] []
 run2' = run' . run'
 runN' n x = iterate run' x !! n
-runN n m activate | n>0 = loop (n-1) (run m False activate)
+runN n m activate | n>0 = loop (n-1) (run m False activate [] [])
                   | otherwise = error "At least one run is necessary"
   where loop 0 r = r
-        loop n r = loop (n-1) (run (r^.newUpdate) False activate)
+        loop n r = loop (n-1) (run (r^.newUpdate) False activate [] [])
 
 testOneNodeResourcesRaw :: Int -> Int -> String -> Maybe (Map ResourceTag Int) -> TestTree
 testOneNodeResourcesRaw node steps file right =
@@ -540,7 +535,8 @@ miscTests = testGroup "discord-delay-bug" [
   , testNodeResources 4 "xmls/strange-loop-bug-delay-2.json" [(115,[]),(120,[("Black",1)])]
   ]
 
-testRF s = isJust (parseRF s) @? T.unpack s
+testRF s = isJust (fst $ parseRF s) @? T.unpack s
+testC s = isJust (snd $ parseRF s) @? T.unpack s
 testSF s = isJust (parseSF s) @? T.unpack s
 
 rfTests = testGroup "ResourceFormulas"
@@ -548,6 +544,8 @@ rfTests = testGroup "ResourceFormulas"
   , testCase "simple" $ testRF "D5"
   , testCase "medium" $ testRF "D5+2"
   , testCase "complex" $ testRF "1+D5*10%"
+  , testCase "simple" $ testRF "D5;this(type)==\"bullet\""
+  , testCase "simple" $ testRF "D5;this(type)==\"bullet\""
   ]
 
 sfTests = testGroup "StateFormulas"

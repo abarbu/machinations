@@ -12,11 +12,15 @@ import Data.Bifunctor
 import Data.List
 import Data.Map.Strict(Map)
 import qualified Data.Map.Strict as M
+import Data.Text(Text)
 
+mkUuid :: IO Text
 mkUuid = U.toText <$> U.nextRandom
 
+mkUuid' :: RandomGen c => c -> (Text, c)
 mkUuid' = first U.toText . random
 
+inv :: (b, a) -> (a, b)
 inv (a,b) = (b,a)
 
 mjsonOptions :: Options
@@ -44,7 +48,7 @@ maybeRight (Right b) = Just b
 
 findJust :: [Maybe a] -> Maybe a
 findJust [] = Nothing
-findJust (Just h:t) = Just h
+findJust (Just h:_) = Just h
 findJust (Nothing:t) = findJust t
 
 weightedSample :: [(a,Int)] -> StdGen -> (Int, StdGen)
@@ -52,6 +56,7 @@ weightedSample [] _ = error "Sampling from empty list"
 weightedSample l g = first (loop l 0) $ randomR (0, sum (map snd l)-1) g
   where loop ((_,h):t) i n | n < h = i
                            | otherwise = loop t (i+1) (n-h)
+        loop [] _ _ = error "BUG: Out of bounds sample"
 
 -- http://utopia.duth.gr/~pefraimi/research/data/2007EncOfAlg.pdf
 weightedShuffle :: [(a,Int)] -> StdGen -> ([(a,Int)], StdGen)
@@ -64,10 +69,6 @@ weightedShuffle l g =
 rotate :: Int -> [a] -> [a]
 rotate i l = take (length l) $ drop i $ cycle l
 
--- bimap2 :: ((Any -> Any, Any -> Any) -> Any Any Any -> Any Any Any)
---   -> (Map GraphLabel Float -> Map GraphLabel Float, Float -> Float)
---   -> (Map GraphLabel Double, Double)
---   -> Any
 bimap2 :: Bifunctor p => (a1 -> a2 -> b) -> (c1 -> c2 -> d) -> (a1, c1) -> p a2 c2 -> p b d
 bimap2 f g a b = uncurry bimap (bimap f g a) b
 

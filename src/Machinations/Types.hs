@@ -66,7 +66,7 @@ toResourceEdgeLabel (AnyLabel l) = ResourceEdgeLabel l
 toStateEdgeLabel (AnyLabel l) = StateEdgeLabel l
 
 data ResourceConstraint = RCCollisionThis
-                        | RCCollisionThat
+                        | RCCollisionOther
                         | RCVar Text
                         | RCApply ResourceConstraint ResourceConstraint
                         | RCEq ResourceConstraint ResourceConstraint

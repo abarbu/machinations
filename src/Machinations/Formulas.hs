@@ -44,7 +44,7 @@ postfix name f = Postfix (f <$ symbol name)
 
 cVariable :: Parser ResourceConstraint
 cVariable = try (string "this" >> pure RCCollisionThis)
-         <|> try (string "that" >> pure RCCollisionThat)
+         <|> try (string "other" >> pure RCCollisionOther)
          <|> (RCVar . T.pack <$> lexeme ((:) <$> letterChar <*> many alphaNumChar <?> "variable"))
 
 cTag :: Parser ResourceConstraint

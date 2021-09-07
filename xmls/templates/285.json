@@ -1,0 +1,255 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "pendingTriggers": [],
+    "graph": {
+        "stateEdges": {
+            "19": {
+                "stateFormula": {
+                    "contents": [
+                        "CGt",
+                        {
+                            "contents": 100,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 17,
+                "active": false,
+                "from": 5
+            },
+            "16": {
+                "stateFormula": {
+                    "contents": [
+                        {
+                            "contents": 50,
+                            "tag": "SFConstant"
+                        },
+                        {
+                            "contents": 100,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFRange"
+                },
+                "to": 14,
+                "active": false,
+                "from": 5
+            },
+            "11": {
+                "stateFormula": {
+                    "contents": [
+                        {
+                            "contents": 1,
+                            "tag": "SFConstant"
+                        },
+                        {
+                            "contents": 49,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFRange"
+                },
+                "to": 4,
+                "active": false,
+                "from": 5
+            }
+        },
+        "vertices": {
+            "4": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "3": {
+                "nodeColor": "black",
+                "nodeLabel": "Sprint",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "7": {
+                "nodeColor": "black",
+                "nodeLabel": "Difficulty Factor",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "6": {
+                "nodeColor": "black",
+                "nodeLabel": "Coins",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "17": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "14": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "5": {
+                "nodeColor": "black",
+                "nodeLabel": "Distance",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            }
+        },
+        "resourceEdges": {
+            "15": {
+                "to": 6,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 2,
+                    "tag": "RFConstant"
+                },
+                "from": 14,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "9": {
+                "to": 5,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 5,
+                    "tag": "RFConstant"
+                },
+                "from": 3,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "18": {
+                "to": 6,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 3,
+                    "tag": "RFConstant"
+                },
+                "from": 17,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "8": {
+                "to": 7,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 3,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "10": {
+                "to": 6,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 4,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

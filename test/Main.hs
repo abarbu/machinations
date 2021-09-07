@@ -21,7 +21,7 @@ import Control.Lens hiding (from,to)
 main = defaultMain tests
 
 tests :: TestTree
-tests = testGroup "Tests" [object101Tests,connections101Tests,rfTests,sfTests,spdTests,miscTests,tutorials]
+tests = testGroup "Tests" [object101Tests,connections101Tests,rfTests,sfTests,spdTests,miscTests,tutorials,templates]
 
 readMachination' :: FilePath -> Machination
 readMachination' = fromJust . unsafePerformIO . decodeFileStrict'
@@ -200,7 +200,7 @@ object101Tests = testGroup "101-objects"
       , test' 1 "0032.json" [(238, [("Black", 1)])]
       , test' 5 "0032.json" [(238, [("Black", 1)])]
       , test' 100 "0033.json" [(245, [("Black", 50)]), (247, [("Black", 50)])]
-      , test' 100 "0034.json" [(251, [("Black", 491)]), (252, [("Black", 509)])]
+      , test' 100 "0034.json" [(251, [("Black", 52)]), (252, [("Black", 48)])]
       , test' 1 "0040.json" [(299, [("Black", 1)])]
       , test' 5 "0040.json" [(299, [("Black", 5)])]
       , test' 5 "0041.json" [(305, [("Black", 5)])]
@@ -217,7 +217,8 @@ object101Tests = testGroup "101-objects"
       , test' 5 "0038.json" [(281, [("Black", 1)]), (283, [("Black", 1)])]
       , test' 100 "0039.json" [(290, [("Black", 50)]), (292, [("Black", 50)])]
       , test' 5 "0042.json" [(311, [("Black", 5)]), (313, []), (314, [])]
-      , test' 6 "0042.json" [(311, [("Black", 1)]), (313, [("Black", 2)]), (314, [("Black", 3)])]
+      , test' 6 "0042.json" [(311, [("Black", 1)]), (313, [("Black", 3)]), (314, [("Black", 2)])]
+      , test' 11 "0042.json" [(311, [("Black", 1)]), (313, [("Black", 5)]), (314, [("Black", 5)])]
       , test' 5 "0043.json" [(320, [("Black", 5)]), (322, []), (323, [])]
       , test' 6 "0043.json" [(320, [("Black", 1)]), (322, [("Black", 2)]), (323, [("Black", 3)])]
       , test' 1 "0091.json" [(550, [("Black", 3)]), (545, [("Black", 2)])]
@@ -297,7 +298,7 @@ object101Tests = testGroup "101-objects"
     , test' 1 "0003.json" [(21, [("Black",9)]),(24, [])]
     , test' 2 "0003.json" [(21, [("Black",9)]),(24, [])]
     , test' 3 "0003.json" [(21, [("Black",9)]),(24, [])]
-    , test' 4 "0003.json" [(21, [("Black",9)]),(24, [])]
+    , test' 4 "0003.json" [(21, [("Black",9)]),(24, [("Black",1)])]
     ]
   , testGroup "queue"
     [
@@ -312,7 +313,7 @@ object101Tests = testGroup "101-objects"
     , test' 1 "0007.json" [(42, [("Black",9)]),(45, [])]
     , test' 2 "0007.json" [(42, [("Black",9)]),(45, [])]
     , test' 3 "0007.json" [(42, [("Black",9)]),(45, [])]
-    , test' 4 "0007.json" [(42, [("Black",9)]),(45, [])]
+    , test' 4 "0007.json" [(42, [("Black",9)]),(45, [("Black",1)])]
     ]
   ]
   where testRaw node steps file right = testOneNodeResourcesRaw node steps ("ours/101-objects/" </> file) right
@@ -509,6 +510,74 @@ tutorials = testGroup "tutorials"
         testEnded' steps file node isEnded activated = testEnded steps ("xmls/tutorials/" </> file) node isEnded activated
         testRaw'' steps file = testNodeResourcesAndRegistersRaw steps ("xmls/tutorials/" </> file)
         test'' steps file = testNodeResourcesAndRegisters steps ("xmls/tutorials/" </> file)
+
+templates = testGroup "templates"
+  [
+    test' 1 "100.json" [(4,[("Black",1)]),(15,[("Black",1)]),(8,[]),(12,[]),(28,[]),(26,[])]
+  , test' 2 "100.json" [(4,[]),(15,[("Black",1)]),(8,[]),(12,[("Black",1)]),(28,[]),(26,[])]
+  , test' 3 "100.json" [(4,[]),(15,[]),(8,[]),(12,[("Black",1)]),(28,[]),(26,[("Black",1)])]
+  , test' 4 "100.json" [(4,[]),(15,[]),(8,[]),(12,[]),(28,[("Black",1)]),(26,[("Black",1)])]
+  , test' 5 "100.json" [(4,[]),(15,[]),(8,[]),(12,[]),(28,[]),(26,[])]
+  , test' 6 "100.json" [(4,[("Black",1)]),(15,[("Black",1)]),(8,[]),(12,[]),(28,[]),(26,[])]
+  , test' 1 "137.json" [(603,[("Black",1)]),(605,[])]
+  , test' 2 "137.json" [(603,[("Black",2)]),(605,[("Black",1)])]
+  , test' 3 "137.json" [(603,[("Black",3)]),(605,[("Black",2)])]
+  , test' 1 "137.json" [(644,[("Black",2)]),(647,[])]
+  , test' 2 "137.json" [(644,[("Black",4)]),(647,[("Black",1)])]
+  , test' 1 "137.json" [(615,[("Black",1)]),(622,[])]
+  , test' 2 "137.json" [(615,[("Black",2)]),(622,[("Black",1)])]
+  -- TODO This seems to say that we need to know if it would be possible to trigger a node chain?
+  , test' 2 "137.json" [(615,[("Black",3)]),(622,[("Black",1)])]
+  , test' 1 "295.json" [(4,[("Black",1)]),(10,[]),(11,[]),(12,[]),(17,[])]
+  , test' 3 "295.json" [(4,[("Black",3)]),(10,[("Black",3)]),(11,[("Black",3)]),(12,[]),(17,[])]
+  , test' 11 "295.json" [(4,[("Black",11)]),(10,[("Black",12)]),(11,[("Black",8)]),(12,[("Black",3)]),(17,[])]
+  , test' 12 "295.json" [(4,[("Black",12)]),(10,[("Black",6)]),(11,[("Black",5)]),(12,[("Black",1)]),(17,[("Black",1)])]
+  , test' 1 "294.json" [(3,[("Black",9800)]),(12,[])]
+  , test' 5 "294.json" [(3,[("Black",9000)]),(12,[])]
+  , test' 6 "294.json" [(3,[("Black",8800)]),(12,[("Black",1)])]
+  , test' 7 "294.json" [(3,[("Black",8600)]),(12,[("Black",2)])]
+  , test' 8 "294.json" [(3,[("Black",8400)]),(12,[("Black",3)])]
+  , test' 9 "294.json" [(3,[("Black",8250)]),(12,[("Black",4)]),(4,[("Black",9700)]),(11,[])]
+  , test' 10 "294.json" [(3,[("Black",8100)]),(12,[("Black",5)]),(4,[("Black",9400)]),(11,[])]
+  , test' 11 "294.json" [(3,[("Black",7950)]),(12,[("Black",6)]),(4,[("Black",9100)]),(11,[])]
+  , test' 12 "294.json" [(3,[("Black",7800)]),(12,[("Black",7)]),(4,[("Black",8800)]),(11,[("Black",1)])]
+  , test'' 1 "292.json" [(3,[("Black",5)]),(6,[]),(7,[])] [(13,5),(16,0)]
+  , test'' 2 "292.json" [(3,[("Black",5)]),(6,[]),(7,[])] [(13,5),(16,0)]
+  -- TODO This needs support for +1 state edges; Just (SFAdd (SFConstant 1)) in updateStateEdge
+  , test'' 3 "292.json" [(3,[("Black",5)]),(6,[("Black",1)]),(7,[("Black",5)])] [(13,7.5),(16,5)]
+  , test'' 1 "260.json" [(1401,[("Black",2)]),(1405,[]),(1406,[]),(1407,[]),(1408,[])]
+                        [(1446,0),(1447,0),(1436,0),(1443,0),(1511,0),(1502,0),(1513,0)]
+  , test'' 2 "260.json" [(1401,[("Black",3)]),(1405,[]),(1406,[]),(1407,[]),(1408,[])]
+                        [(1446,0),(1447,0),(1436,0),(1443,0),(1511,0),(1502,0),(1513,0)]
+  , test'' 3 "260.json" [(1401,[("Black",4)]),(1405,[]),(1406,[]),(1407,[]),(1408,[])]
+                        [(1447,1),(1446,0),(1436,0),(1443,96),(1511,105.6),(1502,2),(1513,2.2)]
+  -- TODO This needs support for +1 state edges
+  , test'' 4 "260.json" [(1401,[("Black",5)]),(1405,[]),(1406,[]),(1407,[]),(1408,[])]
+                        [(1446,0),(1447,0),(1436,0),(1443,0),(1511,0),(1502,0),(1513,0)]
+  , test'' 1 "140.json" [(2,[("Black",1)]),(11,[]),(17,[]),(21,[]),(4,[])]
+                        [(26,0)]
+  , test'' 2 "140.json" [(2,[("Black",1)]),(11,[("Black",1)]),(17,[]),(21,[]),(4,[])]
+                        [(26,0)]
+  , test'' 3 "140.json" [(2,[("Black",1)]),(11,[("Black",1)]),(17,[("Black",5)]),(21,[]),(4,[])]
+                        [(26,0)]
+  , test'' 6 "140.json" [(2,[("Black",1)]),(11,[("Black",1)]),(17,[("Black",20)]),(21,[]),(4,[])]
+                        [(26,0)]
+  -- TODO There's something up with state edges
+  , test'' 21 "140.json" [(2,[("Black",1)]),(11,[("Black",1)]),(17,[("Black",95)]),(21,[]),(4,[])]
+                        [(26,0)]
+  , test'' 22 "140.json" [(2,[("Black",1)]),(11,[("Black",1)]),(17,[("Black",100)]),(21,[]),(4,[])]
+                        [(26,0)]
+  -- TODO There's something up with state edges
+  , test'' 23 "140.json" [(2,[("Black",1)]),(11,[]),(17,[("Black",5)]),(21,[("Black",1)]),(4,[])]
+                        [(26,0)]
+  ]
+  where testRaw node steps file right = testOneNodeResourcesRaw node steps ("xmls/templates/" </> file) right
+        test node steps file right = testOneNodeResources node steps ("xmls/templates/" </> file) right
+        testRaw' steps file noderights = testNodeResourcesAndRegistersRaw steps ("xmls/templates/" </> file) noderights []
+        test' steps file = testNodeResources steps ("xmls/templates/" </> file)
+        testEnded' steps file node isEnded activated = testEnded steps ("xmls/templates/" </> file) node isEnded activated
+        testRaw'' steps file = testNodeResourcesAndRegistersRaw steps ("xmls/templates/" </> file)
+        test'' steps file = testNodeResourcesAndRegisters steps ("xmls/templates/" </> file)
 
 spdTests = testGroup "SourcePoolDrain"
   [ testCase "static" $

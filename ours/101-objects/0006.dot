@@ -1,12 +1,12 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "37" [shape=circle,peripheries="1",label=<10>,labelfontcolor=Black,color=black];
-  "38" [shape=rarrow,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "40" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "39" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "37" [shape=circle,peripheries="1",label=<10<FONT POINT-SIZE='4'>37</FONT>>,labelfontcolor=Black,color=black];
+  "38" [shape=rarrow,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>38</FONT>>,labelfontcolor=black,color=black];
+  "40" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>40</FONT>>,labelfontcolor=black,color=black];
+  "39" [label=<1<FONT POINT-SIZE='4'>39</FONT>>,peripheries="1",color=black,shape=septagon];
   "37" -> "39" [color=black];
   "39" -> "38" [color=black];
-  "41" [label=<3>,peripheries="1",color=black,shape=septagon];
+  "41" [label=<3<FONT POINT-SIZE='4'>41</FONT>>,peripheries="1",color=black,shape=septagon];
   "38" -> "41" [color=black];
   "41" -> "40" [color=black];
 }

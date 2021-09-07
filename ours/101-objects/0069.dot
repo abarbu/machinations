@@ -1,12 +1,12 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "433" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "434" [shape=circle,peripheries="2",label=<0<SUB>p&amp;</SUB>>,labelfontcolor=black,color=black];
-  "435" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "446" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "433" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>433</FONT>>,labelfontcolor=black,color=black];
+  "434" [shape=circle,peripheries="2",label=<0<SUB>p&amp;</SUB><FONT POINT-SIZE='4'>434</FONT>>,labelfontcolor=black,color=black];
+  "435" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>435</FONT>>,labelfontcolor=black,color=black];
+  "446" [label=<1<FONT POINT-SIZE='4'>446</FONT>>,peripheries="1",color=black,shape=septagon];
   "433" -> "446" [color=black];
   "446" -> "434" [color=black];
-  "447" [label=<5>,peripheries="1",color=black,shape=septagon];
+  "447" [label=<5<FONT POINT-SIZE='4'>447</FONT>>,peripheries="1",color=black,shape=septagon];
   "434" -> "447" [color=black];
   "447" -> "435" [color=black];
 }

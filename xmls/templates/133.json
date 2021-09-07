@@ -1,0 +1,563 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "pendingTriggers": [],
+    "graph": {
+        "stateEdges": {
+            "733": {
+                "stateFormula": {
+                    "tag": "SFTrigger"
+                },
+                "to": 703,
+                "active": false,
+                "from": 719
+            },
+            "717": {
+                "stateFormula": {
+                    "contents": [
+                        "CLtEq",
+                        {
+                            "contents": 75,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 707,
+                "active": false,
+                "from": 715
+            },
+            "732": {
+                "stateFormula": {
+                    "contents": [
+                        "CEqual",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 731,
+                "resourceFilter": "Red",
+                "active": false,
+                "from": 705
+            },
+            "726": {
+                "stateFormula": {
+                    "contents": 1,
+                    "tag": "SFConstant"
+                },
+                "to": 720,
+                "active": false,
+                "from": 725
+            },
+            "704": {
+                "stateFormula": {
+                    "contents": [
+                        "CLtEq",
+                        {
+                            "contents": 20,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 702,
+                "active": false,
+                "from": 703
+            },
+            "734": {
+                "stateFormula": {
+                    "contents": [
+                        "CLtEq",
+                        {
+                            "contents": 50,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 709,
+                "active": false,
+                "from": 703
+            },
+            "727": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 1,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFSub"
+                },
+                "to": 717,
+                "active": false,
+                "from": 725
+            },
+            "718": {
+                "stateFormula": {
+                    "tag": "SFTrigger"
+                },
+                "to": 715,
+                "active": false,
+                "from": 713
+            },
+            "720": {
+                "stateFormula": {
+                    "contents": [
+                        "CGt",
+                        {
+                            "contents": 50,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 719,
+                "active": false,
+                "from": 715
+            }
+        },
+        "vertices": {
+            "711": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "0311ac0b-b6cf-48f1-b6b8-b66237a264d8",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "1ef2253f-7b60-4265-8bcd-b99ed6e4a4a4",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "1f038ca1-3e0f-457e-b458-ca25f8ade328",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "30ba3127-071f-4b35-b7da-9f74db4452c7",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "36f550dd-3003-4076-ab66-67ed9421cbef",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "5179d1a5-9e3f-4e29-b05a-3377091f13b5",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "5ce8080d-2039-4628-93d2-11a3f7918913",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "6e2ab518-db39-4a66-bd7f-fef14df67843",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "79ae60e9-50fd-46c0-8892-9f59fa9cb5de",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "80c7114a-6597-41e9-8149-bfd36e0da10c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "84570895-04f4-4829-a260-78c5a4770511",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "87c3e9c5-0ebf-4e47-8e30-9e06f1556c6c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "89c283ba-42b1-4c4c-96e7-a957e54067d2",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "8a48c35d-f0ab-42d8-a451-8263042904bf",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "939158f9-e69f-4763-8a4f-0e68531859f1",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "968a68dd-737a-427f-a814-d2ca62bfac04",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "96c4ddff-2508-4d17-851a-621b2ea4c996",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "ba1e5ea1-e720-4a24-875f-466fc9edf1d6",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "bf6a6c86-b719-4d31-aa16-f8becf9698a7",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "e7bc6bc6-8918-4b0a-af69-da8559b65675",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "703": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Random"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "721": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "709": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "713": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Interactive"
+                    },
+                    "tag": "Drain"
+                }
+            },
+            "731": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "tag": "EndCondition"
+                }
+            },
+            "705": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "045d59e9-0179-4ec9-a873-dc5545037794",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "0a52ec64-5aed-4e67-9181-a1f2af277f27",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "183f8323-489e-4fce-a30d-dc5fe7c4d7ab",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "463b0691-59bc-4197-8f06-47a29ff1b8f0",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "60726c03-5ce8-4a57-ab9d-b0d8e8f5d84a",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "860fbd34-9a55-4efa-9026-ddab8a0645f5",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "91a2b1bb-098f-423c-86bc-cd9b52fa8b07",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "af7a5fcc-b358-4291-a0a5-c7c75d290bbe",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "b1103d4e-afe8-449f-b44f-17ee6511ac7c",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "c8fcc2f3-0ef3-4e0e-b93d-3b4f34387b48",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "e0282175-b2e2-4243-a765-b172376126c9",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "fff6388f-61c3-494d-80f9-26e6600a385f",
+                            "tag": "Red"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "722": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "719": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Drain"
+                }
+            },
+            "715": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Random"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "725": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "limits": {},
+                    "initial": 0,
+                    "tag": "RegisterInteractive",
+                    "currentValue": 0,
+                    "step": 1
+                }
+            },
+            "707": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Drain"
+                }
+            },
+            "702": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Red"
+                    ],
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Source"
+                }
+            }
+        },
+        "resourceEdges": {
+            "708": {
+                "to": 707,
+                "resourceFilter": "Red",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": [
+                        {
+                            "contents": 1,
+                            "tag": "RFConstant"
+                        },
+                        {
+                            "contents": 2,
+                            "tag": "RFConstant"
+                        }
+                    ],
+                    "tag": "RFDice"
+                },
+                "from": 705,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "712": {
+                "to": 711,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 5,
+                    "tag": "RFConstant"
+                },
+                "from": 709,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "706": {
+                "to": 705,
+                "resourceFilter": "Red",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 3,
+                    "tag": "RFConstant"
+                },
+                "from": 702,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "724": {
+                "to": 719,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 721,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "723": {
+                "to": 721,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 10,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 722,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "714": {
+                "to": 713,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": [
+                        {
+                            "contents": [
+                                {
+                                    "contents": 1,
+                                    "tag": "RFConstant"
+                                },
+                                {
+                                    "contents": 3,
+                                    "tag": "RFConstant"
+                                }
+                            ],
+                            "tag": "RFDice"
+                        },
+                        {
+                            "contents": 1,
+                            "tag": "RFConstant"
+                        }
+                    ],
+                    "tag": "RFAdd"
+                },
+                "from": 711,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

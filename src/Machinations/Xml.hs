@@ -287,6 +287,11 @@ parseResourceFormula Nothing = (RFConstant 1, Nothing)
 parseResourceFormula (Just t) = (fromMaybe (RFConstant 1) rf,c)
   where (rf,c) = parseRF t
 
+fixHtmlInXml = T.replace "&lt;" "<"
+             . T.replace "&gt;" ">"
+             . T.replace "<span>" ""
+             . T.replace "</span>" ""
+
 parseResource :: HasCallStack => Object -> Parser (ResourceEdgeLabel, ResourceEdge)
 parseResource obj = do
   i <- obj .: "id"
@@ -294,6 +299,7 @@ parseResource obj = do
   s <- obj .:? "source"
   value <- obj .:? "value"
   formula <- obj .:? "formula"
+  label <- obj .:? "label"
   interval <- obj .:? "interval"
   -- resource filter
   resTag <- resTagParser obj
@@ -301,7 +307,9 @@ parseResource obj = do
   --
   transfer <- obj .: "resourceTransfer"
   shuffle <- obj .: "shuffleSource"
-  let (rf,c) = parseResourceFormula (T.takeWhile (/='|') <$> (formula <|> value))
+  let (rf,c) = parseResourceFormula (T.takeWhile (/='|') <$>
+                                      (fmap fixHtmlInXml
+                                       $ formula <|> value <|> label))
   pure (ResourceEdgeLabel $ read' "" i
        , ResourceEdge
          -- TODO Unconnected edges are possible in Machinations but we don't allow them by construction
@@ -333,6 +341,7 @@ parseState obj = do
   s <- obj .:? "source"
   value <- obj .:? "value"
   formula <- obj .:? "formula"
+  label <- obj .:? "label"
   resTag <- resTagParser obj
   colorCoding <- obj .: "colorCoding"
   pure (StateEdgeLabel $ read' "" i
@@ -340,7 +349,8 @@ parseState obj = do
          -- TODO Unconnected edges are possible in Machinations but we don't allow them by construction
          { _from = AnyLabel $ maybe 0 (read' "") s
          , _to = AnyLabel $ maybe 0 (read' "") t
-         , _stateFormula = parseStateFormula (formula <|> value)
+         , _stateFormula = parseStateFormula (fmap fixHtmlInXml
+                                               $ formula <|> value <|> label)
          , _resourceFilter =
              -- Yes, this is where they store the filter
              case colorCoding :: Text of

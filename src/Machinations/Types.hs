@@ -71,6 +71,7 @@ data ResourceConstraint = RCCollisionThis
                         | RCApply ResourceConstraint ResourceConstraint
                         | RCEq ResourceConstraint ResourceConstraint
                         | RCAnd ResourceConstraint ResourceConstraint
+                        | RCOr ResourceConstraint ResourceConstraint
                         | RCTag Text
   deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "RC") ''ResourceConstraint
@@ -84,6 +85,12 @@ makeFields ''Resource
 
 instance Ord Resource where
   x `compare` x' = resourceUUID x `compare` resourceUUID x'
+
+data Collision = Collision { collisionCollider1 :: Resource,
+                             collisionCollider2 :: Resource }
+  deriving (Show, Eq, Generic, Ord)
+deriveJSON (prefixOptions "collision") ''Collision
+makeFields ''Collision
 
 data Condition = CEqual
                | CNotEqual
@@ -105,11 +112,6 @@ data ResourceFormula = RFAll
                      | RFDice ResourceFormula ResourceFormula
                      | RFConstant Int
                      | RFCondition Condition ResourceFormula
-                     -- NB These don't exist in Machinations
-                     | RFThisType Text
-                     | RFOtherType Text
-                     | RFAnd ResourceFormula ResourceFormula
-                     | RFOr ResourceFormula ResourceFormula
   deriving (Show, Eq, Generic, Ord)
 deriveJSON mjsonOptions ''ResourceFormula
 makePrisms ''ResourceFormula
@@ -401,13 +403,14 @@ data Run = Run { runOldUpdate          :: Machination
                , runStdGen             :: StdGen
                , runErrors             :: Map AnyLabel Text
                , runEnded              :: Maybe NodeLabel
+               , runCollisions         :: Set Collision
                }
   deriving (Show, Eq, Generic)
 makeFields ''Run
 
 data RunMachination = RunMachination { runMachinationMachine         :: Machination
                                      , runMachinationActiveNodes     :: Set NodeLabel
-                                     , runMachinationCollisions      :: Set (Resource, Resource)
+                                     , runMachinationCollisions      :: Set Collision
                                      , runMachinationEvents          :: Set Event
                                      }
   deriving (Show, Eq, Generic)
@@ -436,7 +439,7 @@ mkStateEdgeModifiers :: StateEdgeModifiers
 mkStateEdgeModifiers = StateEdgeModifiers S.empty S.empty S.empty S.empty S.empty M.empty M.empty
 
 mkRun :: Machination -> Run
-mkRun m = Run m m M.empty mkStateEdgeModifiers S.empty S.empty S.empty S.empty S.empty M.empty M.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty Nothing
+mkRun m = Run m m M.empty mkStateEdgeModifiers S.empty S.empty S.empty S.empty S.empty M.empty M.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty Nothing S.empty
 
 runToResult :: Run -> RunResult
 runToResult Run{..} = RunResult runNewUpdate runRegisterValues runStateEdgeModifiers

@@ -1,12 +1,12 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "91" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "92" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "94" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "93" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "91" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>91</FONT>>,labelfontcolor=black,color=black];
+  "92" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>92</FONT>>,labelfontcolor=black,color=black];
+  "94" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>94</FONT>>,labelfontcolor=black,color=black];
+  "93" [label=<1<FONT POINT-SIZE='4'>93</FONT>>,peripheries="1",color=black,shape=septagon];
   "91" -> "93" [color=black];
   "93" -> "92" [color=black];
-  "95" [label=<+5>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "95" [label=<+5<FONT POINT-SIZE='4'>95</FONT>>,peripheries="1",color=black,style=dashed,shape=septagon];
   "92" -> "95" [style=dashed,color=black];
   "95" -> "94" [style=dashed,color=black];
 }

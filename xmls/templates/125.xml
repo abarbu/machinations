@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<mxGraphModel>
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="2" parent="1"/>
+    <mxCell id="3" style="strokeColor=#3E64E4FF;strokeWidth=2;fontColor=#3E64E4FF;locked=0;" parent="2"/>
+    <mxSourceShapeCell id="4" value="Sprint" style="shape=source-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;strokeColor=#4CAF50;fontColor=#4CAF50;fillColor=none;" title="Source" vertex="1" edge="0" activation="automatic" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="3">
+      <mxGeometry x="97" y="197" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="-0.5" y="48.5" as="offset"/>
+      </mxGeometry>
+      <Resource name="Black" color="#000000" travelTime="0" as="resource"/>
+    </mxSourceShapeCell>
+    <mxPoolShapeCell id="5" value="Distance" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;strokeColor=#2196F3;fontColor=#2196F3;fillColor=none;" title="Pool" vertex="1" edge="0" activation="passive" actionMode="pull-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="3">
+      <mxGeometry x="297" y="197" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="-1.25" y="46.5" as="offset"/>
+      </mxGeometry>
+      <Resource name="Black" color="#000000" travelTime="0" as="resource"/>
+    </mxPoolShapeCell>
+    <mxResourceConnectionCell id="6" value="5" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;strokeColor=#000000;fontColor=#000000;fillColor=none;" title="Resource Connection" vertex="0" edge="1" resourceTransfer="interval-based" colorCoding="0" shuffleSource="0" minValue="-9999" maxValue="9999" width="46" height="46" type="plain-arrow" isMachination="1" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="3" source="4" target="5">
+      <mxGeometry x="-0.1358" y="18" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-38" y="220" as="sourcePoint"/>
+        <mxPoint x="213" y="210" as="targetPoint"/>
+        <mxPoint x="0" y="1" as="offset"/>
+        <Array as="points"/>
+      </mxGeometry>
+      <Resource name="Black" color="#000000" travelTime="0" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxTextCell id="7" style="shape=text-shape;html=1;resizable=0;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#000000;strokeColor=nonestrokeColor=none;fillColor=none;fontFamily=Roboto;fontStyle=0;" title="Text" vertex="1" edge="0" label="A &lt;b&gt;Source&lt;/b&gt; Node is used to generate an infinite amount of &lt;b&gt;Resources&lt;/b&gt;. &lt;br&gt;In this case, we will use 'Sprint' to generate Distance.&lt;br&gt;&lt;br&gt;&lt;br&gt;We will store Distance units in a &lt;b&gt;Pool&lt;/b&gt;.&lt;br&gt;&lt;br&gt;The &lt;b&gt;Resource Connection,&lt;/b&gt;&amp;nbsp;represented by the solid arrow, is used to transfer &lt;b&gt;Resources&lt;/b&gt; from the &lt;b&gt;Source&lt;/b&gt; to the &lt;b&gt;Pool&lt;/b&gt;.&lt;br&gt;A Label of 5 means that 5 &lt;b&gt;Resources&lt;/b&gt; will be generated during each &lt;b&gt;Step&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;br&gt;Click &lt;b&gt;Play&lt;/b&gt; on the toolbar below and notice how the Distance &lt;b&gt;Pool&lt;/b&gt; accumulates &lt;b&gt;Resources&lt;/b&gt; every &lt;b&gt;Step&lt;/b&gt;." prevLabel="A &lt;b&gt;Source&lt;/b&gt; Node is used to generate an infinite amount of &lt;b&gt;Resources&lt;/b&gt;. &lt;br&gt;In this case, we will use 'Sprint' to generate Distance.&lt;br&gt;&lt;br&gt;&lt;br&gt;We will store Distance units in a &lt;b&gt;Pool&lt;/b&gt;.&lt;br&gt;&lt;br&gt;The &lt;b&gt;Resource Connection,&lt;/b&gt;&amp;nbsp;represented by the solid arrow, is used to transfer &lt;b&gt;Resources&lt;/b&gt; from the &lt;b&gt;Source&lt;/b&gt; to the &lt;b&gt;Pool&lt;/b&gt;.&lt;br&gt;A Label of 5 means that 5 &lt;b&gt;Resources&lt;/b&gt; will be generated during each &lt;b&gt;Step&lt;/b&gt;.&lt;br&gt;&lt;br&gt;&lt;br&gt;Click &lt;b&gt;Play&lt;/b&gt; on the toolbar below and notice how the Distance &lt;b&gt;Pool&lt;/b&gt; accumulates &lt;b&gt;Resources&lt;/b&gt; every &lt;b&gt;Step&lt;/b&gt;." isMachination="0" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" defaultSpacing="10" parent="3">
+      <mxGeometry x="520" y="122" width="800" height="243" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+    </mxTextCell>
+    <mxTextCell id="8" style="shape=text-shape;html=1;resizable=0;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=20;fontColor=#000000;strokeColor=none;fillColor=none;fontFamily=Roboto;fontStyle=1;strokeWidth=0;spacing=0;opacity=50;textOpacity=50;" title="Text" vertex="1" edge="0" label="Step 1 of 5&lt;br&gt;" prevLabel="Step 1 of 5&lt;br&gt;" isMachination="0" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" defaultSpacing="10" parent="3">
+      <mxGeometry x="520" y="40" width="560" height="40" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+    </mxTextCell>
+    <mxTextCell id="9" style="shape=text-shape;html=1;resizable=0;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=28;fontColor=#000000;strokeColor=none;fillColor=none;fontFamily=Roboto;fontStyle=1;strokeWidth=0;spacing=0;" title="Text" vertex="1" edge="0" label="Let's Build an Endless Runner Loop Together!" prevLabel="Let's Build an Endless Runner Loop Together!" isMachination="0" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" defaultSpacing="10" parent="3">
+      <mxGeometry x="520" y="0" width="640" height="40" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+    </mxTextCell>
+    <mxTextCell id="10" style="shape=text-shape;html=1;resizable=0;align=center;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontColor=#3E64E4;strokeColor=#3E64E4;fillColor=#ffffff;spacing=10;strokeWidth=2;fontFamily=Roboto;fontStyle=0;" title="Text" vertex="1" edge="0" label="&lt;a href=&quot;https://my.machinations.io/templates/Intro-Tutorial:-Step-2-of-5/0523e85d9553ae21ed8e11c9c182f85f4&quot; target=&quot;_blank&quot;&gt;Next Step&lt;/a&gt;&lt;br&gt;" prevLabel="&lt;a href=&quot;https://my.machinations.io/templates/Intro-Tutorial:-Step-2-of-5/0523e85d9553ae21ed8e11c9c182f85f4&quot; target=&quot;_blank&quot;&gt;Next Step&lt;/a&gt;&lt;br&gt;" isMachination="0" defaultSpacing="10" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="3">
+      <mxGeometry x="520" y="396" width="170" height="44" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+    </mxTextCell>
+  </root>
+  <chart/>
+</mxGraphModel>

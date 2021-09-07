@@ -1,0 +1,1681 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "pendingTriggers": [],
+    "graph": {
+        "stateEdges": {
+            "111": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 1,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 108,
+                "active": false,
+                "from": 109
+            },
+            "110": {
+                "stateFormula": {
+                    "contents": "a",
+                    "tag": "SFVariable"
+                },
+                "to": 109,
+                "active": false,
+                "from": 103
+            },
+            "244": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": {
+                            "contents": 1,
+                            "tag": "SFConstant"
+                        },
+                        "tag": "SFPercentage"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 223,
+                "active": false,
+                "from": 243
+            },
+            "205": {
+                "stateFormula": {
+                    "contents": "a",
+                    "tag": "SFVariable"
+                },
+                "to": 204,
+                "active": false,
+                "from": 201
+            },
+            "113": {
+                "stateFormula": {
+                    "contents": [
+                        "CEqual",
+                        {
+                            "contents": 8,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 112,
+                "active": false,
+                "from": 103
+            },
+            "207": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 1,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 206,
+                "active": false,
+                "from": 204
+            }
+        },
+        "vertices": {
+            "236": {
+                "nodeColor": "black",
+                "nodeLabel": "Bought Quartz",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "337": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "343": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "224": {
+                "nodeColor": "black",
+                "nodeLabel": "1$",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "212": {
+                "nodeColor": "black",
+                "nodeLabel": "Chapter Reward",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "331": {
+                "nodeColor": "black",
+                "nodeLabel": "Money Spent $$$",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "229": {
+                "nodeColor": "black",
+                "nodeLabel": "80$",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "349": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAll",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "120": {
+                "nodeColor": "black",
+                "nodeLabel": "Forge Saint Quartz",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAll",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "201": {
+                "nodeColor": "black",
+                "nodeLabel": "Total Login days",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "300": {
+                "nodeColor": "black",
+                "nodeLabel": "Pull Servants",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Random"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "102": {
+                "nodeColor": "black",
+                "nodeLabel": "Daily Login",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "228": {
+                "nodeColor": "black",
+                "nodeLabel": "40$",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "109": {
+                "nodeColor": "black",
+                "nodeLabel": "equal(a,2)+equal(a,4)+(equal(a,6)*2)",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": [
+                            {
+                                "contents": [
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": "equal",
+                                                "tag": "FVar"
+                                            },
+                                            {
+                                                "contents": [
+                                                    {
+                                                        "contents": "a",
+                                                        "tag": "FVar"
+                                                    },
+                                                    {
+                                                        "contents": 2,
+                                                        "tag": "FConstant"
+                                                    }
+                                                ],
+                                                "tag": "FPair"
+                                            }
+                                        ],
+                                        "tag": "FApply"
+                                    },
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": "equal",
+                                                "tag": "FVar"
+                                            },
+                                            {
+                                                "contents": [
+                                                    {
+                                                        "contents": "a",
+                                                        "tag": "FVar"
+                                                    },
+                                                    {
+                                                        "contents": 4,
+                                                        "tag": "FConstant"
+                                                    }
+                                                ],
+                                                "tag": "FPair"
+                                            }
+                                        ],
+                                        "tag": "FApply"
+                                    }
+                                ],
+                                "tag": "FAdd"
+                            },
+                            {
+                                "contents": [
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": "equal",
+                                                "tag": "FVar"
+                                            },
+                                            {
+                                                "contents": [
+                                                    {
+                                                        "contents": "a",
+                                                        "tag": "FVar"
+                                                    },
+                                                    {
+                                                        "contents": 6,
+                                                        "tag": "FConstant"
+                                                    }
+                                                ],
+                                                "tag": "FPair"
+                                            }
+                                        ],
+                                        "tag": "FApply"
+                                    },
+                                    {
+                                        "contents": 2,
+                                        "tag": "FConstant"
+                                    }
+                                ],
+                                "tag": "FMul"
+                            }
+                        ],
+                        "tag": "FAdd"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "329": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "115": {
+                "nodeColor": "black",
+                "nodeLabel": "Weekly Missions",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "222": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Random"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "103": {
+                "nodeColor": "black",
+                "nodeLabel": "Consecutive days",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "340": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "227": {
+                "nodeColor": "black",
+                "nodeLabel": "24$",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "106": {
+                "nodeColor": "black",
+                "nodeLabel": "Login Rewards",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "304": {
+                "nodeColor": "black",
+                "nodeLabel": "5-Star",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "302": {
+                "nodeColor": "black",
+                "nodeLabel": "3-Star",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "221": {
+                "nodeColor": "black",
+                "nodeLabel": "Purchase",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "119": {
+                "nodeColor": "black",
+                "nodeLabel": "Saint Quartz Fragments",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "346": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "203": {
+                "nodeColor": "black",
+                "nodeLabel": "Cumulative Login Rewards",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "204": {
+                "nodeColor": "black",
+                "nodeLabel": "(isInteger(a/10)*smaller(a,51)*4 + equal(a,75)*10 + isInteger(a/50)*larger(a,75)*20)*larger(a,0)",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": [
+                            {
+                                "contents": [
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": [
+                                                    {
+                                                        "contents": [
+                                                            {
+                                                                "contents": [
+                                                                    {
+                                                                        "contents": "isInteger",
+                                                                        "tag": "FVar"
+                                                                    },
+                                                                    {
+                                                                        "contents": [
+                                                                            {
+                                                                                "contents": "a",
+                                                                                "tag": "FVar"
+                                                                            },
+                                                                            {
+                                                                                "contents": 10,
+                                                                                "tag": "FConstant"
+                                                                            }
+                                                                        ],
+                                                                        "tag": "FDiv"
+                                                                    }
+                                                                ],
+                                                                "tag": "FApply"
+                                                            },
+                                                            {
+                                                                "contents": [
+                                                                    {
+                                                                        "contents": "smaller",
+                                                                        "tag": "FVar"
+                                                                    },
+                                                                    {
+                                                                        "contents": [
+                                                                            {
+                                                                                "contents": "a",
+                                                                                "tag": "FVar"
+                                                                            },
+                                                                            {
+                                                                                "contents": 51,
+                                                                                "tag": "FConstant"
+                                                                            }
+                                                                        ],
+                                                                        "tag": "FPair"
+                                                                    }
+                                                                ],
+                                                                "tag": "FApply"
+                                                            }
+                                                        ],
+                                                        "tag": "FMul"
+                                                    },
+                                                    {
+                                                        "contents": 4,
+                                                        "tag": "FConstant"
+                                                    }
+                                                ],
+                                                "tag": "FMul"
+                                            },
+                                            {
+                                                "contents": [
+                                                    {
+                                                        "contents": [
+                                                            {
+                                                                "contents": "equal",
+                                                                "tag": "FVar"
+                                                            },
+                                                            {
+                                                                "contents": [
+                                                                    {
+                                                                        "contents": "a",
+                                                                        "tag": "FVar"
+                                                                    },
+                                                                    {
+                                                                        "contents": 75,
+                                                                        "tag": "FConstant"
+                                                                    }
+                                                                ],
+                                                                "tag": "FPair"
+                                                            }
+                                                        ],
+                                                        "tag": "FApply"
+                                                    },
+                                                    {
+                                                        "contents": 10,
+                                                        "tag": "FConstant"
+                                                    }
+                                                ],
+                                                "tag": "FMul"
+                                            }
+                                        ],
+                                        "tag": "FAdd"
+                                    },
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": [
+                                                    {
+                                                        "contents": [
+                                                            {
+                                                                "contents": "isInteger",
+                                                                "tag": "FVar"
+                                                            },
+                                                            {
+                                                                "contents": [
+                                                                    {
+                                                                        "contents": "a",
+                                                                        "tag": "FVar"
+                                                                    },
+                                                                    {
+                                                                        "contents": 50,
+                                                                        "tag": "FConstant"
+                                                                    }
+                                                                ],
+                                                                "tag": "FDiv"
+                                                            }
+                                                        ],
+                                                        "tag": "FApply"
+                                                    },
+                                                    {
+                                                        "contents": [
+                                                            {
+                                                                "contents": "larger",
+                                                                "tag": "FVar"
+                                                            },
+                                                            {
+                                                                "contents": [
+                                                                    {
+                                                                        "contents": "a",
+                                                                        "tag": "FVar"
+                                                                    },
+                                                                    {
+                                                                        "contents": 75,
+                                                                        "tag": "FConstant"
+                                                                    }
+                                                                ],
+                                                                "tag": "FPair"
+                                                            }
+                                                        ],
+                                                        "tag": "FApply"
+                                                    }
+                                                ],
+                                                "tag": "FMul"
+                                            },
+                                            {
+                                                "contents": 20,
+                                                "tag": "FConstant"
+                                            }
+                                        ],
+                                        "tag": "FMul"
+                                    }
+                                ],
+                                "tag": "FAdd"
+                            },
+                            {
+                                "contents": [
+                                    {
+                                        "contents": "larger",
+                                        "tag": "FVar"
+                                    },
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": "a",
+                                                "tag": "FVar"
+                                            },
+                                            {
+                                                "contents": 0,
+                                                "tag": "FConstant"
+                                            }
+                                        ],
+                                        "tag": "FPair"
+                                    }
+                                ],
+                                "tag": "FApply"
+                            }
+                        ],
+                        "tag": "FMul"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "226": {
+                "nodeColor": "black",
+                "nodeLabel": "12$",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "107": {
+                "nodeColor": "black",
+                "nodeLabel": "Saint Quartz",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "333": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "209": {
+                "nodeColor": "black",
+                "nodeLabel": "Maintenance Compensation",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "303": {
+                "nodeColor": "black",
+                "nodeLabel": "4-Star",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "243": {
+                "nodeColor": "black",
+                "nodeLabel": "Chance to buy each day (0-100%)",
+                "nodeTy": {
+                    "limits": {
+                        "lower": 100,
+                        "upper": 0
+                    },
+                    "initial": 2,
+                    "tag": "RegisterInteractive",
+                    "currentValue": 2,
+                    "step": 1
+                }
+            },
+            "225": {
+                "nodeColor": "black",
+                "nodeLabel": "4$",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "211": {
+                "nodeColor": "black",
+                "nodeLabel": "Main Quest Progress",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "112": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Drain"
+                }
+            }
+        },
+        "resourceEdges": {
+            "214": {
+                "to": 107,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "tag": "RFAll"
+                },
+                "from": 212,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "348": {
+                "to": 346,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 2,
+                    "tag": "RFConstant"
+                },
+                "from": 224,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "242": {
+                "to": 329,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 247,
+                    "tag": "RFConstant"
+                },
+                "from": 229,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "InstantTransfer"
+            },
+            "206": {
+                "to": 107,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 0,
+                    "tag": "RFConstant"
+                },
+                "from": 203,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "307": {
+                "to": 304,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 300,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "230": {
+                "to": 224,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 100,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 222,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "108": {
+                "to": 107,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 0,
+                    "tag": "RFConstant"
+                },
+                "from": 106,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "350": {
+                "to": 300,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 10,
+                    "tag": "RFConstant"
+                },
+                "from": 349,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "237": {
+                "to": 236,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 346,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "InstantTransfer"
+            },
+            "336": {
+                "to": 331,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 40,
+                    "tag": "RFConstant"
+                },
+                "from": 333,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "245": {
+                "to": 107,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "tag": "RFAll"
+                },
+                "from": 236,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "InstantTransfer"
+            },
+            "344": {
+                "to": 343,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 9,
+                    "tag": "RFConstant"
+                },
+                "from": 225,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "223": {
+                "to": 222,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 0,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 221,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "213": {
+                "to": 212,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 2,
+                    "tag": "RFConstant"
+                },
+                "from": 211,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "231": {
+                "to": 225,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 100,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 222,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "330": {
+                "to": 236,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 167,
+                    "tag": "RFConstant"
+                },
+                "from": 329,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "234": {
+                "to": 228,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 100,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 222,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "335": {
+                "to": 333,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 116,
+                    "tag": "RFConstant"
+                },
+                "from": 228,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "345": {
+                "to": 331,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 4,
+                    "tag": "RFConstant"
+                },
+                "from": 343,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "121": {
+                "to": 120,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 7,
+                    "tag": "RFConstant"
+                },
+                "from": 119,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "301": {
+                "to": 349,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 30,
+                    "tag": "RFConstant"
+                },
+                "from": 107,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "235": {
+                "to": 229,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 100,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 222,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "114": {
+                "to": 112,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 7,
+                    "tag": "RFConstant"
+                },
+                "from": 103,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "InstantTransfer"
+            },
+            "334": {
+                "to": 236,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 76,
+                    "tag": "RFConstant"
+                },
+                "from": 333,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "238": {
+                "to": 236,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 5,
+                    "tag": "RFConstant"
+                },
+                "from": 343,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "InstantTransfer"
+            },
+            "339": {
+                "to": 337,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 65,
+                    "tag": "RFConstant"
+                },
+                "from": 227,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "122": {
+                "to": 107,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 120,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "341": {
+                "to": 331,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 12,
+                    "tag": "RFConstant"
+                },
+                "from": 340,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "305": {
+                "to": 302,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 40,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 300,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "240": {
+                "to": 236,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 41,
+                    "tag": "RFConstant"
+                },
+                "from": 337,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "InstantTransfer"
+            },
+            "210": {
+                "to": 107,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": [
+                        {
+                            "contents": 1,
+                            "tag": "RFConstant"
+                        },
+                        {
+                            "contents": [
+                                {
+                                    "contents": 1,
+                                    "tag": "RFConstant"
+                                },
+                                {
+                                    "contents": 6,
+                                    "tag": "RFConstant"
+                                }
+                            ],
+                            "tag": "RFDice"
+                        }
+                    ],
+                    "tag": "RFAdd"
+                },
+                "from": 209,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "232": {
+                "to": 226,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 100,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 222,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "239": {
+                "to": 236,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 18,
+                    "tag": "RFConstant"
+                },
+                "from": 340,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "InstantTransfer"
+            },
+            "118": {
+                "to": 119,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 2,
+                    "tag": "RFConstant"
+                },
+                "from": 115,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "338": {
+                "to": 331,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 24,
+                    "tag": "RFConstant"
+                },
+                "from": 337,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "347": {
+                "to": 331,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 346,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "202": {
+                "to": 201,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 102,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "342": {
+                "to": 340,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 30,
+                    "tag": "RFConstant"
+                },
+                "from": 226,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "306": {
+                "to": 303,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 3,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 300,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "104": {
+                "to": 103,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 102,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "233": {
+                "to": 227,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 100,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 222,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "332": {
+                "to": 331,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 80,
+                    "tag": "RFConstant"
+                },
+                "from": 329,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

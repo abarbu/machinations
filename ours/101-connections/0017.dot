@@ -1,20 +1,20 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "130" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "131" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "132" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "133" [shape=invtriangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "144" [shape=invtriangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "403" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "130" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>130</FONT>>,labelfontcolor=black,color=black];
+  "131" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>131</FONT>>,labelfontcolor=black,color=black];
+  "132" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>132</FONT>>,labelfontcolor=black,color=black];
+  "133" [shape=invtriangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>133</FONT>>,labelfontcolor=black,color=black];
+  "144" [shape=invtriangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>144</FONT>>,labelfontcolor=black,color=black];
+  "403" [label=<1<FONT POINT-SIZE='4'>403</FONT>>,peripheries="1",color=black,shape=septagon];
   "130" -> "403" [color=black];
   "403" -> "131" [color=black];
-  "405" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "405" [label=<1<FONT POINT-SIZE='4'>405</FONT>>,peripheries="1",color=black,shape=septagon];
   "131" -> "405" [color=black];
   "405" -> "144" [color=black];
-  "406" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "406" [label=<1<FONT POINT-SIZE='4'>406</FONT>>,peripheries="1",color=black,shape=septagon];
   "132" -> "406" [color=black];
   "406" -> "133" [color=black];
-  "404" [label=<+5>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "404" [label=<+5<FONT POINT-SIZE='4'>404</FONT>>,peripheries="1",color=black,style=dashed,shape=septagon];
   "131" -> "404" [style=dashed,color=black];
   "404" -> "132" [style=dashed,color=black];
 }

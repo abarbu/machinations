@@ -1,24 +1,24 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "52" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "53" [shape=star,peripheries="1",label="",labelfontcolor=black,color=black];
-  "55" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "57" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "58" [shape=circle,peripheries="1",label=<10>,labelfontcolor=Black,color=black];
-  "61" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "54" [label=<5>,peripheries="2",color=Blue,shape=septagon];
+  "52" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>52</FONT>>,labelfontcolor=black,color=black];
+  "53" [shape=star,peripheries="1",label=<<FONT POINT-SIZE='4'>53</FONT>>,labelfontcolor=black,color=black];
+  "55" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>55</FONT>>,labelfontcolor=black,color=black];
+  "57" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>57</FONT>>,labelfontcolor=black,color=black];
+  "58" [shape=circle,peripheries="1",label=<10<FONT POINT-SIZE='4'>58</FONT>>,labelfontcolor=Black,color=black];
+  "61" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>61</FONT>>,labelfontcolor=black,color=black];
+  "54" [label=<5<FONT POINT-SIZE='4'>54</FONT>>,peripheries="2",color=Blue,shape=septagon];
   "52" -> "54" [color=Blue];
   "54" -> "53" [color=Blue];
-  "56" [label=<1>,peripheries="2",color=Blue,shape=septagon];
+  "56" [label=<1<FONT POINT-SIZE='4'>56</FONT>>,peripheries="2",color=Blue,shape=septagon];
   "53" -> "56" [color=Blue];
   "56" -> "55" [color=Blue];
-  "59" [label=<1>,peripheries="2",color=Black,shape=septagon];
+  "59" [label=<1<FONT POINT-SIZE='4'>59</FONT>>,peripheries="2",color=Black,shape=septagon];
   "53" -> "59" [color=Black];
   "59" -> "57" [color=Black];
-  "60" [label=<1>,peripheries="2",color=Black,shape=septagon];
+  "60" [label=<1<FONT POINT-SIZE='4'>60</FONT>>,peripheries="2",color=Black,shape=septagon];
   "58" -> "60" [color=Black];
   "60" -> "53" [color=Black];
-  "62" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "62" [label=<1<FONT POINT-SIZE='4'>62</FONT>>,peripheries="1",color=black,shape=septagon];
   "61" -> "62" [color=black];
   "62" -> "52" [color=black];
 }

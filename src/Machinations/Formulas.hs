@@ -62,7 +62,8 @@ cOperatorTable :: [[Operator Parser ResourceConstraint]]
 cOperatorTable =
   [ [ binary "" RCApply ]
   , [ binary "==" RCEq ]
-  , [ binary "&&" RCAnd ]
+  , [ binary "&&" RCAnd
+    , binary "||" RCOr ]
   ]
 
 parseC :: Text -> Maybe ResourceConstraint
@@ -112,7 +113,9 @@ rOperatorTable =
   ]
 
 -- | Parses plain RFs as they are in machinations
-parseRFWithoutConstraints "" = pure $ RFConstant 0 -- Machinations allows empty edges :(
+parseRFWithoutConstraints "" =
+  -- Empty edges in Machinations contain an implicit 1
+  pure $ RFConstant 1
 parseRFWithoutConstraints "all" = Just RFAll
 parseRFWithoutConstraints s = parseMaybe (rExpr <* eof) s
 

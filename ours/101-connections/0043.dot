@@ -1,16 +1,16 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "335" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "336" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "337" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "339" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "338" [label=<1 | RFConstant 3>,peripheries="1",color=black,shape=septagon];
+  "335" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>335</FONT>>,labelfontcolor=black,color=black];
+  "336" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>336</FONT>>,labelfontcolor=black,color=black];
+  "337" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>337</FONT>>,labelfontcolor=black,color=black];
+  "339" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>339</FONT>>,labelfontcolor=black,color=black];
+  "338" [label=<1 | RFConstant 3<FONT POINT-SIZE='4'>338</FONT>>,peripheries="1",color=black,shape=septagon];
   "336" -> "338" [color=black];
   "338" -> "337" [color=black];
-  "340" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "340" [label=<1<FONT POINT-SIZE='4'>340</FONT>>,peripheries="1",color=black,shape=septagon];
   "335" -> "340" [color=black];
   "340" -> "339" [color=black];
-  "341" [label=<*>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "341" [label=<*<FONT POINT-SIZE='4'>341</FONT>>,peripheries="1",color=black,style=dashed,shape=septagon];
   "337" -> "341" [style=dashed,color=black];
   "341" -> "335" [style=dashed,color=black];
 }

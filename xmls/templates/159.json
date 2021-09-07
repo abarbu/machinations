@@ -1,0 +1,889 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "pendingTriggers": [],
+    "graph": {
+        "stateEdges": {
+            "43": {
+                "stateFormula": {
+                    "tag": "SFTrigger"
+                },
+                "to": 40,
+                "active": false,
+                "from": 4
+            },
+            "25": {
+                "stateFormula": {
+                    "contents": "L",
+                    "tag": "SFVariable"
+                },
+                "to": 24,
+                "active": false,
+                "from": 4
+            },
+            "18": {
+                "stateFormula": {
+                    "contents": [
+                        "CEqual",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 37,
+                "active": false,
+                "from": 5
+            },
+            "42": {
+                "to": 41,
+                "active": false,
+                "from": 24
+            },
+            "8": {
+                "stateFormula": {
+                    "tag": "SFTrigger"
+                },
+                "to": 9,
+                "active": false,
+                "from": 4
+            },
+            "19": {
+                "stateFormula": {
+                    "tag": "SFTrigger"
+                },
+                "to": 20,
+                "active": false,
+                "from": 35
+            },
+            "28": {
+                "stateFormula": {
+                    "contents": [
+                        "CEqual",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 27,
+                "active": false,
+                "from": 20
+            },
+            "16": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": {
+                            "contents": 20,
+                            "tag": "SFConstant"
+                        },
+                        "tag": "SFPercentage"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 7,
+                "active": false,
+                "from": 14
+            },
+            "17": {
+                "stateFormula": {
+                    "contents": [
+                        "CGt",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 31,
+                "active": false,
+                "from": 5
+            }
+        },
+        "vertices": {
+            "4": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "6b245daf-f4d8-438d-8355-a5a1a226075c",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "37": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "9": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Orange"
+                    ],
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "24": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": [
+                            {
+                                "contents": "floor",
+                                "tag": "FVar"
+                            },
+                            {
+                                "contents": [
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": 17.5,
+                                                "tag": "FConstant"
+                                            },
+                                            {
+                                                "contents": [
+                                                    {
+                                                        "contents": "pow",
+                                                        "tag": "FVar"
+                                                    },
+                                                    {
+                                                        "contents": [
+                                                            {
+                                                                "contents": 1.39,
+                                                                "tag": "FConstant"
+                                                            },
+                                                            {
+                                                                "contents": [
+                                                                    {
+                                                                        "contents": "min",
+                                                                        "tag": "FVar"
+                                                                    },
+                                                                    {
+                                                                        "contents": [
+                                                                            {
+                                                                                "contents": [
+                                                                                    {
+                                                                                        "contents": "L",
+                                                                                        "tag": "FVar"
+                                                                                    },
+                                                                                    {
+                                                                                        "contents": 10,
+                                                                                        "tag": "FConstant"
+                                                                                    }
+                                                                                ],
+                                                                                "tag": "FDiv"
+                                                                            },
+                                                                            {
+                                                                                "contents": 115,
+                                                                                "tag": "FConstant"
+                                                                            }
+                                                                        ],
+                                                                        "tag": "FPair"
+                                                                    }
+                                                                ],
+                                                                "tag": "FApply"
+                                                            }
+                                                        ],
+                                                        "tag": "FPair"
+                                                    }
+                                                ],
+                                                "tag": "FApply"
+                                            }
+                                        ],
+                                        "tag": "FMul"
+                                    },
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": "pow",
+                                                "tag": "FVar"
+                                            },
+                                            {
+                                                "contents": [
+                                                    {
+                                                        "contents": 1.13,
+                                                        "tag": "FConstant"
+                                                    },
+                                                    {
+                                                        "contents": [
+                                                            {
+                                                                "contents": "max",
+                                                                "tag": "FVar"
+                                                            },
+                                                            {
+                                                                "contents": [
+                                                                    {
+                                                                        "contents": [
+                                                                            {
+                                                                                "contents": [
+                                                                                    {
+                                                                                        "contents": "L",
+                                                                                        "tag": "FVar"
+                                                                                    },
+                                                                                    {
+                                                                                        "contents": 10,
+                                                                                        "tag": "FConstant"
+                                                                                    }
+                                                                                ],
+                                                                                "tag": "FDiv"
+                                                                            },
+                                                                            {
+                                                                                "contents": 115,
+                                                                                "tag": "FConstant"
+                                                                            }
+                                                                        ],
+                                                                        "tag": "FSub"
+                                                                    },
+                                                                    {
+                                                                        "contents": 0,
+                                                                        "tag": "FConstant"
+                                                                    }
+                                                                ],
+                                                                "tag": "FPair"
+                                                            }
+                                                        ],
+                                                        "tag": "FApply"
+                                                    }
+                                                ],
+                                                "tag": "FPair"
+                                            }
+                                        ],
+                                        "tag": "FApply"
+                                    }
+                                ],
+                                "tag": "FMul"
+                            }
+                        ],
+                        "tag": "FApply"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "12": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAll",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "27": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "tag": "EndCondition"
+                }
+            },
+            "31": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "40": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "32": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "80741ddc-d21c-4616-ac86-1975f3a50281",
+                            "tag": "Red"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "10": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "6": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Drain"
+                }
+            },
+            "35": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "14": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "5": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "20": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "00321581-5332-4b35-92eb-665f1bbeb36d",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "0436bb4d-909c-48ca-841b-3cd590fcc099",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "0809bdc4-3f26-4b2a-8421-b9c4b095ad7d",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "101ce98d-af47-4e3e-9740-e81ac918714f",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "167f5eb5-e8ae-4061-b76a-1617a907d3ec",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "1c2306fb-2117-489a-8e6e-217e1c28a9dc",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "1c8fd40c-8834-4513-86fa-dd938dbca2c2",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "1fb4efe4-2f8d-4446-b520-013119c78eee",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "29118ece-4be8-4d35-affa-9b6351b04ee1",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "2927bac4-6423-4eb2-8f7e-aa4d302dda3e",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "29790a50-5054-4701-846b-6fc90b747d11",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "2b0f7d2d-830e-4e1a-a4be-2154df40f73c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "2bbc74e3-d19b-46da-9feb-e1ece3dfecd1",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "2f6705e8-75f8-4af5-8cfa-d02666887506",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "30bea182-fa40-4e27-88da-21c8bc9008b5",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "34774160-2e46-47df-adae-4a1832e858ee",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "374bdd7e-58c4-4067-9470-d37c0573b86c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "431b6662-8c03-46a2-9e3e-6a7accc82464",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "441c0722-6c91-49d3-9097-eb8f6d52e842",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "4c707ac7-46a8-4e47-abf7-a9287263b741",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "4e157ec1-71d7-4d1d-a4c0-c1dd70486626",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "628fab3b-6088-439f-9273-e7a396635b2a",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "63047e05-b5ed-4924-a3d4-37001b4a08fa",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "652cfeb8-29d9-46ab-b0a9-04bcc54c8377",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "653be9e4-6bea-4948-b88b-0697a9ef8356",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "6d988091-dbd0-4d27-a764-448bf164fdb5",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "7f070118-fadd-443e-9c2f-7f2656e6ddb3",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "8271a2f0-6109-4b76-bd8b-c88788483f0a",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "832afff4-02a0-4eda-a9ee-69a19a13fcd9",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "8faf4a4c-fec0-4e0a-b74b-fc1c9c303875",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "90701b5a-c8cd-4d9e-94b3-faf5fede6297",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "910105e7-c5c0-4e86-ab5a-bbeef94beb51",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "95e48fbb-0da9-4c60-8e36-ed8675def028",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "965ba665-7d0a-4c8c-8a02-abf88d041dad",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "9af47387-de0c-4e80-b6c2-cd003ef2b91e",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "9befcb59-fef2-4765-bead-80ff07251175",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "a97a4101-c7ac-47d9-afa5-8b14573e01ff",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "afb358da-b040-425e-8d5a-55d0d1dbdc8c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "b3a6ee5b-6081-4140-94be-e805c7269011",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "bab58cb8-a466-43ee-827b-0f021fea97f0",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "bcef7356-c206-453d-9c88-b29b273244dd",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "bf015bb2-b9c7-40f5-a546-e4517013c5f7",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "c29ca8e4-9cd0-4b3e-8a14-6f2db4f01189",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "c654b5d5-ab8b-47a8-9baf-cd4a564a093f",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "c6819e13-a14a-4e45-bf1b-adab88ab2d8f",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "cfb658dd-40c5-4030-9e67-77a5ae6ce750",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "d1fd1794-8575-402e-b6d7-b078df6f55ea",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "d27eff32-b7ea-4dbc-a564-f954250901ae",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "d845c7e1-7033-4df1-8071-d23acbbde0a7",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "d851c7ae-d83c-4c1b-b94e-98397ecfdbba",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "dd070169-3559-42ac-8ba7-2a16cc8488a9",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "e5f0de71-bdc4-4df6-9be6-9aac237a7cfe",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "e73df9f3-3577-49c9-9671-36c440ab00cd",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "e7784abc-26e9-4335-86bd-0ab6697a1aa2",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "f723265f-a826-4a4a-b43a-97f10d7f9c12",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "f915b5ff-79e5-4e34-8469-46b728172bb8",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "fb9b99b1-f4db-4241-99a0-1495694b401f",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "fd0467bd-3b73-4e6c-9a8a-0aee62c63cb1",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "fe05080d-46d1-4938-9954-361dcb85e8c2",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "ff63d728-faf4-4894-951c-d9d410d5c320",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            }
+        },
+        "resourceEdges": {
+            "15": {
+                "to": 14,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 12,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "41": {
+                "to": 5,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 0,
+                    "tag": "RFConstant"
+                },
+                "from": 40,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "13": {
+                "to": 12,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 6,
+                    "tag": "RFConstant"
+                },
+                "from": 10,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "34": {
+                "to": 31,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 35,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "InstantTransfer"
+            },
+            "7": {
+                "to": 6,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": [
+                        {
+                            "contents": 1,
+                            "tag": "RFConstant"
+                        },
+                        {
+                            "contents": 3,
+                            "tag": "RFConstant"
+                        }
+                    ],
+                    "tag": "RFDice"
+                },
+                "from": 5,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "21": {
+                "to": 4,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 20,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "38": {
+                "to": 37,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 32,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "InstantTransfer"
+            },
+            "33": {
+                "to": 32,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 31,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "InstantTransfer"
+            },
+            "11": {
+                "to": 10,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 9,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "36": {
+                "to": 35,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 37,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "InstantTransfer"
+            }
+        }
+    },
+    "time": 0
+}

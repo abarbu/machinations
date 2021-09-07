@@ -64,6 +64,8 @@ deriving newtype instance ToSchema ResourceEdgeLabel
 deriving newtype instance ToSchema StateEdgeLabel
 instance ToSchema ResourceConstraint where
   declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions (prefixOptions "RC"))
+instance ToSchema Collision where
+  declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions (prefixOptions "collision"))
 instance ToSchema Condition where
   declareNamedSchema = genericDeclareNamedSchema (fromAesonOptions mjsonOptions)
 instance ToSchema Machination where

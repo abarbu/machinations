@@ -1,16 +1,16 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "271" [shape=triangle,peripheries="1",label="",labelfontcolor=black,color=black];
-  "272" [shape=diamond,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "273" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "275" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "270" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "271" [shape=triangle,peripheries="1",label=<<FONT POINT-SIZE='4'>271</FONT>>,labelfontcolor=black,color=black];
+  "272" [shape=diamond,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>272</FONT>>,labelfontcolor=black,color=black];
+  "273" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>273</FONT>>,labelfontcolor=black,color=black];
+  "275" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>275</FONT>>,labelfontcolor=black,color=black];
+  "270" [label=<1<FONT POINT-SIZE='4'>270</FONT>>,peripheries="1",color=black,shape=septagon];
   "271" -> "270" [color=black];
   "270" -> "272" [color=black];
-  "274" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "274" [label=<1<FONT POINT-SIZE='4'>274</FONT>>,peripheries="1",color=black,shape=septagon];
   "272" -> "274" [color=black];
   "274" -> "273" [color=black];
-  "276" [label=<50%>,peripheries="1",color=black,shape=septagon];
+  "276" [label=<50%<FONT POINT-SIZE='4'>276</FONT>>,peripheries="1",color=black,shape=septagon];
   "272" -> "276" [color=black];
   "276" -> "275" [color=black];
 }

@@ -1,24 +1,24 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "74" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "75" [shape=star,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "77" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "79" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "80" [shape=circle,peripheries="1",label=<10>,labelfontcolor=Black,color=black];
-  "83" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "76" [label=<5>,peripheries="2",color=Blue,shape=septagon];
+  "74" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>74</FONT>>,labelfontcolor=black,color=black];
+  "75" [shape=star,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>75</FONT>>,labelfontcolor=black,color=black];
+  "77" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>77</FONT>>,labelfontcolor=black,color=black];
+  "79" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>79</FONT>>,labelfontcolor=black,color=black];
+  "80" [shape=circle,peripheries="1",label=<10<FONT POINT-SIZE='4'>80</FONT>>,labelfontcolor=Black,color=black];
+  "83" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>83</FONT>>,labelfontcolor=black,color=black];
+  "76" [label=<5<FONT POINT-SIZE='4'>76</FONT>>,peripheries="2",color=Blue,shape=septagon];
   "74" -> "76" [color=Blue];
   "76" -> "75" [color=Blue];
-  "78" [label=<1>,peripheries="2",color=Blue,shape=septagon];
+  "78" [label=<1<FONT POINT-SIZE='4'>78</FONT>>,peripheries="2",color=Blue,shape=septagon];
   "75" -> "78" [color=Blue];
   "78" -> "77" [color=Blue];
-  "81" [label=<1>,peripheries="2",color=Black,shape=septagon];
+  "81" [label=<1<FONT POINT-SIZE='4'>81</FONT>>,peripheries="2",color=Black,shape=septagon];
   "75" -> "81" [color=Black];
   "81" -> "79" [color=Black];
-  "82" [label=<1>,peripheries="2",color=Black,shape=septagon];
+  "82" [label=<1<FONT POINT-SIZE='4'>82</FONT>>,peripheries="2",color=Black,shape=septagon];
   "80" -> "82" [color=Black];
   "82" -> "75" [color=Black];
-  "84" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "84" [label=<1<FONT POINT-SIZE='4'>84</FONT>>,peripheries="1",color=black,shape=septagon];
   "83" -> "84" [color=black];
   "84" -> "74" [color=black];
 }

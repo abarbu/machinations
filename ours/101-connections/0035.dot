@@ -1,16 +1,16 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "263" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "264" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "265" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "267" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "266" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "263" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>263</FONT>>,labelfontcolor=black,color=black];
+  "264" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>264</FONT>>,labelfontcolor=black,color=black];
+  "265" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>265</FONT>>,labelfontcolor=black,color=black];
+  "267" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>267</FONT>>,labelfontcolor=black,color=black];
+  "266" [label=<1<FONT POINT-SIZE='4'>266</FONT>>,peripheries="1",color=black,shape=septagon];
   "264" -> "266" [color=black];
   "266" -> "265" [color=black];
-  "268" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "268" [label=<1<FONT POINT-SIZE='4'>268</FONT>>,peripheries="1",color=black,shape=septagon];
   "263" -> "268" [color=black];
   "268" -> "267" [color=black];
-  "269" [label=<&gt;=3>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "269" [label=<&gt;=3<FONT POINT-SIZE='4'>269</FONT>>,peripheries="1",color=black,style=dashed,shape=septagon];
   "265" -> "269" [style=dashed,color=black];
   "269" -> "263" [style=dashed,color=black];
 }

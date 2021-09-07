@@ -1,0 +1,1472 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "pendingTriggers": [],
+    "graph": {
+        "stateEdges": {
+            "32": {
+                "stateFormula": {
+                    "contents": [
+                        "CGt",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 16,
+                "active": false,
+                "from": 31
+            }
+        },
+        "vertices": {
+            "18": {
+                "nodeColor": "black",
+                "nodeLabel": "House",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAll",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "24": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "waitingResources": [],
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Queue"
+                }
+            },
+            "30": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "waitingResources": [],
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Delay"
+                }
+            },
+            "12": {
+                "nodeColor": "black",
+                "nodeLabel": "Soldier",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Red"
+                    ],
+                    "pullAction": "PullAll",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "22": {
+                "nodeColor": "black",
+                "nodeLabel": "Tower",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Orange"
+                    ],
+                    "pullAction": "PullAll",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "28": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "waitingResources": [],
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Delay"
+                }
+            },
+            "31": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "16": {
+                "nodeColor": "black",
+                "nodeLabel": "Archer",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Blue"
+                    ],
+                    "pullAction": "PullAll",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "26": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "waitingResources": [],
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Delay"
+                }
+            },
+            "10": {
+                "nodeColor": "black",
+                "nodeLabel": "Timber",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "01bc93be-2d27-4c87-a8eb-55b456315649",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "01f3830a-b3e8-4437-a4a0-c3d672c50238",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "02438a13-bd5b-4939-ba7f-793292050c67",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "0597b1de-f132-4d66-9be7-242c6c3d06aa",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "060112fd-a64a-40d1-b657-3d9ed25bd527",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "081c0340-e0d3-4982-aab4-434c480aea2c",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "0b2e1242-807e-4b7e-80b4-9b8c9a2cd192",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "0b34105f-9e08-4814-b621-45443448d504",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "0d4d852b-dcea-4e10-85b6-9d6bce6b3122",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "10f294ec-5fb0-4fdc-8d0f-90f61d7f3b22",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "1239226c-daf4-4a45-8d03-8c82a415bf6a",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "14c3cf05-4306-4a79-b082-4c3429be08bc",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "163d57dd-87b2-4698-bfb5-7f39af47cead",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "175cddc6-9347-40d4-a940-cd5557e70757",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "1f82a25f-9a1a-4dd6-8dc2-9db1aa414372",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "22bbaa1d-144b-4a81-ba8d-d94035c5c4e7",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "26e6b848-d863-467d-a725-c03e1d1a6138",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "28a99256-e3b6-482f-bdfd-bbe57e025d0b",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "2ceea581-db37-46fe-8455-7e8f5fe5cfc2",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "2f7ee283-faf2-491b-9386-bfc02175bb6b",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "2fba99f0-c8ff-47ff-9ee4-8893aa3d82df",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "33f1fe68-3aed-4d66-ad5d-a844fb8f43b5",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "34f70c3b-d382-4122-a478-b0e70dc24848",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "3c2b292e-45a6-4242-bcac-811577a00fef",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "3ed09255-3aeb-4b0d-b176-86f2ab46cd5d",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "4934dbcd-7c93-45df-b8f5-3f6d35f1eccf",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "4d91e02b-f685-410e-ab99-c49ff6bf4c70",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "4dfa383f-a924-4170-b8db-71deca35aabe",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "4e25b896-5cb3-4d3a-b0b3-a9199aa93ca3",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "4ec91166-cce2-46e2-8c18-ebb0bc03d8c6",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "4f6b2494-0dce-40f8-af79-2b5ae6e6ad01",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "4fe167a2-9fb8-4382-93d5-fe3dc32b1000",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "5020102a-d11b-4916-87fe-e7ab6ff16ea2",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "5056c9dd-46d7-4061-9511-3dfb57b9f353",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "5079cfe5-dfbb-4795-be8e-083e6ddd6038",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "538aaca9-c900-4aeb-aad7-7966d0aed65e",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "53ddf486-8e43-4bd3-b749-528c92271331",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "5a92eff1-9ed9-4ca9-b5c3-20494dd76b3f",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "5a9d2648-7652-4bb3-9306-abbbab152c5f",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "5b819932-17ba-4207-b8f6-a8a10828adb1",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "5b88fe85-d13c-4696-a564-87bce1296e78",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "5d1de5b1-3015-4428-a944-c401692224ac",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "5e0cdc97-12bc-4bee-b0c9-1cda2c6ec6ab",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "64614d7b-7386-4c4f-8bc4-7c216515f584",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "64c43bc6-8afe-4232-93b4-c87a9c87f349",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "694b28be-4b59-4b6a-bf21-4ec401a3ff5f",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "69a51e09-807c-4fd6-93d2-9a3b933e0875",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "6e2946cd-a1e5-4f0c-a8ae-91a1fc20fb7f",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "6ff7037d-7671-44ec-8136-9c82c5c98c7b",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "77113da9-4b81-4177-b820-9028df45d1e6",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "7b1e2368-54fd-403c-9c00-4c1eec2e1067",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "81f59f96-5420-4a82-aaed-3464c745d465",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "82e97070-43f3-42bc-ae2c-84c46b0a4295",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "83532179-6f06-4cbd-855f-52506cd9d39c",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "856a9286-b022-427e-9697-85fe2c441e70",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "8591808a-83cf-4d95-84e6-f0b3b5c296ae",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "86ebf67f-f628-4d04-b7b7-3bc0cae96b3b",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "888e700d-fd84-41c6-96d6-a4a4a3843340",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "8dfe9f09-5bb0-4e4c-a941-48cc8fba2a48",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "90eea9a5-36a0-4004-905f-cfa6b39d1a0d",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "91410516-d719-4068-8243-c55432b43433",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "93b3e16f-494a-4b6a-92ec-8388e021eb9b",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "93dcfdcd-ef56-4eaf-bb35-167ec12c7277",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "9434a710-8453-4368-9a08-bc123c229bdb",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "9489f5f3-6c9b-442e-86f0-f6bdc4b6f79f",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "949877c9-4187-425f-9785-425d25ae44d8",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "98cf709b-d9f8-4c54-9979-1d4ca2838915",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "990cb01e-2ec6-47fc-850e-6e57fafdab68",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "995cb29d-8fea-4005-b428-7edf0c7b9340",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "9a075cbf-bd90-4a74-9c03-791d2fbf8d4d",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "9a78012e-ff57-46b7-aad3-fe0ebc81986d",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "9c51f626-234c-4334-80e0-2c62e86eaa5b",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "9f3f87a0-c71c-4889-85bd-7d901a5affc9",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "9fdb67b5-65ed-4b15-ba31-edfeadc38562",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "a0cc52f2-2e4b-48c8-8068-dd72fab67355",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "a21f96c1-1d31-4476-b3de-4b2f5a3bc88a",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "a3a61106-a979-4313-ab68-a753d33807fd",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "a3d2ef44-1011-4b5f-b51c-9650f00c49e7",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "a79b85db-23af-47b8-a8c2-c038b0295297",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "a7fadc70-fd0a-46f9-80c8-24b12e5e33aa",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "a815e124-ac27-4dd5-befe-4d1cc6dba902",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "af4a2260-317a-44bb-b0dc-8940a26d83bf",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "af73594b-c440-43a4-a806-838960564df8",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "b0dfabb1-f67b-463a-9e35-a9d90d208d54",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "b445039e-42fc-4364-b4ec-cc72a31a61b1",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "b6185e67-405b-4ebc-b470-66d50d8b0078",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "bb0324d9-8538-422f-84ae-01b81b38e824",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "bb176e46-57e4-4b71-a305-6e0124dba693",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "bb32abb3-82e7-4a2d-9d37-080925776b02",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "bf6191f0-ecdb-4216-8021-5ab4b73cc2e8",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "bfb5c4d7-36db-4a93-bcf3-df4f922dffa6",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "c13b7e97-1b22-4c50-b753-32fda0a930af",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "c39213b3-31f8-46c3-9363-f6d23f4b8f60",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "c6275737-207b-42fc-8354-194b5a7f92e1",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "c866307b-268c-4db4-bff1-9a46284bb1ae",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "cd5cc0c8-bc7d-49eb-a2b4-f8a706e48467",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "cdcd7de2-3d81-49ff-9fc1-fb9d851aad7c",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "cf482268-05a3-401b-8bd6-550c9457b52d",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "d157029c-ffe8-47f0-8e52-dc46432a2164",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "d9e69789-ca0b-4c56-a5bd-e9fa17a199b1",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "df31f950-3a89-40f6-88c8-c6caf7e28450",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "df67e4b6-0c26-4a95-a6ce-210a3aa2b990",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "e1a3325c-7711-4c79-8869-3170f15f4a83",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "e520f566-8726-4c9a-a0bd-230bc771f6d9",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "e86386eb-9574-4d24-8724-5cf05986c08a",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "e8ecb497-1e24-4ecc-a0b5-76c00b1ca199",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "e9b1909d-8a36-4ba8-b473-90fa12b7aaf4",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "eb1b95c0-17da-412a-ad6d-8d39e74eb288",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "ee462c3d-3dd5-478c-8d1e-7eb72e285382",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "ef5d79a0-7cd3-418a-8ebb-c4c1e39ed6f4",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "eff3cb15-6267-4a5c-8625-d20374614c07",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "f195d5bd-7a6e-41f8-aef5-11814b55af71",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "f884baa0-fc3c-44da-a8a7-3d1e8e2251aa",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "f92d6571-6577-44c6-a6e0-f365ce572ea3",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "f9b25f94-2d65-4611-903a-b183f7a9155f",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "fa683ed2-4d7e-4b45-91ee-dd2140096334",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "fba23d4f-1d8c-40e7-89dd-df87a14de4f3",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "fd380ce4-0ddf-4964-9856-d48668400137",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "feba11e8-8a94-44a0-84ec-552b185849bc",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "ffa0f4ba-75ef-4119-bd8d-80764f764b6c",
+                            "tag": "Green"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "6": {
+                "nodeColor": "black",
+                "nodeLabel": "Gold",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "0001e020-8e0c-4991-995a-f7a55dd13ddb",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "01782322-5dff-436a-9f2c-24bbc95f9532",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "03fbe496-e36e-4cf6-87b6-e39b353b5a2d",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "079c9a48-2fd2-4c49-aa0a-8531552e400f",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "08f6e65d-a7bc-4103-86e2-8939ed7b42dd",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "0a7190a1-4d3c-43de-bad9-2fbdd29e9882",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "0c006f24-8a08-4a8b-910e-0bed15ed1c33",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "0defeb0f-e394-4e9a-9b32-5af742cf51ad",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "10e7d927-6297-466e-ad7e-c2ac8a2a8272",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "11d91ae5-5b0b-4cbb-b326-01a7175068b9",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "12894618-2d3d-405d-86e2-6e1d246a0ccd",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "133f2c06-1819-4904-a0cb-3af6649274cd",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "1710a525-e023-4cba-8018-ef04f0271720",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "2204db1f-7f1a-45c7-a218-9268f8b6ac43",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "2507ef5e-ebe1-453e-a0a0-6807444c8e93",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "25cc5184-8942-42c0-9954-4612046d0b9b",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "2aa68bf4-2153-4df3-ba53-8f053524f189",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "2cd13e6b-e77e-4be9-a2b0-a29633d8347a",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "2fd1445f-8ec2-4bbd-b092-78622bd1e3e4",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "314e5aff-fe4f-4409-93ad-3987b800a0d9",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "32827ab0-8187-41f0-a17a-bad40d03a03a",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "345789de-5886-4a32-8526-baa2f0b7a259",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "37f27d33-df77-4324-a0df-4aed9c844a8f",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "3884d1d6-c0e5-43cc-89a0-f924fcb6848e",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "399ec750-a5f1-4cfe-b895-ec98e65830b3",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "40e78f68-230b-4d64-95f4-e5f5ec3bbd21",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "4386c032-c755-41a6-a022-7a0520f29b04",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "46674d11-c221-4465-90be-52bc516dfdbc",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "47017cfa-d07e-409f-908a-a200a6f173bc",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "48bed682-aaa5-44eb-bab1-9963c15d2b48",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "4bc4019e-b288-4c18-b081-aaa67e491b7b",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "4c6fd98f-4602-4a7d-9ecb-ac1f231194fe",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "4dbd24b6-af3e-44e3-8d35-193e7a52e2e5",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "50732a07-9376-4048-a458-04790ed9b7dc",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "518cb9c6-b2e8-4d98-83a8-4ed9cc51a8f4",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "5a418c61-2812-4799-8e18-e7fbb0b0d83e",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "5a7f3d4a-7f8c-4918-bc60-980f4387072a",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "5d5c6d17-e456-4b44-aca5-8651bc2e07ed",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "5dad6638-ee41-4231-bc6e-8cbe93eb9bab",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "5dd6c1d5-58b0-42df-ab14-7fc245675c0a",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "5f84525a-4fe0-4daf-9344-e3041eb772d3",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "6209a8d7-4cb4-48a2-b419-2f82baa2430a",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "65b44be9-2330-4889-aa3b-311ad63af433",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "663eed88-8b51-464b-bd7b-f92848f5206d",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "721eee02-0b8b-4b07-8005-9ef8bfa1fe79",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "74f9a16c-dad3-4c8d-b403-b237a88d9178",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "750e9b0b-68cd-4813-9a12-9e4e64495718",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "75f413d0-8193-471e-a96e-481d7fe5de71",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "76834804-624e-44a3-97fa-ce5dce67a32c",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "788a34c2-bdff-418f-8155-595a1604f785",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "78fa5a19-aa30-4211-9a0d-0156165d4f78",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "7901bb28-7598-4cf7-afa7-edfb6cac8485",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "7bfcf9f0-75d1-4654-84b1-538022486ddf",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "7c528f3e-a0e1-4371-81e2-dab5c8699492",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "7ee3b801-49dd-4ccd-9715-9cf19c11b738",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "83c3476c-f80b-4afc-89ca-e6088211b52c",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "843fd3dc-0231-47bd-94fb-767e38c1e0d1",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "84f265c1-c170-499c-b2f2-53549b9d78fa",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "89249689-c4df-4c4c-8cb6-720cddb6a014",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "89ee4bb4-dd48-4a06-b397-4c4a13168db3",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "8e692040-5a17-4af4-a288-2994619f7a6b",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "8f9ec37b-268a-4a88-b695-1b433ee51d82",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "8fc02e24-99b5-4e2e-a69c-edd3ad2fca3f",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "917c6289-30ea-4738-ae49-e62e412f5363",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "93541390-8d33-48eb-8796-b59d28e6a64c",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "93be3919-b10e-4f07-80cf-f8769ba98062",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "95a71900-e1de-47d1-bd63-ff9501a9c41f",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "95dfe79d-dc9d-4ffd-a43c-b856724e0690",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "9bb79d2a-2f18-4f38-846b-693a563ec534",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "a663badb-d50e-4f77-b6d9-b9639f8ad1c6",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "a7b3137a-3478-402f-9460-6df97e31ae3d",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "a8299e37-9b21-4d7e-a1ad-2fddae5782ec",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "aa11bb77-5be1-4fe2-82bc-96949728b80d",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "aa181a43-c012-4347-a820-d81b860f8c21",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "aa9f97fb-5f17-4ed6-94b2-a6f952721979",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "ac35390b-b3d4-41b2-bc39-475485d7c183",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "aeea2e91-c57c-41b0-9f00-762db8618ab1",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "b3d7fb54-fdec-45df-b574-a16bd35c9072",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "b423c00d-849f-4271-9798-0db43d9aa1e8",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "b90c4bff-a52d-4877-b372-f4557755d970",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "ba52a088-b8fb-45fb-8716-1b10e4a64b18",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "ba81f1a8-bf85-4be3-916d-18f927eec5f6",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "bfc4322d-fa4e-4cc1-bb66-4f1fc6d869fe",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "c02163b6-3aa8-471e-a491-41d67f656aa8",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "c094e39b-68a5-4ef8-a224-2ec1d4fa89ea",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "c5096bd6-a2c8-4e5c-b869-25d04c900463",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "c6c1b802-6875-4115-ba91-c4008ad05647",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "c767ba8a-8b33-4890-a58a-bc66b46ac1c8",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "c93b8204-d158-465c-b518-91457896db66",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "ca3e6b04-8493-495c-b031-abe99e57a97a",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "cbd36160-cbca-4287-a313-909c87998320",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "cbd83043-8121-4d25-b568-28849e32526f",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "ceb61560-9988-4916-8230-f139d75944b3",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "cf5b26b5-0c28-4786-add9-c6063112ab48",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "cfb63da9-a88a-4e04-bc97-e5467ff8658b",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "d1cae8e5-3b32-40a3-8d95-7003e48b5c4c",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "d52cb763-876f-48e4-8079-db2eb3b38fe4",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "d8f928fa-13e3-469b-82f0-530f7931696c",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "d9063d25-3223-49ec-b3a7-670487cdda98",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "d9a62d4c-9147-4b2d-b383-a993f03928a4",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "dad40838-43cc-4681-8a02-c5c244c776d2",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "df6c7479-df8e-4aa7-a656-fb0114144202",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "dfa09494-c2cd-4eb2-b03a-fa5eead3ab77",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "e17f1f7d-f011-4647-8912-38108a50fa71",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "e4898a2e-8586-4d8f-8afa-49b861664192",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "e529b33a-50e1-4dee-a81d-64181a715bbb",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "e6dbee69-4b0e-4ff8-a0b6-887178fb605c",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "e8b61e5d-551a-4f6f-a7c4-99d1c77f55f9",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "e91e3013-dce3-4988-ae2e-cbe1af6fc676",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "f093c6ff-3f69-4cf7-8e45-8f7367177c8a",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "f0bab3c6-1d33-42b5-bf59-688a13b9c6f7",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "f16e9d8c-cbf0-404c-9717-af20bad86cf8",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "f53e05d2-f378-4e4b-b0b0-a911c5411922",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "f5f06918-910e-4375-a61a-b6489cae7b4e",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "f839e811-30cd-4c42-8d96-ee22eaff4825",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "fa8bc03d-2b6a-4313-b505-b9b20e6e187b",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "fb4ff5ec-b7cd-4a4e-bb9a-a118316fd8e1",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "fee92072-bdce-4298-822a-a1ae9bb89f81",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "ff7d3637-63af-495a-97ec-e94b4fbaf56e",
+                            "tag": "Orange"
+                        },
+                        {
+                            "uUID": "ffbd294c-92e9-44f5-aa4d-77c72179d05b",
+                            "tag": "Orange"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "14": {
+                "nodeColor": "black",
+                "nodeLabel": "Units",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "20": {
+                "nodeColor": "black",
+                "nodeLabel": "Mill",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Green"
+                    ],
+                    "pullAction": "PullAll",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            }
+        },
+        "resourceEdges": {
+            "25": {
+                "to": 31,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 4,
+                    "tag": "RFConstant"
+                },
+                "from": 26,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "4": {
+                "to": 18,
+                "resourceFilter": "Orange",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 10,
+                    "tag": "RFConstant"
+                },
+                "from": 6,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "15": {
+                "to": 24,
+                "resourceFilter": "Blue",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 16,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "9": {
+                "to": 22,
+                "resourceFilter": "Green",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 4,
+                    "tag": "RFConstant"
+                },
+                "from": 10,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "23": {
+                "to": 14,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 2,
+                    "tag": "RFConstant"
+                },
+                "from": 24,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "29": {
+                "to": 31,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 3,
+                    "tag": "RFConstant"
+                },
+                "from": 30,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "3": {
+                "to": 16,
+                "resourceFilter": "Orange",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 2,
+                    "tag": "RFConstant"
+                },
+                "from": 6,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "8": {
+                "to": 20,
+                "resourceFilter": "Green",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 10,
+                    "tag": "RFConstant"
+                },
+                "from": 10,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "19": {
+                "to": 28,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 20,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "27": {
+                "to": 31,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 4,
+                    "tag": "RFConstant"
+                },
+                "from": 28,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "13": {
+                "to": 12,
+                "resourceFilter": "Orange",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 3,
+                    "tag": "RFConstant"
+                },
+                "from": 6,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "7": {
+                "to": 16,
+                "resourceFilter": "Green",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 10,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "17": {
+                "to": 26,
+                "resourceFilter": "Black",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 18,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "21": {
+                "to": 30,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 22,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "11": {
+                "to": 24,
+                "resourceFilter": "Red",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 12,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "5": {
+                "to": 22,
+                "resourceFilter": "Orange",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 6,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

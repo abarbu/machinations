@@ -1,0 +1,1176 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "pendingTriggers": [],
+    "graph": {
+        "stateEdges": {
+            "25": {
+                "to": 23,
+                "active": false,
+                "from": 24
+            },
+            "61": {
+                "stateFormula": {
+                    "contents": [
+                        "CEqual",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 62,
+                "active": false,
+                "from": 8
+            },
+            "48": {
+                "stateFormula": {
+                    "contents": [
+                        "CEqual",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 37,
+                "active": false,
+                "from": 8
+            },
+            "51": {
+                "stateFormula": {
+                    "tag": "SFTrigger"
+                },
+                "to": 11,
+                "active": false,
+                "from": 50
+            },
+            "60": {
+                "stateFormula": {
+                    "tag": "SFTrigger"
+                },
+                "to": 19,
+                "active": false,
+                "from": 16
+            },
+            "42": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 2,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 36,
+                "active": false,
+                "from": 14
+            },
+            "27": {
+                "stateFormula": {
+                    "contents": [
+                        "CEqual",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 26,
+                "active": false,
+                "from": 24
+            },
+            "63": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 10,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFPercentage"
+                },
+                "to": 6,
+                "active": false,
+                "from": 62
+            },
+            "52": {
+                "stateFormula": {
+                    "contents": [
+                        "CGt",
+                        {
+                            "contents": 100,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 50,
+                "active": false,
+                "from": 41
+            },
+            "59": {
+                "stateFormula": {
+                    "contents": [
+                        "CEqual",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 58,
+                "active": false,
+                "from": 57
+            },
+            "53": {
+                "stateFormula": {
+                    "tag": "SFTrigger"
+                },
+                "to": 47,
+                "active": false,
+                "from": 50
+            },
+            "17": {
+                "stateFormula": {
+                    "contents": [
+                        "CGt",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 16,
+                "active": false,
+                "from": 8
+            },
+            "65": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 20,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFPercentage"
+                },
+                "to": 16,
+                "active": false,
+                "from": 64
+            },
+            "55": {
+                "stateFormula": {
+                    "tag": "SFTrigger"
+                },
+                "to": 54,
+                "active": false,
+                "from": 50
+            },
+            "49": {
+                "stateFormula": {
+                    "contents": [
+                        "CGt",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 43,
+                "active": false,
+                "from": 8
+            },
+            "46": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 50,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFPercentage"
+                },
+                "to": 44,
+                "active": false,
+                "from": 45
+            }
+        },
+        "vertices": {
+            "43": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Drain"
+                }
+            },
+            "4": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "42bce8bf-0faf-4917-bd47-15a2017d42a6",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "452b4a63-bf14-489e-8875-a35f239061ab",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "45d8daa5-3b0d-4934-b4d2-1ff961abed9b",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "9cad82bd-3832-46d4-ae10-42826b7f5038",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "37": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "9": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Drain"
+                }
+            },
+            "45": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Random"
+                    },
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "24": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "08c12edf-8d00-42ae-a028-d19e0171e252",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "17a74425-3cad-4032-8834-6c54c9451f6f",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "1b10eef3-9958-40ba-8efb-3aa7e8d91dc1",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "203f794a-fea4-4472-ac56-efbcaca0b4ab",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "21cd1fae-703d-42a1-ad12-d987982a10f3",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "291a962f-2791-42ca-bb61-0c9e0126c846",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "29ebc614-653b-4aee-9c66-ff44fedd8444",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "2ad3e2f9-9ca8-4429-9cc8-c86736c32d67",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "2d175c73-cb0d-4456-8b47-e1b8d7979c3c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "31d8ce24-371f-4124-a495-e43510f360a9",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "39bea83e-6d10-48fd-a26e-ef53f480adc1",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "39e4000c-8aa2-4b75-900f-e224ea6b44c2",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "3cb597ac-8a17-4b58-bcdc-3f774881949d",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "3ed266cc-de9d-4034-94b7-ec8d0e2f3f37",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "4a8c2898-fe5d-49c3-9214-de0d3548e7a2",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "4cd4d872-c442-46ae-815a-8bd6aa9864e9",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "52c4542a-c915-4b0a-8f46-692dd4a7d499",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "58d89d23-eb1b-4fab-a9e4-7cf10441b5f3",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "5a54ab38-8caa-4c0d-b3eb-cb4df9707b80",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "63d6c06f-d1eb-4316-93d0-8042f292fb91",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "6535e101-005f-46e0-9b47-4a392c6cd704",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "67f067de-423f-456b-b937-75ef7b9e6b64",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "702de60d-8bbb-42d2-a5e8-abadb5bfc17a",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "7990b990-4f75-4620-8425-8a1ff7513efc",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "7f2a1e50-ef90-40a5-875c-9cc459ff64b0",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "81b1408b-9478-4381-b368-1fb8318c2c0e",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "872eadb4-577b-4993-bfef-b47f6b6bc649",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "8b44f7b2-d489-48b5-a09e-cc3c05983e43",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "8b4b12cf-c911-4b56-917d-1f8765cfcea6",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "8d6ecac3-a042-40cb-8bef-e314b4a45041",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "9116317a-5ebc-4670-b10d-8b3db0b941ec",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "92b0bfe6-7e5a-4a22-b80b-75382dcbdee7",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "95cd5928-1cf9-4305-8764-db9f4c0da6e8",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "9f3b16e5-fa74-4369-8578-128fface77d2",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "a279089a-c657-415c-abbe-6f371b9a5235",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "a48f21fb-3ef5-4e80-9008-7a0aa8a67bb3",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "b3439d28-6003-47bc-8a9f-980386e82b0f",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "b645abe6-51ba-4d31-93a0-babe0cd7e5c7",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "b6ebc84c-f39d-4f2d-a0ee-4e8d1cafef04",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "be183689-e2dd-419d-8e24-d8f1cdf9c090",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "c8cbb46c-49e5-413a-9b25-04fbbcaaef7c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "cd1b5efd-ae8a-445e-95fb-aaabed5596bf",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "d31fae54-8ef6-4abc-9c5c-f194f7aad37a",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "dd214891-9f5f-4a4b-bf12-2a7c7c5409b3",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "de5ec95e-f29e-44b0-b911-620047978f47",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "e4e3e1a2-b21a-4dc5-85b8-653a261d3b4f",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "e95935ae-5777-412c-b7d1-a73083aad149",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "ed87fff5-34a5-4a21-9410-fdee45218ab3",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "f6438ddf-8e4c-48ae-9517-ada0adea2a80",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "fe04bfbc-b450-477a-9c1f-87defa68e107",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "29": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "8": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "44": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Drain"
+                }
+            },
+            "22": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "19": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "41": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "58": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "tag": "EndCondition"
+                }
+            },
+            "57": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "52682cb1-de80-44f5-bf63-862aa83e4dae",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "663e61d4-7dcb-4b72-930b-a1b93c0e0801",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "b542dd40-45d1-49f6-ba54-1867b59b5f95",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "34": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "16": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "62": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Random"
+                    },
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "26": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "tag": "EndCondition"
+                }
+            },
+            "54": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Drain"
+                }
+            },
+            "32": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "6": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "35": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Drain"
+                }
+            },
+            "47": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Drain"
+                }
+            },
+            "11": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "1d5a29bf-7c44-4c09-91d4-cd088489d52b",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "7268b8ff-837c-448d-bf2e-844da34be8bf",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "a261f510-762c-4baf-854e-0f18397d7575",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "dba01c5f-9aed-4b6c-9f31-ee02de646afa",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "50": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "14": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "64": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Random"
+                    },
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "20": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            }
+        },
+        "resourceEdges": {
+            "15": {
+                "to": 11,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 16,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "23": {
+                "to": 22,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 100,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 24,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "18": {
+                "to": 20,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 5,
+                    "tag": "RFConstant"
+                },
+                "from": 19,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "56": {
+                "to": 54,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 57,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "30": {
+                "to": 29,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 50,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 32,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "12": {
+                "to": 16,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 14,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "3": {
+                "to": 6,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 4,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "28": {
+                "to": 20,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 5,
+                    "tag": "RFConstant"
+                },
+                "from": 29,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "31": {
+                "to": 35,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 5,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 32,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "13": {
+                "to": 11,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "tag": "RFAll"
+                },
+                "from": 14,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "7": {
+                "to": 9,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 8,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "40": {
+                "to": 47,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "tag": "RFAll"
+                },
+                "from": 41,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "10": {
+                "to": 14,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 5,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 11,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "21": {
+                "to": 20,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 22,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "38": {
+                "to": 43,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 5,
+                    "tag": "RFConstant"
+                },
+                "from": 41,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "33": {
+                "to": 32,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 20,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 34,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "36": {
+                "to": 41,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 0,
+                    "tag": "RFConstant"
+                },
+                "from": 37,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "5": {
+                "to": 8,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 12,
+                    "tag": "RFConstant"
+                },
+                "from": 6,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "39": {
+                "to": 44,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 6,
+                    "tag": "RFConstant"
+                },
+                "from": 41,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

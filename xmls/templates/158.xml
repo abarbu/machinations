@@ -1,0 +1,391 @@
+<?xml version="1.0"?>
+<mxGraphModel dx="2272.75" dy="750" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="0" fold="1" page="1" pageScale="0.75" pageWidth="1169" pageHeight="827" background="#ffffff" time_interval="1" distribution_mode="distribution_mode_variable_speed" document_owner="Machinations Support" document_creation_date="1591097814895" document_last_change_date="1591253329167" diagram_dice="D6" chartProperties="{&quot;openChart&quot;:&quot;true&quot;,&quot;chartHeight&quot;:89,&quot;highlightedCell&quot;:null}" diagram_time_steps_limit="100" diagram_number_of_batch_runs="10" diagram_number_of_total_runs="20">
+  <root>
+    <mxCell id="100"/>
+    <mxCell id="101" parent="100"/>
+    <mxSourceShapeCell id="102" style="shape=source-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#000000;strokeColor=#000000;" title="Source" parent="101" vertex="1" activation="onstart" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0">
+      <mxGeometry x="-140" y="93" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="0" y="40" as="offset"/>
+      </mxGeometry>
+    </mxSourceShapeCell>
+    <mxPoolShapeCell id="103" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#009900;strokeColor=#009900;" title="Pool" parent="101" vertex="1" __latestValue="0" activation="passive" actionMode="push-any" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0" label="Success">
+      <mxGeometry x="490" y="394" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="right" as="geometry">
+        <mxPoint x="68.5" y="-14.5" as="offset"/>
+      </mxGeometry>
+    </mxPoolShapeCell>
+    <mxGateShapeCell id="104" style="shape=gate-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#000000;strokeColor=#000000;" title="Gate" parent="101" vertex="1" actionMode="pull-any" distributionMode="dice" isMachination="1" width="60" height="60" activation="automatic" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0">
+      <mxGeometry x="338" y="250" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="0" y="40" as="offset"/>
+      </mxGeometry>
+    </mxGateShapeCell>
+    <mxPoolShapeCell id="106" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#000000;strokeColor=#000000;" title="Pool" parent="101" vertex="1" __latestValue="0" activation="passive" actionMode="push-any" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0" label="Level Start">
+      <mxGeometry x="338" y="93" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="right" as="geometry">
+        <mxPoint x="66.5" y="3" as="offset"/>
+      </mxGeometry>
+    </mxPoolShapeCell>
+    <mxResourceConnectionCell id="107" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#000000;strokeColor=#000000;" title="Resource Connection" parent="101" source="106" target="104" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;1&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="392" y="123" as="sourcePoint"/>
+        <mxPoint x="392" y="123" as="targetPoint"/>
+        <mxPoint x="20" y="0" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="108" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#000000;strokeColor=#000000;align=right;" title="Resource Connection" parent="101" source="104" target="103" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;50%&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="1" y="-12.779561251124912" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="392" y="280" as="sourcePoint"/>
+        <mxPoint x="392" y="280" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxPoolShapeCell id="109" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#990000;strokeColor=#990000;" title="Pool" parent="101" vertex="1" __latestValue="0" activation="passive" actionMode="push-any" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0" label="Fail">
+      <mxGeometry x="185" y="394" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="left" as="geometry">
+        <mxPoint x="-51.25" y="-14.5" as="offset"/>
+      </mxGeometry>
+    </mxPoolShapeCell>
+    <mxResourceConnectionCell id="110" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#000000;strokeColor=#000000;align=left;" title="Resource Connection" parent="101" source="104" target="109" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;50%&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0.8998303424045823" y="12.627553482998772" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="392" y="280" as="sourcePoint"/>
+        <mxPoint x="392" y="280" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxMachinationRegisterCell id="111" style="shape=register;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#00CCCC;strokeColor=#00CCCC;" title="Register" parent="101" vertex="1" isInteractive="0" initialValue="0" step="1" maxValue="9999" minValue="-9999" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0" label="Number of enemies: a*0.3+2">
+      <mxGeometry x="772" y="24" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="right" as="geometry">
+        <mxPoint x="71.5" y="4" as="offset"/>
+      </mxGeometry>
+    </mxMachinationRegisterCell>
+    <mxPoolShapeCell id="112" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#00CCCC;strokeColor=#00CCCC;" title="Pool" parent="101" vertex="1" __latestValue="1" activation="passive" actionMode="push-any" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" number="1" capacity="-1" displayCapacity="-1" overflow="block" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0" label="Level counter">
+      <mxGeometry x="772" y="394" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="0" y="58" as="offset"/>
+      </mxGeometry>
+    </mxPoolShapeCell>
+    <mxStateConnectionCell id="114" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#00CCCC;strokeColor=#00CCCC;" title="State Connection" parent="101" source="112" target="111" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;a&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="832" y="424" as="sourcePoint"/>
+        <mxPoint x="832" y="424" as="targetPoint"/>
+        <mxPoint x="20" y="0" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="115" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#00CCCC;strokeColor=#00CCCC;" title="State Connection" parent="101" source="111" target="135" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;+1&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="667" y="50" as="sourcePoint"/>
+        <mxPoint x="266.4726817411274" y="91.46511185199404" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="298" y="50"/>
+        </Array>
+        <mxPoint x="20" y="10" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxSourceShapeCell id="116" style="shape=source-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#00CCCC;strokeColor=#00CCCC;" title="Source" parent="101" vertex="1" activation="passive" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0">
+      <mxGeometry x="907" y="394" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="0" y="40" as="offset"/>
+      </mxGeometry>
+    </mxSourceShapeCell>
+    <mxDrainShapeCell id="117" style="shape=drain-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#009900;strokeColor=#009900;" title="Drain" parent="101" vertex="1" activation="automatic" actionMode="pull-any" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0" label="Mission Success">
+      <mxGeometry x="490" y="529" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottomRight" as="geometry">
+        <mxPoint x="47.75" y="42" as="offset"/>
+      </mxGeometry>
+    </mxDrainShapeCell>
+    <mxResourceConnectionCell id="119" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#009900;strokeColor=#009900;" title="Resource Connection" parent="101" source="103" target="117" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;all&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="540" y="420" as="sourcePoint"/>
+        <mxPoint x="540" y="420" as="targetPoint"/>
+        <mxPoint x="20" y="0" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxMachinationRegisterCell id="120" style="shape=register;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#009900;strokeColor=#009900;" title="Register" parent="101" vertex="1" isInteractive="0" initialValue="0" step="1" maxValue="9999" minValue="-9999" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0" label="equal(round(a),b)*equal(c,0)">
+      <mxGeometry x="570" y="229" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="top" as="geometry">
+        <mxPoint x="-11" y="-46.5" as="offset"/>
+      </mxGeometry>
+    </mxMachinationRegisterCell>
+    <mxStateConnectionCell id="121" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#009900;strokeColor=#009900;" title="State Connection" parent="101" source="111" target="120" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;a&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="667" y="50" as="sourcePoint"/>
+        <mxPoint x="667" y="50" as="targetPoint"/>
+        <mxPoint x="20" y="10" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="122" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#009900;strokeColor=#009900;" title="State Connection" parent="101" source="103" target="120" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;b&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="540" y="420" as="sourcePoint"/>
+        <mxPoint x="540" y="420" as="targetPoint"/>
+        <mxPoint x="20" y="10" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="123" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#009900;strokeColor=#009900;" title="State Connection" parent="101" source="120" target="117" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;&amp;gt;0&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="623" y="259" as="sourcePoint"/>
+        <mxPoint x="623" y="259" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="593" y="559"/>
+        </Array>
+        <mxPoint x="20" y="10" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxDrainShapeCell id="124" style="shape=drain-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#990000;strokeColor=#990000;" title="Drain" parent="101" vertex="1" activation="automatic" actionMode="pull-any" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0" label="Mission Failed">
+      <mxGeometry x="185" y="529" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottomLeft" as="geometry">
+        <mxPoint x="-39.25" y="47" as="offset"/>
+      </mxGeometry>
+    </mxDrainShapeCell>
+    <mxResourceConnectionCell id="125" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#990000;strokeColor=#990000;" title="Resource Connection" parent="101" source="109" target="124" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;all&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="245" y="424" as="sourcePoint"/>
+        <mxPoint x="245" y="424" as="targetPoint"/>
+        <mxPoint x="20" y="0" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="127" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#990000;strokeColor=#990000;" title="Resource Connection" parent="101" source="103" target="124" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;all&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="460" y="420" as="sourcePoint"/>
+        <mxPoint x="460" y="420" as="targetPoint"/>
+        <mxPoint x="20" y="10" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxStateConnectionCell id="128" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#000000;strokeColor=#000000;edgeStyle=orthogonalEdgeStyle;" title="State Connection" parent="101" source="117" target="102" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;*&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="460" y="559" as="sourcePoint"/>
+        <mxPoint x="460" y="559" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="510" y="620"/>
+          <mxPoint x="-110" y="620"/>
+        </Array>
+        <mxPoint x="10" y="-10" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="130" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#000000;strokeColor=#000000;" title="State Connection" parent="101" source="117" target="116" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;*&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="460" y="559" as="sourcePoint"/>
+        <mxPoint x="460" y="559" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="524" y="640"/>
+          <mxPoint x="937" y="640"/>
+        </Array>
+        <mxPoint x="20" y="10" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxResourceConnectionCell id="131" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#00CCCC;strokeColor=#00CCCC;" title="Resource Connection" parent="101" source="116" target="112" edge="1" type="plain-arrow" resourceTransfer="instantaneous" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;1&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="967" y="424" as="sourcePoint"/>
+        <mxPoint x="967" y="424" as="targetPoint"/>
+        <mxPoint x="0" y="-20" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxStateConnectionCell id="132" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#000000;strokeColor=#000000;edgeStyle=orthogonalEdgeStyle;" title="State Connection" parent="101" source="124" target="102" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;*&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="320" y="559" as="sourcePoint"/>
+        <mxPoint x="320" y="559" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="-180" y="559"/>
+          <mxPoint x="-180" y="123"/>
+        </Array>
+        <mxPoint x="10" y="-10" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxConverterShapeCell id="133" style="shape=converter-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#000000;strokeColor=#000000;" title="Converter" parent="101" vertex="1" activation="passive" actionMode="pull-any" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0">
+      <mxGeometry x="-10" y="93" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="0" y="40" as="offset"/>
+      </mxGeometry>
+    </mxConverterShapeCell>
+    <mxResourceConnectionCell id="134" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#000000;strokeColor=#000000;align=center;" title="Resource Connection" parent="101" source="102" target="133" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;1&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="-0.11428571428571428" y="19.5" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-80" y="123" as="sourcePoint"/>
+        <mxPoint x="-80" y="123" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="135" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#000000;strokeColor=#000000;align=center;" title="Resource Connection" parent="101" source="133" target="106" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;0&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="-0.07317073170731707" y="19.5" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="250" y="123" as="sourcePoint"/>
+        <mxPoint x="250" y="123" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxStateConnectionCell id="140" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#009900;strokeColor=#009900;align=right;edgeStyle=orthogonalEdgeStyle;" title="State Connection" parent="101" source="109" target="120" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;c&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="-0.8480252124871374" y="9" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="320" y="424" as="sourcePoint"/>
+        <mxPoint x="320" y="424" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="215" y="259"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxMachinationRegisterCell id="142" style="shape=register;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#990000;strokeColor=#990000;" title="Register" parent="101" vertex="1" isInteractive="0" initialValue="0" step="1" maxValue="9999" minValue="-9999" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0" label="equal(round(a),b+c)*larger(c,0)">
+      <mxGeometry x="95" y="229" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="top" as="geometry">
+        <mxPoint x="11.5" y="-46.5" as="offset"/>
+      </mxGeometry>
+    </mxMachinationRegisterCell>
+    <mxStateConnectionCell id="143" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#990000;strokeColor=#990000;" title="State Connection" parent="101" source="109" target="142" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;c&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="245" y="424" as="sourcePoint"/>
+        <mxPoint x="245" y="424" as="targetPoint"/>
+        <mxPoint x="10" y="-10" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="144" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#990000;strokeColor=#990000;edgeStyle=orthogonalEdgeStyle;align=left;" title="State Connection" parent="101" source="103" target="142" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;b&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="-0.8066465256797583" y="-9" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="460" y="420" as="sourcePoint"/>
+        <mxPoint x="460" y="420" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="510" y="259"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="145" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#990000;strokeColor=#990000;" title="State Connection" parent="101" source="111" target="142" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;a&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="667" y="50" as="sourcePoint"/>
+        <mxPoint x="667" y="50" as="targetPoint"/>
+        <mxPoint x="20" y="10" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="146" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#990000;strokeColor=#990000;edgeStyle=orthogonalEdgeStyle;" title="State Connection" parent="101" source="142" target="124" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;&amp;gt;0&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="155" y="259" as="sourcePoint"/>
+        <mxPoint x="155" y="259" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="125" y="559"/>
+        </Array>
+        <mxPoint x="-10" y="10" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxSourceShapeCell id="147" style="shape=source-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Source" parent="101" vertex="1" activation="passive" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0">
+      <mxGeometry x="220" y="700" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="0" y="40" as="offset"/>
+      </mxGeometry>
+    </mxSourceShapeCell>
+    <mxPoolShapeCell id="148" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Pool" parent="101" vertex="1" __latestValue="0" activation="passive" actionMode="push-any" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" number="0" capacity="-1" displayCapacity="-1" overflow="block" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0" label="Level Gems">
+      <mxGeometry x="374" y="700" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="topLeft" as="geometry">
+        <mxPoint x="-50.25" y="-40" as="offset"/>
+      </mxGeometry>
+    </mxPoolShapeCell>
+    <mxPoolShapeCell id="149" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Pool" parent="101" vertex="1" __latestValue="0" activation="passive" actionMode="pull-any" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" number="0" capacity="-1" displayCapacity="-1" overflow="block" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0" label="Gems">
+      <mxGeometry x="540" y="700" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="topLeft" as="geometry">
+        <mxPoint x="-41.25" y="-36.5" as="offset"/>
+      </mxGeometry>
+    </mxPoolShapeCell>
+    <mxResourceConnectionCell id="150" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Resource Connection" parent="101" source="147" target="148" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;15&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="276" y="700" as="sourcePoint"/>
+        <mxPoint x="276" y="700" as="targetPoint"/>
+        <mxPoint x="20" y="10" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="151" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Resource Connection" parent="101" source="148" target="149" edge="1" type="plain-arrow" resourceTransfer="instantaneous" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;all&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="570.6923076923076" y="760" as="sourcePoint"/>
+        <mxPoint x="434" y="700" as="targetPoint"/>
+        <mxPoint x="20" y="10" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxDrainShapeCell id="152" style="shape=drain-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Drain" parent="101" vertex="1" activation="passive" actionMode="pull-any" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0">
+      <mxGeometry x="374" y="840" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="0" y="40" as="offset"/>
+      </mxGeometry>
+    </mxDrainShapeCell>
+    <mxResourceConnectionCell id="153" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Resource Connection" parent="101" source="148" target="152" edge="1" type="plain-arrow" resourceTransfer="instantaneous" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;all&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="434" y="730" as="sourcePoint"/>
+        <mxPoint x="434" y="730" as="targetPoint"/>
+        <mxPoint x="20" y="0" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxStateConnectionCell id="154" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#000000;strokeColor=#000000;" title="State Connection" parent="101" source="103" target="147" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;*&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="540" y="420" as="sourcePoint"/>
+        <mxPoint x="540" y="420" as="targetPoint"/>
+        <mxPoint x="20" y="10" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="155" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#000000;strokeColor=#000000;edgeStyle=orthogonalEdgeStyle;" title="State Connection" parent="101" source="124" target="152" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;*&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="245" y="424" as="sourcePoint"/>
+        <mxPoint x="245" y="424" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="160" y="559"/>
+          <mxPoint x="160" y="870"/>
+        </Array>
+        <mxPoint x="-10" y="10" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="156" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=16;fontColor=#000000;strokeColor=#000000;" title="State Connection" parent="101" source="117" target="149" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;*&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="540" y="559" as="sourcePoint"/>
+        <mxPoint x="561.2280701754385" y="700" as="targetPoint"/>
+        <mxPoint x="20" y="10" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxMachinationRegisterCell id="166" style="shape=register;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#CC6600;strokeColor=#CC6600;" title="Register" parent="101" vertex="1" isInteractive="1" initialValue="70" step="1" maxValue="100" minValue="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0" label="Player skill">
+      <mxGeometry x="338" y="390" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="top" as="geometry">
+        <mxPoint x="0.75" y="-58" as="offset"/>
+      </mxGeometry>
+    </mxMachinationRegisterCell>
+    <mxStateConnectionCell id="167" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=2;fontSize=16;fontColor=#CC6600;strokeColor=#CC6600;align=left;" title="State Connection" parent="101" source="166" target="108" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;+0.5&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="-0.854194706475904" y="-12.306907865318994" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="398" y="420" as="sourcePoint"/>
+        <mxPoint x="398" y="420" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="168" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=2;fontSize=16;fontColor=#CC6600;strokeColor=#CC6600;align=right;" title="State Connection" parent="101" source="166" target="110" edge="1" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;-0.5&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="-0.7929073178577679" y="12.136513383743276" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="398" y="420" as="sourcePoint"/>
+        <mxPoint x="398" y="420" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+    </mxStateConnectionCell>
+    <mxSourceShapeCell id="169" style="shape=source-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Source" parent="101" vertex="1" activation="passive" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0" label="Quest Completed">
+      <mxGeometry x="810" y="700" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="right" as="geometry">
+        <mxPoint x="78.75" y="-3" as="offset"/>
+      </mxGeometry>
+    </mxSourceShapeCell>
+    <mxResourceConnectionCell id="171" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Resource Connection" parent="101" source="169" target="172" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;50%&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="832" y="732" as="sourcePoint"/>
+        <mxPoint x="832" y="732" as="targetPoint"/>
+        <mxPoint x="10" y="-10" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxConverterShapeCell id="172" style="shape=converter-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Converter" parent="101" vertex="1" activation="passive" actionMode="pull-any" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0">
+      <mxGeometry x="683" y="700" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="0" y="40" as="offset"/>
+      </mxGeometry>
+    </mxConverterShapeCell>
+    <mxResourceConnectionCell id="173" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Resource Connection" parent="101" source="172" target="149" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;200&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="743" y="730" as="sourcePoint"/>
+        <mxPoint x="600" y="730" as="targetPoint"/>
+        <mxPoint x="0" y="-20" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxSourceShapeCell id="181" style="shape=source-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Source" parent="101" vertex="1" activation="passive" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0" label="Watch AD">
+      <mxGeometry x="810" y="820" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="right" as="geometry">
+        <mxPoint x="66.75" y="0" as="offset"/>
+      </mxGeometry>
+    </mxSourceShapeCell>
+    <mxConverterShapeCell id="182" style="shape=converter-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Converter" parent="101" vertex="1" activation="passive" actionMode="pull-any" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" isMachination="1" width="60" height="60" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0">
+      <mxGeometry x="683" y="820" width="60" height="60" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="0" y="40" as="offset"/>
+      </mxGeometry>
+    </mxConverterShapeCell>
+    <mxResourceConnectionCell id="183" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#004C99;strokeColor=#004C99;align=center;" title="Resource Connection" parent="101" source="181" target="182" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;20%&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="-0.291044776119403" y="-19.5" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="870" y="847" as="sourcePoint"/>
+        <mxPoint x="870" y="847" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="184" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=16;fontColor=#004C99;strokeColor=#004C99;edgeStyle=orthogonalEdgeStyle;" title="Resource Connection" parent="101" source="182" target="149" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" resourcesColor="{&quot;colorName&quot;: &quot;Black&quot;, &quot;colorCode&quot;: &quot;#000000&quot;}" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" vertex="0" connectable="1" visible="1" collapsed="0" label="&lt;span&gt;200&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="743" y="850" as="sourcePoint"/>
+        <mxPoint x="743" y="850" as="targetPoint"/>
+        <mxPoint x="10" y="-10" as="offset"/>
+      </mxGeometry>
+    </mxResourceConnectionCell>
+    <mxTextCell id="400" style="shape=text-shape;html=1;resizable=0;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontColor=#000000;fontStyle=1" title="Text" parent="101" vertex="1" isMachination="0" width="60" height="60" activation="passive" blinkStatus="0" inChart="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;black&quot;, &quot;chartType&quot;: &quot;0&quot;}" edge="0" connectable="1" visible="1" collapsed="0" label="Hunter Assassin game:&lt;br&gt;1. Each level the objective is to kill all of the enemies&lt;br&gt;2. Enemy number increases as you progress through levels&lt;br&gt;3. Getting killed results in failure and you can retry the mission&lt;br&gt;4. Every enemy killed gives 15 gems&lt;br&gt;5. There are various quests that can reward the player with gems&lt;br&gt;6. Watching ads also gives the player gems&lt;br&gt;7. You can set&amp;nbsp; the player skill in the interactive register with a value between 0 and 100. It will directly influence the player's chance of success for each mission&lt;br&gt;" prevLabel="Hunter Assassin game:&lt;br&gt;1. Each level the objective is to kill all of the enemies&lt;br&gt;2. Enemy number increases as you progress through levels&lt;br&gt;3. Getting killed results in failure and you can retry the mission&lt;br&gt;4. Every enemy killed gives 15 gems&lt;br&gt;5. There are various quests that can reward the player with gems&lt;br&gt;6. Watching ads also gives the player gems&lt;br&gt;7. You can set&amp;nbsp; the player skill in the interactive register with a value between 0 and 100. It will directly influence the player's chance of success for each mission&lt;br&gt;">
+      <mxGeometry x="990" y="110" width="300" height="160" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+    </mxTextCell>
+  </root>
+</mxGraphModel>

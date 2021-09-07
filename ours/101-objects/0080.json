@@ -12,7 +12,9 @@
                     "resourceTypes": [
                         "Black"
                     ],
-                    "activation": "Automatic",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
                     "tag": "Source"
                 }
             },
@@ -20,7 +22,9 @@
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
-                    "activation": "Passive",
+                    "activation": {
+                        "tag": "Passive"
+                    },
                     "overflow": "OverflowBlock",
                     "resources": [],
                     "pushPullAction": {
@@ -35,7 +39,9 @@
                 "nodeLabel": "",
                 "nodeTy": {
                     "pullAction": "PullAll",
-                    "activation": "Interactive",
+                    "activation": {
+                        "tag": "Interactive"
+                    },
                     "tag": "Drain"
                 }
             }

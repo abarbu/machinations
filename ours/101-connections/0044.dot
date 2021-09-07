@@ -1,24 +1,24 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "345" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "346" [shape=circle,peripheries="1",label=<10>,labelfontcolor=Black,color=black];
-  "348" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "349" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "350" [shape=circle,peripheries="1",label=<0<SUB>p</SUB>>,labelfontcolor=black,color=black];
-  "466" [shape=invtriangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "347" [label=<1 | RFConstant 3>,peripheries="1",color=black,shape=septagon];
+  "345" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>345</FONT>>,labelfontcolor=black,color=black];
+  "346" [shape=circle,peripheries="1",label=<10<FONT POINT-SIZE='4'>346</FONT>>,labelfontcolor=Black,color=black];
+  "348" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>348</FONT>>,labelfontcolor=black,color=black];
+  "349" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>349</FONT>>,labelfontcolor=black,color=black];
+  "350" [shape=circle,peripheries="1",label=<0<SUB>p</SUB><FONT POINT-SIZE='4'>350</FONT>>,labelfontcolor=black,color=black];
+  "466" [shape=invtriangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>466</FONT>>,labelfontcolor=black,color=black];
+  "347" [label=<1 | RFConstant 3<FONT POINT-SIZE='4'>347</FONT>>,peripheries="1",color=black,shape=septagon];
   "345" -> "347" [color=black];
   "347" -> "346" [color=black];
-  "351" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "351" [label=<1<FONT POINT-SIZE='4'>351</FONT>>,peripheries="1",color=black,shape=septagon];
   "349" -> "351" [color=black];
   "351" -> "350" [color=black];
-  "352" [label=<all>,peripheries="1",color=black,shape=septagon];
+  "352" [label=<all<FONT POINT-SIZE='4'>352</FONT>>,peripheries="1",color=black,shape=septagon];
   "350" -> "352" [color=black];
   "352" -> "348" [color=black];
-  "467" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "467" [label=<1<FONT POINT-SIZE='4'>467</FONT>>,peripheries="1",color=black,shape=septagon];
   "346" -> "467" [color=black];
   "467" -> "466" [color=black];
-  "353" [label=<*>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "353" [label=<*<FONT POINT-SIZE='4'>353</FONT>>,peripheries="1",color=black,style=dashed,shape=septagon];
   "346" -> "353" [style=dashed,color=black];
   "353" -> "350" [style=dashed,color=black];
 }

@@ -1,0 +1,274 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "pendingTriggers": [],
+    "graph": {
+        "stateEdges": {
+            "25": {
+                "to": 0,
+                "active": false,
+                "from": 15
+            },
+            "23": {
+                "to": 0,
+                "active": false,
+                "from": 16
+            },
+            "24": {
+                "to": 0,
+                "active": false,
+                "from": 17
+            },
+            "22": {
+                "to": 0,
+                "active": false,
+                "from": 13
+            },
+            "19": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 50,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFPercentage"
+                },
+                "to": 7,
+                "active": false,
+                "from": 18
+            },
+            "27": {
+                "to": 0,
+                "active": false,
+                "from": 20
+            },
+            "26": {
+                "to": 0,
+                "active": false,
+                "from": 14
+            }
+        },
+        "vertices": {
+            "4": {
+                "nodeColor": "black",
+                "nodeLabel": "Total harvested crops",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "18": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Random"
+                    },
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "3": {
+                "nodeColor": "black",
+                "nodeLabel": "Time needed to grow",
+                "nodeTy": {
+                    "waitingResources": [],
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Delay"
+                }
+            },
+            "7": {
+                "nodeColor": "black",
+                "nodeLabel": "Sell one",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "10": {
+                "nodeColor": "black",
+                "nodeLabel": "Buy and plant seed",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAll",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "5": {
+                "nodeColor": "black",
+                "nodeLabel": "Dollars",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "218ca65a-d25f-421e-9892-0220fffa22d3",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "2bfbec87-eba7-44a8-9fd4-22c7c82018c2",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "372649b0-a926-4c18-8a77-52bc46a988b1",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "4f0bc22c-4e77-432b-bea2-9bcd61be00d4",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "788bd900-bd29-4c08-a1c3-0cd03b470a0c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "98f00b7f-582e-41b0-9cfe-f7c218d8ba1c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "9bc60496-bd9f-40d0-ab24-66324ae91e85",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "a4229a3a-6dbf-48c0-9d39-22ce3ab9caa1",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "bd733e81-3c8f-42e9-a85a-1e1cbabe565d",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "ed62d6f0-0313-43c1-a950-22d78ea3c045",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            }
+        },
+        "resourceEdges": {
+            "9": {
+                "to": 5,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 5,
+                    "tag": "RFConstant"
+                },
+                "from": 7,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "12": {
+                "to": 3,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 10,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "8": {
+                "to": 7,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 4,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "6": {
+                "to": 4,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 4,
+                    "tag": "RFConstant"
+                },
+                "from": 3,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "11": {
+                "to": 10,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 3,
+                    "tag": "RFConstant"
+                },
+                "from": 5,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

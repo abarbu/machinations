@@ -27,6 +27,11 @@ type Filter = ResourceTag
 type Probability = Float
 type Percentage = Float
 
+newtype Event = Event { unEvent :: Text }
+  deriving (Show, Eq, Ord)
+  deriving newtype (ToJSON, FromJSON, ToJSONKey, FromJSONKey)
+makePrisms ''Event
+
 newtype NodeLabel = NodeLabel { unNodeLabel :: Int }
   deriving (Show, Eq, Ord)
   deriving newtype (ToJSON, FromJSON, ToJSONKey, FromJSONKey)
@@ -60,6 +65,18 @@ toNodeLabel (AnyLabel l) = NodeLabel l
 toResourceEdgeLabel (AnyLabel l) = ResourceEdgeLabel l
 toStateEdgeLabel (AnyLabel l) = StateEdgeLabel l
 
+data ResourceConstraint = RCCollisionThis
+                        | RCCollisionOther
+                        | RCVar Text
+                        | RCApply ResourceConstraint ResourceConstraint
+                        | RCEq ResourceConstraint ResourceConstraint
+                        | RCAnd ResourceConstraint ResourceConstraint
+                        | RCOr ResourceConstraint ResourceConstraint
+                        | RCTag Text
+  deriving (Show, Eq, Generic)
+deriveJSON (prefixOptions "RC") ''ResourceConstraint
+makeFields ''ResourceConstraint
+
 data Resource = Resource { resourceTag :: ResourceTag,
                            resourceUUID :: Text }
   deriving (Show, Eq, Generic)
@@ -68,6 +85,12 @@ makeFields ''Resource
 
 instance Ord Resource where
   x `compare` x' = resourceUUID x `compare` resourceUUID x'
+
+data Collision = Collision { collisionCollider1 :: Resource,
+                             collisionCollider2 :: Resource }
+  deriving (Show, Eq, Generic, Ord)
+deriveJSON (prefixOptions "collision") ''Collision
+makeFields ''Collision
 
 data Condition = CEqual
                | CNotEqual
@@ -138,6 +161,8 @@ data NodeActivation = Passive
                     | Interactive
                     | Automatic
                     | OnStart
+                    -- NB These don't exist in Machinations
+                    | TriggeredByEvent (Set Event)
   deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''NodeActivation
 makePrisms ''NodeActivation
@@ -262,6 +287,7 @@ data ResourceEdge = ResourceEdge { _from :: NodeLabel
                                  , _resourceFilter :: Maybe Filter
                                  , _shuffleOrigin :: Bool
                                  , _limits :: Limits
+                                 , _constraints :: Maybe ResourceConstraint
                                  }
   deriving (Show, Eq, Generic)
 deriveJSON mjsonOptions ''ResourceEdge
@@ -377,12 +403,15 @@ data Run = Run { runOldUpdate          :: Machination
                , runStdGen             :: StdGen
                , runErrors             :: Map AnyLabel Text
                , runEnded              :: Maybe NodeLabel
+               , runCollisions         :: Set Collision
                }
   deriving (Show, Eq, Generic)
 makeFields ''Run
 
 data RunMachination = RunMachination { runMachinationMachine         :: Machination
                                      , runMachinationActiveNodes     :: Set NodeLabel
+                                     , runMachinationCollisions      :: Set Collision
+                                     , runMachinationEvents          :: Set Event
                                      }
   deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "runMachination") ''RunMachination
@@ -410,7 +439,7 @@ mkStateEdgeModifiers :: StateEdgeModifiers
 mkStateEdgeModifiers = StateEdgeModifiers S.empty S.empty S.empty S.empty S.empty M.empty M.empty
 
 mkRun :: Machination -> Run
-mkRun m = Run m m M.empty mkStateEdgeModifiers S.empty S.empty S.empty S.empty S.empty M.empty M.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty Nothing
+mkRun m = Run m m M.empty mkStateEdgeModifiers S.empty S.empty S.empty S.empty S.empty M.empty M.empty M.empty S.empty S.empty (mkStdGen $ m^.seed) M.empty Nothing S.empty
 
 runToResult :: Run -> RunResult
 runToResult Run{..} = RunResult runNewUpdate runRegisterValues runStateEdgeModifiers

@@ -1,16 +1,16 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "166" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "167" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "168" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "170" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "169" [label=<1 | RFConstant 2>,peripheries="1",color=black,shape=septagon];
+  "166" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>166</FONT>>,labelfontcolor=black,color=black];
+  "167" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>167</FONT>>,labelfontcolor=black,color=black];
+  "168" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>168</FONT>>,labelfontcolor=black,color=black];
+  "170" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>170</FONT>>,labelfontcolor=black,color=black];
+  "169" [label=<1 | RFConstant 2<FONT POINT-SIZE='4'>169</FONT>>,peripheries="1",color=black,shape=septagon];
   "167" -> "169" [color=black];
   "169" -> "168" [color=black];
-  "171" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "171" [label=<1<FONT POINT-SIZE='4'>171</FONT>>,peripheries="1",color=black,shape=septagon];
   "166" -> "171" [color=black];
   "171" -> "170" [color=black];
-  "172" [label=<+1i>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "172" [label=<+1i<FONT POINT-SIZE='4'>172</FONT>>,peripheries="1",color=black,style=dashed,shape=septagon];
   "168" -> "172" [style=dashed,color=black];
   "172" -> "171" [style=dashed,color=black];
 }

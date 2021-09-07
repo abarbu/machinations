@@ -1,0 +1,968 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "pendingTriggers": [],
+    "graph": {
+        "stateEdges": {
+            "1512": {
+                "stateFormula": {
+                    "contents": "a",
+                    "tag": "SFVariable"
+                },
+                "to": 1511,
+                "active": false,
+                "from": 1443
+            },
+            "1451": {
+                "stateFormula": {
+                    "contents": "a",
+                    "tag": "SFVariable"
+                },
+                "to": 1443,
+                "active": false,
+                "from": 1447
+            },
+            "1514": {
+                "stateFormula": {
+                    "contents": "a",
+                    "tag": "SFVariable"
+                },
+                "to": 1513,
+                "active": false,
+                "from": 1502
+            },
+            "1448": {
+                "stateFormula": {
+                    "contents": "b",
+                    "tag": "SFVariable"
+                },
+                "to": 1446,
+                "active": false,
+                "from": 1401
+            },
+            "1442": {
+                "stateFormula": {
+                    "contents": "c",
+                    "tag": "SFVariable"
+                },
+                "to": 1443,
+                "active": false,
+                "from": 1436
+            },
+            "1507": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": {
+                            "contents": 1,
+                            "tag": "SFConstant"
+                        },
+                        "tag": "SFPercentage"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 1410,
+                "active": false,
+                "from": 1513
+            },
+            "1449": {
+                "stateFormula": {
+                    "contents": "a",
+                    "tag": "SFVariable"
+                },
+                "to": 1447,
+                "active": false,
+                "from": 1401
+            },
+            "1450": {
+                "stateFormula": {
+                    "contents": "b",
+                    "tag": "SFVariable"
+                },
+                "to": 1443,
+                "active": false,
+                "from": 1446
+            },
+            "1510": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": {
+                            "contents": 1,
+                            "tag": "SFConstant"
+                        },
+                        "tag": "SFPercentage"
+                    },
+                    "tag": "SFSub"
+                },
+                "to": 1409,
+                "active": false,
+                "from": 1513
+            },
+            "1509": {
+                "to": 1412,
+                "active": false,
+                "from": 1513
+            },
+            "1506": {
+                "stateFormula": {
+                    "contents": "d",
+                    "tag": "SFVariable"
+                },
+                "to": 1513,
+                "active": false,
+                "from": 1445
+            },
+            "1503": {
+                "stateFormula": {
+                    "contents": "a",
+                    "tag": "SFVariable"
+                },
+                "to": 1502,
+                "active": false,
+                "from": 1447
+            },
+            "1439": {
+                "stateFormula": {
+                    "contents": "c",
+                    "tag": "SFVariable"
+                },
+                "to": 1436,
+                "active": false,
+                "from": 1401
+            },
+            "1508": {
+                "to": 1411,
+                "active": false,
+                "from": 1513
+            },
+            "1505": {
+                "stateFormula": {
+                    "contents": "c",
+                    "tag": "SFVariable"
+                },
+                "to": 1502,
+                "active": false,
+                "from": 1436
+            },
+            "1504": {
+                "stateFormula": {
+                    "contents": "b",
+                    "tag": "SFVariable"
+                },
+                "to": 1502,
+                "active": false,
+                "from": 1446
+            },
+            "1501": {
+                "stateFormula": {
+                    "contents": "d",
+                    "tag": "SFVariable"
+                },
+                "to": 1511,
+                "active": false,
+                "from": 1500
+            },
+            "1444": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": {
+                            "contents": 1,
+                            "tag": "SFConstant"
+                        },
+                        "tag": "SFPercentage"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 1404,
+                "active": false,
+                "from": 1511
+            }
+        },
+        "vertices": {
+            "1445": {
+                "nodeColor": "black",
+                "nodeLabel": "Item rarity stacking %",
+                "nodeTy": {
+                    "limits": {},
+                    "initial": 10,
+                    "tag": "RegisterInteractive",
+                    "currentValue": 10,
+                    "step": 1
+                }
+            },
+            "1500": {
+                "nodeColor": "black",
+                "nodeLabel": "Item quantity stacking %",
+                "nodeTy": {
+                    "limits": {},
+                    "initial": 10,
+                    "tag": "RegisterInteractive",
+                    "currentValue": 10,
+                    "step": 1
+                }
+            },
+            "1401": {
+                "nodeColor": "black",
+                "nodeLabel": "No. of enemies killed",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "df675911-71de-4afe-b89d-986d1ea25f0b",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "1513": {
+                "nodeColor": "black",
+                "nodeLabel": "a+((d/100)*a)",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": [
+                            {
+                                "contents": "a",
+                                "tag": "FVar"
+                            },
+                            {
+                                "contents": [
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": "d",
+                                                "tag": "FVar"
+                                            },
+                                            {
+                                                "contents": 100,
+                                                "tag": "FConstant"
+                                            }
+                                        ],
+                                        "tag": "FDiv"
+                                    },
+                                    {
+                                        "contents": "a",
+                                        "tag": "FVar"
+                                    }
+                                ],
+                                "tag": "FMul"
+                            }
+                        ],
+                        "tag": "FAdd"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "1406": {
+                "nodeColor": "black",
+                "nodeLabel": "Magic",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "1436": {
+                "nodeColor": "black",
+                "nodeLabel": "isInteger(c/60)",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": [
+                            {
+                                "contents": "isInteger",
+                                "tag": "FVar"
+                            },
+                            {
+                                "contents": [
+                                    {
+                                        "contents": "c",
+                                        "tag": "FVar"
+                                    },
+                                    {
+                                        "contents": 60,
+                                        "tag": "FConstant"
+                                    }
+                                ],
+                                "tag": "FDiv"
+                            }
+                        ],
+                        "tag": "FApply"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "1408": {
+                "nodeColor": "black",
+                "nodeLabel": "Unique",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "1443": {
+                "nodeColor": "black",
+                "nodeLabel": "equal(a+b+c,1)*6*16 + equal(a+b+c,2)*14*16 + equal(a+b+c,3)*28.5*16",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": [
+                            {
+                                "contents": [
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": [
+                                                    {
+                                                        "contents": [
+                                                            {
+                                                                "contents": "equal",
+                                                                "tag": "FVar"
+                                                            },
+                                                            {
+                                                                "contents": [
+                                                                    {
+                                                                        "contents": [
+                                                                            {
+                                                                                "contents": [
+                                                                                    {
+                                                                                        "contents": "a",
+                                                                                        "tag": "FVar"
+                                                                                    },
+                                                                                    {
+                                                                                        "contents": "b",
+                                                                                        "tag": "FVar"
+                                                                                    }
+                                                                                ],
+                                                                                "tag": "FAdd"
+                                                                            },
+                                                                            {
+                                                                                "contents": "c",
+                                                                                "tag": "FVar"
+                                                                            }
+                                                                        ],
+                                                                        "tag": "FAdd"
+                                                                    },
+                                                                    {
+                                                                        "contents": 1,
+                                                                        "tag": "FConstant"
+                                                                    }
+                                                                ],
+                                                                "tag": "FPair"
+                                                            }
+                                                        ],
+                                                        "tag": "FApply"
+                                                    },
+                                                    {
+                                                        "contents": 6,
+                                                        "tag": "FConstant"
+                                                    }
+                                                ],
+                                                "tag": "FMul"
+                                            },
+                                            {
+                                                "contents": 16,
+                                                "tag": "FConstant"
+                                            }
+                                        ],
+                                        "tag": "FMul"
+                                    },
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": [
+                                                    {
+                                                        "contents": [
+                                                            {
+                                                                "contents": "equal",
+                                                                "tag": "FVar"
+                                                            },
+                                                            {
+                                                                "contents": [
+                                                                    {
+                                                                        "contents": [
+                                                                            {
+                                                                                "contents": [
+                                                                                    {
+                                                                                        "contents": "a",
+                                                                                        "tag": "FVar"
+                                                                                    },
+                                                                                    {
+                                                                                        "contents": "b",
+                                                                                        "tag": "FVar"
+                                                                                    }
+                                                                                ],
+                                                                                "tag": "FAdd"
+                                                                            },
+                                                                            {
+                                                                                "contents": "c",
+                                                                                "tag": "FVar"
+                                                                            }
+                                                                        ],
+                                                                        "tag": "FAdd"
+                                                                    },
+                                                                    {
+                                                                        "contents": 2,
+                                                                        "tag": "FConstant"
+                                                                    }
+                                                                ],
+                                                                "tag": "FPair"
+                                                            }
+                                                        ],
+                                                        "tag": "FApply"
+                                                    },
+                                                    {
+                                                        "contents": 14,
+                                                        "tag": "FConstant"
+                                                    }
+                                                ],
+                                                "tag": "FMul"
+                                            },
+                                            {
+                                                "contents": 16,
+                                                "tag": "FConstant"
+                                            }
+                                        ],
+                                        "tag": "FMul"
+                                    }
+                                ],
+                                "tag": "FAdd"
+                            },
+                            {
+                                "contents": [
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": [
+                                                    {
+                                                        "contents": "equal",
+                                                        "tag": "FVar"
+                                                    },
+                                                    {
+                                                        "contents": [
+                                                            {
+                                                                "contents": [
+                                                                    {
+                                                                        "contents": [
+                                                                            {
+                                                                                "contents": "a",
+                                                                                "tag": "FVar"
+                                                                            },
+                                                                            {
+                                                                                "contents": "b",
+                                                                                "tag": "FVar"
+                                                                            }
+                                                                        ],
+                                                                        "tag": "FAdd"
+                                                                    },
+                                                                    {
+                                                                        "contents": "c",
+                                                                        "tag": "FVar"
+                                                                    }
+                                                                ],
+                                                                "tag": "FAdd"
+                                                            },
+                                                            {
+                                                                "contents": 3,
+                                                                "tag": "FConstant"
+                                                            }
+                                                        ],
+                                                        "tag": "FPair"
+                                                    }
+                                                ],
+                                                "tag": "FApply"
+                                            },
+                                            {
+                                                "contents": 28.5,
+                                                "tag": "FConstant"
+                                            }
+                                        ],
+                                        "tag": "FMul"
+                                    },
+                                    {
+                                        "contents": 16,
+                                        "tag": "FConstant"
+                                    }
+                                ],
+                                "tag": "FMul"
+                            }
+                        ],
+                        "tag": "FAdd"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "1407": {
+                "nodeColor": "black",
+                "nodeLabel": "Rare",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "1446": {
+                "nodeColor": "black",
+                "nodeLabel": "isInteger(b/20)",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": [
+                            {
+                                "contents": "isInteger",
+                                "tag": "FVar"
+                            },
+                            {
+                                "contents": [
+                                    {
+                                        "contents": "b",
+                                        "tag": "FVar"
+                                    },
+                                    {
+                                        "contents": 20,
+                                        "tag": "FConstant"
+                                    }
+                                ],
+                                "tag": "FDiv"
+                            }
+                        ],
+                        "tag": "FApply"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "1511": {
+                "nodeColor": "black",
+                "nodeLabel": "a+((d/100)*a)",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": [
+                            {
+                                "contents": "a",
+                                "tag": "FVar"
+                            },
+                            {
+                                "contents": [
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": "d",
+                                                "tag": "FVar"
+                                            },
+                                            {
+                                                "contents": 100,
+                                                "tag": "FConstant"
+                                            }
+                                        ],
+                                        "tag": "FDiv"
+                                    },
+                                    {
+                                        "contents": "a",
+                                        "tag": "FVar"
+                                    }
+                                ],
+                                "tag": "FMul"
+                            }
+                        ],
+                        "tag": "FAdd"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "1447": {
+                "nodeColor": "black",
+                "nodeLabel": "isInteger(a/4)",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": [
+                            {
+                                "contents": "isInteger",
+                                "tag": "FVar"
+                            },
+                            {
+                                "contents": [
+                                    {
+                                        "contents": "a",
+                                        "tag": "FVar"
+                                    },
+                                    {
+                                        "contents": 4,
+                                        "tag": "FConstant"
+                                    }
+                                ],
+                                "tag": "FDiv"
+                            }
+                        ],
+                        "tag": "FApply"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "1502": {
+                "nodeColor": "black",
+                "nodeLabel": "equal(a+b+c,1)*2 +equal(a+b+c,2)*10 +equal(a+b+c,3)*10",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": [
+                            {
+                                "contents": [
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": [
+                                                    {
+                                                        "contents": "equal",
+                                                        "tag": "FVar"
+                                                    },
+                                                    {
+                                                        "contents": [
+                                                            {
+                                                                "contents": [
+                                                                    {
+                                                                        "contents": [
+                                                                            {
+                                                                                "contents": "a",
+                                                                                "tag": "FVar"
+                                                                            },
+                                                                            {
+                                                                                "contents": "b",
+                                                                                "tag": "FVar"
+                                                                            }
+                                                                        ],
+                                                                        "tag": "FAdd"
+                                                                    },
+                                                                    {
+                                                                        "contents": "c",
+                                                                        "tag": "FVar"
+                                                                    }
+                                                                ],
+                                                                "tag": "FAdd"
+                                                            },
+                                                            {
+                                                                "contents": 1,
+                                                                "tag": "FConstant"
+                                                            }
+                                                        ],
+                                                        "tag": "FPair"
+                                                    }
+                                                ],
+                                                "tag": "FApply"
+                                            },
+                                            {
+                                                "contents": 2,
+                                                "tag": "FConstant"
+                                            }
+                                        ],
+                                        "tag": "FMul"
+                                    },
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": [
+                                                    {
+                                                        "contents": "equal",
+                                                        "tag": "FVar"
+                                                    },
+                                                    {
+                                                        "contents": [
+                                                            {
+                                                                "contents": [
+                                                                    {
+                                                                        "contents": [
+                                                                            {
+                                                                                "contents": "a",
+                                                                                "tag": "FVar"
+                                                                            },
+                                                                            {
+                                                                                "contents": "b",
+                                                                                "tag": "FVar"
+                                                                            }
+                                                                        ],
+                                                                        "tag": "FAdd"
+                                                                    },
+                                                                    {
+                                                                        "contents": "c",
+                                                                        "tag": "FVar"
+                                                                    }
+                                                                ],
+                                                                "tag": "FAdd"
+                                                            },
+                                                            {
+                                                                "contents": 2,
+                                                                "tag": "FConstant"
+                                                            }
+                                                        ],
+                                                        "tag": "FPair"
+                                                    }
+                                                ],
+                                                "tag": "FApply"
+                                            },
+                                            {
+                                                "contents": 10,
+                                                "tag": "FConstant"
+                                            }
+                                        ],
+                                        "tag": "FMul"
+                                    }
+                                ],
+                                "tag": "FAdd"
+                            },
+                            {
+                                "contents": [
+                                    {
+                                        "contents": [
+                                            {
+                                                "contents": "equal",
+                                                "tag": "FVar"
+                                            },
+                                            {
+                                                "contents": [
+                                                    {
+                                                        "contents": [
+                                                            {
+                                                                "contents": [
+                                                                    {
+                                                                        "contents": "a",
+                                                                        "tag": "FVar"
+                                                                    },
+                                                                    {
+                                                                        "contents": "b",
+                                                                        "tag": "FVar"
+                                                                    }
+                                                                ],
+                                                                "tag": "FAdd"
+                                                            },
+                                                            {
+                                                                "contents": "c",
+                                                                "tag": "FVar"
+                                                            }
+                                                        ],
+                                                        "tag": "FAdd"
+                                                    },
+                                                    {
+                                                        "contents": 3,
+                                                        "tag": "FConstant"
+                                                    }
+                                                ],
+                                                "tag": "FPair"
+                                            }
+                                        ],
+                                        "tag": "FApply"
+                                    },
+                                    {
+                                        "contents": 10,
+                                        "tag": "FConstant"
+                                    }
+                                ],
+                                "tag": "FMul"
+                            }
+                        ],
+                        "tag": "FAdd"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "1403": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Random"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "1405": {
+                "nodeColor": "black",
+                "nodeLabel": "Common",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "1400": {
+                "nodeColor": "black",
+                "nodeLabel": "Kill enemy",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            }
+        },
+        "resourceEdges": {
+            "1412": {
+                "to": 1408,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 1403,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "1411": {
+                "to": 1407,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 6,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 1403,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "1402": {
+                "to": 1401,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 1400,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "1409": {
+                "to": 1405,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 80,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 1403,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "1410": {
+                "to": 1406,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 13,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 1403,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "1404": {
+                "to": 1403,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 0,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 1400,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

@@ -9,7 +9,9 @@
                 "nodeColor": "black",
                 "nodeLabel": "",
                 "nodeTy": {
-                    "activation": "Passive",
+                    "activation": {
+                        "tag": "Passive"
+                    },
                     "overflow": "OverflowBlock",
                     "resources": [],
                     "pushPullAction": {
@@ -27,7 +29,9 @@
                         "Black"
                     ],
                     "pullAction": "PullAny",
-                    "activation": "OnStart",
+                    "activation": {
+                        "tag": "OnStart"
+                    },
                     "storage": {},
                     "tag": "Converter"
                 }
@@ -39,7 +43,9 @@
                     "resourceTypes": [
                         "Black"
                     ],
-                    "activation": "Passive",
+                    "activation": {
+                        "tag": "Passive"
+                    },
                     "tag": "Source"
                 }
             }

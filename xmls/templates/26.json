@@ -1,0 +1,1407 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "pendingTriggers": [],
+    "graph": {
+        "stateEdges": {
+            "9": {
+                "stateFormula": {
+                    "contents": [
+                        "CGt",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 4,
+                "active": false,
+                "from": 6
+            },
+            "18": {
+                "stateFormula": {
+                    "contents": [
+                        "CGt",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 7,
+                "active": false,
+                "from": 3
+            },
+            "17": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 20,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 8,
+                "active": false,
+                "from": 12
+            },
+            "20": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 20,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFPercentage"
+                },
+                "to": 11,
+                "active": false,
+                "from": 19
+            }
+        },
+        "vertices": {
+            "4": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Drain"
+                }
+            },
+            "12": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "3": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "0012488a-9d28-4806-9fdc-e5f13e06ce85",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "070b6c14-18bd-4a10-9cec-1089c70d7489",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "073e9290-5a7d-4f39-80e2-d461b17123f2",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "083ea6f3-531b-45f5-b6c8-1a18b0d6bf36",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "08e2e0fd-f24b-4ca6-ac58-b3abd35b62e9",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "1187f246-480e-4157-b960-0cf61a75948c",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "11d01d53-583a-420c-91ab-87e0917d563f",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "1515940a-fd1a-45a5-a419-c82f37e0de94",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "17256eab-d76e-4d94-ab90-e871c766a059",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "17fee5eb-a3f8-499c-b0be-8d06f411c3ca",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "1963d9d2-2f25-46a7-8a3a-425cd63353e1",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "19ec2d2a-4edb-4a36-b49a-5732af7095de",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "1a5b253f-e469-42ed-9d2f-a5ba4dfed4c1",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "1ab53e8d-52b0-4bf3-bab4-2589f30888c2",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "1b0943d5-b2bf-4ac9-9b34-4161923cddd2",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "1db1367f-fc02-4219-a10b-f0f14b46ca3a",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "1e50a2b5-64e6-4f76-aade-bfe79a3e7e15",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "2417cbe4-32cf-4c29-aeba-5dc888affb05",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "24924c04-6219-481e-a117-857d389064a6",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "26d93756-93ed-4b8c-bda0-7d6e1a03b0d3",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "27f0ba92-ad55-418f-afaa-1968dd107397",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "28721e85-6403-4523-adae-7d54ec64082b",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "28c528f9-ee34-4d71-b2b4-a9bd916b4544",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "33d14f4c-287d-43c6-981d-66692b952a4d",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "39275571-9a66-4b66-9f36-a2d35b572297",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "3ea4efdf-28ec-44f9-a943-211b8b458a0f",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "406cfb69-e851-4eb4-88ae-7110b33f9e16",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "40970678-2e35-4f71-92b2-c7d442b7b3e5",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "41e95183-3236-4c89-8962-575bcda90474",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "42c48e04-efe3-40c1-8066-02d3d3d8d075",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "43bea07d-d405-49ba-a4a3-60fed5765071",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "456f9615-2741-4fdc-90e1-fe2e0d1d349d",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "4a65ecf0-2c1e-4bdc-80fd-153957a7dc06",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "561d5bbd-c6a0-4774-b77f-0ce82326fd39",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "592c90d5-dac9-4120-8b34-48be08735bbd",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "5e84f574-5eb5-491d-98f7-eadf43c806d2",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "5f421129-c394-4d66-8a4d-0ec42be65033",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "5fdb6a1e-66a6-48a4-94af-b2467c41e37d",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "61744315-1ec8-4435-918a-b34602a5e86c",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "62271e11-3087-4194-bb2a-0ea59a8e9cbf",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "672d1927-ab50-4de8-9007-4ba344bda2be",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "69bef340-297d-4651-ba56-f80174da8851",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "6a012268-3b56-4769-9a8b-aef39cc452b3",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "70cb0aaa-b43a-46a4-b73d-38800dfb4f38",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "71577a1c-33ad-41f0-b3c4-8c45b81a5105",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "71d6da99-a4a6-41a0-82a9-d46a29745673",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "72bace23-bc3d-4c4f-bdaf-8f5f505672a2",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "76d55852-ac93-4206-ae11-faab2897a361",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "76fd3386-7236-405b-a8d7-835eec3f9786",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "785b14ef-8a89-41ef-bb3a-08c79ba76b73",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "7d251929-11f8-4105-8ddc-69ff404cae61",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "85714b91-691e-46cb-8323-9973c5ae36ab",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "8ce33c6b-84e4-4f4f-9daa-31e775f89354",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "917cc0b3-8441-4212-b749-6ab4309579a4",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "9311d65f-a2b6-45a5-9f51-6b90ddc97ee6",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "98048833-196b-4a13-8234-e317f150f9a4",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "98619bda-2aba-471e-969b-783ba653ec04",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "9861ac4d-e63e-44dc-bb8d-43ab16acc067",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "99ce30b8-decc-4a02-8963-2502276c9582",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "9a15462d-75e7-49b1-b8b2-a80e380cb3de",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "9af8b763-c4d4-407b-bab3-5147fd24cb7b",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "9b394183-4394-405f-a5de-028e746fe7c7",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "9ef94654-e189-459d-9c74-18ae1c9741e7",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "9f493599-f845-4d9b-8f6c-8286c11824ae",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "a0f55b11-044c-414d-a31b-c01f31b88ca5",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "a327c14c-26a1-4b04-a12a-3e9255afb5b0",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "a3edf479-5450-475c-89d1-886a77aba6e9",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "a42fb4de-0eac-4580-994d-45a82fe6fce3",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "a51bd23a-848a-4a0c-b4df-7b48aa81b66a",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "ab5ff19b-8f22-4c97-a947-575ebf0af583",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "ab86ac65-5655-4a21-868f-fc3f51b74d63",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "afdb3eee-39c1-47ca-b3b2-e374ab9d18b5",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "b8925d9a-54bb-459f-af12-d525171efc2f",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "b9ffe6e9-7ea7-4deb-a52e-6e14155c1a67",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "bc1a1dc2-46c5-4f6b-909a-74bf8097c06d",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "bf989c81-1227-403d-a469-236ac33b2370",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "c016c633-e81b-49b6-82aa-a52079c441d9",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "c28395c3-dd6d-4fa1-af24-79a983d6732d",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "c6b48640-35e8-4936-85f3-be0a2607a369",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "c854bdb9-993f-4aaf-8f3b-13206c1c31b7",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "c9d9f97a-f4d5-4b54-b500-f4a304e3ec15",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "cc52930a-bb8b-4fca-8805-8aee7407d4a0",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "cca0289b-f495-4ae2-a3fa-db39be9bedaf",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "cec33c1a-fc51-4771-a160-bf67f9ff5d08",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "cf20c543-9d9c-4deb-8b05-8e04e4395ea9",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "cf6b2ff6-ad0d-42b0-a1c4-df2a50083339",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "cfbe8304-d7c3-4523-981b-5b3bd0aa7ae1",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "d07ad897-6faf-4c3a-b2e1-87442b349b53",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "d3c8ca80-e195-450e-bb0b-9a5fa3a1ce20",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "d628a452-39a8-4548-8791-7d3177c2fc04",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "d6890351-3500-4ce0-837f-9b18e2dea33b",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "d7804819-9723-478d-baa4-732f16ac0a21",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "d9208905-c6cc-4f2d-a308-a113450cbae5",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "e11c2ee0-1a00-4443-8318-3acaa830dd35",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "e8b8c0cf-0c50-42a4-9ab5-e27ef4eb0264",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "ea2b89df-9a61-472a-ba77-701082bf934b",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "ea726ac5-d6ca-494c-a001-1c29a1fc490f",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "ed003330-b95c-41df-b42f-086c17a0cd5f",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "f505bed8-a20b-48c4-89ce-185e559ee0ff",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "fb0f0c1f-76b8-4b58-a19e-e1de4042574a",
+                            "tag": "Green"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "19": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Random"
+                    },
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "13": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Drain"
+                }
+            },
+            "7": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Drain"
+                }
+            },
+            "10": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "00837229-6ccd-41ff-862f-df2668c1e8be",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "01cc17c4-3e38-4f27-8efc-f456404a70bd",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "06e0d64f-b477-4c59-b38b-b5a98b7e15f4",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "0920c7da-815b-4d6b-90f0-e7f27bb0d398",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "0c13901b-9feb-417c-a198-8b34fcb19cb1",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "18c028de-8d24-4f89-a537-da59933fbc0c",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "195be27c-484d-4fff-80fd-c9eb046780da",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "19d753f3-0c36-4b1b-b5db-1bd776509ad9",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "1bd74c5e-cf99-401b-8b0b-cc3b43d5e948",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "1dc88fc9-b287-46c0-85dc-b609788e8652",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "1fd38539-bed1-4d99-a553-2c9562d9cd92",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "233e8206-b3dd-49e1-a7a0-4174a9040fdb",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "23af39f3-743c-42a9-b167-dc19ccc17d06",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "24a73474-2e4a-4f87-846e-1a3f7f60ce67",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "24b213b0-1fb3-4271-9fe1-193964c3ed20",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "2bf60069-26d0-4b0a-9eb5-792616c10a7a",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "2c42f6e2-0174-4e43-a27b-c4d570559ba9",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "2def0ea2-70ad-4d16-ac38-691723570f5a",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "3437d9b4-e34b-482e-9157-bc4e054dfb76",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "35c8d558-4d7f-43f9-8dca-29433e324be9",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "370f6b9d-af2a-4d64-b779-eeca72fcbccb",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "399a4f1e-6b50-4103-aae7-50149c1ba005",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "39cd2c6a-bdce-49f4-a88b-eeaf8345236e",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "3ee9ff40-78e2-40dc-861a-ea1127fe218d",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "4118eee1-91b1-4c73-b313-4c79baaa495d",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "441aad24-c5e2-484c-a338-221468c79700",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "4ad26ea1-eb32-4c22-9647-98b1269e2c4b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "4bad1e04-d977-49bc-b8a1-6e5f3745e6f4",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "4f5473d7-ae0c-4dae-8ed3-47e0334abcef",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "54569e2e-fff4-4e72-a99b-a58839d2a575",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "56130eb4-3b0b-4bb8-9b09-4aeb06b32571",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "563ee3a6-6a78-43d8-b77d-cb61362c7cbf",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "5b107d0f-ba3f-44ff-be86-a81ca05fb76c",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "5d3167aa-1e4b-4c5f-8d13-4fc2188a3217",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "5e7d6f8a-b9b1-4333-b593-a7ce08f3ade3",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "5f0519ac-9b77-41e2-9f7b-0fe3a435808e",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "624c50ea-3af3-4444-872e-fc4f7de321bd",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "6301b83d-7da0-487d-84e5-0eaa51d950ac",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "68d49793-0445-4be9-9135-29aa9735aa98",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "696c0b11-c232-4db4-973d-c7227b3eb81a",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "6aa8078c-ffb7-4ac8-aa1b-ad2016eb2f46",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "728bcf7a-736e-47d2-ac95-0725f2972791",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "72b674fb-6251-42fb-8d11-4a4bd7429ef6",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "73a4b1df-5b9f-4b9c-aaf2-074125905ded",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "74e77a99-3147-49fe-8696-0cab9e21d3a5",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "7a5d602b-2c29-4b3c-ad41-287d0876cefe",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "7b40067a-50ff-47f5-bc2a-b9cac8133e19",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "7f2e61d2-e235-4dc9-9c8c-5b8636b48aca",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "81d098d0-3dc5-4647-ab54-5a1cf5761aff",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "832799ab-4ff8-4620-8a34-3ec0da5ddb02",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "84ab8679-35d6-4ed0-94db-e42f90a2447f",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "87fc259d-df6d-43ce-864d-6205cf661f4e",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "8f37332b-1f73-4183-828f-02a3ce010e7c",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "93e1f21d-b18c-4063-bb20-a21905882fda",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "969bc4ab-aa64-4a49-9cdd-7dd0858b8d7b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "97588e3a-53d6-41e8-bad0-1fab492afd2b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "99dd94b0-a0db-4dd4-8b1f-3ac0b884e30b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "a1ef7b13-ffe7-4c71-88ba-d659ab2b91cf",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "a9cf0247-2210-458f-ac35-5fb0156a298f",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "ab347105-c633-468e-a7f6-7b69d2f6a7c2",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "ae3570d3-8105-464b-98ab-95858eee52e4",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "af3854bf-8c37-4178-a192-a5d844bdeb0c",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "b69c2e2f-1f75-454b-96d7-bb194ea24e6b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "bcb1ce89-d7b1-4232-8a6e-2e3c291552a8",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "bcfcefb0-197e-4d06-b9e8-1406990fed4d",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "c20dda0e-ac73-4862-b005-6a175251a4b6",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "c52c9eb0-0d95-4faa-9196-b86c7afbef79",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "c9277a09-c626-4c7d-af09-ceb981e3a82e",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "c965a1d3-8909-4900-b691-2c9a3bcd827a",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "cce3f0ce-9cd4-46b3-9fbe-25816d4fa091",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "d0d79da2-0f98-4d4b-84f2-298689b2a254",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "d290e8e6-4d6a-47cb-ae9e-100c8245ed38",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "db11e5ee-2374-4a86-b60a-351487c84490",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "dfe9793c-b325-4848-abff-c2af11b5c2e9",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "e0a64c03-0b6e-49dd-9bc9-4e8c71bc853f",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "e5541da9-38c7-486d-a7a1-c6cf00bb018b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "e903a94a-37bd-4e55-8100-27e57b555d6d",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "f143ebe6-5295-4f2a-8c55-ef17664cc09b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "f18c895b-5ec5-4f3b-908f-ea86ff98d85e",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "f66200a6-d491-4df6-8f69-8080f70e5f6d",
+                            "tag": "Blue"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "6": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "03330ffc-d030-424e-bb53-34e8527a2e8c",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "03d82b31-7834-4b23-88d9-8e34c109c034",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "07057f5a-0aa2-448c-812c-8749ee8059a2",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "0a30bcc3-b03a-4d9c-98f3-73bfff804df5",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "0aa64260-7dbd-45d2-a6ef-cac854e44423",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "0c5bf859-1d0e-4362-907e-fa751ecf0da3",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "0fb96383-1831-45bd-8665-b16451da63b8",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "1071f7e6-1a34-4d0f-9948-e3fafb82b72d",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "1398f50c-8ee7-4ffc-afef-4fdb3aa08ba0",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "13f94423-2474-40c2-a325-a4651cb0cc3f",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "14541248-0b38-465e-81be-7f18934b0dee",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "15f58178-39e0-4227-8eae-12e75e5b603e",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "2297694b-683f-47d8-847f-b346dc88935f",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "22e44221-e23b-4d18-9ba8-11f2fc8951c7",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "26496356-6f42-4c75-ad67-60707481676c",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "2aa5f830-f6bd-4e25-95a8-b8a539082151",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "2cfadafe-6dc1-4f6d-87aa-bb3bb2d05f8c",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "2d1671d7-06af-48b5-83bc-d3e3c81f3131",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "2f751314-65e6-4293-8414-f3af887afae6",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "30f14c26-62f7-484e-af0a-90ec32e85113",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "319a6fd4-8cc1-4eda-acb7-c0419c386482",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "34275743-e467-4b21-8661-3e9518697333",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "37693990-5361-4804-8265-b874aeb621f0",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "38591501-7623-44bc-8697-e695cd542f1e",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "38c60342-5dc5-4a15-bd5d-7293efe65a59",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "38db4e53-e3e0-4ad5-8da4-a8a36eea0a0f",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "3c39b41e-c796-4767-ac0e-505931b3ad35",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "3e4965c9-979a-4305-8300-4a30e0df78d3",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "40baa41b-f33a-414e-8f03-13bcf5fff620",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "444fcbca-6bc8-4af2-ab48-e4c91197df92",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "44965cb2-1be7-42e7-8836-ba2f38261df3",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "4853dfbb-3a58-4f36-b9fe-1faec91baf54",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "4915f3d1-8ab9-4a1d-96d1-76a39211f146",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "4e6c5c7c-e467-4935-9ff8-607c256e6656",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "4eeb3aea-d64a-4b9a-b8dc-fd22e5bd28d1",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "565f850e-1c01-4dda-92ac-fc3073fceae8",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "5798743a-776d-4249-94b2-67c8f37f3b76",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "57ddcab8-1136-4fb3-80f8-6da8fb5f7115",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "59bdb140-85d1-489d-a79f-3aac138e2a29",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "5bcfec7d-e07e-4c62-8d96-2701c42fc408",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "5ca6d2c7-2274-41e1-96a0-d9f440994018",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "5cccb10b-7e2b-4fe4-81f8-d8054d2c3e78",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "5f93f103-8fcf-42dd-aa0e-12442cc7715d",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "626da972-bbae-4751-93ec-78dc225f993c",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "63100244-9c4d-4535-9653-0f12b6a1c596",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "641ba410-4cfa-496f-b1c0-8791970eab25",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "6552332d-6a4c-44c0-86ce-3203f7498623",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "660057e0-bf11-4740-b684-063ffe7a9c1a",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "67a9348a-c35a-4715-a684-53aceccb74d8",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "6a447f00-ed86-45da-bdce-ffeb00445dac",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "6b57ce9c-829e-4646-96c5-d80484dd38c4",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "71a83400-b7b8-4501-9f5c-db932d998e31",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "75e52e8b-8fbc-4410-a105-b515ab95dc22",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "7ad6b2ed-ccfe-4208-82a4-5adad8c7c0fb",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "7ed3ce70-0f2a-4fdf-9017-21486ba01c59",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "80db6271-3d01-458a-87e9-5ce8809199a0",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "8165428a-b9e7-4958-b1ed-8c3ab9135477",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "85ef3c50-d619-4cf5-b395-5dc0c99e4d4f",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "8a2480bc-df00-4803-8d48-1dff807bef2e",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "8a8c81ab-35b3-4313-96f1-7ffebb544d26",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "900db6dc-581d-4e80-80f4-5862996ace95",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "92261ee1-46c7-441a-9091-373d49061aff",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "94a2aa5a-5219-4480-915f-37fcf79efd86",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "94c2f219-1e3c-4cf4-8e92-cb30f5eb74e3",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "955e219c-0ace-44d1-98b2-9f55b6470498",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "95b3a3cb-ad68-40ad-85bc-ce05f2c024fb",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "980efdf6-6d44-4088-9eab-5af377e7f9cd",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "9c5710ce-2ece-4dc9-9822-6b920e52863f",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "9cf0c90d-6200-483a-a7b9-dceb028d1685",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "a57f1ffc-5f0b-40e7-8d46-aceb64881fca",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "a6068f1b-5b52-49ff-b54a-3c68ed715e23",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "a77e7dfe-978b-4a9b-8818-9012cf447e85",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "a9c3c0a2-29bc-4310-bcd1-e4ea0ff0a1f7",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "b0de2d02-cc6e-4752-89fd-9cf3338243fb",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "b173fcbf-16b2-4670-a12e-c10dc63a0df3",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "b2953503-f651-4df4-b282-182d9691c8e0",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "b7890638-e58e-46fc-bc37-47be58c2dd4a",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "c0e4d995-56c8-4ecb-a4fe-fefbb41c70d6",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "c29e5a4d-41c6-4424-84ee-d04863a8b047",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "c4b3a6ea-9c12-4411-b970-23e96703778b",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "d2f7dfdd-1567-4e13-86f5-554a0c87f54a",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "d3c4e9dc-cbb2-4712-a4f8-d5509946629a",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "d4d5192a-572e-41c1-bc78-354247be21c8",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "d7aeefb8-a20d-4025-a62c-dd1b54549ff7",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "d92e6c54-0290-41c0-9894-c9f669187c1b",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "d99470f8-9ea0-4c60-9efb-3af2adcd7253",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "dbf4daa2-9b1f-4884-bd26-fb9803f5d374",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "dc4991a8-ca35-4fcc-b6ab-e97767a041e5",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "dd880b9f-8395-42fd-88e4-eef36ab7a6c6",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "dfea59f1-1b64-4f82-9b94-3372c0da4419",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "e37f05e8-270a-44c2-b9b3-9a79af658010",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "e3879c8a-50dc-4129-9556-ee4448ebbacd",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "e4379862-3ea3-4c33-8d21-d7f099732a20",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "edf9a4a8-a913-4647-88f6-31483a04bcc9",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "ef8a5a12-bfa4-49b1-bea8-5bd2bbdc7051",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "f082cd04-3b85-4839-be18-4c3770d6a886",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "f19db729-2628-44b6-9e06-9992c749752b",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "f23b9882-9573-4300-ba7e-d51b05874693",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "f2a27813-b26b-49d3-a2b7-1b031831a593",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "fadda6ee-9ff4-4917-be65-61ec2263cd83",
+                            "tag": "Red"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "11": {
+                "nodeColor": "black",
+                "nodeLabel": "Ultimate!",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            }
+        },
+        "resourceEdges": {
+            "15": {
+                "to": 12,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 11,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "8": {
+                "to": 7,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 10,
+                    "tag": "RFConstant"
+                },
+                "from": 6,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "16": {
+                "to": 13,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 12,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "14": {
+                "to": 11,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 10,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "5": {
+                "to": 4,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 5,
+                    "tag": "RFConstant"
+                },
+                "from": 3,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

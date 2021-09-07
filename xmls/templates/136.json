@@ -1,0 +1,1416 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "pendingTriggers": [],
+    "graph": {
+        "stateEdges": {
+            "654": {
+                "stateFormula": {
+                    "contents": "a",
+                    "tag": "SFVariable"
+                },
+                "to": 646,
+                "active": false,
+                "from": 645
+            },
+            "652": {
+                "stateFormula": {
+                    "contents": "b",
+                    "tag": "SFVariable"
+                },
+                "to": 645,
+                "active": false,
+                "from": 628
+            },
+            "655": {
+                "stateFormula": {
+                    "contents": "b",
+                    "tag": "SFVariable"
+                },
+                "to": 644,
+                "active": false,
+                "from": 634
+            },
+            "658": {
+                "stateFormula": {
+                    "contents": 1,
+                    "tag": "SFConstant"
+                },
+                "to": 631,
+                "active": false,
+                "from": 628
+            },
+            "653": {
+                "stateFormula": {
+                    "contents": "a",
+                    "tag": "SFVariable"
+                },
+                "to": 645,
+                "active": false,
+                "from": 622
+            },
+            "656": {
+                "stateFormula": {
+                    "contents": 1,
+                    "tag": "SFConstant"
+                },
+                "to": 617,
+                "active": false,
+                "from": 641
+            },
+            "657": {
+                "stateFormula": {
+                    "contents": 1,
+                    "tag": "SFConstant"
+                },
+                "to": 612,
+                "active": false,
+                "from": 640
+            },
+            "649": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 50,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFPercentage"
+                },
+                "to": 606,
+                "active": false,
+                "from": 647
+            },
+            "650": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 25,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFPercentage"
+                },
+                "to": 601,
+                "active": false,
+                "from": 647
+            },
+            "651": {
+                "stateFormula": {
+                    "contents": "a",
+                    "tag": "SFVariable"
+                },
+                "to": 644,
+                "active": false,
+                "from": 628
+            },
+            "648": {
+                "stateFormula": {
+                    "tag": "SFTrigger"
+                },
+                "to": 647,
+                "active": false,
+                "from": 618
+            }
+        },
+        "vertices": {
+            "632": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Interactive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "646": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": 0,
+                        "tag": "FConstant"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "602": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "03422f7a-7ed4-4e92-a7c5-5cf7290d1296",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "06ac3275-447e-4b45-8c9b-c45e3452a47e",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "41fc8f6a-135f-46a8-a438-2c1d90a5ba49",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "69cc0807-961b-4171-93c8-7bdf501e1b38",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "6f88417e-6e75-44b9-8cc4-579f96189e1e",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "700db3e8-a96b-40f5-bfad-21186170669b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "70990949-0ca9-40cb-9941-6e618ff006b9",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "9800d6d3-5313-402d-9a2a-f67fce87accc",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "9d576649-cc86-473c-b656-2d58fb4b1f56",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "c5992a95-f66f-4d16-978a-461b761fc3f6",
+                            "tag": "Blue"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "634": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "608": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "0892f10e-1ccd-4844-9f34-4eec7324977b",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "29a53b91-15e8-4c3f-8e6e-adfc9f82fb6b",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "4e7f032c-5bcd-411d-aa1f-c9a27f671a05",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "57039a67-c502-4327-be34-fc7f63a7f640",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "5739658e-338b-4ec1-805a-d5381b0a1e92",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "a33723f3-31a9-4c16-9051-2fc2024cbbdb",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "a75dc854-9ccf-4c88-b129-e3a974630727",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "b2dc0479-5410-4a53-946f-5cd0da2b7726",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "c37fac46-971e-4896-b31d-f2cf24c1c863",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "fc3e285e-8980-4a26-a34b-d546e884a93b",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "611": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Interactive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "605": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "058f77a8-6aa4-48c9-a4d9-72076ccaa99f",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "05e4f778-8bdc-4d8f-8bd7-d1e5c98e8ed8",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "07d05dfe-4da6-4580-9af3-84d4f7e0560b",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "0abcaa0f-94e5-4924-a893-49abaf655f90",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "0e13c0b8-bbd2-4d29-9c08-622211fc1d33",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "0f684096-a4bc-4475-84ee-944b5c1a7e1e",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "122dca27-304b-4584-aec5-8f932afa961a",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "146944a2-dece-4fe4-a7ae-a26f4a34b1a7",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "1f73d06c-6a44-4e4b-829b-04785dd01444",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "2188056d-3b4b-4041-888b-246f9b9db742",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "25dda4ad-c783-4b47-ab8a-a90e74cfc57a",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "2bd1c015-d7e9-4c89-84fc-6a1e88663a98",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "2e68ae4b-fc2a-4460-a4af-ea6fff08faa1",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "45dcd788-bffa-4b7f-a66d-f295e9e0263f",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "4b8649ec-09cf-4704-b517-9793fe93d3e7",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "54dc7c3d-832d-4f06-b247-9186431b85e1",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "5af3f8f9-c3f4-4d6c-b54b-69794ebf971f",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "5df98e12-f461-45bc-b091-54d8347bdb40",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "669319da-e433-4bb2-a19d-fdb1849c55b8",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "6d65532c-e448-47b6-b6cb-f33cab1c7454",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "6d961c86-ead0-4fc7-b8d3-647d9198791c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "7ef24950-7398-4e17-bf3f-e3b200520f12",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "810e49de-bb3f-4a0b-bc37-53924fabcb6a",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "81de009c-a9f3-4fff-8345-271bf908c69a",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "832ef22d-aba3-456c-a373-9e53653f785b",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "87779d72-2480-4441-aa67-ec0222207269",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "8ec2a66a-f561-459c-8c12-a1df0752ef12",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "90ed4071-2cd6-49a8-ab10-ebd3fdea94f8",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "9c9680c7-1913-47d0-832d-8b5ceb97eef4",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "af46abde-4b48-4d2c-ac08-4cd7329b9667",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "b1984229-68f9-46df-a31b-5b0c621f11c4",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "b2623b52-a288-4766-83a6-bf137044724c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "b2876dab-5772-4539-aa0c-12fe7226e696",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "b3b97cfc-a686-4291-9aac-7995d7361967",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "b42e82ff-c554-4729-a78a-c142471f9d42",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "c783403d-a49a-439f-941c-39ac218f4a6f",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "c7ea5641-4573-4d0e-b1ea-66042042bff0",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "cb7ceb53-d748-4458-b98d-1d937b7adad4",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "cc9c5b77-89c5-4cba-8fbe-b4fbf6fd74d0",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "ccc74c65-6176-4be4-96fe-27fa812e72d5",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "cd1dc1f0-fc32-485f-95d7-124971689a05",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "d8119d2f-9249-4c82-861c-49691909228c",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "d966eb7a-08fe-4c44-94da-89868dd28ca8",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "daa912a0-7c17-4d73-9663-fd9377cab9bc",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "e54346a0-45c8-4185-b0a6-fe69696993a4",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "e819df31-0c75-4a67-99e6-307e64fb55c6",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "ea2f1ef4-0100-4bd2-af3e-dd6e8ebf19c5",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "f130bc09-58b8-459c-9e5c-6ae6b19856e2",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "f3c2ff5c-67ed-4596-b869-c3fc4b5a0fed",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "f99e2bda-fc79-4946-a8a4-2c28c8d43be3",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "641": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "630": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "640": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "601": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "645": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": 0,
+                        "tag": "FConstant"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "618": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Interactive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "628": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "613": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Interactive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "644": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": 0,
+                        "tag": "FConstant"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "619": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Interactive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "600": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "0001ef24-5e71-435f-923b-5e47dcdb3c91",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "09fdf9df-c670-4f22-bfe7-429da90a0bba",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "0da7c955-bc9d-4ea3-92e2-ce4b920b9a03",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "147eaf6c-c99c-4c87-83dc-b07037b3a42e",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "1d9ee7fe-965d-438a-877f-f3cb71ae152b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "2720abce-8155-46f5-888e-28ab4309b600",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "2a3252cb-478a-4f4b-852a-85e0526ec51a",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "2d7ff889-c875-426a-b07d-cafe176719ce",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "326e704a-a776-4140-b78e-7a3ad417c966",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "3849f5d3-9ec8-441e-b8f8-6dd0c5b9eb10",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "38b94c1a-51fc-4f55-a5dd-bbb5bcb1db33",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "40be962d-01ea-4b5d-a3dd-f763db9a4396",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "44a10e64-1b45-4d2e-98ba-595ce2fdc4a2",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "4b383309-275b-43bb-83e0-3f61f4ad5d3d",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "5b5f5088-ab5a-4bc2-aabb-8bc54fec4d99",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "6dac56ee-638d-4d58-93f2-beb3442bd641",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "74c1d692-db79-45f3-aa30-05f3d5813d31",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "7a445960-4811-4080-8157-5a37d54940a3",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "7c52a7c7-8601-4062-a26d-740f3fab783c",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "7e14a5f1-947e-45ac-aa33-572084ac3053",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "80e37350-24e1-4ea5-af23-fbed859168b4",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "83072197-30f5-4459-bd1a-edd41929103a",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "85a1f322-d9df-4a85-bcfd-c0296a7afa10",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "8c854dbe-9ba2-4e23-8869-3d1be52ddd2e",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "8cc85f7d-3152-4e29-8331-dfed918faf07",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "9bd7ec5e-af28-4370-93e2-2199b3dfa6a2",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "a42de7d3-024e-468b-af1d-75582e29fb24",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "a744e92f-7264-4829-80e1-3f4168cc35b2",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "a8a73274-66aa-4a89-8f2a-3be124645fe0",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "aa81b1c9-dc6d-4369-b5b6-a65d1934ce77",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "acf35948-71a7-4080-b0ec-9ad236b23ebf",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "ad7655e1-b4a0-4f47-bcdf-bf1a4f608062",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "b2886221-cbc9-47f5-b3da-692892a16c5a",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "b4452e49-271c-4373-8da0-9d147618f72e",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "b67ad76d-b52d-4307-8642-93031e34f474",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "b829c40b-9c73-4e2f-93d3-527a8d9d0e47",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "be41971a-75f7-4f9b-8e6e-70e706c3735d",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "c1f48f79-5bdb-45cd-b65f-b076a37be801",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "c3d41074-ac23-40ec-a38f-54930d5ff4d5",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "cddebf50-81cb-4595-88f0-ad4257be3184",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "d316ebf6-15d1-4857-9173-7383a9bd4039",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "db4a542a-4421-4dca-bb82-46757b53677f",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "dc427c70-93a9-4055-84d0-49c039cf57e9",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "e10ba1e3-60e2-4905-849b-a292d61363c1",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "e6cb3b8e-f7fb-40a4-b904-ea092ee5474c",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "e72178c4-32b4-433d-9437-162a25d0c867",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "ef5b997b-5ad8-4035-b863-db92b312b106",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "f344da73-9021-4c47-9d36-aae6b66cbbbd",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "f53ca72f-49f8-481d-85ac-65a5b71ec69c",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "f778aa73-97e2-4c7e-b19f-34ae90e15c1e",
+                            "tag": "Blue"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "622": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "7c499491-b393-4b71-999d-c8c05b244eb4",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "d1789e18-4807-4087-9a2b-2abeaaca3f8b",
+                            "tag": "Black"
+                        },
+                        {
+                            "uUID": "d6065a8a-781f-4044-b310-24229a7ee0f2",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "636": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Interactive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "606": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "624": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAll",
+                    "activation": {
+                        "tag": "Interactive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            },
+            "647": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Random"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "615": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "637": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Interactive"
+                    },
+                    "storage": {},
+                    "tag": "Converter"
+                }
+            }
+        },
+        "resourceEdges": {
+            "609": {
+                "to": 608,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 606,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "639": {
+                "to": 637,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 3,
+                    "tag": "RFConstant"
+                },
+                "from": 630,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "620": {
+                "to": 618,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 615,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "616": {
+                "to": 615,
+                "resourceFilter": "Blue",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 611,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "633": {
+                "to": 632,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 3,
+                    "tag": "RFConstant"
+                },
+                "from": 630,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "627": {
+                "to": 624,
+                "resourceFilter": "Blue",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 615,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "617": {
+                "to": 615,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 613,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "635": {
+                "to": 634,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 632,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "612": {
+                "to": 611,
+                "resourceFilter": "Blue",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 602,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "629": {
+                "to": 628,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 624,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "604": {
+                "to": 602,
+                "resourceFilter": "Blue",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 601,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "626": {
+                "to": 624,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 615,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "623": {
+                "to": 622,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 618,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "631": {
+                "to": 630,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 619,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "643": {
+                "to": 641,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 637,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "607": {
+                "to": 606,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": [
+                        {
+                            "contents": 1,
+                            "tag": "RFConstant"
+                        },
+                        {
+                            "contents": 4,
+                            "tag": "RFConstant"
+                        }
+                    ],
+                    "tag": "RFDice"
+                },
+                "from": 605,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "625": {
+                "to": 624,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 622,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "614": {
+                "to": 613,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 608,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "642": {
+                "to": 640,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 636,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "603": {
+                "to": 601,
+                "resourceFilter": "Blue",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": [
+                        {
+                            "contents": 4,
+                            "tag": "RFConstant"
+                        },
+                        {
+                            "contents": [
+                                {
+                                    "contents": 1,
+                                    "tag": "RFConstant"
+                                },
+                                {
+                                    "contents": 2,
+                                    "tag": "RFConstant"
+                                }
+                            ],
+                            "tag": "RFDice"
+                        }
+                    ],
+                    "tag": "RFAdd"
+                },
+                "from": 600,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "621": {
+                "to": 619,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 615,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "638": {
+                "to": 636,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 3,
+                    "tag": "RFConstant"
+                },
+                "from": 630,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

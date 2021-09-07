@@ -1,12 +1,12 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "375" [shape=circle,peripheries="2",label=<0<SUB>p</SUB>>,labelfontcolor=black,color=black];
-  "382" [shape=triangle,peripheries="1",label=<<SUP>S</SUP>>,labelfontcolor=black,color=black];
-  "390" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "383" [label=<10>,peripheries="1",color=black,shape=septagon];
+  "375" [shape=circle,peripheries="2",label=<0<SUB>p</SUB><FONT POINT-SIZE='4'>375</FONT>>,labelfontcolor=black,color=black];
+  "382" [shape=triangle,peripheries="1",label=<<SUP>S</SUP><FONT POINT-SIZE='4'>382</FONT>>,labelfontcolor=black,color=black];
+  "390" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>390</FONT>>,labelfontcolor=black,color=black];
+  "383" [label=<10<FONT POINT-SIZE='4'>383</FONT>>,peripheries="1",color=black,shape=septagon];
   "382" -> "383" [color=black];
   "383" -> "375" [color=black];
-  "393" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "393" [label=<1<FONT POINT-SIZE='4'>393</FONT>>,peripheries="1",color=black,shape=septagon];
   "375" -> "393" [color=black];
   "393" -> "390" [color=black];
 }

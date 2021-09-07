@@ -1,0 +1,1019 @@
+<?xml version="1.0"?>
+<mxGraphModel>
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+    <mxCell id="2" parent="1"/>
+    <mxSourceShapeCell id="3" value="New Run" style="shape=source-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Source" vertex="1" edge="0" activation="onstart" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-113" y="47" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="left" as="geometry">
+        <mxPoint x="-63.866068984351614" y="-18.773885385653443" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxSourceShapeCell>
+    <mxPoolShapeCell id="4" value="Run Active" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Pool" vertex="1" edge="0" activation="automatic" actionMode="push-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-113" y="192" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="topLeft" as="geometry">
+        <mxPoint x="-49.54249618617473" y="-39.3929942035345" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxPoolShapeCell>
+    <mxResourceConnectionCell id="5" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#004C99;strokeColor=#004C99;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="3" target="4">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-60" y="70" as="sourcePoint"/>
+        <mxPoint x="-60" y="70" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxPoolShapeCell id="6" value="Dead" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Pool" vertex="1" edge="0" activation="automatic" actionMode="push-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-113" y="347" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="left" as="geometry">
+        <mxPoint x="-58.20967562728447" y="-4.8259303725183145" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxPoolShapeCell>
+    <mxResourceConnectionCell id="7" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#004C99;strokeColor=#004C99;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="4" target="6">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-60" y="215" as="sourcePoint"/>
+        <mxPoint x="-60" y="215" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxGateShapeCell id="8" style="shape=gate-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Gate" vertex="1" edge="0" actionMode="pull-any" distributionMode="deterministic" isMachination="1" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="37" y="277" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+    </mxGateShapeCell>
+    <mxResourceConnectionCell id="9" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#004C99;strokeColor=#004C99;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="6" target="8">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-60" y="370" as="sourcePoint"/>
+        <mxPoint x="-60" y="370" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="10" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#004C99;strokeColor=#004C99;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="8" target="4">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="80" y="277" as="sourcePoint"/>
+        <mxPoint x="80" y="277" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxSourceShapeCell id="11" style="shape=source-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#999900;strokeColor=#999900;" title="Source" vertex="1" edge="0" activation="passive" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="177" y="277" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxSourceShapeCell>
+    <mxPoolShapeCell id="12" value="Revenue $$$" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#00CC00;strokeColor=#00CC00;" title="Pool" vertex="1" edge="0" activation="passive" actionMode="push-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" inChartProperties="{&quot;visible&quot;: &quot;true&quot;, &quot;onLeftScale&quot;: &quot;true&quot;, &quot;color&quot;: &quot;#00CC00&quot;, &quot;chartType&quot;: &quot;0&quot;}" parent="2">
+      <mxGeometry x="87" y="-87" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottomLeft" as="geometry">
+        <mxPoint x="-55.051251065733595" y="36.23231275815647" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+      <mxChartCell as="chartprop"/>
+    </mxPoolShapeCell>
+    <mxStateConnectionCell id="13" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=2;fontSize=14;fontColor=#999900;strokeColor=#999900;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="*" formulaOnTop="0" parent="2" source="8" target="11">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="90" y="300" as="sourcePoint"/>
+        <mxPoint x="90" y="300" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxPoolShapeCell id="14" value="Ad revive used" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#999900;strokeColor=#999900;" title="Pool" vertex="1" edge="0" activation="passive" actionMode="push-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="337" y="277" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="right" as="geometry">
+        <mxPoint x="67.43809546769307" y="-2.8902040914726967" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxPoolShapeCell>
+    <mxResourceConnectionCell id="15" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#999900;strokeColor=#999900;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="11" target="14">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="230" y="300" as="sourcePoint"/>
+        <mxPoint x="230" y="300" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="16" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#00CC00;strokeColor=#00CC00;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="11" target="12">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="230" y="300" as="sourcePoint"/>
+        <mxPoint x="230" y="300" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxStateConnectionCell id="17" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#000000;strokeColor=#000000;align=center;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="==0" formulaOnTop="0" parent="2" source="14" target="10">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="390" y="300" as="sourcePoint"/>
+        <mxPoint x="390" y="300" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="360" y="210"/>
+          <mxPoint x="20" y="210"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxGateShapeCell id="18" style="shape=gate-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Gate" vertex="1" edge="0" actionMode="pull-any" distributionMode="dice" isMachination="1" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="37" y="453" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+    </mxGateShapeCell>
+    <mxPoolShapeCell id="19" value="Red star rings" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#CC0000;strokeColor=#CC0000;" title="Pool" vertex="1" edge="0" activation="passive" actionMode="push-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="287" y="-87" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="left" as="geometry">
+        <mxPoint x="-67.38073774209988" y="-4.010758198934582" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+      <mxChartCell as="chartprop"/>
+    </mxPoolShapeCell>
+    <mxResourceConnectionCell id="20" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#004C99;strokeColor=#004C99;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="8" target="18">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="90" y="300" as="sourcePoint"/>
+        <mxPoint x="90" y="300" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxGateShapeCell id="21" style="shape=gate-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Gate" vertex="1" edge="0" actionMode="pull-any" distributionMode="deterministic" isMachination="1" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-223" y="287" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+    </mxGateShapeCell>
+    <mxResourceConnectionCell id="22" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#004C99;strokeColor=#004C99;edgeStyle=orthogonalEdgeStyle;align=center;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="100%" formulaOnTop="0" parent="2" source="18" target="21">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="90" y="476" as="sourcePoint"/>
+        <mxPoint x="90" y="476" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="23" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#004C99;strokeColor=#004C99;edgeStyle=orthogonalEdgeStyle;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="21" target="4">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-200" y="310" as="sourcePoint"/>
+        <mxPoint x="-200" y="310" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="-200" y="215"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxPoolShapeCell id="24" value="Final score" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Pool" vertex="1" edge="0" activation="passive" actionMode="push-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-113" y="584" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="left" as="geometry">
+        <mxPoint x="-66.91885942972863" y="-7.594425416762988" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxPoolShapeCell>
+    <mxResourceConnectionCell id="25" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#004C99;strokeColor=#004C99;align=center;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="100%" formulaOnTop="0" parent="2" source="18" target="26">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="90" y="476" as="sourcePoint"/>
+        <mxPoint x="90" y="476" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxConverterShapeCell id="26" style="shape=converter-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Converter" vertex="1" edge="0" activation="passive" actionMode="pull-any" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="39" y="584" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxConverterShapeCell>
+    <mxResourceConnectionCell id="27" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#004C99;strokeColor=#004C99;align=center;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="200 + d300" formulaOnTop="0" parent="2" source="26" target="24">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="92" y="607" as="sourcePoint"/>
+        <mxPoint x="92" y="607" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxPoolShapeCell id="28" value="Rings" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#6600CC;strokeColor=#6600CC;" title="Pool" vertex="1" edge="0" activation="passive" actionMode="push-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-513" y="-87" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="35.13399549792114" y="44.05647402257858" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+      <mxChartCell as="chartprop"/>
+    </mxPoolShapeCell>
+    <mxSourceShapeCell id="29" value="Double rings Ad" style="shape=source-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#6600CC;strokeColor=#6600CC;" title="Source" vertex="1" edge="0" activation="passive" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-513" y="407" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" as="geometry">
+        <mxPoint x="0" y="67.5" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxSourceShapeCell>
+    <mxResourceConnectionCell id="30" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#6600CC;strokeColor=#6600CC;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="0" formulaOnTop="0" parent="2" source="29" target="28">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-430" y="416" as="sourcePoint"/>
+        <mxPoint x="-430" y="416" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxStateConnectionCell id="31" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#999900;strokeColor=#999900;edgeStyle=orthogonalEdgeStyle;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="==0" formulaOnTop="0" parent="2" source="14" target="11">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="390" y="300" as="sourcePoint"/>
+        <mxPoint x="390" y="300" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="360" y="380"/>
+          <mxPoint x="200" y="380"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxDrainShapeCell id="32" style="shape=drain-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#CC0000;strokeColor=#CC0000;" title="Drain" vertex="1" edge="0" activation="passive" actionMode="pull-any" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="287" y="47" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+    </mxDrainShapeCell>
+    <mxResourceConnectionCell id="33" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#CC0000;strokeColor=#CC0000;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="2" formulaOnTop="0" parent="2" source="19" target="32">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="340" y="-64" as="sourcePoint"/>
+        <mxPoint x="340" y="-64" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxStateConnectionCell id="34" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#004C99;strokeColor=#004C99;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="*" formulaOnTop="0" parent="2" source="21" target="32">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-200" y="310" as="sourcePoint"/>
+        <mxPoint x="-200" y="310" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxSourceShapeCell id="35" value="Purchase 105 rings" style="shape=source-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#CC0000;strokeColor=#CC0000;" title="Source" vertex="1" edge="0" activation="passive" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="497" y="-264" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="right" as="geometry">
+        <mxPoint x="73.86446875070806" y="-3.5087135033095365" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxSourceShapeCell>
+    <mxSourceShapeCell id="36" value="Purchase 30 rings" style="shape=source-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#CC0000;strokeColor=#CC0000;" title="Source" vertex="1" edge="0" activation="passive" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="287" y="-264" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="topLeft" as="geometry">
+        <mxPoint x="-45.51235310334641" y="-45.73313374903182" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxSourceShapeCell>
+    <mxResourceConnectionCell id="37" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#CC0000;strokeColor=#CC0000;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="30" formulaOnTop="0" parent="2" source="36" target="19">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="340" y="-220" as="sourcePoint"/>
+        <mxPoint x="340" y="-220" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="38" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#CC0000;strokeColor=#CC0000;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="105" formulaOnTop="0" parent="2" source="35" target="19">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="550" y="-220" as="sourcePoint"/>
+        <mxPoint x="550" y="-220" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxGateShapeCell id="39" style="shape=gate-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#000000;strokeColor=#000000;" title="Gate" vertex="1" edge="0" actionMode="pull-any" distributionMode="dice" isMachination="1" activation="automatic" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="497" y="-393" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+    </mxGateShapeCell>
+    <mxStateConnectionCell id="40" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=2;fontSize=14;fontColor=#000000;strokeColor=#000000;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1%" formulaOnTop="0" parent="2" source="39" target="35">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="540" y="-370" as="sourcePoint"/>
+        <mxPoint x="540" y="-370" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="41" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=2;fontSize=14;fontColor=#000000;strokeColor=#000000;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="5%" formulaOnTop="0" parent="2" source="39" target="36">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="550" y="-370" as="sourcePoint"/>
+        <mxPoint x="550" y="-370" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxPoolShapeCell id="42" value="Number of boosters" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#990099;strokeColor=#990099;" title="Pool" vertex="1" edge="0" activation="passive" actionMode="push-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="497" y="277" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottomRight" as="geometry">
+        <mxPoint x="42.81844844206853" y="54.266436393593494" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxPoolShapeCell>
+    <mxConverterShapeCell id="43" style="shape=converter-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#990099;strokeColor=#990099;" title="Converter" vertex="1" edge="0" activation="passive" actionMode="pull-all" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="497" y="89" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxConverterShapeCell>
+    <mxResourceConnectionCell id="44" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#990099;strokeColor=#990099;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="3" formulaOnTop="0" parent="2" source="19" target="43">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="340" y="-64" as="sourcePoint"/>
+        <mxPoint x="340" y="-64" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="45" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#990099;strokeColor=#990099;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="43" target="42">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="550" y="112" as="sourcePoint"/>
+        <mxPoint x="550" y="112" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxConverterShapeCell id="46" style="shape=converter-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#990099;strokeColor=#990099;" title="Converter" vertex="1" edge="0" activation="passive" actionMode="pull-all" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="587" y="89" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxConverterShapeCell>
+    <mxResourceConnectionCell id="47" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#990099;strokeColor=#990099;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="3" formulaOnTop="0" parent="2" source="19" target="46">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="340" y="-64" as="sourcePoint"/>
+        <mxPoint x="340" y="-64" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="48" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#990099;strokeColor=#990099;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="46" target="42">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="640" y="112" as="sourcePoint"/>
+        <mxPoint x="640" y="112" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxConverterShapeCell id="49" style="shape=converter-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#990099;strokeColor=#990099;" title="Converter" vertex="1" edge="0" activation="passive" actionMode="pull-all" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="677" y="89" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxConverterShapeCell>
+    <mxResourceConnectionCell id="50" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#990099;strokeColor=#990099;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="49" target="42">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="730" y="112" as="sourcePoint"/>
+        <mxPoint x="730" y="112" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="51" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#990099;strokeColor=#990099;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="3" formulaOnTop="0" parent="2" source="19" target="49">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="340" y="-64" as="sourcePoint"/>
+        <mxPoint x="340" y="-64" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxStateConnectionCell id="52" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#990099;strokeColor=#990099;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="*" formulaOnTop="0" parent="2" source="3" target="43">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-60" y="70" as="sourcePoint"/>
+        <mxPoint x="-60" y="70" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="53" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#990099;strokeColor=#990099;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="*" formulaOnTop="0" parent="2" source="3" target="46">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-60" y="70" as="sourcePoint"/>
+        <mxPoint x="-60" y="70" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="54" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#990099;strokeColor=#990099;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="*" formulaOnTop="0" parent="2" source="3" target="49">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-60" y="70" as="sourcePoint"/>
+        <mxPoint x="-60" y="70" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxDrainShapeCell id="55" style="shape=drain-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Drain" vertex="1" edge="0" activation="passive" actionMode="pull-any" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-113" y="847" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+    </mxDrainShapeCell>
+    <mxGateShapeCell id="56" style="shape=gate-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#004C99;strokeColor=#004C99;" title="Gate" vertex="1" edge="0" actionMode="pull-any" distributionMode="deterministic" isMachination="1" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-113" y="717" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+    </mxGateShapeCell>
+    <mxResourceConnectionCell id="57" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#004C99;strokeColor=#004C99;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="all" formulaOnTop="0" parent="2" source="24" target="56">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-60" y="607" as="sourcePoint"/>
+        <mxPoint x="-60" y="607" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="58" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#004C99;strokeColor=#004C99;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="56" target="55">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-64" y="730" as="sourcePoint"/>
+        <mxPoint x="-64" y="730" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="59" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#999900;strokeColor=#999900;edgeStyle=orthogonalEdgeStyle;align=center;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="all" formulaOnTop="0" parent="2" source="14" target="55">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="390" y="300" as="sourcePoint"/>
+        <mxPoint x="390" y="300" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="360" y="870"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="60" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#000000;strokeColor=#000000;edgeStyle=orthogonalEdgeStyle;align=center;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="all" formulaOnTop="0" parent="2" source="42" target="55">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="550" y="300" as="sourcePoint"/>
+        <mxPoint x="550" y="300" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="520" y="870"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxSourceShapeCell id="61" value="Watch Ad" style="shape=source-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#6600CC;strokeColor=#6600CC;" title="Source" vertex="1" edge="0" activation="passive" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-513" y="-264" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="left" as="geometry">
+        <mxPoint x="-67.0634554043072" y="-6.58570228732242" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxSourceShapeCell>
+    <mxResourceConnectionCell id="62" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#6600CC;strokeColor=#6600CC;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="100" formulaOnTop="0" parent="2" source="61" target="28">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-460" y="-241" as="sourcePoint"/>
+        <mxPoint x="-460" y="-241" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxGateShapeCell id="63" style="shape=gate-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#000000;strokeColor=#000000;" title="Gate" vertex="1" edge="0" actionMode="pull-any" distributionMode="dice" isMachination="1" activation="automatic" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-513" y="-403" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+    </mxGateShapeCell>
+    <mxStateConnectionCell id="64" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=2;fontSize=14;fontColor=#000000;strokeColor=#000000;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="10%" formulaOnTop="0" parent="2" source="63" target="61">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-460" y="-380" as="sourcePoint"/>
+        <mxPoint x="-460" y="-380" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxSourceShapeCell id="65" value="Purchase double rings" style="shape=source-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#6600CC;strokeColor=#6600CC;" title="Source" vertex="1" edge="0" activation="passive" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-353" y="-264" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="topRight" as="geometry">
+        <mxPoint x="47.82555104045127" y="-51.5086323888936" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxSourceShapeCell>
+    <mxPoolShapeCell id="66" value="Double ring active" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#6600CC;strokeColor=#6600CC;" title="Pool" vertex="1" edge="0" activation="passive" actionMode="push-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-353" y="-87" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottomLeft" as="geometry">
+        <mxPoint x="-62.5" y="41.87720740614168" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxPoolShapeCell>
+    <mxResourceConnectionCell id="67" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#6600CC;strokeColor=#6600CC;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="65" target="66">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-300" y="-241" as="sourcePoint"/>
+        <mxPoint x="-300" y="-241" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxStateConnectionCell id="68" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=2;fontSize=14;fontColor=#000000;strokeColor=#000000;align=center;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="5%" formulaOnTop="0" parent="2" source="63" target="65">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-460" y="-380" as="sourcePoint"/>
+        <mxPoint x="-460" y="-380" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="69" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#6600CC;strokeColor=#6600CC;edgeStyle=orthogonalEdgeStyle;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="==0" formulaOnTop="0" parent="2" source="66" target="65">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-300" y="-64" as="sourcePoint"/>
+        <mxPoint x="-300" y="-64" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="-390" y="-64"/>
+          <mxPoint x="-390" y="-241"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxMachinationRegisterCell id="70" style="shape=register;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#000000;strokeColor=#000000;" title="Register" vertex="1" edge="0" isInteractive="0" initialValue="0" step="1" minValue="-9999" isMachination="1" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="2*b*(a+1)" parent="2">
+      <mxGeometry x="-353" y="147" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+    </mxMachinationRegisterCell>
+    <mxStateConnectionCell id="71" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#6600CC;strokeColor=#6600CC;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="a" formulaOnTop="0" parent="2" source="66" target="70">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-300" y="-64" as="sourcePoint"/>
+        <mxPoint x="-300" y="-64" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="72" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#004C99;strokeColor=#004C99;align=center;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="b" formulaOnTop="0" parent="2" source="24" target="70">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-60" y="607" as="sourcePoint"/>
+        <mxPoint x="-60" y="607" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="73" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#004C99;strokeColor=#004C99;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="*" formulaOnTop="0" parent="2" source="24" target="29">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-60" y="607" as="sourcePoint"/>
+        <mxPoint x="-60" y="607" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="74" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#000000;strokeColor=#000000;edgeStyle=orthogonalEdgeStyle;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="*" formulaOnTop="0" parent="2" source="29" target="61">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-460" y="430" as="sourcePoint"/>
+        <mxPoint x="-460" y="430" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="-550" y="430"/>
+          <mxPoint x="-550" y="-242"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxResourceConnectionCell id="75" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#00CC00;strokeColor=#00CC00;edgeStyle=orthogonalEdgeStyle;align=center;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="61" target="12">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-460" y="-241" as="sourcePoint"/>
+        <mxPoint x="-460" y="-241" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="76" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#00CC00;strokeColor=#00CC00;edgeStyle=orthogonalEdgeStyle;align=center;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="5" formulaOnTop="0" parent="2" source="65" target="12">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-300" y="-241" as="sourcePoint"/>
+        <mxPoint x="-300" y="-241" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="77" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#00CC00;strokeColor=#00CC00;edgeStyle=orthogonalEdgeStyle;align=center;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="5" formulaOnTop="0" parent="2" source="36" target="12">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="340" y="-220" as="sourcePoint"/>
+        <mxPoint x="340" y="-220" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="78" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#00CC00;strokeColor=#00CC00;edgeStyle=orthogonalEdgeStyle;align=center;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="12" formulaOnTop="0" parent="2" source="35" target="12">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="550" y="-241" as="sourcePoint"/>
+        <mxPoint x="550" y="-241" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxStateConnectionCell id="79" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=2;fontSize=14;fontColor=#6600CC;strokeColor=#6600CC;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="+1" formulaOnTop="0" parent="2" source="70" target="30">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-300" y="170" as="sourcePoint"/>
+        <mxPoint x="-300" y="170" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="80" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#004C99;strokeColor=#004C99;edgeStyle=orthogonalEdgeStyle;align=center;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="*" formulaOnTop="0" parent="2" source="56" target="3">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-60" y="740" as="sourcePoint"/>
+        <mxPoint x="-60" y="740" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="-240" y="740"/>
+          <mxPoint x="-240" y="70"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxConverterShapeCell id="81" style="shape=converter-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Converter" vertex="1" edge="0" activation="automatic" actionMode="pull-all" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-706" y="-255" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxConverterShapeCell>
+    <mxResourceConnectionCell id="82" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#994C00;strokeColor=#994C00;align=center;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="0" formulaOnTop="0" parent="2" source="28" target="81">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-460" y="-64" as="sourcePoint"/>
+        <mxPoint x="-460" y="-64" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxPoolShapeCell id="83" value="Dash Boost" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Pool" vertex="1" edge="0" activation="passive" actionMode="push-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-881" y="-255" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="right" as="geometry">
+        <mxPoint x="64.83119966921193" y="26.744597773989167" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxPoolShapeCell>
+    <mxResourceConnectionCell id="84" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="81" target="83">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-653" y="-232" as="sourcePoint"/>
+        <mxPoint x="-653" y="-232" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxMachinationRegisterCell id="85" value="Upgrade cost" style="shape=register;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Register" vertex="1" edge="0" isInteractive="0" initialValue="0" step="1" minValue="-9999" isMachination="1" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="100*pow(2,a)" parent="2">
+      <mxGeometry x="-1021" y="-255" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="left" as="geometry">
+        <mxPoint x="-92.0106798072272" y="-9.259001800868582" as="offset"/>
+      </mxGeometry>
+    </mxMachinationRegisterCell>
+    <mxStateConnectionCell id="86" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=2;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="a" formulaOnTop="0" parent="2" source="83" target="85">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-828" y="-232" as="sourcePoint"/>
+        <mxPoint x="-828" y="-232" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="87" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="+1" formulaOnTop="0" parent="2" source="85" target="82">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-968" y="-232" as="sourcePoint"/>
+        <mxPoint x="-968" y="-232" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="-1008" y="-310"/>
+          <mxPoint x="-638" y="-310"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxConverterShapeCell id="88" style="shape=converter-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Converter" vertex="1" edge="0" activation="automatic" actionMode="pull-all" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-706" y="-133" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxConverterShapeCell>
+    <mxPoolShapeCell id="89" value="x2 multiplier" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Pool" vertex="1" edge="0" activation="passive" actionMode="push-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-881" y="-133" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="right" as="geometry">
+        <mxPoint x="68.85684415692758" y="28.97456154681582" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxPoolShapeCell>
+    <mxMachinationRegisterCell id="90" value="Upgrade cost" style="shape=register;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Register" vertex="1" edge="0" isInteractive="0" initialValue="0" step="1" minValue="-9999" isMachination="1" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="100*pow(2,a)" parent="2">
+      <mxGeometry x="-1021" y="-133" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="left" as="geometry">
+        <mxPoint x="-92.01582543958435" y="-9.228342770328645" as="offset"/>
+      </mxGeometry>
+    </mxMachinationRegisterCell>
+    <mxResourceConnectionCell id="91" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="88" target="89">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-653" y="-110" as="sourcePoint"/>
+        <mxPoint x="-653" y="-110" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxStateConnectionCell id="92" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=2;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="a" formulaOnTop="0" parent="2" source="89" target="90">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-828" y="-110" as="sourcePoint"/>
+        <mxPoint x="-828" y="-110" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxResourceConnectionCell id="93" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#994C00;strokeColor=#994C00;align=center;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="0" formulaOnTop="0" parent="2" source="28" target="88">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-460" y="-64" as="sourcePoint"/>
+        <mxPoint x="-460" y="-64" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxStateConnectionCell id="94" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="+1" formulaOnTop="0" parent="2" source="90" target="93">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-968" y="-110" as="sourcePoint"/>
+        <mxPoint x="-968" y="-110" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="-1000" y="-180"/>
+          <mxPoint x="-660" y="-180"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxConverterShapeCell id="95" style="shape=converter-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Converter" vertex="1" edge="0" activation="automatic" actionMode="pull-all" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-706" y="-6" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxConverterShapeCell>
+    <mxResourceConnectionCell id="96" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="0" formulaOnTop="0" parent="2" source="28" target="95">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-460" y="-64" as="sourcePoint"/>
+        <mxPoint x="-460" y="-64" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxPoolShapeCell id="97" value="Magnet" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Pool" vertex="1" edge="0" activation="passive" actionMode="push-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-881" y="-6" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottomRight" as="geometry">
+        <mxPoint x="49.38280580197833" y="38.31117578238199" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxPoolShapeCell>
+    <mxResourceConnectionCell id="98" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="95" target="97">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-653" y="17" as="sourcePoint"/>
+        <mxPoint x="-653" y="17" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxMachinationRegisterCell id="99" value="Upgrade cost" style="shape=register;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Register" vertex="1" edge="0" isInteractive="0" initialValue="0" step="1" minValue="-9999" isMachination="1" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="100*pow(2,a)" parent="2">
+      <mxGeometry x="-1020" y="-7" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="left" as="geometry">
+        <mxPoint x="-92.78215364099879" y="0.6288870045068506" as="offset"/>
+      </mxGeometry>
+    </mxMachinationRegisterCell>
+    <mxStateConnectionCell id="100" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=2;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="a" formulaOnTop="0" parent="2" source="97" target="99">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-828" y="17" as="sourcePoint"/>
+        <mxPoint x="-828" y="17" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="101" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="+1" formulaOnTop="0" parent="2" source="99" target="96">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-967" y="16" as="sourcePoint"/>
+        <mxPoint x="-967" y="16" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="-997" y="-60"/>
+          <mxPoint x="-640" y="-50"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxConverterShapeCell id="102" style="shape=converter-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Converter" vertex="1" edge="0" activation="automatic" actionMode="pull-all" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-706" y="117" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxConverterShapeCell>
+    <mxPoolShapeCell id="103" value="Shield" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Pool" vertex="1" edge="0" activation="passive" actionMode="push-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-881" y="117" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottomRight" as="geometry">
+        <mxPoint x="47.92727415373877" y="36.158599909465146" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxPoolShapeCell>
+    <mxResourceConnectionCell id="104" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="102" target="103">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-653" y="140" as="sourcePoint"/>
+        <mxPoint x="-653" y="140" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxMachinationRegisterCell id="105" value="Upgrade cost" style="shape=register;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Register" vertex="1" edge="0" isInteractive="0" initialValue="0" step="1" minValue="-9999" isMachination="1" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="100*pow(2,a)" parent="2">
+      <mxGeometry x="-1020" y="117" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="left" as="geometry">
+        <mxPoint x="-92.247855296946" y="-7.718206426066315" as="offset"/>
+      </mxGeometry>
+    </mxMachinationRegisterCell>
+    <mxStateConnectionCell id="106" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=2;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="a" formulaOnTop="0" parent="2" source="103" target="105">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-828" y="140" as="sourcePoint"/>
+        <mxPoint x="-828" y="140" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxResourceConnectionCell id="107" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="0" formulaOnTop="0" parent="2" source="28" target="102">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-460" y="-64" as="sourcePoint"/>
+        <mxPoint x="-460" y="-64" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxStateConnectionCell id="108" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="+1" formulaOnTop="0" parent="2" source="105" target="107">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-967" y="140" as="sourcePoint"/>
+        <mxPoint x="-967" y="140" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="-997" y="70"/>
+          <mxPoint x="-670" y="70"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxConverterShapeCell id="109" style="shape=converter-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Converter" vertex="1" edge="0" activation="automatic" actionMode="pull-all" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-706" y="252" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxConverterShapeCell>
+    <mxResourceConnectionCell id="110" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="0" formulaOnTop="0" parent="2" source="28" target="109">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-460" y="-64" as="sourcePoint"/>
+        <mxPoint x="-460" y="-64" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxPoolShapeCell id="111" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Pool" vertex="1" edge="0" activation="passive" actionMode="push-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-881" y="252" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxPoolShapeCell>
+    <mxResourceConnectionCell id="112" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="109" target="119">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-653" y="275" as="sourcePoint"/>
+        <mxPoint x="-653" y="275" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxMachinationRegisterCell id="113" value="Upgrade cost" style="shape=register;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Register" vertex="1" edge="0" isInteractive="0" initialValue="0" step="1" minValue="-9999" isMachination="1" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="100*pow(2,a)" parent="2">
+      <mxGeometry x="-1020" y="252" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="left" as="geometry">
+        <mxPoint x="-92.59640222977461" y="-4.583317728178957" as="offset"/>
+      </mxGeometry>
+    </mxMachinationRegisterCell>
+    <mxStateConnectionCell id="114" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=2;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="a" formulaOnTop="0" parent="2" source="119" target="113">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-828" y="275" as="sourcePoint"/>
+        <mxPoint x="-828" y="275" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="115" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#994C00;strokeColor=#994C00;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="+1" formulaOnTop="0" parent="2" source="113" target="110">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-967" y="275" as="sourcePoint"/>
+        <mxPoint x="-967" y="275" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="-997" y="210"/>
+          <mxPoint x="-700" y="210"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxMachinationRegisterCell id="116" value="Bonus from upgrades" style="shape=register;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#000000;strokeColor=#000000;" title="Register" vertex="1" edge="0" isInteractive="0" initialValue="0" step="1" minValue="-9999" isMachination="1" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="(a+b+c+d+f)*20" parent="2">
+      <mxGeometry x="-881" y="528" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="-4.107845643525577" y="71.72665086821618" as="offset"/>
+      </mxGeometry>
+    </mxMachinationRegisterCell>
+    <mxStateConnectionCell id="117" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#000000;strokeColor=#000000;align=center;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="a" formulaOnTop="0" parent="2" source="83" target="116">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-828" y="-232" as="sourcePoint"/>
+        <mxPoint x="-828" y="-232" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="118" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#000000;strokeColor=#000000;align=center;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="b" formulaOnTop="0" parent="2" source="89" target="116">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-828" y="-110" as="sourcePoint"/>
+        <mxPoint x="-828" y="-110" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxPoolShapeCell id="119" value="Headstart" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#994C00;strokeColor=#994C00;" title="Pool" vertex="1" edge="0" activation="passive" actionMode="push-any" number="0" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-881" y="252" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottomRight" as="geometry">
+        <mxPoint x="55.52007803884928" y="37.68343286709589" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxPoolShapeCell>
+    <mxStateConnectionCell id="120" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#000000;strokeColor=#000000;align=center;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="c" formulaOnTop="0" parent="2" source="97" target="116">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-828" y="17" as="sourcePoint"/>
+        <mxPoint x="-828" y="17" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="121" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#000000;strokeColor=#000000;align=center;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="d" formulaOnTop="0" parent="2" source="103" target="116">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-828" y="140" as="sourcePoint"/>
+        <mxPoint x="-828" y="140" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="122" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#000000;strokeColor=#000000;align=center;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="f" formulaOnTop="0" parent="2" source="119" target="116">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-828" y="275" as="sourcePoint"/>
+        <mxPoint x="-828" y="275" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="123" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#004C99;strokeColor=#004C99;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="*" formulaOnTop="0" parent="2" source="29" target="55">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-460" y="430" as="sourcePoint"/>
+        <mxPoint x="-460" y="430" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxSourceShapeCell id="124" style="shape=source-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#999900;strokeColor=#999900;" title="Source" vertex="1" edge="0" activation="passive" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-443" y="614" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="0" y="53" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxSourceShapeCell>
+    <mxPoolShapeCell id="125" value="Times revived" style="shape=pool-shape;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#999900;strokeColor=#999900;" title="Pool" vertex="1" edge="0" activation="passive" actionMode="push-any" number="1" capacity="-1" displayCapacity="25" overflow="block" isMachination="1" blinkStatus="0" connectable="1" visible="1" collapsed="0" parent="2">
+      <mxGeometry x="-443" y="750" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="left" as="geometry">
+        <mxPoint x="-71.76402056836196" y="-1.5311530691367028" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxPoolShapeCell>
+    <mxResourceConnectionCell id="126" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#999900;strokeColor=#999900;edgeStyle=orthogonalEdgeStyle;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="all" formulaOnTop="0" parent="2" source="125" target="55">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-390" y="773" as="sourcePoint"/>
+        <mxPoint x="-390" y="773" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="-420" y="960"/>
+          <mxPoint x="-90" y="960"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxResourceConnectionCell id="127" style="shape=resource-connection;endArrow=classic;html=1;strokeWidth=2;fontSize=14;fontColor=#999900;strokeColor=#999900;" title="Resource Connection" vertex="0" edge="1" type="plain-arrow" resourceTransfer="interval-based" colorCoding="0" minValue="-9999" maxValue="9999" shuffleSource="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="1" formulaOnTop="0" parent="2" source="124" target="125">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-390" y="654" as="sourcePoint"/>
+        <mxPoint x="-390" y="654" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxResourceConnectionCell>
+    <mxStateConnectionCell id="128" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#004C99;strokeColor=#004C99;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="*" formulaOnTop="0" parent="2" source="21" target="124">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-170" y="310" as="sourcePoint"/>
+        <mxPoint x="-170" y="310" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="129" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#004C99;strokeColor=#004C99;align=center;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="&gt;1" formulaOnTop="0" parent="2" source="19" target="22">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="340" y="-64" as="sourcePoint"/>
+        <mxPoint x="340" y="-64" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxMachinationRegisterCell id="130" value="Added score" style="shape=register;whiteSpace=wrap;html=1;strokeWidth=2;aspect=fixed;resizable=0;fontSize=16;fontColor=#000000;strokeColor=#000000;" title="Register" vertex="1" edge="0" isInteractive="0" initialValue="0" step="1" minValue="-9999" isMachination="1" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="a*100 + b*200 + c" parent="2">
+      <mxGeometry x="-293" y="750" width="46" height="46" TRANSLATE_CONTROL_POINTS="1" relative="0" vertexOrientation="bottom" as="geometry">
+        <mxPoint x="-32.77996252512529" y="89.21953361702046" as="offset"/>
+      </mxGeometry>
+    </mxMachinationRegisterCell>
+    <mxStateConnectionCell id="131" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#999900;strokeColor=#999900;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="a" formulaOnTop="0" parent="2" source="125" target="130">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-390" y="773" as="sourcePoint"/>
+        <mxPoint x="-390" y="773" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="132" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#000000;strokeColor=#000000;edgeStyle=orthogonalEdgeStyle;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="b" formulaOnTop="0" parent="2" source="42" target="130">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="550" y="300" as="sourcePoint"/>
+        <mxPoint x="550" y="300" as="targetPoint"/>
+        <Array as="points">
+          <mxPoint x="520" y="960"/>
+          <mxPoint x="-270" y="960"/>
+        </Array>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="133" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#000000;strokeColor=#000000;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="c" formulaOnTop="0" parent="2" source="116" target="130">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-828" y="551" as="sourcePoint"/>
+        <mxPoint x="-828" y="551" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="134" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#000000;strokeColor=#000000;edgeStyle=orthogonalEdgeStyle;align=center;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="+1" formulaOnTop="0" parent="2" source="130" target="27">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-240" y="773" as="sourcePoint"/>
+        <mxPoint x="-240" y="773" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+    <mxStateConnectionCell id="135" style="shape=state-connection;endArrow=classic;dashed=1;dashPattern=4 3;html=1;strokeWidth=1;fontSize=14;fontColor=#004C99;strokeColor=#004C99;" title="State Connection" vertex="0" edge="1" colorCoding="0" isMachination="1" width="60" height="60" activation="passive" blinkStatus="0" connectable="1" visible="1" collapsed="0" formula="*" formulaOnTop="0" parent="2" source="56" target="124">
+      <mxGeometry x="0" y="0" width="60" height="60" relative="1" TRANSLATE_CONTROL_POINTS="1" as="geometry">
+        <mxPoint x="-60" y="740" as="sourcePoint"/>
+        <mxPoint x="-60" y="740" as="targetPoint"/>
+        <mxPoint x="0" y="0" as="offset"/>
+      </mxGeometry>
+      <Resource travelTime="0" name="Black" color="#000000" as="resource"/>
+    </mxStateConnectionCell>
+  </root>
+  <chart/>
+</mxGraphModel>

@@ -1,4 +1,4 @@
-{-# LANGUAGE RankNTypes, OverloadedLists, OverloadedStrings, OverloadedLabels, MagicHash, ConstraintKinds #-}
+{-# LANGUAGE RankNTypes, OverloadedLists, OverloadedStrings, OverloadedLabels, MagicHash, ConstraintKinds, MultiWayIf #-}
 {-# LANGUAGE DuplicateRecordFields, DataKinds, KindSignatures, GADTs, TypeApplications, ScopedTypeVariables, AllowAmbiguousTypes, TypeFamilies, TypeOperators, PolyKinds, FlexibleContexts, ViewPatterns #-}
 
 module Machinations.Xml where
@@ -15,7 +15,7 @@ import Control.Lens.Extras
 import Data.String
 import qualified Data.ByteString.Lazy.Char8 as B
 import Data.Maybe
-import Data.List (foldl', nub, nubBy, partition, groupBy)
+import Data.List (foldl', nub, nubBy, partition, groupBy, isInfixOf)
 import Data.Set(Set)
 import qualified Data.Set as S
 import Data.Map(Map)
@@ -29,6 +29,14 @@ import System.IO.Unsafe
 import Control.Applicative
 import Text.Read(readMaybe)
 import GHC.Stack(HasCallStack)
+import qualified Data.HashMap.Strict as H
+import qualified Data.Text as T
+import qualified Data.Text.IO as T
+import System.Directory
+import System.FilePath
+import System.IO.Temp
+import Text.XML.JSON.XmlToJson
+import GHC.IO.Handle
 
 conv = do
   f <- capture_ (xmlToJson [] ["/tmp/a.xml"])
@@ -44,7 +52,7 @@ parseActivation "passive" = Passive
 parseActivation "interactive" = Interactive
 parseActivation "automatic" = Automatic
 parseActivation "onstart" = OnStart -- TODO Not verified
- 
+
 parseOverflow :: Text -> Overflow
 parseOverflow "block" = OverflowBlock
 parseOverflow "drain" = OverflowDrain
@@ -83,6 +91,25 @@ parseOneOrMode label parser root = do
                     pure [x])
       Nothing -> pure []
 
+resTagParser obj = do
+  res :: Maybe Object <- obj .:? "Resource"
+  resColor :: Maybe String <- obj .:? "resourcesColor"
+  resTag :: ResourceTag <- case (res, resColor) of
+    (Just r, _) -> r .: "name"
+    (_, Just c) -> if
+      | "Black"  `isInfixOf` c -> pure "Black"
+      | "Blue"   `isInfixOf` c -> pure "Blue"
+      | "Green"  `isInfixOf` c -> pure "Green"
+      | "Orange" `isInfixOf` c -> pure "Orange"
+      | "Red"    `isInfixOf` c -> pure "Red"
+  pure resTag
+
+splitLabel Nothing = ("", Nothing)
+splitLabel (Just l) =
+  case T.splitOn ";" l of
+    [label] ->  (label, Nothing)
+    [label,events] -> (label, Just $ TriggeredByEvent (S.fromList (map Event $ T.splitOn "," events)))
+
 parsePool :: HasCallStack => Object -> Parser (NodeLabel, Node)
 parsePool obj = do
   i <- obj .: "id"
@@ -90,13 +117,13 @@ parsePool obj = do
   a <- obj .: "activation"
   ppa <- obj .: "actionMode"
   amount <- obj .: "number"
-  res :: Object <- obj .: "Resource"
-  resTag :: ResourceTag <- res .: "name"
+  resTag <- resTagParser obj
   o <- obj .: "overflow"
   c <- obj .: "capacity"
+  let (label, triggers) = splitLabel l
   pure (NodeLabel $ read' "" i
         , Node { nodeTy =
-                   Pool { _activation = parseActivation a
+                   Pool { _activation = fromMaybe (parseActivation a) triggers
                         , _pushPullAction = parsePushPullAction ppa
                         , _resources =
                             S.fromList
@@ -104,7 +131,7 @@ parsePool obj = do
                             $ mapM (\_ -> Resource resTag <$> mkUuid) [1..read' "" amount]
                         , _overflow = parseOverflow o
                         , _limit = parseOptionalInt $ read' "" c }
-                 , nodeLabel = fromMaybe "" l
+                 , nodeLabel = label
                  , nodeColor = "black"
                  })
 
@@ -113,14 +140,14 @@ parseSource obj = do
   i <- obj .: "id"
   l <- obj .:? "value"
   a <- obj .: "activation"
-  res :: Object <- obj .: "Resource"
-  resTag :: ResourceTag <- res .: "name"
+  resTag <- resTagParser obj
+  let (label, triggers) = splitLabel l
   pure (NodeLabel $ read' "" i
         , Node { nodeTy =
-                   Source { _activation = parseActivation a
+                   Source { _activation = fromMaybe (parseActivation a) triggers
                           , _resourceTypes = [resTag]
                           }
-                 , nodeLabel = fromMaybe "" l
+                 , nodeLabel = label
                  , nodeColor = "black"
                  })
 
@@ -130,12 +157,13 @@ parseDrain obj = do
   l <- obj .:? "value"
   a <- obj .: "activation"
   pa <- obj .: "actionMode"
+  let (label, triggers) = splitLabel l
   pure (NodeLabel $ read' "" i
         , Node { nodeTy =
-                   Drain { _activation = parseActivation a
+                   Drain { _activation = fromMaybe (parseActivation a) triggers
                          , _pullAction = parsePullAction pa
                          }
-                 , nodeLabel = fromMaybe "" l
+                 , nodeLabel = label
                  , nodeColor = "black"
                  })
 
@@ -145,16 +173,16 @@ parseConverter obj = do
   l <- obj .:? "value"
   a <- obj .: "activation"
   pa <- obj .: "actionMode"
-  res :: Object <- obj .: "Resource"
-  resTag :: ResourceTag <- res .: "name"
+  resTag <- resTagParser obj
+  let (label, triggers) = splitLabel l
   pure (NodeLabel $ read' "" i
        , Node { nodeTy =
-                  Converter { _activation = parseActivation a
+                  Converter { _activation = fromMaybe (parseActivation a) triggers
                             , _pullAction = parsePullAction pa
                             , _resourceTypes = [resTag]
                             , _storage = []
                             }
-              , nodeLabel = fromMaybe "" l
+              , nodeLabel = label
               , nodeColor = "black"
               })
 
@@ -175,13 +203,14 @@ parseGate obj = do
   a <- obj .: "activation"
   pa <- obj .: "actionMode"
   dm <- obj .: "distributionMode"
+  let (label, triggers) = splitLabel l
   pure (NodeLabel $ read' "" i
        , Node { nodeTy =
-                  Gate { _activation = parseActivation a
+                  Gate { _activation = fromMaybe (parseActivation a) triggers
                        , _pullAction = parsePullAction pa
                        , _distribution = parseDistribution dm
                        }
-              , nodeLabel = fromMaybe "" l
+              , nodeLabel = label
               , nodeColor = "black"
               })
 
@@ -190,10 +219,11 @@ parseTrader obj = do
   i <- obj .: "id"
   l <- obj .:? "value"
   a <- obj .: "activation"
+  let (label, triggers) = splitLabel l
   pure (NodeLabel $ read' "" i
        , Node { nodeTy =
-                  Trader { _activation = parseActivation a }
-              , nodeLabel = fromMaybe "" l
+                  Trader { _activation = fromMaybe (parseActivation a) triggers }
+              , nodeLabel = label
               , nodeColor = "black"
               })
 
@@ -203,12 +233,18 @@ parseDelayOrQueue obj = do
   l <- obj .:? "value"
   a <- obj .: "activation"
   q <- obj .: "queue"
+  let (label, triggers) = splitLabel l
   pure (NodeLabel $ read' "" i
        , Node { nodeTy =
                   case q :: Text of
-                    "0" -> Delay { _activation = parseActivation a, _waitingResources = [] }
-                    "1" -> Queue { _activation = parseActivation a, _waitingResources = [], _nextTimeAvailable = Nothing }
-              , nodeLabel = fromMaybe "" l
+                    "0" -> Delay { _activation = fromMaybe (parseActivation a) triggers
+                                , _waitingResources = []
+                                }
+                    "1" -> Queue { _activation = fromMaybe (parseActivation a) triggers
+                                , _waitingResources = []
+                                , _nextTimeAvailable = Nothing
+                                }
+              , nodeLabel = label
               , nodeColor = "black"
               })
 
@@ -232,6 +268,7 @@ parseRegister obj = do
   max <- obj .: "maxValue"
   min <- obj .: "minValue"
   formula :: Maybe Text <- obj .:? "formula"
+  let (label, triggers) = splitLabel l
   pure (NodeLabel $ read' "" i
        , Node { nodeTy =
                   case isIn :: Text of
@@ -245,8 +282,15 @@ parseRegister obj = do
               , nodeColor = "black"
               })
 
-parseResourceFormula :: Maybe Text -> ResourceFormula
-parseResourceFormula = maybe (RFConstant 1) (fromJust . parseRF)
+parseResourceFormula :: Maybe Text -> (ResourceFormula, Maybe ResourceConstraint)
+parseResourceFormula Nothing = (RFConstant 1, Nothing)
+parseResourceFormula (Just t) = (fromMaybe (RFConstant 1) rf,c)
+  where (rf,c) = parseRF t
+
+fixHtmlInXml = T.replace "&lt;" "<"
+             . T.replace "&gt;" ">"
+             . T.replace "<span>" ""
+             . T.replace "</span>" ""
 
 parseResource :: HasCallStack => Object -> Parser (ResourceEdgeLabel, ResourceEdge)
 parseResource obj = do
@@ -255,21 +299,24 @@ parseResource obj = do
   s <- obj .:? "source"
   value <- obj .:? "value"
   formula <- obj .:? "formula"
+  label <- obj .:? "label"
   interval <- obj .:? "interval"
   -- resource filter
-  res :: Object <- obj .: "Resource"
-  resTag :: ResourceTag <- res .: "name"
+  resTag <- resTagParser obj
   colorCoding <- obj .: "colorCoding"
   --
   transfer <- obj .: "resourceTransfer"
   shuffle <- obj .: "shuffleSource"
+  let (rf,c) = parseResourceFormula (T.takeWhile (/='|') <$>
+                                      (fmap fixHtmlInXml
+                                       $ formula <|> value <|> label))
   pure (ResourceEdgeLabel $ read' "" i
        , ResourceEdge
          -- TODO Unconnected edges are possible in Machinations but we don't allow them by construction
          { _from = NodeLabel $ maybe 0 (read' "") s
          , _to = NodeLabel $ maybe 0 (read' "") t
-         , _resourceFormula = parseResourceFormula (T.takeWhile (/='|') <$> (formula <|> value))
-         , _interval = Interval (parseResourceFormula (case T.dropWhile (/='|') <$> interval of
+         , _resourceFormula = rf
+         , _interval = Interval (fst $ parseResourceFormula (case T.dropWhile (/='|') <$> interval of
                                                           Just "" -> interval
                                                           x -> x)) 0
            -- Interval (RFConstant $ maybe 1 (read' "") interval) 0
@@ -282,6 +329,7 @@ parseResource obj = do
                                Nothing
                              -- TODO limits
          , _limits = Limits Nothing Nothing
+         , _constraints = c
          })
 
 parseStateFormula x = x >>= parseSF
@@ -293,15 +341,16 @@ parseState obj = do
   s <- obj .:? "source"
   value <- obj .:? "value"
   formula <- obj .:? "formula"
-  res :: Object <- obj .: "Resource"
-  resTag :: ResourceTag <- res .: "name"
+  label <- obj .:? "label"
+  resTag <- resTagParser obj
   colorCoding <- obj .: "colorCoding"
   pure (StateEdgeLabel $ read' "" i
        , StateEdge
          -- TODO Unconnected edges are possible in Machinations but we don't allow them by construction
          { _from = AnyLabel $ maybe 0 (read' "") s
          , _to = AnyLabel $ maybe 0 (read' "") t
-         , _stateFormula = parseStateFormula (formula <|> value)
+         , _stateFormula = parseStateFormula (fmap fixHtmlInXml
+                                               $ formula <|> value <|> label)
          , _resourceFilter =
              -- Yes, this is where they store the filter
              case colorCoding :: Text of
@@ -323,10 +372,32 @@ parseRegisters = parseOneOrMode "mxMachinationRegisterCell" parseRegister
 parseResourceEdges = parseOneOrMode "mxResourceConnectionCell" parseResource
 parseStateEdges = parseOneOrMode "mxStateConnectionCell" parseState
 
+convertMachinationsXmlInJSON :: FilePath -> IO ()
+convertMachinationsXmlInJSON fname = do
+  f <- B.readFile fname
+  let (Just a :: Maybe Object) = decode f
+  m <- convertXml (case a H.! "content" of
+                    Object x -> case x H.! "xml" of
+                                 String s -> s)
+  B.writeFile (dropExtension fname <> ".json") (encodePretty m)
+
+convertXml :: Text -> IO (Maybe Machination)
+convertXml contents = do
+  withSystemTempFile "convert.xml" $ \fname handle -> do
+    T.hPutStr handle contents
+    hClose handle
+    readMachinationsXml fname
+
+convertXmlFile :: FilePath -> IO ()
+convertXmlFile fname = do
+  contents <- T.readFile fname
+  m <- convertXml contents
+  B.writeFile (dropExtension fname <> ".json") (encodePretty m)
+
+readMachinationsXml :: String -> IO (Maybe Machination)
 readMachinationsXml fname = do
   f <- capture_ (xmlToJson [] [fname])
   let (Just result) :: Maybe Object = decode (B.pack f)
-  -- print result
   pure $ flip parseMaybe result $ \obj -> do
     (g :: Object) <- obj .: "mxGraphModel"
     (root :: Object) <- g .: "root"

@@ -2,7 +2,7 @@
 {-# LANGUAGE RankNTypes, OverloadedLists, OverloadedStrings #-}
 {-# LANGUAGE TypeApplications, ScopedTypeVariables, AllowAmbiguousTypes, FlexibleContexts #-}
 {-# LANGUAGE NoMonomorphismRestriction #-}
-{-# OPTIONS -fwarn-missing-signatures -Wall -Wno-name-shadowing #-}
+{-# OPTIONS -fwarn-missing-signatures -Wall -Wno-name-shadowing -Wno-type-defaults #-}
 
 module Machinations where
 import Machinations.Types
@@ -111,14 +111,14 @@ gateByInterval r l e f =
         -- We aren't ready to run, just increment the counter and do nothing
         -- NB This is not a failed edge!
         -- TODO Nor is it an activated edge. What is it?
-        Just $ (r' & newUpdate . graph . resourceEdges . ix l . interval . counter +~ 1
-               ,[])
+        Just (r' & newUpdate . graph . resourceEdges . ix l . interval . counter +~ 1
+             ,[])
     _ -> Nothing -- Intervals need to be numbers
 
 type CreditNodeFn' rel nl = Run -> rel -> Set Resource -> nl -> Maybe (Run, Set Resource)
 type CreditNodeFn = CreditNodeFn' ResourceEdgeLabel NodeLabel
 type CreditNodeFnM = CreditNodeFn' (Maybe ResourceEdgeLabel) (Maybe NodeLabel)
-type DebitNodeFn' rel nl = Run -> rel -> Maybe Int -> Maybe ResourceTag -> nl -> Maybe (Run, Set Resource)
+type DebitNodeFn' rel nl = Run -> rel -> Maybe Int -> Maybe ResourceTag -> Maybe ResourceConstraint -> nl -> Maybe (Run, Set Resource)
 type DebitNodeFn = DebitNodeFn' ResourceEdgeLabel NodeLabel
 type DebitNodeFnM = DebitNodeFn' (Maybe ResourceEdgeLabel) (Maybe NodeLabel)
 
@@ -145,11 +145,12 @@ distributeDeterministicGatedResources r nodeLabel resources
    case first (filterInactive r) $ fromMaybe mkCounts $ n^?! ty.distribution.counts of
      ([],_) -> mzero -- Can't distribute anything if we have no outgoing edges
      (counts' :: (Map ResourceEdgeLabel Int, Int)) ->
-       let (r', targetDistribution_) = M.mapAccumWithKey
-                                       (\r l _ -> second (fromIntegral . fromMaybe 0)
-                                                 $ resourceFormulaValue r l (r^?!newUpdate.graph.resourceEdges.ix l))
-                                       r
-                                       (fst counts')
+       let (r', targetDistribution_, constraints) =
+             splitCountsAndConstraints
+             $ M.mapAccumWithKey
+               (\r l _ -> resourceFormulaValue r l (r^?!newUpdate.graph.resourceEdges.ix l))
+               r
+             $ fst counts'
            targetDistribution = (M.map (/100) targetDistribution_, (0 `max` 100 - M.foldl' (+) 0 targetDistribution_)/100)
            onePass' :: Run -> (Map ResourceEdgeLabel Float, Float) -> (Map ResourceEdgeLabel Int, Int) -> Set Resource -> Maybe Run
            onePass' r _ _ [] = Just r
@@ -194,12 +195,13 @@ distributeDeterministicGatedResources r nodeLabel resources
      ([],_) -> mzero -- Can't distribute anything if we have no outgoing edges
      (counts' :: (Map ResourceEdgeLabel Int, Int)) ->
        let last = fromMaybe (ResourceEdgeLabel 0) $ n^?! ty.distribution.lastEdge
-           (r', capacities) = M.mapAccumWithKey (\r l _ -> second (fromMaybe 0)
-                                                          $ resourceFormulaValue r l (r^?!newUpdate.graph.resourceEdges.ix l))
-                              r
-                              (fst counts')
+           (r', capacities, constraints) =
+             splitCountsAndConstraints
+             $ M.mapAccumWithKey (\r l _ -> resourceFormulaValue r l (r^?!newUpdate.graph.resourceEdges.ix l)) r
+             $ fst counts'
        in onePass r' capacities last counts' resources
-  where allOutbound' = outResourceEdges (r^.newUpdate) nodeLabel
+  where splitCountsAndConstraints (r,m) = (r, fmap (fromIntegral . fromMaybe 0 . fst) m, fmap snd m)
+        allOutbound' = outResourceEdges (r^.newUpdate) nodeLabel
         allOutbound = map fst allOutbound'
         n = r ^?! newUpdate . graph . vertices . ix nodeLabel
         currentNode = newUpdate . graph . vertices . ix nodeLabel
@@ -233,9 +235,10 @@ distributeDeterministicGatedResources r nodeLabel resources
                (r', last', newCounts', []) -> updateRun r' newCounts' last'
                (r', Nothing, newCounts', leftover) -> if newCounts' /= newCounts then
                                                        onePass r' capacities (ResourceEdgeLabel 0) newCounts' leftover else
-                                                       onePass r' capacities (ResourceEdgeLabel 0) newCounts' leftover
                                                        -- TODO updateRun r' newCounts' (Just 0)
                                                        -- Why isn't this the right move here?
+                                                       onePass r' capacities (ResourceEdgeLabel 0) newCounts' leftover
+               _ -> error "Distributing capacities for deterministic gates failed, this is a bug"
         updateRun r' counts' lastEdge' =
              pure $ r' & newUpdate . graph . vertices . ix nodeLabel . ty . distribution . counts ?~ counts'
                        & newUpdate . graph . vertices . ix nodeLabel . ty . distribution . lastEdge .~ lastEdge'
@@ -255,12 +258,13 @@ distributeRandomGatedResources r nodeLabel resources = do
   -- resources being distributed evenly but the rest being dropped.
   -- TODO We should probably switch out of Maybe so that we can propagate errors
   when mixedPercentage mzero
-  let (r', tempWeights) = second catMaybes
-                        $ mapAccumL (\r e ->
-                                       second
-                                       (fmap (Just $ (snd e ^. to, fst e),))
-                                       (resourceFormulaValue r (fst e) (snd e)))
-                          r es
+  let (r', tempWeights, constraints) =
+        splitCountsAndConstraints
+        $ mapAccumL (\r e ->
+                        second
+                        (bimap (fmap (Just (snd e ^. to, fst e),)) (fmap (Just (snd e ^. to, fst e),)))
+                        (resourceFormulaValue r (fst e) (snd e)))
+          r es
   let weights = if allPercentage && sum (map snd tempWeights) < 100 then
                   (Nothing, 100-sum (map snd tempWeights)) : tempWeights
                   else
@@ -273,6 +277,7 @@ distributeRandomGatedResources r nodeLabel resources = do
         creditNode' r _ res   Nothing = Just (r & killedResources <>~ res, [])
         creditNode' r Nothing res _ = Just (r & killedResources <>~ res, [])
         creditNode' r (Just e) res (Just l) = creditNode r e res l
+        splitCountsAndConstraints (r,m) = (r, mapMaybe fst m, mapMaybe snd m)
 
 traderInputsOutputs :: Run -> NodeLabel -> Node -> Maybe (((ResourceEdgeLabel, ResourceEdge, Filter),
                                                        (ResourceEdgeLabel, ResourceEdge, Filter)),
@@ -305,10 +310,11 @@ generateResources r tag nr =
 
 fireConverterIfPossible :: Run -> NodeLabel -> Maybe Run
 fireConverterIfPossible r l =
-  let (r', inResourceEdgeValues) =
-        mapAccumL (\r (elabel,edge) -> second (((elabel,edge),) . fromMaybe 0) (resourceFormulaValue r elabel edge))
-                  r
-        allInboundOld
+  let (r', inResourceEdgeValues, inResourceEdgeConstraints) =
+        splitCountsAndConstraints
+        $ mapAccumL (\r (elabel,edge) -> second ((elabel,edge),) (resourceFormulaValue r elabel edge))
+                    r
+          allInboundOld
   in if all (\((elabel,_),evalue) ->
                -- TODO Should this default to 0 or 1?
                 maybe 0 S.size (available ^? ix elabel) >= evalue
@@ -320,7 +326,7 @@ fireConverterIfPossible r l =
               case n^.resourceTypes of
                 [rtag] ->
                   -- TODO Is the default here 0 or 1?
-                  let (r'', val) = second (fromMaybe 0) $ resourceFormulaValue r' olabel oedge
+                  let (r'', (val, constraint)) = second (first (fromMaybe 0)) $ resourceFormulaValue r' olabel oedge
                       (r''', res) = generateResources r'' rtag val
                   in Just $ maybe (clearStorage r''') fst $ creditNode (clearStorage r''') olabel res (oedge^.to)
                 _ -> pure r'
@@ -335,10 +341,11 @@ fireConverterIfPossible r l =
         clearStorage r = r & oldUpdate . graph . vertices . ix l . ty . storage .~ []
                            & newUpdate . graph . vertices . ix l . ty . storage .~ []
                            & killedResources <>~ (S.unions $ M.elems $ r ^. oldUpdate . graph . vertices . ix l . ty . storage)
+        splitCountsAndConstraints (r,m) = (r, map (second (fromMaybe 0 . fst)) m, map (second snd) m)
 
-debitNode :: Run -> ResourceEdgeLabel -> Maybe Int -> Maybe ResourceTag -> NodeLabel -> Maybe (Run, Set Resource)
-debitNode r destEdge amount resourceTag from | not $ isActiveNode r from = Nothing
-                                             | otherwise = updateNodeStats $
+debitNode :: Run -> ResourceEdgeLabel -> Maybe Int -> Maybe ResourceTag -> Maybe ResourceConstraint -> NodeLabel -> Maybe (Run, Set Resource)
+debitNode r destEdge amount resourceTag constraint from | not $ isActiveNode r from = Nothing
+                                                        | otherwise = updateNodeStats $
   case n^.ty of
     Drain{} -> Nothing
     Source{} -> do
@@ -355,11 +362,12 @@ debitNode r destEdge amount resourceTag from | not $ isActiveNode r from = Nothi
       --      I set it to 100 here
       pure $ generateResources r resourceTagToGenerate $ fromMaybe 100 amount
     Pool{} -> do
-      let filteredResources =
+      let tagFilteredResources =
             case resourceTag of
               Nothing -> n ^?! ty . resources
               Just tags -> S.filter (\r -> r^.tag == tags) $ n ^?! ty . resources
-      let (out, remaining) = case amount of
+          filteredResources = maybe tagFilteredResources (\c -> S.filter (passesResourceConstraint r c) tagFilteredResources) constraint
+          (out, _remaining) = case amount of
             Nothing -> (filteredResources, [])
             Just amount -> S.splitAt (amount `min` S.size filteredResources) filteredResources
       pure (r & oldUpdate . graph . vertices . ix from . ty . resources %~ (S.\\ out) -- .~ remaining
@@ -415,12 +423,12 @@ creditNode r sourceEdge incoming toNode | not $ isActiveNode r toNode = Nothing
       case filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.oldUpdate) toNode of
         [outEdge] ->
           let now = r^.oldUpdate.time
-              (r', val) = second (fromMaybe 0) $ resourceFormulaValue r (fst outEdge) (snd outEdge)
+              (r', val, constraint) = splitCountAndConstraint $ resourceFormulaValue r (fst outEdge) (snd outEdge)
           in Just $ (,[]) $ r' & newUpdate . graph . vertices . ix toNode . ty . waitingResources <>~ map (Waiting $ now + val) (S.toList incoming)
     Queue{} ->
       case filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.oldUpdate) toNode of
         [outEdge] ->
-          let (r', val) = second (fromMaybe 0) $ resourceFormulaValue r (fst outEdge) (snd outEdge)
+          let (r', val, constraint) = splitCountAndConstraint $ resourceFormulaValue r (fst outEdge) (snd outEdge)
           in Just $ (,[]) $ r' & newUpdate . graph . vertices . ix toNode . ty . waitingResources <>~ map (Waiting $ now + val) (S.toList incoming)
   where n' = r ^?! newUpdate . graph . vertices . ix toNode
         now = r^.oldUpdate.time
@@ -429,6 +437,7 @@ creditNode r sourceEdge incoming toNode | not $ isActiveNode r toNode = Nothing
           Just (r & edgeflow . at sourceEdge . non [] <>~ incoming S.\\ leftovers
                   & nodeInflow . at toNode . non [] <>~ incoming S.\\ leftovers
                , leftovers)
+        splitCountAndConstraint (r,(v,c)) = (r, fromMaybe 0 v, c)
 
 runResourceEdge :: DebitNodeFn -> CreditNodeFn
                 -> Bool -> Node -> Run -> (ResourceEdgeLabel, ResourceEdge)
@@ -436,60 +445,65 @@ runResourceEdge :: DebitNodeFn -> CreditNodeFn
 -- TODO Resources edges propagate activation to non-latched nodes
 runResourceEdge debitFn creditFn maxNeeded _ r (l,e) =
   -- TODO this only applies to the latched nodes
-    if | isLatched $ oldSource ->
+    if | isLatched oldSource ->
          gateByInterval r l e $ \r -> do
-           let (r', amount) = resourceFormulaValue r l e
+           let (r', amount, constraint) = splitCountAndConstraint $ resourceFormulaValue r l e
            -- TODO Check limits on the credited node so we don't ask for too much
            -- TODO Check limits on resource edge
-           (r'',resources) <- debitFn r' l amount (e^.resourceFilter) (e^.from)
+           (r'',resources) <- debitFn r' l amount (e^.resourceFilter) constraint (e^.from)
            when (maxNeeded && Just (S.size resources) /= amount) mzero
            (r''',remainingResources) <- creditFn r'' l resources (e^.to)
            pure (r''' & activatedEdges <>~ [l]
                       & edgeflow . at l . non S.empty <>~ resources
                 , remainingResources)
-       | isGate $ oldSource -> mzero -- TODO?
-       | isConverter $ oldSource -> mzero -- TODO?
-       | isTrader $ oldSource -> mzero -- TODO?
+       | isGate oldSource -> case runNode' r (e^.from, oldSource) of
+                                (_, False) -> Nothing
+                                (r', True) -> pure (r', S.empty) -- TODO?
+       | isConverter oldSource -> mzero -- TODO?
+       | isTrader oldSource -> mzero -- TODO?
   where oldSource = r ^?! oldUpdate . graph . vertices . ix (e^.from)
-        oldTarget = r ^?! oldUpdate . graph . vertices . ix (e^.from)
+        splitCountAndConstraint (r,(v,c)) = (r, v, c)
 
-pushDelayedResources :: Run -> ResourceEdgeLabel -> NodeLabel -> Node -> NodeType -> NodeLabel -> Run
+pushDelayedResources :: Run -> ResourceEdgeLabel -> NodeLabel -> Node -> NodeType -> NodeLabel -> (Run, Bool)
 pushDelayedResources r edgel l _ d dest =
   case alive of
-    [] -> r
+    [] -> (r, False)
     _ -> case creditNode r edgel (S.fromList $ map (^.resource) alive) dest of
-          Nothing -> r -- We hold on to the resources
+          Nothing -> (r, False) -- We hold on to the resources
           Just (r, leftovers) ->
-            r & oldUpdate . graph . vertices . ix l . ty . waitingResources %~
+           (r & oldUpdate . graph . vertices . ix l . ty . waitingResources %~
                    (\prev -> let dead = filter (\a -> not ((a^.resource) `S.member` leftovers)) alive
                             in prev \\ dead)
               & newUpdate . graph . vertices . ix l . ty . waitingResources %~
                    (\prev -> let dead = filter (\a -> not ((a^.resource) `S.member` leftovers)) alive
                             in prev \\ dead)
+           , True)
   where alive = filter (\x -> x^.startTime <= r^.oldUpdate.time) $ d^.waitingResources
 
-pushQueuedResources :: Run -> (ResourceEdgeLabel, ResourceEdge) -> NodeLabel -> Node -> NodeType -> NodeLabel -> Run
+pushQueuedResources :: Run -> (ResourceEdgeLabel, ResourceEdge) -> NodeLabel -> Node -> NodeType -> NodeLabel -> (Run, Bool)
 pushQueuedResources r (edgel,edge) l _ d dest =
   case alive of
-    [] -> r
+    [] -> (r, False)
     (h:_) -> 
       if h^.startTime <= now && maybe True (now >=) (d^?!nextTimeAvailable) then
         case creditNode r' edgel [h^.resource] dest of
-              Nothing -> r' -- We hold on to the resources
-              Just (r'', []) -> r'' & oldUpdate . graph . vertices . ix l . ty . waitingResources %~ delete h
-                                   & newUpdate . graph . vertices . ix l . ty . waitingResources %~ delete h
-                                   & oldUpdate . graph . vertices . ix l . ty . nextTimeAvailable ?~ now+val
+              Nothing -> (r', True) -- We hold on to the resources
+              Just (r'', []) -> (r'' & oldUpdate . graph . vertices . ix l . ty . waitingResources %~ delete h
+                                    & newUpdate . graph . vertices . ix l . ty . waitingResources %~ delete h
+                                    & oldUpdate . graph . vertices . ix l . ty . nextTimeAvailable ?~ now+val
                                    & newUpdate . graph . vertices . ix l . ty . nextTimeAvailable ?~ now+val
-              Just (_, [_]) -> r -- there can only be one, we abort
+                               , True)
+              Just (_, [_]) -> (r, False) -- there can only be one, we abort
               _ -> error "pushQueuedResources shouldn't be able to have more leftovers"
       else
-        r
+        (r, False)
   where alive = filter (\x -> x^.startTime <= r^.oldUpdate.time) $ d^.waitingResources
         now = r^.oldUpdate.time
-        (r', val) = second (fromMaybe 0) $ resourceFormulaValue r edgel edge
+        (r', val, constraint) = splitCountAndConstraint $ resourceFormulaValue r edgel edge
+        splitCountAndConstraint (r,(v,c)) = (r, fromMaybe 0 v, c)
 
-runNode :: Run -> (NodeLabel, Node) -> Run
-runNode r (l, n) | not $ isActiveNode r l = r
+runNode' :: Run -> (NodeLabel, Node) -> (Run, Bool)
+runNode' r (l, n) | not $ isActiveNode r l = (r, False)
                  | otherwise =
   case n^.ty of
     p@Pool{} ->
@@ -504,29 +518,38 @@ runNode r (l, n) | not $ isActiveNode r l = r
                   PullAll -> pushPullAll allInboundOld
     s@Gate{} -> -- TODO State edges
       case (allInboundOld, allOutboundOld) of
-        ([],_) -> r
-        (_,[]) -> r
+        ([],_) -> (r, False)
+        (_,[]) -> (r, False)
         (_,_) -> case (case _pullAction s of
                     PullAny -> pushPullAny' allInboundOld dontcredit
                     PullAll -> pushPullAll' allInboundOld dontcredit) of
-              (r', resources) -> -- We fail if we can't distribue the resources anywhere
-                fromMaybe r $ distributeGatedResources r' l resources
+              (r', resources, False) -> (r', False)
+              (r', [], _) -> (r', False)
+              (r', resources, True) ->
+                -- We fail if we can't distribue the resources anywhere
+                maybe (r, False) (,True)
+                   $ distributeGatedResources r' l resources
     s@Converter{} -> case _pullAction s of
                   PullAny -> pushPullAny allInboundOld
                   PullAll -> pushPullAll allInboundOld
     Trader{} -> case traderInputsOutputs r l n of
                  Just ((i1,_),(i2,_)) -> pushPullAll [(i1^._1,i1^._2),(i2^._1,i2^._2)]
-                 Nothing -> r
+                 Nothing -> (r, False)
     d@Delay{} -> case allOutboundOld of
-      [dest] -> pushDelayedResources (pushPullAny allInboundOld) (dest^._1) l n d (dest^._2.to)
-      _ -> r -- We fail if there are multiple outputs
+      [dest] -> case pushPullAny allInboundOld of
+                 (r', True) -> pushDelayedResources r' (dest^._1) l n d (dest^._2.to)
+                 x -> x
+      _ -> (r, False) -- We fail if there are multiple outputs
     q@Queue{} -> case allOutboundOld of
-      [dest] -> pushQueuedResources (pushPullAny allInboundOld) dest l n q (dest^._2.to)
-      _ -> r -- We fail if there are multiple outputs
+      [dest] -> case pushPullAny allInboundOld of
+                 (r', True) -> pushQueuedResources r' dest l n q (dest^._2.to)
+                 x -> x
+      _ -> (r, False) -- We fail if there are multiple outputs
   where -- NB Inactive resources edges don't count
         allInboundOld = filter (isActiveResourceEdge r . fst) $ inResourceEdges (r^.oldUpdate) l
         allOutboundOld = filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.newUpdate) l
         dontcredit = \r _ s _ -> Just (r,s)
+        dropResources (r,_,b) = (r,b)
         runResourceEdge' c d m n (r,s) e = do
           (r', s') <- runResourceEdge c d m n r e
           pure (r', s <> s')
@@ -535,9 +558,10 @@ runNode r (l, n) | not $ isActiveNode r l = r
                (r, []) $ filter (isActiveResourceEdge r . fst) edges of
             Nothing -> (r & failedEdges <>~ S.fromList (map fst edges)
                          & failedNodes <>~ [l]
-                      , [])
-            Just (r, s) -> (r & activatedNodes <>~ [l], s)
-        pushPullAny edges = fst $ pushPullAny' edges creditNode
+                      , []
+                      , False)
+            Just (r, s) -> (r & activatedNodes <>~ [l], s, True)
+        pushPullAny edges = dropResources $ pushPullAny' edges creditNode
         pushPullAll' rawEdges creditFn =
           let edges = filter (isActiveResourceEdge r .fst) rawEdges
           in -- NB Disabled resource edges don't count toward PushAll/PullAll requirements!
@@ -545,15 +569,31 @@ runNode r (l, n) | not $ isActiveNode r l = r
                  (r, []) edges of
               Nothing -> (r & failedEdges <>~ S.fromList (map fst edges)
                            & failedNodes <>~ [l]
-                        , [])
-              Just (r, s) -> (r & activatedNodes <>~ [l], s)
-        pushPullAll edges = fst $ pushPullAll' edges creditNode
+                        , []
+                        , False)
+              Just (r, s) -> (r & activatedNodes <>~ [l], s, True)
+        pushPullAll edges = dropResources $ pushPullAll' edges creditNode
+
+wakeupQueuedResources :: Run -> (NodeLabel, Node) -> Run
+wakeupQueuedResources r (l, n) =
+  case n^.ty of
+    d@Delay{} -> case allOutboundOld of
+      [dest] -> fst $ pushDelayedResources r (dest^._1) l n d (dest^._2.to)
+      _ -> r -- We fail if there are multiple outputs
+    q@Queue{} -> case allOutboundOld of
+      [dest] -> fst $ pushQueuedResources r dest l n q (dest^._2.to)
+      _ -> r -- We fail if there are multiple outputs
+    _ -> r
+  where allOutboundOld = filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.newUpdate) l
+
+runNode :: Run -> (NodeLabel, Node) -> Run
+runNode r p = fst $ runNode' r p
 
 -- | This must happen after the run!
 postUpdateStateEdgeTriggers :: Run -> (StateEdgeLabel, StateEdge) -> Run
-postUpdateStateEdgeTriggers r (sel, se) =
+postUpdateStateEdgeTriggers r (_sel, se) =
   case (resolveAnyLabel (r^.newUpdate) $ se^.from, resolveAnyLabel (r^.newUpdate) $ se^.to) of
-    (RNode nlfrom nfrom, RNode nlto nto) ->
+    (RNode nlfrom _nfrom, RNode nlto _nto) ->
       case se^.stateFormula of
         -- Triggers and reverse triggers are not symmetric
         -- A trigger fires when a node is activated or when all of its active inputs are satisfied
@@ -573,7 +613,7 @@ postUpdateStateEdgeTriggers r (sel, se) =
         trigger r nlabel = r & newUpdate . pendingTriggers <>~ [nlabel]
 
 evaluateRegisterFormula :: Machination -> StateEdgeModifiers -> Map NodeLabel Double -> NodeLabel -> Node -> Double
-evaluateRegisterFormula m sem regmap rlabel rnode = evalF (rnode^?!ty.registerFormula)
+evaluateRegisterFormula m _sem regmap rlabel rnode = evalF (rnode^?!ty.registerFormula)
   where allInbound = inStateEdges m rlabel
         evalMaybePair (FPair a b) = evalMaybePair a <> evalMaybePair b
         evalMaybePair e = [e] :: [Formula]
@@ -612,36 +652,36 @@ evaluateRegisterFormula m sem regmap rlabel rnode = evalF (rnode^?!ty.registerFo
         evalF (FApply (FVar "largerEq") f) = binaryOp "largerEq" (\a b -> if a >= b then 1 else 0) f
         evalF (FApply (FVar "smaller") f) = binaryOp "smaller" (\a b -> if a < b then 1 else 0) f
         evalF (FApply (FVar "smallerEq") f) = binaryOp "smallerEq" (\a b -> if a <= b then 1 else 0) f
+        evalF (FApply (FVar "equal") f) = binaryOp "equal" (\a b -> if a == b then 1 else 0) f
         evalF (FApply (FVar "and") f) = binaryOp "and" (\a b -> if a > 0 && b > 0 then 1 else 0) f
         evalF (FApply (FVar "or") f) = binaryOp "or" (\a b -> if a > 0 || b > 0 then 1 else 0) f
         evalF (FApply (FVar "not") f) = unaryOp "not" (\a -> if a > 0 then 0 else 1) f
         evalF (FApply (FVar "xor") f) = binaryOp "xor" (\a b -> if a > 0 || b > 0 && a /= b then 1 else 0) f
+        evalF (FApply (FVar "isInteger") f) = unaryOp "isInteger" (\a -> if floor a == ceiling a then 1 else 0) f
         evalF (FApply (FVar op) _) = error $ "Register operation " <> show op <> " not implemented, this is easy to do"
         evalF (FVar v) =
           case find (\(_,sen) -> case sen^.stateFormula of
                                     (Just (SFVariable v')) -> v' == v
                                     _ -> False) allInbound of
             Nothing -> 0
-            Just (sel,sen) ->
+            Just (_,sen) ->
               case m ^? graph . vertices . ix (toNodeLabel $ sen^.from) . ty of
                 Just Pool{..} -> fromIntegral $ S.size _resources
                 Just RegisterInteractive{..} -> fromIntegral _currentValue
-                Just RegisterFn{..} -> case regmap ^? ix rlabel of
-                                       Nothing -> 0
-                                       Just d -> d
+                Just RegisterFn{} -> fromMaybe 0 (regmap ^? ix (toNodeLabel $ sen^.from))
                 _ -> 0
 
 updateStateEdge :: Machination -> Map NodeLabel Double -> StateEdgeModifiers -> (StateEdgeLabel, StateEdge) -> StateEdgeModifiers
-updateStateEdge m regmap sem (sel, se) =
+updateStateEdge m regmap sem (_sel, se) =
   case (resolveAnyLabel m $ se^.from, resolveAnyLabel m $ se^.to) of
-    (RNode nlfrom nfrom, RNode nlto nto) ->
+    (RNode nlfrom nfrom, RNode nlto _nto) ->
       case se^.stateFormula of
         Just (SFRange (SFConstant low) (SFConstant high)) ->
           case nfrom of
             Node Pool{..} _ _ ->
               handleRange (activateNode sem nlto) (inactivateNode sem nlto)
                           (S.size _resources) low high
-            Node RegisterFn{..} _ _ ->
+            Node RegisterFn{} _ _ ->
               handleRange (activateNode sem nlto) (inactivateNode sem nlto)
                           (round $ regmap^?!ix nlfrom) low high
             Node RegisterInteractive{..} _ _ ->
@@ -652,24 +692,23 @@ updateStateEdge m regmap sem (sel, se) =
             Node Pool{..} _ _ ->
               handleCondition (activateNode sem nlto) (inactivateNode sem nlto)
                               c (S.size _resources) val
-            Node RegisterFn{..} _ _ ->
+            Node RegisterFn{} _ _ ->
               handleCondition (activateNode sem nlto) (inactivateNode sem nlto)
                               c (round $ regmap^?!ix nlfrom) val
             Node RegisterInteractive{..} _ _ ->
               handleCondition (activateNode sem nlto) (inactivateNode sem nlto)
                               c _currentValue val
-        -- TODO
-        -- x -> error $ show x
-        Just (SFVariable a) -> snuop sem nlfrom nfrom nlto 1 id id
-        x -> sem
-    (RNode nlfrom nfrom, RResource rlto rto) ->
+        Just SFVariable{} -> snuop sem nlfrom nfrom nlto 1 id id
+        -- TODO do we need to handle any other cases?
+        _ -> sem
+    (RNode nlfrom nfrom, RResource rlto _) ->
       case se^.stateFormula of
         Just (SFRange (SFConstant low) (SFConstant high)) ->
           case nfrom of
             Node Pool{..} _ _ ->
               handleRange (activateEdge sem rlto) (inactivateEdge sem rlto)
                           (S.size _resources) low high
-            Node RegisterFn{..} _ _ ->
+            Node RegisterFn{} _ _ ->
               handleRange (activateEdge sem rlto) (inactivateEdge sem rlto)
                           (round $ regmap^?!ix nlfrom) low high
             Node RegisterInteractive{..} _ _ ->
@@ -680,7 +719,7 @@ updateStateEdge m regmap sem (sel, se) =
             Node Pool{..} _ _ ->
               handleCondition (activateEdge sem rlto) (inactivateEdge sem rlto)
                               c (S.size _resources) val
-            Node RegisterFn{..} _ _ ->
+            Node RegisterFn{} _ _ ->
               handleCondition (activateEdge sem rlto) (inactivateEdge sem rlto)
                               c (round $ regmap^?!ix nlfrom) val
             Node RegisterInteractive{..} _ _ ->
@@ -693,10 +732,9 @@ updateStateEdge m regmap sem (sel, se) =
         Just (SFInterval (SFConstant val)) ->         sfuop sem nlfrom nfrom rlto val SFAdd SFInterval
         Just (SFSub (SFConstant val)) ->              sfuop sem nlfrom nfrom rlto val SFSub id
         Just (SFSub (SFInterval (SFConstant val))) -> sfuop sem nlfrom nfrom rlto val SFSub SFInterval
-        -- TODO
-        x -> error $ show x
-        -- _ -> sem
-    -- TODO
+        -- TODO do we need to handle any other cases?
+        _ -> sem
+    -- TODO do we need to handle any other cases?
     _ -> sem
   where activateNode :: StateEdgeModifiers -> NodeLabel -> StateEdgeModifiers
         activateNode sem nlabel = sem & enableNode <>~ [nlabel]
@@ -720,11 +758,6 @@ updateStateEdge m regmap sem (sel, se) =
             Node {nodeTy = Pool{..}} -> changeNode sem rlto (uop (mid (SFConstant (val * S.size _resources))))
             Node {nodeTy = RegisterFn{}} -> changeNode sem rlto (uop (mid (SFConstant (val * round (regmap^?!ix nlfrom)))))
             Node {nodeTy = RegisterInteractive{..}} -> changeNode sem rlto (uop (mid (SFConstant (val * _currentValue))))
-        -- Just (SFVariable a) -> sem & modifyNode <> SFAdd (SFConstant val)
-          -- if | isPool nfrom -> 
-          --    | isRegisterFn nfrom -> changeFormula sem rlto (uop (mid (SFConstant (val * (round $ regmap^?!ix nlfrom)))))
-          --    | isRegisterInteractive nfrom -> changeFormula sem rlto (uop (mid (SFConstant (val * _currentValue (nfrom^.ty)))))
-          --    | otherwise -> sem
         handleRange fgood fbad amount low high
           | amount >= low && amount <= high = fgood
           | otherwise = fbad
@@ -748,17 +781,18 @@ filterBadEdges m = m & graph.resourceEdges %~ M.filter filterR
         filterR e =  (e^.from) `M.member` allNodes && (e^.to) `M.member` allNodes
         filterS e =  isJust (resolveAnyLabel' m (e^.from)) && isJust (resolveAnyLabel' m (e^.to))
 
-run :: Machination -> Bool -> Set NodeLabel -> Run
-run mraw debugMode clicked =
+run :: Machination -> Bool -> Set NodeLabel -> Set Collision -> Set Event -> Run
+run mraw debugMode clicked externalCollisions events =
   (if debugMode then
      withCheckingResourceBalance else
      \r f -> f r) r0 $ \rstart ->
-      let r = go rstart
+      let r = go (foldl' wakeupQueuedResources rstart (M.toList (graphVertices $ machinationGraph $ runOldUpdate rstart)))
                    (nub
                     $ automaticNodes m
                     <> (if m^.time == 0 then startNodes m else [])
                     <> map (nodeLookup m) (S.toList clicked)
-                    <> map (nodeLookup m) (S.toList $ m ^. pendingTriggers))
+                    <> map (nodeLookup m) (S.toList $ m ^. pendingTriggers)
+                    <> nodesTriggeredByEvents m)
           r' = foldl' postUpdateStateEdgeTriggers
                       (updateStateAndRegisters r)
                       $ M.toList $ r^. newUpdate . graph . stateEdges
@@ -770,8 +804,9 @@ run mraw debugMode clicked =
           case find (isEndCondition . snd) active of
             Nothing -> foldl' runNode r active
             Just (l,_) -> r { runEnded = Just l }
-        r0 = updateStateAndRegisters $ mkRun $ m & time +~ 1
-                                                 & pendingTriggers .~ []
+        r0 = updateStateAndRegisters $ mkRun (m & time +~ 1
+                                                & pendingTriggers .~ [])
+                                             & collisions .~ externalCollisions
         -- This assumes that the run happened and states & edges were updated post-run
         runEndState r = find (isEndCondition . snd . nodeLookup (r^.newUpdate))
                       $ S.toList (r^. stateEdgeModifiers . enableNode)
@@ -787,6 +822,12 @@ run mraw debugMode clicked =
                             | isRegisterInteractive reg -> (sem, M.insert rlabel (maybe 0 fromIntegral $ reg^?ty.currentValue) regmap)
                        Right s -> (updateStateEdge m regmap sem s, regmap))
           (mkStateEdgeModifiers, M.empty :: Map NodeLabel Double) (topologicalSortStateAndRegisters m)
+        nodesTriggeredByEvents =
+            M.toList
+          . M.filter (\n -> case n ^? (ty.activation) of
+                             (Just (TriggeredByEvent s)) -> not $ S.null $ S.intersection s events
+                             _ -> False)
+          . graphVertices . machinationGraph
 
 exSourcePoolDrain :: NodeActivation -> NodeActivation -> PushPullAction -> NodeActivation -> Int -> Int -> Machination
 exSourcePoolDrain sa pa pt da rsp rpd =
@@ -795,11 +836,14 @@ exSourcePoolDrain sa pa pt da rsp rpd =
                 ,(NodeLabel 1, Node (Pool pa pt [Resource "life" "1"] OverflowBlock Nothing) "Pool" "black")
                 ,(NodeLabel 2, Node (Drain da PullAny) "Drain" "black")
                 ]
-                [(ResourceEdgeLabel 100, ResourceEdge (NodeLabel 0) (NodeLabel 1) (RFConstant rsp) (Interval (RFConstant 1) 0) IntervalTransfer Nothing False (Limits Nothing Nothing))
-                ,(ResourceEdgeLabel 101, ResourceEdge (NodeLabel 1) (NodeLabel 2) (RFConstant rpd) (Interval (RFConstant 1) 0) IntervalTransfer Nothing False (Limits Nothing Nothing))]
+                [(ResourceEdgeLabel 100
+                 , ResourceEdge (NodeLabel 0) (NodeLabel 1) (RFConstant rsp) (Interval (RFConstant 1) 0)
+                                IntervalTransfer Nothing False (Limits Nothing Nothing) Nothing)
+                ,(ResourceEdgeLabel 101
+                 , ResourceEdge (NodeLabel 1) (NodeLabel 2) (RFConstant rpd) (Interval (RFConstant 1) 0)
+                                IntervalTransfer Nothing False (Limits Nothing Nothing) Nothing)]
                 [])
             [("life", "red")] 0 0 S.empty
 
 startHere :: Machination
 startHere = exSourcePoolDrain Automatic Passive (Pushing PushAny) Passive 3 0
-

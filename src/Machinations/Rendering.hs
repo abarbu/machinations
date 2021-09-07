@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedLists, OverloadedStrings, TypeApplications, ScopedTypeVariables, FlexibleContexts, NoMonomorphismRestriction #-}
+{-# OPTIONS -Wall #-}
 
 module Machinations.Rendering where
 import Machinations.Types
@@ -63,7 +64,8 @@ nodeToStatement l n =
                              <>
                              (case n^.label of
                                "" -> ""
-                               l -> Id $ "<BR />" <> l)
+                               t -> Id $ "<BR />"
+                                   <> T.replace "<br>" "<BR />" (T.replace "&nbsp" " " t))
                               <>
                              (case n^?ty.activation of
                                   Just Automatic -> "<SUP>*</SUP>"
@@ -74,7 +76,7 @@ nodeToStatement l n =
                                   Just (Pushing p) -> labelPush p
                                   Just (Pulling p) -> labelPull p
                                   _ -> "")
-                            )
+                              <> "<FONT POINT-SIZE='4'>" <> (Id $ T.pack $ show $ unNodeLabel l) <>"</FONT>")
     , Attribute "labelfontcolor" (case n^.ty of
                                      Source{} -> "black"
                                      Drain{} -> "black"
@@ -121,6 +123,7 @@ resourceFormulaToLabel (RFPercentage x) = resourceFormulaToLabel x <> "%"
 resourceFormulaToLabel (RFDice (RFConstant 1) y) = "D" <> resourceFormulaToLabel y
 resourceFormulaToLabel (RFDice x y) = resourceFormulaToLabel x <> "D" <> resourceFormulaToLabel y
 resourceFormulaToLabel (RFConstant f) = show' f
+resourceFormulaToLabel (RFCondition c x) = conditionToLabel c <> resourceFormulaToLabel x
 
 resourceEdgeToStatement :: ResourceEdgeLabel -> ResourceEdge -> [Statement]
 resourceEdgeToStatement l e =
@@ -132,7 +135,8 @@ resourceEdgeToStatement l e =
                              (case e^?interval.formula of
                                 Just (RFConstant 1) -> ""
                                 Just i -> " | " <> show' i
-                                _ -> ""))
+                                _ -> "")
+                             <> "<FONT POINT-SIZE='4'>" <> (Id $ T.pack $ show $ unResourceEdgeLabel l) <>"</FONT>")
     , Attribute "peripheries" (case e^.resourceFilter of
                                   Just _ -> "2"
                                   _ -> "1")
@@ -172,7 +176,8 @@ stateEdgeToStatement l e =
   [StatementNode $ NodeStatement (show' $ unStateEdgeLabel l)
     [ Attribute "shape" "septagon"
     , HtmlAttribute "label" (case e^?stateFormula of
-                                Just rf -> Id $ maybe "" stateFormulaToLabel rf)
+                                Just rf -> Id $ maybe "" stateFormulaToLabel rf
+                            <> "<FONT POINT-SIZE='4'>" <> (Id $ T.pack $ show $ unStateEdgeLabel l) <>"</FONT>")
     , Attribute "peripheries" (case e^.resourceFilter of
                                   Just _ -> "2"
                                   _ -> "1")

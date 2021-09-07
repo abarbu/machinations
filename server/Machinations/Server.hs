@@ -23,6 +23,7 @@ import Data.Maybe
 import qualified Machinations.Types as M
 import qualified Machinations.Rendering as M
 import qualified Machinations.Utils as M
+import qualified Machinations.Xml as M
 import qualified Machinations as M
 import Data.Set(Set)
 import qualified Data.Set as S
@@ -62,7 +63,8 @@ serveRender :: M.Machination -> App T.Text
 serveRender = pure . T.pack . show . M.toGraph
 
 serveRun :: M.RunMachination -> App M.RunResult
-serveRun M.RunMachination{..} = pure $ M.runToResult $ M.run runMachinationMachine False runMachinationActiveNodes
+serveRun M.RunMachination{..} =
+  pure $ M.runToResult $ M.run runMachinationMachine False runMachinationActiveNodes runMachinationCollisions runMachinationEvents
 
 serveConvertxml :: A.XMLFile -> App A.XMLConversionResult
 serveConvertxml A.XMLFile{..} = liftIO $ A.XMLConversionResult <$> M.convertXml xmlContents

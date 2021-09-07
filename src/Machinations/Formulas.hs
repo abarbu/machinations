@@ -9,6 +9,7 @@ import Data.Text (Text)
 import qualified Data.Text as T
 import qualified Text.Megaparsec.Char.Lexer as L
 import Control.Monad.Combinators.Expr
+import Data.Functor.Identity
 
 type Parser = Parsec Void Text
 
@@ -26,6 +27,47 @@ symbol = L.symbol sc
 
 parens :: Parser a -> Parser a
 parens = between (symbol "(") (symbol ")")
+
+quote :: Parser a -> Parser a
+quote = between (symbol "\"") (symbol "\"")
+
+binary :: Text -> (a -> a -> a) -> Operator (ParsecT Void Text Identity) a
+binary  name f = InfixL  (f <$ symbol name)
+
+prefix :: Text -> (a -> a) -> Operator (ParsecT Void Text Identity) a
+prefix  name f = Prefix  (f <$ symbol name)
+
+postfix :: Text -> (a -> a) -> Operator (ParsecT Void Text Identity) a
+postfix name f = Postfix (f <$ symbol name)
+
+-- * Constraints
+
+cVariable :: Parser ResourceConstraint
+cVariable = try (string "this" >> pure RCCollisionThis)
+         <|> try (string "other" >> pure RCCollisionOther)
+         <|> (RCVar . T.pack <$> lexeme ((:) <$> letterChar <*> many alphaNumChar <?> "variable"))
+
+cTag :: Parser ResourceConstraint
+cTag = RCTag . T.pack <$> quote (many alphaNumChar) 
+
+cExpr :: Parser ResourceConstraint
+cExpr = makeExprParser cTerm cOperatorTable
+  where cTerm :: Parser ResourceConstraint
+        cTerm = choice [ parens cExpr
+                       , cTag
+                       , cVariable
+                       ]
+
+cOperatorTable :: [[Operator Parser ResourceConstraint]]
+cOperatorTable =
+  [ [ binary "" RCApply ]
+  , [ binary "==" RCEq ]
+  , [ binary "&&" RCAnd
+    , binary "||" RCOr ]
+  ]
+
+parseC :: Text -> Maybe ResourceConstraint
+parseC = parseMaybe (cExpr <* eof)
 
 -- * ResourceFormula
 
@@ -69,15 +111,19 @@ rOperatorTable =
     , binary "-" RFSubtract
     ]
   ]
-  where binary :: Text -> (ResourceFormula -> ResourceFormula -> ResourceFormula) -> Operator Parser ResourceFormula
-        binary  name f = InfixL  (f <$ symbol name)
-        prefix, postfix :: Text -> (ResourceFormula -> ResourceFormula) -> Operator Parser ResourceFormula
-        prefix  name f = Prefix  (f <$ symbol name)
-        postfix name f = Postfix (f <$ symbol name)
 
-parseRF "" = pure $ RFConstant 0 -- Machinations allows empty edges :(
-parseRF "all" = Just RFAll
-parseRF s = parseMaybe (rExpr <* eof) s
+-- | Parses plain RFs as they are in machinations
+parseRFWithoutConstraints "" =
+  -- Empty edges in Machinations contain an implicit 1
+  pure $ RFConstant 1
+parseRFWithoutConstraints "all" = Just RFAll
+parseRFWithoutConstraints s = parseMaybe (rExpr <* eof) s
+
+-- | Parses RFs with added constraints
+parseRF :: Text -> (Maybe ResourceFormula, Maybe ResourceConstraint)
+parseRF t = case T.splitOn ";" t of
+              [f] -> (parseRFWithoutConstraints f, Nothing)
+              [f,c] -> (parseRFWithoutConstraints f, parseC c)
 
 isRFPercentage (RFPercentage p) = True
 isRFPercentage _ = False
@@ -121,11 +167,6 @@ sOperatorTable =
   , [ binary ".." SFRange
     ]
   ]
-  where binary :: Text -> (StateFormula -> StateFormula -> StateFormula) -> Operator Parser StateFormula
-        binary  name f = InfixL  (f <$ symbol name)
-        prefix, postfix :: Text -> (StateFormula -> StateFormula) -> Operator Parser StateFormula
-        prefix  name f = Prefix  (f <$ symbol name)
-        postfix name f = Postfix (f <$ symbol name)
 
 parseSF "*" = Just SFTrigger
 parseSF "!" = Just SFReverseTrigger
@@ -162,13 +203,8 @@ fOperatorTable =
     ]
   , [ binary "," FPair ]
   ]
-  where binary :: Text -> (Formula -> Formula -> Formula) -> Operator Parser Formula
-        binary  name f = InfixL  (f <$ symbol name)
-        prefix, postfix :: Text -> (Formula -> Formula) -> Operator Parser Formula
-        prefix  name f = Prefix  (f <$ symbol name)
-        postfix name f = Postfix (f <$ symbol name)
 
 parseF "" = pure $ FConstant 0 -- these can happen in registers
 parseF s = parseMaybe (fExpr <* eof) s
 
-debugParser = parseTest (fExpr <* eof) "b*pow(1.5,a)"
+debugParser = parseTest (rExpr <* eof) "all;this(type)==\"bullet\""

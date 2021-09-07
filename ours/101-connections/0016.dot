@@ -1,20 +1,20 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "118" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "119" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "121" [shape=circle,peripheries="1",label=<0<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "122" [shape=circle,peripheries="1",label=<0<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "123" [shape=cds,peripheries="1",label="",labelfontcolor=black,color=black];
-  "120" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "118" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>118</FONT>>,labelfontcolor=black,color=black];
+  "119" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>119</FONT>>,labelfontcolor=black,color=black];
+  "121" [shape=circle,peripheries="1",label=<0<SUP>*</SUP><FONT POINT-SIZE='4'>121</FONT>>,labelfontcolor=black,color=black];
+  "122" [shape=circle,peripheries="1",label=<0<SUP>*</SUP><FONT POINT-SIZE='4'>122</FONT>>,labelfontcolor=black,color=black];
+  "123" [shape=cds,peripheries="1",label=<<FONT POINT-SIZE='4'>123</FONT>>,labelfontcolor=black,color=black];
+  "120" [label=<1<FONT POINT-SIZE='4'>120</FONT>>,peripheries="1",color=black,shape=septagon];
   "118" -> "120" [color=black];
   "120" -> "119" [color=black];
-  "125" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "125" [label=<1<FONT POINT-SIZE='4'>125</FONT>>,peripheries="1",color=black,shape=septagon];
   "123" -> "125" [color=black];
   "125" -> "121" [color=black];
-  "126" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "126" [label=<1<FONT POINT-SIZE='4'>126</FONT>>,peripheries="1",color=black,shape=septagon];
   "123" -> "126" [color=black];
   "126" -> "122" [color=black];
-  "124" [label=<+1>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "124" [label=<+1<FONT POINT-SIZE='4'>124</FONT>>,peripheries="1",color=black,style=dashed,shape=septagon];
   "119" -> "124" [style=dashed,color=black];
   "124" -> "123" [style=dashed,color=black];
 }

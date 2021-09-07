@@ -1,20 +1,20 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "180" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "181" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "182" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "184" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "185" [shape=diamond,peripheries="1",label="",labelfontcolor=black,color=black];
-  "183" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "180" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>180</FONT>>,labelfontcolor=black,color=black];
+  "181" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>181</FONT>>,labelfontcolor=black,color=black];
+  "182" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>182</FONT>>,labelfontcolor=black,color=black];
+  "184" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>184</FONT>>,labelfontcolor=black,color=black];
+  "185" [shape=diamond,peripheries="1",label=<<FONT POINT-SIZE='4'>185</FONT>>,labelfontcolor=black,color=black];
+  "183" [label=<1<FONT POINT-SIZE='4'>183</FONT>>,peripheries="1",color=black,shape=septagon];
   "181" -> "183" [color=black];
   "183" -> "182" [color=black];
-  "186" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "186" [label=<1<FONT POINT-SIZE='4'>186</FONT>>,peripheries="1",color=black,shape=septagon];
   "180" -> "186" [color=black];
   "186" -> "185" [color=black];
-  "187" [label=<10%>,peripheries="1",color=black,shape=septagon];
+  "187" [label=<10%<FONT POINT-SIZE='4'>187</FONT>>,peripheries="1",color=black,shape=septagon];
   "185" -> "187" [color=black];
   "187" -> "184" [color=black];
-  "188" [label=<+1%>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "188" [label=<+1%<FONT POINT-SIZE='4'>188</FONT>>,peripheries="1",color=black,style=dashed,shape=septagon];
   "182" -> "188" [style=dashed,color=black];
   "188" -> "187" [style=dashed,color=black];
 }

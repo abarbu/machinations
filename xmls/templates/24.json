@@ -1,0 +1,219 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "pendingTriggers": [],
+    "graph": {
+        "stateEdges": {
+            "9": {
+                "stateFormula": {
+                    "contents": [
+                        "CGt",
+                        {
+                            "contents": 3,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 10,
+                "active": false,
+                "from": 3
+            },
+            "6": {
+                "stateFormula": {
+                    "contents": [
+                        "CLt",
+                        {
+                            "contents": 5,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 5,
+                "active": false,
+                "from": 3
+            }
+        },
+        "vertices": {
+            "3": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "262921af-2560-4e61-9d11-a2f9cd2c83da",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "323364ad-c886-4582-9818-80b057774782",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "32a6cb4b-16a5-4c06-9bfa-7bc7fb59d74c",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "4ae17085-d0d1-48d4-a75a-10638174c5dd",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "554ff626-b4ab-4ff1-8f7a-26157b865c0e",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "907cae59-3a09-4117-bb1e-5dfd0eacbdc0",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "9ca232b2-2822-45f7-8291-78e6804ea905",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "a4867190-a863-4427-88e1-5aec343b00da",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "b722692d-1325-41c6-9be4-7c6af48095af",
+                            "tag": "Red"
+                        },
+                        {
+                            "uUID": "ba2bae9f-f8b2-4f8d-9a15-d30a10e52744",
+                            "tag": "Red"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "limit": 20,
+                    "tag": "Pool"
+                }
+            },
+            "7": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Interactive"
+                    },
+                    "tag": "Drain"
+                }
+            },
+            "10": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "2763984a-f960-4208-9edf-dcd982d03042",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "3e4ac0de-25da-4d9e-aae8-3a74c273f964",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "5e058994-6888-43d6-b769-b359239d9229",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "6b3cf431-6c12-4633-ad95-1bdcd4b25fe7",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "6f603b47-1d3b-4954-8e93-b5d4eb117c1d",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "98f6667d-8939-4bc4-aad5-fbc27976bbd2",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "9f20377e-7662-4ca8-83f9-320d4930ec6a",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "a3e6039b-3e93-49cc-b156-0cf94137e46a",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "bc5a42bf-f736-4f1c-b702-8ec1aded09a5",
+                            "tag": "Green"
+                        },
+                        {
+                            "uUID": "cd103b16-29fd-45ea-846b-a0893d702d9c",
+                            "tag": "Green"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "5": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Red"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            }
+        },
+        "resourceEdges": {
+            "4": {
+                "to": 3,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 5,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "8": {
+                "to": 7,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 3,
+                    "tag": "RFConstant"
+                },
+                "from": 3,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

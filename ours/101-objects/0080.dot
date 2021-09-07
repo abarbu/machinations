@@ -1,12 +1,12 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "486" [shape=invtriangle,peripheries="2",label="",labelfontcolor=black,color=black];
-  "489" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "498" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "491" [label=<5>,peripheries="1",color=black,shape=septagon];
+  "486" [shape=invtriangle,peripheries="2",label=<<FONT POINT-SIZE='4'>486</FONT>>,labelfontcolor=black,color=black];
+  "489" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>489</FONT>>,labelfontcolor=black,color=black];
+  "498" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>498</FONT>>,labelfontcolor=black,color=black];
+  "491" [label=<5<FONT POINT-SIZE='4'>491</FONT>>,peripheries="1",color=black,shape=septagon];
   "489" -> "491" [color=black];
   "491" -> "486" [color=black];
-  "502" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "502" [label=<1<FONT POINT-SIZE='4'>502</FONT>>,peripheries="1",color=black,shape=septagon];
   "498" -> "502" [color=black];
   "502" -> "489" [color=black];
 }

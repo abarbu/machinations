@@ -1,0 +1,1010 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "pendingTriggers": [],
+    "graph": {
+        "stateEdges": {
+            "48": {
+                "stateFormula": {
+                    "contents": "b",
+                    "tag": "SFVariable"
+                },
+                "to": 37,
+                "active": false,
+                "from": 39
+            },
+            "23": {
+                "stateFormula": {
+                    "contents": [
+                        "CGtEq",
+                        {
+                            "contents": 1,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 13,
+                "active": false,
+                "from": 3
+            },
+            "29": {
+                "stateFormula": {
+                    "contents": [
+                        "CGtEq",
+                        {
+                            "contents": 2,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 28,
+                "active": false,
+                "from": 5
+            },
+            "201": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 5,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFPercentage"
+                },
+                "to": 42,
+                "active": false,
+                "from": 200
+            },
+            "22": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 20,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFPercentage"
+                },
+                "to": 18,
+                "active": false,
+                "from": 21
+            },
+            "66": {
+                "stateFormula": {
+                    "contents": [
+                        "CEqual",
+                        {
+                            "contents": 0,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 79,
+                "active": false,
+                "from": 59
+            },
+            "7": {
+                "stateFormula": {
+                    "contents": [
+                        "CGtEq",
+                        {
+                            "contents": 1,
+                            "tag": "SFConstant"
+                        }
+                    ],
+                    "tag": "SFCondition"
+                },
+                "to": 8,
+                "active": false,
+                "from": 3
+            },
+            "35": {
+                "stateFormula": {
+                    "contents": "a",
+                    "tag": "SFVariable"
+                },
+                "to": 34,
+                "active": false,
+                "from": 5
+            },
+            "38": {
+                "stateFormula": {
+                    "contents": "a",
+                    "tag": "SFVariable"
+                },
+                "to": 37,
+                "active": false,
+                "from": 30
+            },
+            "101": {
+                "to": 75,
+                "active": false,
+                "from": 5
+            },
+            "36": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 1,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFAdd"
+                },
+                "to": 31,
+                "active": false,
+                "from": 34
+            },
+            "14": {
+                "stateFormula": {
+                    "contents": {
+                        "contents": 10,
+                        "tag": "SFConstant"
+                    },
+                    "tag": "SFPercentage"
+                },
+                "to": 8,
+                "active": false,
+                "from": 13
+            }
+        },
+        "vertices": {
+            "51": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Drain"
+                }
+            },
+            "37": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": 0,
+                        "tag": "FConstant"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "15": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Random"
+                    },
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "18": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "42": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Green"
+                    ],
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "79": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAll",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "30": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "3": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "8": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "057946bb-f548-4d5f-8297-df3128d4ffa0",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "0782d194-6bd6-4c80-8625-a81bcd125d6b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "0945a8fc-2098-4d03-8501-7540fb326d0e",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "0e0bd2ef-249d-4b0d-84ad-ec2e9dd0b222",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "0fe6c059-19c9-412e-a3ed-630dc4480126",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "14375534-17ac-4e8c-8cda-abf079a58681",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "17056000-a424-43b5-8982-f26c553d93ba",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "1a632608-2c9e-47b8-bc74-59e35d2fcbb8",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "1f58e33a-bbb6-4ce5-96b4-f4094610576b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "20b6e9d4-af2e-41e4-ba33-d9dcfa3f19e9",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "286626cd-0805-43a8-9135-1ad75b55d626",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "28e0241c-9295-4ead-8ce3-b5f61530b815",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "29aee29d-8386-4d2d-b929-947acf848908",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "29e1ada9-62e2-4a36-b412-3938a74899ae",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "2af33071-79de-4f2e-a831-fc166b5a0506",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "2bacd432-07b2-4c7a-89c3-4423757e50d2",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "312ae046-47bd-4e25-9932-8e49efa8b24e",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "3443e3cf-76c3-4a93-aef5-19e4e5a4d9a9",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "34c765e5-090d-4dfa-945d-8437c92c9cb0",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "3f8f07cb-f2a1-4678-bc80-031a03b4b51b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "3fbe2851-b221-4b32-82bc-d9294c10bd2e",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "40d05814-1608-4706-9152-bd0d0b05712b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "44cc92fd-e3f7-404d-a77e-b11c5e15abfe",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "48093f14-5334-42ba-85c4-36e6a3f69110",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "4944e2db-a0ef-4a0f-8c82-568ecb31f76d",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "4c0b8cf3-a71d-4c0d-905b-c3f2cad335bf",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "4de80ae1-0b9e-4063-b0fa-95cb3af0dbcc",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "4eb3ff0b-e06b-4769-bb81-b454da1fdd62",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "51b20576-938b-4ddc-ac7f-89812e4e6b8f",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "54e4ad17-761f-4b27-8e0e-588111b4f2b1",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "56aa6bea-162c-4902-957b-2092ade0ea62",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "58ffe67c-120f-4884-bf30-a2c4770ae946",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "5aebe159-58d2-45ba-8e24-096feba996e7",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "5afec405-61c5-4f14-bd79-1c32b14643d7",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "5e61b22a-7a1a-4742-b04a-93e1cdc1b3a6",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "5f4e6625-ed90-4842-b407-9f282944074e",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "6154b637-31b5-4036-822d-af1046b8af07",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "621efeba-87b1-4698-bc8f-d9d82bc12a48",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "66d9ef65-0943-46c1-9222-47d9f8ce4506",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "6a705640-6851-46de-b699-bfdf33d23462",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "6aa27f65-906e-43af-9fa1-93607d3f67cc",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "6ed2e6f4-438f-4b0f-9e95-9a2bdcba6fa7",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "70241690-a9cd-4c61-8d08-817723704ee0",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "708dcadf-bebf-4609-83a4-7b740fcaa734",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "791b44ed-253f-45ed-8ff8-6d6e7cafe2be",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "7b221f6b-7fc4-47ba-87f6-6769bd7d8487",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "7c994fd3-9ad2-4ffa-b6a2-53a9ff1133b0",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "811b3c27-1eb6-4e6e-b3a0-73bea01e6bfd",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "8484848c-8423-4e3b-adc3-b21a50f15fea",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "848e9abf-118d-4653-8189-241862a1c745",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "8695040d-ecc7-4934-951b-a23271445f1b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "87305955-5e0d-434a-bb5d-200ff1aa71ce",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "87bea0e4-eab7-4ea0-b581-48394631a014",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "885d59e6-29aa-44ec-9813-8a82dad7b728",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "893aae13-1703-4014-b726-30a5633c2ed0",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "8a5c6c85-b203-42fa-9c06-ea08422788b4",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "8ad66925-adfe-4e5b-8358-5ca4d60be047",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "8dfdb1ad-41d5-4877-9971-2cfd9b9cae90",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "8eb31def-0935-4e90-839e-5a9e56003430",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "91ac0476-31d7-49e3-8f8d-842988473660",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "945a9d76-e90e-4785-9166-65b2ee3b0988",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "99dd04e6-4a66-4939-bbb7-390bb593b3bc",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "9bc7b519-7c04-4f14-b2b4-01867e15d740",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "9f0c6af2-da39-4b1d-88dd-b70821075151",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "a08ca7e1-ee07-4fc3-97e6-a7edad3d7637",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "a7871826-2521-45b4-ac27-70c03e2f5273",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "a7912727-c873-4ba5-8f93-956b0f464e8d",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "abc9640b-0b27-43eb-bcb4-633f2fc7512b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "ad408bfb-9bf4-4fee-803f-9dc88927d319",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "b1a1894d-b973-4824-bf29-b9ac4d222045",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "b2683d6b-30bd-4ec5-ab96-7b95dd8264bd",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "b3037a9f-5540-4e16-b480-989d1379f599",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "b7a06795-f787-4ffb-ae72-60d15fdf3874",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "be9b0e95-8c92-4343-9c0c-23d3deb06f61",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "beb5e427-af27-4869-ac47-8f1a76da91b7",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "bf795ff6-ab2e-4ddb-a9ce-44fa78cb2b65",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "c0f2cfa4-612a-4913-becf-7010d27e504d",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "c1b9eadd-dc85-40ca-aed8-607362622681",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "c1f1f233-4e4e-4a8d-acda-9240a832974a",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "c523c358-7527-48d7-ba41-ab925b750902",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "c65c691c-f511-4210-a0aa-857bb783ed95",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "cd9ca63b-6f2f-47aa-bed5-4c2586db24c7",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "ced6c129-b9d4-474c-9c5c-dfb0a9259720",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "d4bad357-b9e2-4fd4-8450-2689c9a11454",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "d6835d32-940a-4117-aa79-b1660b89fcb6",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "d7218a22-d1f4-46ed-bf4f-4bb161c727d9",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "e1f08e98-ee45-4166-97f1-5865f67a087f",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "e5cf6572-bf23-47cc-b6d0-d2ae08e5f856",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "e7b1a976-8093-4bef-a5e3-e416af5f3628",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "e95f84d9-69a7-44a9-8494-9fbfbe8f45be",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "eac0464e-4ce2-46d0-9193-9d40ab39d057",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "eb9c98b6-a4c8-4581-a6a2-8a17bf40051b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "ec4cefd2-f935-412c-840d-c77ef05e2f29",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "f20bd1c2-9ace-46b9-933b-801eac50e3c7",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "f2a0f36e-59c6-448f-b27d-977977cc3b2b",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "f41812eb-ad2c-4214-8f00-33e39e682ca3",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "f6ae9855-9596-4831-9929-c3ad32baafe5",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "f8d7e7dc-9e1f-451e-8b58-8694a5dd86f4",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "f97186a0-8bd7-419c-a24b-9eda46c1f4d7",
+                            "tag": "Blue"
+                        },
+                        {
+                            "uUID": "fcc7ef8d-99f3-4093-81f6-c4dd2f0d5f92",
+                            "tag": "Blue"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "200": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Random"
+                    },
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "2": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "28": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "resourceTypes": [
+                        "Black"
+                    ],
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Source"
+                }
+            },
+            "13": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "34": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "registerFormula": {
+                        "contents": 0,
+                        "tag": "FConstant"
+                    },
+                    "limits": {},
+                    "tag": "RegisterFn"
+                }
+            },
+            "59": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "21": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "pullAction": "PullAny",
+                    "distribution": {
+                        "tag": "Deterministic"
+                    },
+                    "activation": {
+                        "tag": "Automatic"
+                    },
+                    "tag": "Gate"
+                }
+            },
+            "5": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "39": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PushAny",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            }
+        },
+        "resourceEdges": {
+            "61": {
+                "to": 51,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 59,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "4": {
+                "to": 3,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 5,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 2,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "60": {
+                "to": 59,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 30,
+                    "tag": "RFConstant"
+                },
+                "from": 42,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "19": {
+                "to": 18,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 20,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 15,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "75": {
+                "to": 39,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 0,
+                    "tag": "RFConstant"
+                },
+                "from": 42,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "31": {
+                "to": 30,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": [
+                        {
+                            "contents": 1,
+                            "tag": "RFConstant"
+                        },
+                        {
+                            "contents": 10,
+                            "tag": "RFConstant"
+                        }
+                    ],
+                    "tag": "RFDice"
+                },
+                "from": 28,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "16": {
+                "to": 15,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 8,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "17": {
+                "to": 5,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": {
+                        "contents": 80,
+                        "tag": "RFConstant"
+                    },
+                    "tag": "RFPercentage"
+                },
+                "from": 15,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "65": {
+                "to": 79,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "tag": "RFAll"
+                },
+                "from": 39,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            },
+            "20": {
+                "to": 5,
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 18,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

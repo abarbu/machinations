@@ -1,20 +1,20 @@
 digraph {
   graph  [labelloc=bottom,labeljust=left,fontsize="10",label="step=0"];
-  "110" [shape=triangle,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "111" [shape=circle,peripheries="1",label=<0>,labelfontcolor=black,color=black];
-  "113" [shape=diamond,peripheries="1",label=<<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "114" [shape=circle,peripheries="1",label=<0<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "116" [shape=circle,peripheries="1",label=<0<SUP>*</SUP>>,labelfontcolor=black,color=black];
-  "112" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "110" [shape=triangle,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>110</FONT>>,labelfontcolor=black,color=black];
+  "111" [shape=circle,peripheries="1",label=<0<FONT POINT-SIZE='4'>111</FONT>>,labelfontcolor=black,color=black];
+  "113" [shape=diamond,peripheries="1",label=<<SUP>*</SUP><FONT POINT-SIZE='4'>113</FONT>>,labelfontcolor=black,color=black];
+  "114" [shape=circle,peripheries="1",label=<0<SUP>*</SUP><FONT POINT-SIZE='4'>114</FONT>>,labelfontcolor=black,color=black];
+  "116" [shape=circle,peripheries="1",label=<0<SUP>*</SUP><FONT POINT-SIZE='4'>116</FONT>>,labelfontcolor=black,color=black];
+  "112" [label=<1<FONT POINT-SIZE='4'>112</FONT>>,peripheries="1",color=black,shape=septagon];
   "110" -> "112" [color=black];
   "112" -> "111" [color=black];
-  "115" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "115" [label=<1<FONT POINT-SIZE='4'>115</FONT>>,peripheries="1",color=black,shape=septagon];
   "113" -> "115" [color=black];
   "115" -> "114" [color=black];
-  "117" [label=<1>,peripheries="1",color=black,shape=septagon];
+  "117" [label=<1<FONT POINT-SIZE='4'>117</FONT>>,peripheries="1",color=black,shape=septagon];
   "113" -> "117" [color=black];
   "117" -> "116" [color=black];
-  "399" [label=<+1>,peripheries="1",color=black,style=dashed,shape=septagon];
+  "399" [label=<+1<FONT POINT-SIZE='4'>399</FONT>>,peripheries="1",color=black,style=dashed,shape=septagon];
   "111" -> "399" [style=dashed,color=black];
   "399" -> "113" [style=dashed,color=black];
 }

@@ -291,8 +291,9 @@ regenerateFromXmls = do
   convertXmlFile "xmls/gate-split-66-33.xml"
   convertXmlFile "xmls/tutorials/basic-casual-game-system.xml"
   convertXmlFile "xmls/tutorials/basic-game-idle-system.xml"
-  let d = "xmls/templates"
-  xmls <- map (d</>) . filter ((== ".xml") . takeExtension) <$> listDirectory d
+  --convertXmlFile "xmls/collisions/test.xml"
+  let ds = ["xmls/templates", "xmls/collisions"] :: [[Char]]
+  xmls <- foldl (\acc d -> (++) <$> (map (d</>) . filter ((== ".xml") . takeExtension) <$> listDirectory d) <*> acc) (pure []) ds
   mapM_ (\x -> do
             r <- try @SomeException $ convertMachinationsXmlInJSON x
             case r of

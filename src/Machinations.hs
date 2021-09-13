@@ -550,8 +550,8 @@ runNode' r (l, n) | not $ isActiveNode r l = (r, False)
         allOutboundOld = filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.newUpdate) l
         dontcredit = \r _ s _ -> Just (r,s)
         dropResources (r,_,b) = (r,b)
-        runResourceEdge' c d m n (r,s) e = do
-          (r', s') <- runResourceEdge c d m n r e
+        runResourceEdge' d c m n (r,s) e = do
+          (r', s') <- runResourceEdge d c m n r e
           pure (r', s <> s')
         pushPullAny' edges creditFn =
           case foldM (runResourceEdge' debitNode creditFn False n)

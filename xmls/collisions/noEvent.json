@@ -1,0 +1,119 @@
+{
+    "seed": 0,
+    "resourceTagColor": {},
+    "pendingTriggers": [],
+    "graph": {
+        "stateEdges": {},
+        "vertices": {
+            "103": {
+                "nodeColor": "black",
+                "nodeLabel": "pool1",
+                "nodeTy": {
+                    "activation": {
+                        "contents": [
+                            "event1"
+                        ],
+                        "tag": "TriggeredByEvent"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [
+                        {
+                            "uUID": "a7408c7d-0522-462e-89e6-3b8622dc6c6c",
+                            "tag": "Black"
+                        }
+                    ],
+                    "pushPullAction": {
+                        "contents": "PushAll",
+                        "tag": "Pushing"
+                    },
+                    "tag": "Pool"
+                }
+            },
+            "104": {
+                "nodeColor": "black",
+                "nodeLabel": "",
+                "nodeTy": {
+                    "activation": {
+                        "tag": "Passive"
+                    },
+                    "overflow": "OverflowBlock",
+                    "resources": [],
+                    "pushPullAction": {
+                        "contents": "PullAny",
+                        "tag": "Pulling"
+                    },
+                    "tag": "Pool"
+                }
+            }
+        },
+        "resourceEdges": {
+            "105": {
+                "constraints": {
+                    "contents": [
+                        {
+                            "contents": [
+                                {
+                                    "contents": [
+                                        {
+                                            "contents": "type",
+                                            "tag": "RCVar"
+                                        },
+                                        {
+                                            "tag": "RCCollisionThis"
+                                        }
+                                    ],
+                                    "tag": "RCApply"
+                                },
+                                {
+                                    "contents": "Black",
+                                    "tag": "RCTag"
+                                }
+                            ],
+                            "tag": "RCEq"
+                        },
+                        {
+                            "contents": [
+                                {
+                                    "contents": [
+                                        {
+                                            "contents": "type",
+                                            "tag": "RCVar"
+                                        },
+                                        {
+                                            "tag": "RCCollisionOther"
+                                        }
+                                    ],
+                                    "tag": "RCApply"
+                                },
+                                {
+                                    "contents": "bullet",
+                                    "tag": "RCTag"
+                                }
+                            ],
+                            "tag": "RCEq"
+                        }
+                    ],
+                    "tag": "RCAnd"
+                },
+                "to": 104,
+                "resourceFilter": "Black",
+                "interval": {
+                    "counter": 0,
+                    "formula": {
+                        "contents": 1,
+                        "tag": "RFConstant"
+                    }
+                },
+                "resourceFormula": {
+                    "contents": 1,
+                    "tag": "RFConstant"
+                },
+                "from": 103,
+                "limits": {},
+                "shuffleOrigin": false,
+                "transfer": "IntervalTransfer"
+            }
+        }
+    },
+    "time": 0
+}

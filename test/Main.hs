@@ -22,8 +22,7 @@ import Control.Lens hiding (from,to)
 main = defaultMain tests
 
 tests :: TestTree
---tests = testGroup "Tests" [object101Tests,connections101Tests,rfTests,sfTests,spdTests,miscTests,tutorials,templates]
-tests = testGroup "Tests" [rfTests]
+tests = testGroup "Tests" [object101Tests,connections101Tests,rfTests,sfTests,spdTests,miscTests,tutorials,templates]
 
 readMachination' :: FilePath -> Machination
 readMachination' = fromJust . unsafePerformIO . decodeFileStrict'
@@ -37,7 +36,6 @@ runN n m activate | n>0 = loop (n-1) (run m False activate [] [])
         loop n r = loop (n-1) (run (r^.newUpdate) False activate [] [])
 
 runNCollision :: Int -> Machination -> Set NodeLabel -> [Set Collision] -> [Set Event] -> Run --TODO: just one runN function
---runNCollision n m a c e | trace ("n " ++ show n ++ "c" ++ show c) False = undefined
 runNCollision n m activate (c:cs) (e:events) | n>0 = loop (n-1) (run m False activate c e) cs events
                                              | otherwise = error "At least one run is necessary"
                                              where loop 0 r _ _ = r
@@ -47,7 +45,7 @@ runNCollision n m activate _ _  = error "check that events and collisions are th
 
 testCollisionOneNodeResourcesRaw :: Int -> Int -> String -> Set NodeLabel -> [Set Collision] -> [Set Event] -> Maybe (Map ResourceTag Int) -> TestTree
 testCollisionOneNodeResourcesRaw node steps file activate collisions events right =
-  testCase (show node <> " x" <> show steps <> " " <> file)
+  testCase (show node <> " x" <> show steps <> " " <> takeBaseName file)
   $ noderes node (r^.newUpdate) @?= right
   where r = (runNCollision steps (readMachination' file) activate collisions events) 
 
@@ -636,7 +634,10 @@ rfTests = testGroup "ResourceFormulas"
   , testCase "complex" $ testRF "1+D5*10%"
   , testCase "simple" $ testRF "D5;this(type)==\"bullet\""
   , testCase "simple" $ testC "D5;this(type)==\"bullet\""
-  , test 104 1 "test.json" [] [[Collision (Resource "Black" "fc7e8848-4c9a-473f-ab6f-398fa49759cc") (Resource "bullet" "barID")]] [[]] [("Black", 1)]
+  , test 104 1 "collision.json" [] [[Collision (Resource "Black" "fc7e8848-4c9a-473f-ab6f-398fa49759cc") (Resource "bullet" "barID")]] [[]] [("Black", 1)] -- note: make sure that the UUID actually matches with a resource in collision.json
+  , test 104 1 "noCollision.json" [] [[]] [[]] []
+  , test 104 1 "eventAndCollision.json" [] [[Collision (Resource "Black" "a7408c7d-0522-462e-89e6-3b8622dc6c6c") (Resource "bullet" "barID")]] [[Event "event1"]] [("Black", 1)]
+  , test 104 1 "noEvent.json" [] [[Collision (Resource "Black" "a7408c7d-0522-462e-89e6-3b8622dc6c6c") (Resource "bullet" "barID")]] [[]] []
   ]
   where test node steps file activate collisions events right = 
                 testCollisionOneNodeResources node steps ("xmls/collisions/" </> file) activate collisions events right

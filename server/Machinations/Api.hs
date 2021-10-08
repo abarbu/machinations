@@ -89,6 +89,7 @@ instance ToSchema XMLConversionResult where
 
 type RawAPI = "api" :> (("test"  :> Get '[JSON] Text)
                          :<|> ("render" :> ReqBody '[JSON] Machination :> Post '[JSON] Text )
+                         :<|> ("renderText" :> ReqBody '[JSON] Machination :> Post '[JSON] Text )
                          :<|> ("run" :> ReqBody '[JSON] RunMachination :> Post '[JSON] RunResult )
                          :<|> ("convertxml" :> ReqBody '[JSON] XMLFile :> Post '[JSON] XMLConversionResult ))
 

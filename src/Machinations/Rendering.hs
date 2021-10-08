@@ -194,6 +194,9 @@ stateEdgeToStatement l e =
         style = Attribute "style" (Id $ T.intercalate "," $ ["dashed"]
                           <> if e^.active then ["bold"] else [])
 
+toGraphText :: Machination -> Text
+toGraphText = encode . toGraph
+
 toGraph :: Machination -> DotGraph
 toGraph m = DotGraph NonStrict Directed Nothing
                                ([ StatementAttribute $ AttributeStatement D.Graph

@@ -62,6 +62,9 @@ serveTest = pure "Hi"
 serveRender :: M.Machination -> App T.Text
 serveRender = pure . T.pack . show . M.toGraph
 
+serveRenderText :: M.Machination -> App T.Text
+serveRenderText = pure . T.pack . show . M.toGraphText
+
 serveRun :: M.RunMachination -> App M.RunResult
 serveRun M.RunMachination{..} =
   pure $ M.runToResult $ M.run runMachinationMachine False runMachinationActiveNodes runMachinationCollisions runMachinationEvents
@@ -70,4 +73,4 @@ serveConvertxml :: A.XMLFile -> App A.XMLConversionResult
 serveConvertxml A.XMLFile{..} = liftIO $ A.XMLConversionResult <$> M.convertXml xmlContents
 
 server :: ServerT A.API App
-server = swaggerSchemaUIServerT A.swaggerDoc :<|> (serveTest :<|> serveRender :<|> serveRun :<|> serveConvertxml)
+server = swaggerSchemaUIServerT A.swaggerDoc :<|> (serveTest :<|> serveRender :<|> serveRenderText :<|> serveRun :<|> serveConvertxml)

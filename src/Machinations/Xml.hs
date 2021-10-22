@@ -128,7 +128,7 @@ parsePool obj = do
                         , _resources =
                             S.fromList
                             $ unsafePerformIO
-                            $ mapM (\_ -> Resource resTag <$> mkUuid) [1..read' "" amount]
+                            $ mapM (\_ -> Resource [resTag] <$> mkUuid) [1..read' "" amount]
                         , _overflow = parseOverflow o
                         , _limit = parseOptionalInt $ read' "" c }
                  , nodeLabel = label

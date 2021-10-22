@@ -88,12 +88,13 @@ nodeToStatement l n =
                                      Queue{} -> "black"
                                      RegisterFn{} -> "black"
                                      RegisterInteractive{} -> "black"
-                                     t@Pool{} -> case map (resourceTag . head)
-                                                     $ groupBy (\a b -> resourceTag a == resourceTag b)
+                                     t@Pool{} -> case map (resourceTags . head)
+                                                     $ groupBy (\a b -> resourceTags a == resourceTags b)
                                                      $ S.toList
                                                      $ t^.resources of
                                                   [] -> "black"
-                                                  [res] -> Id res)
+                                                  [res] -> "black") --just make everything black to be safe. res is not necessarily a color
+                                                  --[res] -> Id (fromString (show res))) --not sure if here, res is assumed to be a color
       -- TODO Other properties
     ]
   where labelPush PushAny = "<SUB>p</SUB>"

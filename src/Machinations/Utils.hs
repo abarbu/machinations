@@ -10,7 +10,7 @@ import Machinations.Misc
 import Machinations.Rendering
 import Control.Lens hiding (from,to)
 import Data.Maybe
-import Data.List (groupBy, sortOn, mapAccumL)
+import Data.List (groupBy, sortOn, mapAccumL, sort, group)
 import Data.Set(Set)
 import qualified Data.Set as S
 import Data.Map.Strict(Map)
@@ -31,6 +31,7 @@ import Machinations.Xml
 import qualified Data.Graph as G
 import Control.Exception
 
+
 -- | Full nodes don't count for some operations, like those affecting gates
 isNodeFull :: NodeType -> Bool
 isNodeFull Pool{..}  = maybe False (S.size _resources >=) _limit
@@ -50,9 +51,10 @@ isNodeFull EndCondition{}  = True
 nodeLookup :: Machination -> NodeLabel -> (NodeLabel, Node)
 nodeLookup m l = (l, fromJust $ M.lookup l (m^.graph.vertices))
 
-resourceStatsByTag :: Set Resource -> Map ResourceTag Int
-resourceStatsByTag s = M.fromList $ map (\a@(h:_) -> (resourceTag h, length a))
-                     $ groupBy (\x y -> resourceTag x == resourceTag y) $ sortOn resourceTag $ S.toList s
+resourceStatsByTag :: Set Resource -> Map ResourceTag Int --TODO figure out semantics of set of tags. Do we want each set of tags to be treated as unique?
+resourceStatsByTag s = M.fromList $ map (\a@(h:_) -> (h, length a))
+                     $ group $ sort $ concat $ map (S.toList . (^.tags)) $ S.toList s
+--                     $ groupBy (\x y -> resourceTags x == resourceTags y) $ sortOn resourceTag $ S.toList s --TODO: figure out why there are lenses and normal getters
 
 nodeResources :: Machination -> NodeLabel -> Maybe (Set Resource)
 nodeResources m l = m^?graph.vertices.ix l.ty.resources
@@ -141,12 +143,13 @@ data RCEval = RCEBool Bool
 
 passesResourceConstraint :: Run -> ResourceConstraint -> Resource -> Bool
 passesResourceConstraint r resourceConstraint res =
+  --TODO: add the semantics of, e.g., bullet `in` type(this)
   case evalRc resourceConstraint of
     Nothing -> False
     (Just (RCEResources [])) -> False
     (Just (RCEResources _)) -> True
     (Just (RCEBool b)) -> b
-    (Just (RCETags ts)) -> not $ S.null $ S.filter (res^.tag ==) ts
+    (Just (RCETags ts)) -> (res^.tags) `S.isSubsetOf` ts  -- TODO: should this be a strict subset? Or should we let the resource pass if there's non-zero overlap?
   where relevantCollisions = S.filter (collided res) (r ^. collisions)
         others = S.map (\c -> if res == c^.collider1 then
                                c^.collider2 else
@@ -162,7 +165,7 @@ passesResourceConstraint r resourceConstraint res =
           e <- evalRc rc
           case e of
             (RCEResources []) -> mzero
-            (RCEResources rs) -> pure $ RCETags $ S.map (^.tag) rs
+            (RCEResources rs) -> pure $ RCETags $ S.unions (S.map (^.tags) rs)
             _ -> tyError rc
         evalRc (RCTag rc) = pure $ RCETags [rc]
         evalRc rcall@(RCEq rc rc') = do

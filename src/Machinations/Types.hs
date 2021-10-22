@@ -77,7 +77,7 @@ data ResourceConstraint = RCCollisionThis
 deriveJSON (prefixOptions "RC") ''ResourceConstraint
 makeFields ''ResourceConstraint
 
-data Resource = Resource { resourceTag :: ResourceTag,
+data Resource = Resource { resourceTags :: Set ResourceTag,
                            resourceUUID :: Text }
   deriving (Show, Eq, Generic)
 deriveJSON (prefixOptions "resource") ''Resource

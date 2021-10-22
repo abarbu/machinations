@@ -300,10 +300,10 @@ traderInputsOutputs r l _ =
   where allInboundOld = filter (isActiveResourceEdge r . fst) $ inResourceEdges (r^.oldUpdate) l
         allOutboundOld = filter (isActiveResourceEdge r . fst) $ outResourceEdges (r^.oldUpdate) l
 
-generateResources :: Run -> ResourceTag -> Int -> (Run, Set Resource)
+generateResources :: Run -> ResourceTag -> Int -> (Run, Set Resource) --TODO: right now, this only produces resources with a singleton type
 generateResources r tag nr = 
       let (newGen,createdResources) = second S.fromList
-            $ mapAccumL (\g _ -> inv $ first (Resource tag) $ mkUuid' g) (r^.stdGen) ([1..nr] :: [Int])
+            $ mapAccumL (\g _ -> inv $ first (Resource [tag]) $ mkUuid' g) (r^.stdGen) ([1..nr] :: [Int])
       in (r & generatedResources <>~ createdResources
             & stdGen .~ newGen
          , createdResources)
@@ -365,7 +365,8 @@ debitNode r destEdge amount resourceTag constraint from | not $ isActiveNode r f
       let tagFilteredResources =
             case resourceTag of
               Nothing -> n ^?! ty . resources
-              Just tags -> S.filter (\r -> r^.tag == tags) $ n ^?! ty . resources
+              --Just t -> S.filter (\res -> t `S.member` res^.tags) $ n ^?! ty . resources
+              Just t -> S.filter (\res -> t `S.member` ((res^.tags)::(Set ResourceTag))) $ n ^?! ty . resources -- TODO: why is type annotation necessary here?
           filteredResources = maybe tagFilteredResources (\c -> S.filter (passesResourceConstraint r c) tagFilteredResources) constraint
           (out, _remaining) = case amount of
             Nothing -> (filteredResources, [])
@@ -450,7 +451,7 @@ runResourceEdge debitFn creditFn maxNeeded _ r (l,e) =
            let (r', amount, constraint) = splitCountAndConstraint $ resourceFormulaValue r l e
            -- TODO Check limits on the credited node so we don't ask for too much
            -- TODO Check limits on resource edge
-           (r'',resources) <- debitFn r' l amount (e^.resourceFilter) constraint (e^.from)
+           (r'',resources) <- debitFn r' l amount (e^.resourceFilter) constraint (e^.from) --TODO right now, resource filters are singletons. could make them sets
            when (maxNeeded && Just (S.size resources) /= amount) mzero
            (r''',remainingResources) <- creditFn r'' l resources (e^.to)
            pure (r''' & activatedEdges <>~ [l]
@@ -833,7 +834,7 @@ exSourcePoolDrain :: NodeActivation -> NodeActivation -> PushPullAction -> NodeA
 exSourcePoolDrain sa pa pt da rsp rpd =
   Machination (Graph
                 [(NodeLabel 0, Node (Source sa ["life"]) "Source" "black")
-                ,(NodeLabel 1, Node (Pool pa pt [Resource "life" "1"] OverflowBlock Nothing) "Pool" "black")
+                ,(NodeLabel 1, Node (Pool pa pt [Resource ["life"] "1"] OverflowBlock Nothing) "Pool" "black")
                 ,(NodeLabel 2, Node (Drain da PullAny) "Drain" "black")
                 ]
                 [(ResourceEdgeLabel 100

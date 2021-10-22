@@ -389,7 +389,7 @@ creditNode r sourceEdge incoming toNode | not $ isActiveNode r toNode = Nothing
   case n'^.ty of
     Source{} -> Nothing
     Drain{} -> pure (r & killedResources <>~ incoming
-                   , [])
+                    ,[])
     p@Pool{} -> do
       let overCapacity = maybe False (< S.size ((r ^. newUpdate . graph . vertices . ix toNode . ty . resources) <> incoming))
                                      (p^?!limit)

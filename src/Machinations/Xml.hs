@@ -307,7 +307,7 @@ parseResource obj = do
   --
   transfer <- obj .: "resourceTransfer"
   shuffle <- obj .: "shuffleSource"
-  let (rf,c) = parseResourceFormula (T.takeWhile (/=';') <$>
+  let (rf,c) = parseResourceFormula (T.takeWhile (/='|') <$> --note: | causes problems for OR and ; causes problems for escaped chars
                                       (fmap fixHtmlInXml
                                        $ formula <|> value <|> label))
   pure (ResourceEdgeLabel $ read' "" i

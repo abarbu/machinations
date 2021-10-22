@@ -1,0 +1,260 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+
+name:           machinations
+version:        0.8.0.0
+synopsis:       An implementation of the Machinations game mechanics specification language
+description:    Please see the README on Github at <https://github.com/abarbu/machinations#readme>
+category:       AI
+homepage:       https://github.com/abarbu/machinations
+bug-reports:    https://github.com/abarbu/machinations/issues
+author:         Andrei Barbu
+maintainer:     andrei@0xab.com
+copyright:      2020 Andrei Barbu
+license:        BSD3
+build-type:     Simple
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/abarbu/machinations
+
+library
+  exposed-modules:
+      Machinations
+      Machinations.Formulas
+      Machinations.Misc
+      Machinations.Rendering
+      Machinations.Types
+      Machinations.Utils
+      Machinations.Xml
+  other-modules:
+      Paths_machinations
+  hs-source-dirs:
+      src
+  ghc-options: -fplugin=StackTrace.Plugin
+  build-depends:
+      aeson
+    , aeson-pretty
+    , base >=4.7 && <5
+    , bcrypt
+    , bifunctors
+    , bytestring
+    , constraints
+    , containers
+    , directory
+    , dot
+    , either
+    , extra
+    , filepath
+    , ghc-prim
+    , hashable
+    , haskell-stack-trace-plugin
+    , indexed
+    , jwt
+    , language-c
+    , lens
+    , megaparsec
+    , monad-logger
+    , mono-traversable
+    , mtl
+    , nondeterminism
+    , openapi3
+    , parser-combinators
+    , persistent
+    , persistent-sqlite
+    , persistent-template
+    , pretty
+    , random
+    , resourcet
+    , servant
+    , servant-openapi3
+    , servant-server
+    , servant-swagger-ui
+    , servant-swagger-ui-core
+    , shelly
+    , silently
+    , singletons
+    , stm
+    , string-interpolate
+    , tasty
+    , tasty-expected-failure
+    , tasty-golden
+    , tasty-hunit
+    , tasty-program
+    , tasty-quickcheck
+    , tasty-smallcheck
+    , temporary
+    , text
+    , time
+    , transformers
+    , unix
+    , unordered-containers
+    , uuid
+    , vector
+    , wai
+    , wai-cors
+    , wai-extra
+    , wai-logger
+    , warp
+    , xml-to-json
+  default-language: Haskell2010
+
+executable machinations-server
+  main-is: Main.hs
+  other-modules:
+      Machinations.Api
+      Machinations.Database
+      Machinations.JWT
+      Machinations.Server
+      Paths_machinations
+  hs-source-dirs:
+      server
+  ghc-options: -fplugin=StackTrace.Plugin -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , aeson-pretty
+    , base >=4.7 && <5
+    , bcrypt
+    , bifunctors
+    , bytestring
+    , constraints
+    , containers
+    , directory
+    , dot
+    , either
+    , extra
+    , filepath
+    , ghc-prim
+    , hashable
+    , haskell-stack-trace-plugin
+    , indexed
+    , jwt
+    , language-c
+    , lens
+    , machinations
+    , megaparsec
+    , monad-logger
+    , mono-traversable
+    , mtl
+    , nondeterminism
+    , openapi3
+    , parser-combinators
+    , persistent
+    , persistent-sqlite
+    , persistent-template
+    , pretty
+    , random
+    , resourcet
+    , servant
+    , servant-openapi3
+    , servant-server
+    , servant-swagger-ui
+    , servant-swagger-ui-core
+    , shelly
+    , silently
+    , singletons
+    , stm
+    , string-interpolate
+    , tasty
+    , tasty-expected-failure
+    , tasty-golden
+    , tasty-hunit
+    , tasty-program
+    , tasty-quickcheck
+    , tasty-smallcheck
+    , temporary
+    , text
+    , time
+    , transformers
+    , unix
+    , unordered-containers
+    , uuid
+    , vector
+    , wai
+    , wai-cors
+    , wai-extra
+    , wai-logger
+    , warp
+    , xml-to-json
+  default-language: Haskell2010
+
+test-suite test
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      Paths_machinations
+  hs-source-dirs:
+      test
+  ghc-options: -fplugin=StackTrace.Plugin
+  build-depends:
+      aeson
+    , aeson-pretty
+    , base >=4.7 && <5
+    , bcrypt
+    , bifunctors
+    , bytestring
+    , constraints
+    , containers
+    , directory
+    , dot
+    , either
+    , extra
+    , filepath
+    , ghc-prim
+    , hashable
+    , haskell-stack-trace-plugin
+    , indexed
+    , jwt
+    , language-c
+    , lens
+    , machinations
+    , megaparsec
+    , monad-logger
+    , mono-traversable
+    , mtl
+    , nondeterminism
+    , openapi3
+    , parser-combinators
+    , persistent
+    , persistent-sqlite
+    , persistent-template
+    , pretty
+    , random
+    , resourcet
+    , servant
+    , servant-openapi3
+    , servant-server
+    , servant-swagger-ui
+    , servant-swagger-ui-core
+    , shelly
+    , silently
+    , singletons
+    , stm
+    , string-interpolate
+    , tasty
+    , tasty-expected-failure
+    , tasty-golden
+    , tasty-hunit
+    , tasty-program
+    , tasty-quickcheck
+    , tasty-smallcheck
+    , temporary
+    , text
+    , time
+    , transformers
+    , unix
+    , unordered-containers
+    , uuid
+    , vector
+    , wai
+    , wai-cors
+    , wai-extra
+    , wai-logger
+    , warp
+    , xml-to-json
+  default-language: Haskell2010

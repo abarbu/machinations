@@ -6,9 +6,10 @@ cradle:
       component: "machinations:exe:machinations-server"
     - path: "./test"
       component: "machinations:test:test"
-
-#   stack:
-#     - path: "./src"
-#       component: "machinations:lib"
-#     - path: "./test"
-#       component: "machinations:test:test"
+  cabal:
+    - path: "./src"
+      component: "lib:machinations"
+    - path: "./server"
+      component: "machinations:exe:machinations-server"
+    - path: "./test"
+      component: "machinations:test:test"

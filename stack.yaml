@@ -1,4 +1,4 @@
-resolver: nightly-2021-08-03
+resolver: lts-18.13
 
 packages:
   - .
@@ -10,3 +10,7 @@ extra-deps:
     commit: c9ce1767377cf325569fb2be355431f1851f5fc9
 
 allow-newer: true
+
+nix:
+  enable: false
+  shell-file: shell.nix

@@ -456,6 +456,6 @@ summarize r = P.render $
    P.text "New:" P.$$ (sm $ r^.newUpdate)
    P.$$ P.text "Generated" P.<+> P.int (S.size (r^.generatedResources))
    P.$$ P.text "Killed" P.<+> P.int (S.size (r^.killedResources)))
-  where sm m = P.nest 2 $ P.vcat $ map sp $ M.toList $ M.filter (\n -> isPool n) $ m^.graph . vertices
+  where sm m = P.nest 2 $ P.vcat $ map sp $ M.toList $ M.filter isPool $ m^.graph . vertices
         sp (l,Node p@Pool{} _ _) = P.sizedText 6 (show l) P.<+> P.sizedText 6 "Pool" P.<+> P.sizedText 6 (show $ S.size $ _resources p)
         sp _ = ""

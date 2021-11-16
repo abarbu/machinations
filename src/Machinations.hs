@@ -20,6 +20,7 @@ import Control.Monad
 import System.Random(random)
 import Data.Bifunctor
 
+-- TODO ask about conversions for sets/text
 -- TODO We don't yet handle resources edges with filters like >3
 -- TODO Maybe is not good with sampling. The samples will be correlated.
 -- TODO Gates are really complex in their deterministic behavior, we aren't there yet.
@@ -365,8 +366,7 @@ debitNode r destEdge amount resourceTag constraint from | not $ isActiveNode r f
       let tagFilteredResources =
             case resourceTag of
               Nothing -> n ^?! ty . resources
-              --Just t -> S.filter (\res -> t `S.member` res^.tags) $ n ^?! ty . resources
-              Just t -> S.filter (\res -> t `S.member` ((res^.tags)::(Set ResourceTag))) $ n ^?! ty . resources -- TODO: why is type annotation necessary here?
+              Just t -> S.filter (\res -> t `S.member` (res^.tags)) $ n ^?! ty . resources
           filteredResources = maybe tagFilteredResources (\c -> S.filter (passesResourceConstraint r c) tagFilteredResources) constraint
           (out, _remaining) = case amount of
             Nothing -> (filteredResources, [])

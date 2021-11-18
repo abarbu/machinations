@@ -627,21 +627,24 @@ testRF s = isJust (fst $ parseRF s) @? T.unpack s
 testC s = isJust (snd $ parseRF s) @? T.unpack s
 testSF s = isJust (parseSF s) @? T.unpack s
 
-rfTests = testGroup "ResourceFormulas"
-  [ testCase "static" $ testRF "1"
-  , testCase "simple" $ testRF "D5"
-  , testCase "medium" $ testRF "D5+2"
-  , testCase "complex" $ testRF "1+D5*10%"
-  , testCase "simple" $ testRF "D5;this(type)==\"bullet\""
-  , testCase "simple" $ testC "D5;this(type)==\"bullet\""
-  , test 104 1 "collision.json" [] [[Collision (Resource "Black" "fc7e8848-4c9a-473f-ab6f-398fa49759cc") (Resource "bullet" "barID")]] [[]] [("Black", 1)] -- note: make sure that the UUID actually matches with a resource in collision.json
-  , test 104 1 "noCollision.json" [] [[]] [[]] []
-  , test 104 1 "eventAndCollision.json" [] [[Collision (Resource "Black" "a7408c7d-0522-462e-89e6-3b8622dc6c6c") (Resource "bullet" "barID")]] [[Event "event1"]] [("Black", 1)]
-  , test 104 1 "noEvent.json" [] [[Collision (Resource "Black" "a7408c7d-0522-462e-89e6-3b8622dc6c6c") (Resource "bullet" "barID")]] [[]] []
-  ]
-  where test node steps file activate collisions events right = 
-                testCollisionOneNodeResources node steps ("xmls/collisions/" </> file) activate collisions events right
 
+rfTests =
+  testGroup
+    "ResourceFormulas"
+    [ testCase "static" $ testRF "1",
+      testCase "simple" $ testRF "D5",
+      testCase "medium" $ testRF "D5+2",
+      testCase "complex" $ testRF "1+D5*10%",
+      testCase "simple" $ testRF "D5;this(type)==\"bullet\"",
+      testCase "simple" $ testC "D5;this(type)==\"bullet\"",
+      test 104 1 "collision.json" [] [[Collision (Resource ["Black"] "fc7e8848-4c9a-473f-ab6f-398fa49759cc") (Resource ["bullet"] "barID")]] [[]] [("Black", 1)], -- note: make sure that the UUID actually matches with a resource in collision.json
+      test 104 1 "noCollision.json" [] [[]] [[]] [],
+      test 104 1 "eventAndCollision.json" [] [[Collision (Resource "Black" "a7408c7d-0522-462e-89e6-3b8622dc6c6c") (Resource "bullet" "barID")]] [[Event "event1"]] [("Black", 1)],
+      test 104 1 "noEvent.json" [] [[Collision (Resource "Black" "a7408c7d-0522-462e-89e6-3b8622dc6c6c") (Resource "bullet" "barID")]] [[]] []
+    ]
+  where
+    test node steps file activate collisions events right =
+      testCollisionOneNodeResources node steps ("xmls/collisions/" </> file) activate collisions events right
 
 sfTests = testGroup "StateFormulas"
   [ testCase "simple" $ testSF "+1"
